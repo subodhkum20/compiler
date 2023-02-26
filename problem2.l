@@ -135,7 +135,7 @@ compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"
 {Identifier}            {return Identifier;}
 {compileError}          {return compileError;}
 ">>>"                   {return(UNSIGNED_RIGHT); }
-">>>="                  {return(UNSIGNED_RIGHT_assign); }
+">>>="                  {return(UNSIGNED_RIGHT_ASSIGN); }
 "::"                    {return(METHOD_REFERENCE); }
 "..."			{return(ELLIPSIS); }
 ">>="			{return(RIGHT_ASSIGN); }
@@ -187,7 +187,7 @@ compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"
 
 .       {
         cout<<"illegal character on line "<<j<<" :"<<yytext<<endl;
-        return -1
+        return -1;
 }
 
 %%
