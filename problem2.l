@@ -127,8 +127,8 @@ compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"
 {keyword}               {return m[string(yytext)];}
 {integerLiteral}        {return integerLiteral;}
 {stringLiteral}         {return stringLiteral;}
-{boolean}               {return boolean;}
-{float}                 {return float;}
+{boolean}               {return booleanLiteral;}
+{float}                 {return FloatingPointLiteral;}
 {nullLiteral}           {return nullLiteral;}
 {characterLiteral}      {return characterLiteral;}
 {textBlock}             {return textBlock;}
