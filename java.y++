@@ -16,7 +16,7 @@
 %token<str> XOR_ASSIGN OR_ASSIGN
 %token  <str>integerLiteral stringLiteral nullLiteral characterLiteral textBlock Identifier ABSTRACT CONTINUE FOR NEW ASSERT DEFAULT IF PACKAGE SYNCHRONIZED BOOLEAN GOTO PRIVATE THIS BREAK DOUBLE IMPLEMENTS PROTECTED THROW BYTE ELSE IMPORT PUBLIC THROWS CASE ENUM INSTANCEOF RETURN TRANSIENT CATCH EXTENDS INT SHORT TRY CHAR FINAL INTERFACE STATIC VOID CLASS FINALLY LONG STRICTFP VOLATILE CONST FLOAT NATIVE SUPER WHILE _ EXPORTS OPENS REQUIRES USES MODULE PERMITS SEALED VAR NON_SEALED PROVIDES TO WITH OPEN RECORD TRANSITIVE YIELD
 
-%type AdditionalBound AdditionalBounds AdditiveExpression AmbiguousName AndExpression Annotation Annotations AnnotationInterfaceBody AnnotationInterfaceDeclaration AnnotationInterfaceElementDeclaration AnnotationInterfaceElementModifier AnnotationInterfaceElementModifiers AnnotationInterfaceMemberDeclarations AnnotationInterfaceMemberDeclaration ArgumentList ArrayAccess ArrayCreationExpression ArrayCreationExpression ArrayInitializer ArrayType AssertStatement Assignment AssignmentExpression AssignmentOperator BasicForStatement BasicForStatementNoShortIf Block BlockStatement BlockStatements BreakStatement CaseConstant CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassExtends ClassImplements ClassInstanceCreationExpression ClassLiteral ClassMemberDeclaration ClassModifiers ClassModifier ClassOrInterfaceType ClassOrInterfaceTypeToInstantiate ClassPermits ClassType CompactConstructorDeclaration CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstantDeclaration ConstantExpression ConstantModifiers ConstantModifier ConstructorBody ConstructorDeclaration ConstructorDeclarator ConstructorModifier ConstructorModifiers ContinueStatement DefaultValue DimExpr DimExprs Dims ElementValue ElementValueArrayInitializer ElementValueList ElementValuePair ElementValuePairList EmptyStatement EnhancedForStatement EnhancedForStatementNoShortIf EnumBody EnumBodyDeclarations EnumConstant EnumConstantList EnumConstantModifier EnumConstantModifiers EnumDeclaration EqualityExpression ExceptionType ExceptionTypeList ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionName ExpressionStatement FieldAccess FieldDeclaration FieldModifier Finally FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate Identifiers Identifier IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement ImportDeclarations ImportDeclaration InclusiveOrExpression InstanceInitializer InstanceofExpression IntegralType InterfaceBody InterfaceDeclaration InterfaceExtends InterfaceMemberDeclaration InterfaceMemberDeclarations InterfaceMethodDeclaration InterfaceMethodModifier InterfaceMethodModifiers InterfaceModifier InterfaceModifier InterfacePermits InterfaceType InterfaceTypeList LabeledStatement LabeledStatementNoShortIf LambdaBody LambdaExpression LambdaParameter LambdaParameterList LambdaParameters LambdaParameterType LeftHandSide Literal LocalClassOrInterfaceDeclaration LocalVariableDeclaration LocalVariableDeclarationStatement LocalVariableType MarkerAnnotation MethodBody MethodDeclaration MethodDeclarator MethodHeader MethodInvocation MethodModifier MethodModifiers MethodName MethodReference ModularCompilationUnit ModuleDeclaration ModuleDirective ModuleDirectives ModuleName ModuleNames MultiplicativeExpression NormalAnnotation NormalClassDeclaration NormalInterfaceDeclaration NumericType OrdinaryCompilationUnit PackageDeclaration PackageModifier PackageModifier PackageName PackageOrTypeName Pattern PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType ReceiverParameter RecordBody RecordBodyDeclaration RecordBodyDeclarations RecordComponent RecordComponentList RecordComponentModifier RecordComponentModifiers RecordDeclaration RecordHeader ReferenceType RelationalExpression RequiresModifier RequiresModifiers Resource ResourceList ResourceSpecification Result ReturnStatement ShiftExpression SimpleTypeName SingleElementAnnotation SingleStaticImportDeclaration SingleTypeImportDeclaration Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticImportOnDemandDeclaration StaticInitializer SynchronizedStatement Throws ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations Type TypeArgument TypeArguments TypeArgumentList TypeArguments TypeArgumentsOrDiamond TypeBound TypeIdentifier TypeImportOnDemandDeclaration TypeName TypeNames TypeParameter TypeParameters TypeParameterList TypeParameterModifier TypeParameterModifiers TypeParameters TypePattern TypeVariable UnannArrayType UnannClassOrInterfaceType UnannClassType UnannInterfaceType UnannPrimitiveType UnannReferenceType UnannType UnannTypeVariable UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression UnqualifiedMethodIdentifier VariableAccess VariableArityParameter VariableArityRecordComponent VariableDeclarator VariableDeclaratorId VariableDeclaratorList VariableInitializer VariableInitializerList VariableModifier VariableModifiers WhileStatement WhileStatementNoShortIf Wildcard WildcardBounds YieldStatement
+%type AdditionalBound AdditionalBounds AdditiveExpression AmbiguousName AndExpression Annotation Annotations AnnotationInterfaceBody AnnotationInterfaceDeclaration AnnotationInterfaceElementDeclaration AnnotationInterfaceElementModifier AnnotationInterfaceElementModifiers AnnotationInterfaceMemberDeclarations AnnotationInterfaceMemberDeclaration ArgumentList ArrayAccess ArrayCreationExpression ArrayCreationExpression ArrayInitializer ArrayType AssertStatement Assignment AssignmentExpression AssignmentOperator BasicForStatement BasicForStatementNoShortIf Block BlockStatement BlockStatements Brackets BreakStatement CaseConstant CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassExtends ClassImplements ClassInstanceCreationExpression ClassLiteral ClassMemberDeclaration ClassModifiers ClassModifier ClassOrInterfaceType ClassOrInterfaceTypeToInstantiate ClassPermits ClassType CompactConstructorDeclaration CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstantDeclaration ConstantExpression ConstantModifiers ConstantModifier ConstructorBody ConstructorDeclaration ConstructorDeclarator ConstructorModifier ConstructorModifiers ContinueStatement DefaultValue DimExpr DimExprs Dims ElementValue ElementValueArrayInitializer ElementValueList ElementValuePair ElementValuePairList EmptyStatement EnhancedForStatement EnhancedForStatementNoShortIf EnumBody EnumBodyDeclarations EnumConstant EnumConstantList EnumConstantModifier EnumConstantModifiers EnumDeclaration EqualityExpression ExceptionType ExceptionTypeList ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionName ExpressionStatement FieldAccess FieldDeclaration FieldModifier Finally FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate Identifiers Identifier IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement ImportDeclarations ImportDeclaration InclusiveOrExpression InstanceInitializer InstanceofExpression IntegralType InterfaceBody InterfaceDeclaration InterfaceExtends InterfaceMemberDeclaration InterfaceMemberDeclarations InterfaceMethodDeclaration InterfaceMethodModifier InterfaceMethodModifiers InterfaceModifier InterfaceModifier InterfacePermits InterfaceType InterfaceTypeList LabeledStatement LabeledStatementNoShortIf LambdaBody LambdaExpression LambdaParameter LambdaParameterList LambdaParameters LambdaParameterType LeftHandSide Literal LocalClassOrInterfaceDeclaration LocalVariableDeclaration LocalVariableDeclarationStatement LocalVariableType MarkerAnnotation MethodBody MethodDeclaration MethodDeclarator MethodHeader MethodInvocation MethodModifier MethodModifiers MethodName MethodReference ModularCompilationUnit ModuleDeclaration ModuleDirective ModuleDirectives ModuleName ModuleNames MultiplicativeExpression NormalAnnotation NormalClassDeclaration NormalInterfaceDeclaration NumericType OrdinaryCompilationUnit PackageDeclaration PackageModifier PackageModifier PackageName PackageOrTypeName Pattern PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType ReceiverParameter RecordBody RecordBodyDeclaration RecordBodyDeclarations RecordComponent RecordComponentList RecordComponentModifier RecordComponentModifiers RecordDeclaration RecordHeader ReferenceType RelationalExpression RequiresModifier RequiresModifiers Resource ResourceList ResourceSpecification Result ReturnStatement ShiftExpression SimpleTypeName SingleElementAnnotation SingleStaticImportDeclaration SingleTypeImportDeclaration Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticImportOnDemandDeclaration StaticInitializer SynchronizedStatement Throws ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations Type TypeArgument TypeArguments TypeArgumentList TypeArguments TypeArgumentsOrDiamond TypeBound TypeIdentifier TypeImportOnDemandDeclaration TypeName TypeNames TypeParameter TypeParameters TypeParameterList TypeParameterModifier TypeParameterModifiers TypeParameters TypePattern TypeVariable UnannArrayType UnannClassOrInterfaceType UnannClassType UnannInterfaceType UnannPrimitiveType UnannReferenceType UnannType UnannTypeVariable UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression UnqualifiedMethodIdentifier VariableAccess VariableArityParameter VariableArityRecordComponent VariableDeclarator VariableDeclaratorId VariableDeclaratorList VariableInitializer VariableInitializerList VariableModifier VariableModifiers WhileStatement WhileStatementNoShortIf Wildcard WildcardBounds YieldStatement
 %%
 
 
@@ -487,10 +487,14 @@ EnumBodyDeclarations:
 ';' ClassBodyDeclarations
 ;
 RecordDeclaration:
-ClassModifiers record TypeIdentifier [TypeParameters] RecordHeader [ClassImplements] RecordBody
+ClassModifiers record TypeIdentifier TypeParameters RecordHeader ClassImplements RecordBody
+|ClassModifiers record TypeIdentifier RecordHeader ClassImplements RecordBody
+|ClassModifiers record TypeIdentifier TypeParameters RecordHeader RecordBody
+|ClassModifiers record TypeIdentifier RecordHeader RecordBody
 ;
 RecordHeader:
-'(' [RecordComponentList] ')'
+'(' RecordComponentList ')'
+|'(' ')'
 ;
 RecordComponentList:
 RecordComponent
@@ -524,6 +528,10 @@ ClassBodyDeclaration
 CompactConstructorDeclaration:
 ConstructorModifiers SimpleTypeName ConstructorBody
 ;
+
+
+
+
 InterfaceDeclaration:
 NormalInterfaceDeclaration
 |AnnotationInterfaceDeclaration
@@ -821,6 +829,10 @@ TypePattern
 TypePattern:
 LocalVariableDeclaration
 ;
+
+
+
+//Grammar for Expressions
 Primary:
 PrimaryNoNewArray
 |ArrayCreationExpression
@@ -838,10 +850,14 @@ Literal
 |MethodReference
 ;
 ClassLiteral:
-TypeName {'[' ']'} '.' CLASS
-|NumericType {'[' ']'} '.' CLASS
-|BOOLEAN {'[' ']'} '.' CLASS
+TypeName Brackets '.' CLASS
+|NumericType Brackets '.' CLASS
+|BOOLEAN Brackets '.' CLASS
 |VOID '.' CLASS
+;
+Brackets:
+
+|'[' ']' Brackets
 ;
 ClassInstanceCreationExpression:
 UnqualifiedClassInstanceCreationExpression
@@ -849,11 +865,22 @@ UnqualifiedClassInstanceCreationExpression
 |Primary '.' UnqualifiedClassInstanceCreationExpression
 ;
 UnqualifiedClassInstanceCreationExpression:
-NEW [TypeArguments] ClassOrInterfaceTypeToInstantiate '(' [ArgumentList] ')' [ClassBody]
+NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' ClassBody
+NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' ClassBody
+NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' 
+NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ')' ClassBody
+NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ')'
+NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')'
+NEW ClassOrInterfaceTypeToInstantiate '(' ')' ClassBody
+|NEW ClassOrInterfaceTypeToInstantiate '(' ')'
 ;
 ClassOrInterfaceTypeToInstantiate:
-Annotations Identifier [TypeArgumentsOrDiamond]
-|Annotations Identifier '.' ClassOrInterfaceTypeToInstantiate [TypeArgumentsOrDiamond]
+ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamond
+|ClassOrInterfaceTypeToInstant 
+;
+ClassOrInterfaceTypeToInstant:
+Annotations Identifier
+|Annotations Identifier '.' ClassOrInterfaceTypeToInstantiate
 ;
 TypeArgumentsOrDiamond:
 TypeArguments
@@ -869,29 +896,53 @@ ExpressionName '[' Expression ']'
 |PrimaryNoNewArray '[' Expression ']'
 ;
 MethodInvocation:
-MethodName '(' [ArgumentList] ')'
-|TypeName '.' [TypeArguments] Identifier '(' [ArgumentList] ')'
-|ExpressionName '.' [TypeArguments] Identifier '(' [ArgumentList] ')'
-|Primary '.' [TypeArguments] Identifier '(' [ArgumentList] ')'
-|SUPER '.' [TypeArguments] Identifier '(' [ArgumentList] ')'
-|TypeName '.' SUPER '.' [TypeArguments] Identifier '(' [ArgumentList] ')'
+MethodName '(' ArgumentList ')'
+|MethodName '(' ')'
+|TypeName '.' TypeArguments Identifier '(' ArgumentList ')'
+|TypeName '.' TypeArguments Identifier '(' ')'
+|TypeName '.' Identifier '(' ArgumentList ')'
+|TypeName '.' Identifier '(' ')'
+|ExpressionName '.' TypeArguments Identifier '(' ArgumentList ')'
+|ExpressionName '.' TypeArguments Identifier '(' ')'
+|ExpressionName '.' Identifier '(' ArgumentList ')'
+|ExpressionName '.' Identifier '(' ')'
+|Primary '.' TypeArguments Identifier '(' ArgumentList ')'
+|Primary '.' Identifier '(' ArgumentList ')'
+|Primary '.' TypeArguments Identifier '(' ')'
+|Primary '.' Identifier '(' ')'
+|SUPER '.' TypeArguments Identifier '(' ArgumentList ')'
+|SUPER '.' TypeArguments Identifier '(' ')'
+|SUPER '.' Identifier '(' ArgumentList ')'
+|SUPER '.' Identifier '(' ')'
+|TypeName '.' SUPER '.' TypeArguments Identifier '(' ArgumentList ')'
+|TypeName '.' SUPER '.' Identifier '(' ArgumentList ')'
+|TypeName '.' SUPER '.' TypeArguments Identifier '(' ')'
+|TypeName '.' SUPER '.' Identifier '(' ')'
 ;
 ArgumentList:
 Expression
 |Expression ArgumentList
 ;
 MethodReference:
-ExpressionName METHOD_REFERENCE [TypeArguments] Identifier
-|Primary METHOD_REFERENCE [TypeArguments] Identifier
-|ReferenceType METHOD_REFERENCE [TypeArguments] Identifier
-|SUPER METHOD_REFERENCE [TypeArguments] Identifier
-|TypeName '.' SUPER METHOD_REFERENCE [TypeArguments] Identifier
-|ClassType METHOD_REFERENCE [TypeArguments] NEW
-ArrayType METHOD_REFERENCE NEW
+ExpressionName METHOD_REFERENCE TypeArguments Identifier
+|ExpressionName METHOD_REFERENCE Identifier
+|Primary METHOD_REFERENCE TypeArguments Identifier
+|Primary METHOD_REFERENCE Identifier
+|ReferenceType METHOD_REFERENCE TypeArguments Identifier
+|ReferenceType METHOD_REFERENCE Identifier
+|SUPER METHOD_REFERENCE TypeArguments Identifier
+|SUPER METHOD_REFERENCE Identifier
+|TypeName '.' SUPER METHOD_REFERENCE TypeArguments Identifier
+|TypeName '.' SUPER METHOD_REFERENCE Identifier
+|ClassType METHOD_REFERENCE TypeArguments NEW
+|ClassType METHOD_REFERENCE NEW
+|ArrayType METHOD_REFERENCE NEW
 ;
 ArrayCreationExpression:
-NEW PrimitiveType DimExprs [Dims]
-|NEW ClassOrInterfaceType DimExprs [Dims]
+NEW PrimitiveType DimExprs Dims
+|NEW PrimitiveType DimExprs
+|NEW ClassOrInterfaceType DimExprs
+|NEW ClassOrInterfaceType DimExprs Dims
 |NEW PrimitiveType Dims ArrayInitializer
 |NEW ClassOrInterfaceType Dims ArrayInitializer
 ;
@@ -910,7 +961,8 @@ LambdaExpression:
 LambdaParameters PTR_OP LambdaBody
 ;
 LambdaParameters:
-'(' [LambdaParameterList] ')'
+'(' ')'
+'(' LambdaParameterList ')'
 |Identifier
 ;
 LambdaParameterList:
@@ -1036,8 +1088,8 @@ PostfixExpression DEC_OP
 ;
 CastExpression:
 '(' PrimitiveType ")" UnaryExpression
-|'(' ReferenceType {AdditionalBound} ')' UnaryExpressionNotPlusMinus
-|'(' ReferenceType {AdditionalBound} ')' LambdaExpression
+|'(' ReferenceType AdditionalBounds ')' UnaryExpressionNotPlusMinus
+|'(' ReferenceType AdditionalBounds ')' LambdaExpression
 ;
 ConstantExpression:
 Expression
