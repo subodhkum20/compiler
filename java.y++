@@ -66,9 +66,12 @@ ClassType
 |InterfaceType
 ;
 ClassType:
-Annotations TypeIdentifier [TypeArguments]
-|PackageName '.' Annotations TypeIdentifier [TypeArguments]
-|ClassOrInterfaceType '.' Annotations TypeIdentifier [TypeArguments]
+Annotations TypeIdentifier TypeArguments
+Annotations TypeIdentifier
+|PackageName '.' Annotations TypeIdentifier TypeArguments
+|PackageName '.' Annotations TypeIdentifier
+|ClassOrInterfaceType '.' Annotations TypeIdentifier TypeArguments
+|ClassOrInterfaceType '.' Annotations TypeIdentifier
 ;
 InterfaceType:
 ClassType
@@ -86,7 +89,8 @@ Dims:
 |Annotations '[' ']' Dims
 ;
 TypeParameter:
-TypeParameterModifiers TypeIdentifier [TypeBound]
+TypeParameterModifiers TypeIdentifier TypeBound
+|TypeParameterModifiers TypeIdentifier 
 ;
 TypeParameterModifiers:
 
@@ -118,12 +122,17 @@ ReferenceType
 |Wildcard
 ;
 Wildcard:
-Annotations '?' [WildcardBounds]
+Annotations '?' WildcardBounds
+|Annotations '?' 
 ;
 WildcardBounds:
 EXTENDS ReferenceType
 |SUPER ReferenceType
 ;
+
+
+
+//Grammar for Names
 ModuleName:
 Identifier
 |ModuleName '.' Identifier
@@ -150,49 +159,6 @@ Identifier
 AmbiguousName:
 Identifier
 |AmbiguousName '.' Identifier
-;
-PackageDeclaration:
-PackageModifiers PACKAGE Identifier Identifiers ';'
-;
-PackageModifiers:
-
-|PackageModifier PackageModifiers
-;
-Identifiers:
-
-|'.' Identifier Identifiers
-;
-PackageModifier:
-Annotation
-;
-ModuleDeclaration:
-Annotations [OPEN] MODULE Identifier Identifiers '{' ModuleDirectives '}'
-ModuleDirectives:
-
-|ModuleDirective ModuleDirectives
-;
-ModuleDirective:
-REQUIRES RequiresModifiers ModuleName ';'
-|EXPORTS PackageName [TO ModuleName ModuleNames] ';'
-OPENS PackageName [TO ModuleName ModuleNames] ';'
-USES TypeName ';'
-PROVIDES TypeName WITH TypeName TypeNames ';'
-;
-RequiresModifiers:
-
-|RequiresModifier RequiresModifiers
-;
-ModuleNames:
-
-|',' ModuleName ModuleNames
-;
-TypeNames:
-
-|',' TypeName TypeNames
-;
-RequiresModifier:
-TRANSITIVE 
-|STATIC
 ;
 
 
@@ -531,13 +497,21 @@ ConstructorModifiers SimpleTypeName ConstructorBody
 
 
 
-
+// grammar for Interfaces
 InterfaceDeclaration:
 NormalInterfaceDeclaration
 |AnnotationInterfaceDeclaration
 ;
 NormalInterfaceDeclaration:
-InterfaceModifiers INTERFACE TypeIdentifier [TypeParameters] [InterfaceExtends] [InterfacePermits] InterfaceBody
+InterfaceModifiers INTERFACE TypeIdentifier TypeParameters InterfaceExtends InterfacePermits
+InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier InterfaceExtends InterfacePermits InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier TypeParameters InterfacePermits InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier TypeParameters InterfaceExtends InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier InterfaceExtends InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier InterfacePermits InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier TypeParameters InterfaceBody
+|InterfaceModifiers INTERFACE TypeIdentifier InterfaceBody
 ;
 InterfaceModifiers:
 
@@ -604,7 +578,10 @@ AnnotationInterfaceElementDeclaration
 |';'
 ;
 AnnotationInterfaceElementDeclaration:
-AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' [Dims] [DefaultValue] ';'
+AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' Dims DefaultValue ';'
+|AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' DefaultValue ';'
+|AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' Dims ';'
+|AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' ';'
 ;
 AnnotationInterfaceElementModifiers:
 
@@ -622,7 +599,8 @@ NormalAnnotation
 |SingleElementAnnotation
 ;
 NormalAnnotation:
-'@' TypeName '(' [ElementValuePairList] ')'
+'@' TypeName '(' ElementValuePairList ')'
+|'@' TypeName '(' ')'
 ;
 ElementValuePairList:
 ElementValuePair
@@ -637,8 +615,10 @@ ConditionalExpression
 |Annotation
 ;
 ElementValueArrayInitializer:
-
-|[ElementValueList] [','] ElementValueArrayInitializer
+'{'ElementValueList ',' '}'
+|'{' ',' '}'
+|'{'ElementValueList '}'
+|'{' '}'
 ;
 ElementValueList:
 ElementValue 
@@ -650,9 +630,15 @@ MarkerAnnotation:
 SingleElementAnnotation:
 '@' TypeName '(' ElementValue ')'
 ;
-ArrayInitializer:
 
-|[VariableInitializerList] [','] ArrayInitializer
+
+
+//Arrays
+ArrayInitializer:
+'{' VariableInitializerList ',' '}'
+|'{' VariableInitializerList '}'
+|'{' ',' '}'
+|'{' '}'
 ;
 VariableInitializerList:
 VariableInitializer 
