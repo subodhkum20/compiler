@@ -11,7 +11,6 @@
         #include "parser.hpp"
         void count(void);
         int line = 1;
-        extern void yyerror(char const*);
 
         unordered_map<string,yytokentype>m(
                 {
@@ -204,3 +203,4 @@ void count(void)
         if (yytext[i] == '\n') line ++;
       return;  
 }
+

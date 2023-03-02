@@ -25,8 +25,8 @@ treeNode *makeleaf(string str){
 	
 	string tmp = "";
 	for(int i=0; i<str.length(); ++i){
-		tmp+=str[i];
-		if(str[i]=='\\') tmp+=str[i];
+		tmp.push_back(str[i]);
+		if(str[i]=='\\') tmp.push_back(str[i]);
 	}
 
     treeNode *node = new treeNode;

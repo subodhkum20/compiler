@@ -70,13 +70,13 @@
 
     #include<iostream>
     #include<stdio.h>
+    #include "ast.h"
     #include <fstream>
     using namespace std;
     extern char* yytext;
     extern int line;
+    extern void yyerror(char const*);
     int yylex (void); /* type of yylex() */
-    void yyerror(char const*)
-    #include "ast.h"
     #define YYDEBUG 1
     #define YYERROR_VERBOSE
 
@@ -7630,12 +7630,6 @@ yyreturn:
 
 
 int main(){
-    dotfile = fopen("AST.dot", "w");
-	
-	if(dotfile == NULL){
-		cout<<"cannot open the dot file AST.dot"<<"\nCompilation terminated\n";
-		return -1;
-	}
 
 	beginAST();
     yyparse();
@@ -7648,4 +7642,3 @@ void yyerror(char const* s){
     cout << "Error: " << s << "in Line no: " << line << endl;
     return;
 }
-
