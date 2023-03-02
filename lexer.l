@@ -7,8 +7,14 @@
         #include <vector>
         #include <algorithm>
         #include <unordered_map>
-        #include "y.tab.h++"
+        #include "parser.tab.h++"
         using namespace std;
+        #include "ast.h"
+        #include "parser.hpp"
+
+        void count(void);
+        int line = 1;
+
         unordered_map<string,yytokentype>m(
                 {
                         {"abstract",ABSTRACT},
@@ -84,6 +90,7 @@
 
 hex [0-9a-fA-F]
 UnicodeEscape   [\\]u+{hex}{4}
+UnicodeInputCharacter {UnicodeEscape}|
 LineTerminators [\n\r]|[\r][\n]
 whitespace  [ \t\f]|{LineTerminators}
 oneLineComment  [/]{2}[^\r\n]+
@@ -108,7 +115,7 @@ hexadecimalFloat  {hexsignificand}{binaryExponent}[fFdD]?
 float   {decimalFloat}|{hexadecimalFloat}
 boolean true|false
 octalEscape [\][0-3]?[0-7]{1,2}
-integerLiteral  {boolean}|{decimal}|{hexNumeral}[lL]?|{octal}
+integerLiteral  {decimal}|{hexNumeral}[lL]?|{octal}|{binary}
 escapeSequence  [\\][btrnf\"\'\\]|{octalEscape}
 singleCharacter [^\n\r\'\\]
 characterLiteral    [\']{singleCharacter}[\']|[\']{escapeSequence}[\']
@@ -121,73 +128,85 @@ textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
 compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"]
 %%
 
-{LineTerminators}       {}
+{LineTerminators}       {count();}
 {whitespace}            {}
 {comments}              {}
-{keyword}               {return m[string(yytext)];}
-{integerLiteral}        {return integerLiteral;}
-{stringLiteral}         {return stringLiteral;}
-{boolean}               {return booleanLiteral;}
-{float}                 {return FloatingPointLiteral;}
-{nullLiteral}           {return nullLiteral;}
-{characterLiteral}      {return characterLiteral;}
-{textBlock}             {return textBlock;}
-{Identifier}            {return Identifier;}
-{compileError}          {return compileError;}
-">>>"                   {return(UNSIGNED_RIGHT); }
-">>>="                  {return(UNSIGNED_RIGHT_ASSIGN); }
-"::"                    {return(METHOD_REFERENCE); }
-"..."			{return(ELLIPSIS); }
-">>="			{return(RIGHT_ASSIGN); }
-"<<="			{return(LEFT_ASSIGN); }
-"+="			{return(ADD_ASSIGN); }
-"-="			{return(SUB_ASSIGN); }
-"*="			{return(MUL_ASSIGN); }
-"/="			{return(DIV_ASSIGN); }
-"%="			{return(MOD_ASSIGN); }
-"&="			{return(AND_ASSIGN); }
-"^="			{return(XOR_ASSIGN); }
-"|="			{return(OR_ASSIGN); }
-">>"			{return(RIGHT_OP); }
-"<<"			{return(LEFT_OP); }
-"++"			{return(INC_OP); }
-"--"			{return(DEC_OP); }
-"->"			{return(PTR_OP); }
-"&&"			{return(AND_OP); }
-"||"			{return(OR_OP); }
-"<="			{return(LE_OP); }
-">="			{return(GE_OP); }
-"=="			{return(EQ_OP); }
-"!="			{return(NE_OP); }
-";"			{return(';'); }
-"@"                     {return('@'); }
-"{"		        {return('{'); }
-"}"		        {return('}'); }
-","			{return(','); }
-":"			{return(':'); }
-"="			{return('='); }
-"("			{return('('); }
-")"			{return(')'); }
-"["	        	{return('['); }
-"]"     		{return(']'); }
-"."			{return('.'); }
-"&"			{return('&'); }
-"!"			{return('!'); }
-"~"			{return('~'); }
-"-"			{return('-'); }
-"+"			{return('+'); }
-"*"			{return('*'); }
-"/"			{return('/'); }
-"%"			{return('%'); }
-"<"			{return('<'); }
-">"			{return('>'); }
-"^"			{return('^'); }
-"|"			{return('|'); }
-"?"			{return('?'); }
-
+{keyword}               {yylval.str = strdup(yytext); count();return m[string(yytext)]}
+{integerLiteral}        {yylval.str = strdup(yytext); count(); return integerLiteral;}
+{stringLiteral}         {yylval.str = strdup(yytext); count(); return stringLiteral;}
+{boolean}               {yylval.str = strdup(yytext); count(); return booleanLiteral;}
+{float}                 {yylval.str = strdup(yytext); count(); return FloatingPointLiteral;}
+{nullLiteral}           {yylval.str = strdup(yytext); count(); return nullLiteral;}
+{characterLiteral}      {yylval.str = strdup(yytext); count(); return characterLiteral;}
+{textBlock}             {yylval.str = strdup(yytext); count(); return textBlock;}
+{Identifier}            {yylval.str = strdup(yytext); count(); return Identifier;}
+{compileError}          {yylval.str = strdup(yytext); count(); return compileError;}
+">>>"                   {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT); }
+">>>="                  {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT_ASSIGN); }
+"::"                    {yylval.str = strdup(yytext); count(); return(METHOD_REFERENCE); }
+"..."			{yylval.str = strdup(yytext); count(); return(ELLIPSIS); }
+">>="			{yylval.str = strdup(yytext); count(); return(RIGHT_ASSIGN); }
+"<<="			{yylval.str = strdup(yytext); count(); return(LEFT_ASSIGN); }
+"+="			{yylval.str = strdup(yytext); count(); return(ADD_ASSIGN); }
+"-="			{yylval.str = strdup(yytext); count(); return(SUB_ASSIGN); }
+"*="			{yylval.str = strdup(yytext); count(); return(MUL_ASSIGN); }
+"/="			{yylval.str = strdup(yytext); count(); return(DIV_ASSIGN); }
+"%="			{yylval.str = strdup(yytext); count(); return(MOD_ASSIGN); }
+"&="			{yylval.str = strdup(yytext); count(); return(AND_ASSIGN); }
+"^="			{yylval.str = strdup(yytext); count(); return(XOR_ASSIGN); }
+"|="			{yylval.str = strdup(yytext); count(); return(OR_ASSIGN); }
+">>"			{yylval.str = strdup(yytext); count(); return(RIGHT_OP); }
+"<<"			{yylval.str = strdup(yytext); count(); return(LEFT_OP); }
+"++"			{yylval.str = strdup(yytext); count(); return(INC_OP); }
+"--"			{yylval.str = strdup(yytext); count(); return(DEC_OP); }
+"->"			{yylval.str = strdup(yytext); count(); return(PTR_OP); }
+"&&"			{yylval.str = strdup(yytext); count(); return(AND_OP); }
+"||"			{yylval.str = strdup(yytext); count(); return(OR_OP); }
+"<="			{yylval.str = strdup(yytext); count(); return(LE_OP); }
+">="			{yylval.str = strdup(yytext); count(); return(GE_OP); }
+"=="			{yylval.str = strdup(yytext); count(); return(EQ_OP); }
+"!="			{yylval.str = strdup(yytext); count(); return(NE_OP); }
+";"			{yylval.str = strdup(yytext); count(); return(';'); }
+"@"                     {yylval.str = strdup(yytext); count(); return('@'); }
+"{"		        {yylval.str = strdup(yytext); count(); return('{'); }
+"}"		        {yylval.str = strdup(yytext); count(); return('}'); }
+","			{yylval.str = strdup(yytext); count(); return(','); }
+":"			{yylval.str = strdup(yytext); count(); return(':'); }
+"="			{yylval.str = strdup(yytext); count(); return('='); }
+"("			{yylval.str = strdup(yytext); count(); return('('); }
+")"			{yylval.str = strdup(yytext); count(); return(')'); }
+"["	        	{yylval.str = strdup(yytext); count(); return('['); }
+"]"     		{yylval.str = strdup(yytext); count(); return(']'); }
+"."			{yylval.str = strdup(yytext); count(); return('.'); }
+"&"			{yylval.str = strdup(yytext); count(); return('&'); }
+"!"			{yylval.str = strdup(yytext); count(); return('!'); }
+"~"			{yylval.str = strdup(yytext); count(); return('~'); }
+"-"			{yylval.str = strdup(yytext); count(); return('-'); }
+"+"			{yylval.str = strdup(yytext); count(); return('+'); }
+"*"			{yylval.str = strdup(yytext); count(); return('*'); }
+"/"			{yylval.str = strdup(yytext); count(); return('/'); }
+"%"			{yylval.str = strdup(yytext); count(); return('%'); }
+"<"			{yylval.str = strdup(yytext); count(); return('<'); }
+">"			{yylval.str = strdup(yytext); count(); return('>'); }
+"^"			{yylval.str = strdup(yytext); count(); return('^'); }
+"|"			{yylval.str = strdup(yytext); count(); return('|'); }
+"?"			{yylval.str = strdup(yytext); count(); return('?'); }
+<<EOF>>                 {yylval.str =  "<EOF>"; return EOF;}
 .       {
-        cout<<"illegal character on line "<<j<<" :"<<yytext<<endl;
+        cout<<"illegal character on line "<<line<<" :"<<yytext<<endl;
         return -1;
 }
 
 %%
+
+int yywrap()
+{
+      return(1);
+}
+
+void count(void)
+{
+      for (i = 0; yytext[i] != '\0'; i++) 
+        if (yytext[i] == '\n') line ++;
+      return;  
+}

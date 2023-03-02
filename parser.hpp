@@ -34,8 +34,8 @@
 /* Undocumented macros, especially those whose name start with YY_,
    are private implementation details.  Do not rely on them.  */
 
-#ifndef YY_YY_JAVA_TAB_H__INCLUDED
-# define YY_YY_JAVA_TAB_H__INCLUDED
+#ifndef YY_YY_PARSER_HPP_INCLUDED
+# define YY_YY_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -154,11 +154,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "java.y++"
+#line 9 "parser.y++"
  
-    char* s;
+    char* str;
 
-#line 162 "java.tab.h++"
+#line 162 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -171,4 +171,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_JAVA_TAB_H__INCLUDED  */
+#endif /* !YY_YY_PARSER_HPP_INCLUDED  */

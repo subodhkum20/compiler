@@ -66,7 +66,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "java.y++"
+#line 1 "parser.y++"
 
 #include<iostream>
     using namespace std;
@@ -74,7 +74,7 @@
     void yyerror(char const *s);
     #define YYDEBUG 1
 
-#line 78 "java.tab.c++"
+#line 78 "parser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -107,8 +107,8 @@
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_YY_JAVA_TAB_H__INCLUDED
-# define YY_YY_JAVA_TAB_H__INCLUDED
+#ifndef YY_YY_PARSER_HPP_INCLUDED
+# define YY_YY_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -227,11 +227,11 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "java.y++"
+#line 9 "parser.y++"
  
-    char* s;
+    char* str;
 
-#line 235 "java.tab.c++"
+#line 235 "parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -244,7 +244,7 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_JAVA_TAB_H__INCLUDED  */
+#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
 
 
 
@@ -2818,7 +2818,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 2822 "java.tab.c++"
+#line 2822 "parser.cpp"
 
       default: break;
     }
@@ -3050,7 +3050,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 1186 "java.y++"
+#line 1186 "parser.y++"
 
 
 int main(){
