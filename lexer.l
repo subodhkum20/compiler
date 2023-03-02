@@ -1,4 +1,3 @@
-
 %{
         #include<iostream>
         #include<string>
@@ -7,13 +6,12 @@
         #include <vector>
         #include <algorithm>
         #include <unordered_map>
-        #include "parser.tab.h++"
         using namespace std;
         #include "ast.h"
         #include "parser.hpp"
-
         void count(void);
         int line = 1;
+        extern void yyerror(char const*);
 
         unordered_map<string,yytokentype>m(
                 {
@@ -21,36 +19,37 @@
                         {"continue",CONTINUE},
                         {"for",FOR},
                         {"new",NEW},
-                        {"switch",SWITCH},
+                        // {"switch",SWITCH},
                         {"assert",ASSERT},
                         {"default",DEFAULT},
                         {"if",IF},
                         {"package",PACKAGE},
                         {"synchronized",SYNCHRONIZED},
                         {"boolean",BOOLEAN},
-                        {"do",DO},{"goto",GOTO},
+                        // {"do",DO},
+                        // {"goto",GOTO},
                         {"private",PRIVATE},
                         {"this",THIS},
                         {"break",BREAK},
                         {"double",DOUBLE},
                         {"implements",IMPLEMENTS},
-                        {"protected",PROTECTED},
+                        // {"protected",PROTECTED},
                         {"throw",THROW},
                         {"byte",BYTE},
                         {"else",ELSE},
-                        {"import",IMPORT},
+                        // {"import",IMPORT},
                         {"public",PUBLIC},
                         {"throws",THROWS},
-                        {"case",CASE},
+                        // {"case",CASE},
                         {"enum",ENUM},
                         {"instanceof",INSTANCEOF},
                         {"return",RETURN},
                         {"transient",TRANSIENT},
-                        {"catch",CATCH},
+                        // {"catch",CATCH},
                         {"extends",EXTENDS},
                         {"int",INT},
                         {"short",SHORT},
-                        {"try",TRY},
+                        // {"try",TRY},
                         {"char",CHAR},
                         {"final",FINAL},
                         {"interface",INTERFACE},
@@ -61,12 +60,12 @@
                         {"long",LONG},
                         {"strictfp",STRICTFP},
                         {"volatile",VOLATILE},
-                        {"const",CONST},
+                        // {"const",CONST},
                         {"float",FLOAT},
                         {"native",NATIVE},
                         {"super",SUPER},
                         {"while",WHILE},
-                        {"_",UNDERSCORE},
+                        // {"_",UNDERSCORE},
                         {"exports",EXPORTS},
                         {"opens",OPENS},
                         {"requires",REQUIRES},
@@ -89,12 +88,9 @@
 %}
 
 hex [0-9a-fA-F]
-UnicodeEscape   [\\]u+{hex}{4}
-UnicodeInputCharacter {UnicodeEscape}|
 LineTerminators [\n\r]|[\r][\n]
 whitespace  [ \t\f]|{LineTerminators}
 oneLineComment  [/]{2}[^\r\n]+
-character   .|\n|\r
 multiLineComment    "/*"([^*]|\*+[^*/])*\*+"/"
 comments    {oneLineComment}|{multiLineComment}
 keyword abstract|continue|for|new|switch|assert|default|if|package|synchronized|boolean|do|goto|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while|_|exports|opens|requires|uses|module|permits|sealed|var|non-sealed|provides|to|with|open|record|transitive|yield
@@ -125,13 +121,12 @@ nullLiteral null
 end [^\\][\"]{3}
 textBlockCharacter  [^\\]|{escapeSequence}
 textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
-compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"]
 %%
 
 {LineTerminators}       {count();}
 {whitespace}            {}
 {comments}              {}
-{keyword}               {yylval.str = strdup(yytext); count();return m[string(yytext)]}
+{keyword}               {yylval.str = strdup(yytext); count();return m[string(yytext)];}
 {integerLiteral}        {yylval.str = strdup(yytext); count(); return integerLiteral;}
 {stringLiteral}         {yylval.str = strdup(yytext); count(); return stringLiteral;}
 {boolean}               {yylval.str = strdup(yytext); count(); return booleanLiteral;}
@@ -140,7 +135,6 @@ compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"
 {characterLiteral}      {yylval.str = strdup(yytext); count(); return characterLiteral;}
 {textBlock}             {yylval.str = strdup(yytext); count(); return textBlock;}
 {Identifier}            {yylval.str = strdup(yytext); count(); return Identifier;}
-{compileError}          {yylval.str = strdup(yytext); count(); return compileError;}
 ">>>"                   {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT); }
 ">>>="                  {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT_ASSIGN); }
 "::"                    {yylval.str = strdup(yytext); count(); return(METHOD_REFERENCE); }
@@ -191,7 +185,7 @@ compileError    [\'].*[\r\n]+.*[\']|[\'].[^\']|[\"][^\r\n\"]*[\r\n]+[^\r\n\"][\"
 "^"			{yylval.str = strdup(yytext); count(); return('^'); }
 "|"			{yylval.str = strdup(yytext); count(); return('|'); }
 "?"			{yylval.str = strdup(yytext); count(); return('?'); }
-<<EOF>>                 {yylval.str =  "<EOF>"; return EOF;}
+<<EOF>>                 {yylval.str =  "<EOF>"; return eof;}
 .       {
         cout<<"illegal character on line "<<line<<" :"<<yytext<<endl;
         return -1;
@@ -206,7 +200,7 @@ int yywrap()
 
 void count(void)
 {
-      for (i = 0; yytext[i] != '\0'; i++) 
+      for (int i = 0; yytext[i] != '\0'; i++) 
         if (yytext[i] == '\n') line ++;
       return;  
 }

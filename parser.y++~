@@ -7,7 +7,7 @@
     extern char* yytext;
     extern int line;
     int yylex (void); /* type of yylex() */
-    int yyerror(const char*);
+    int yyerror(char const*);
     #define YYDEBUG 1
     #define YYERROR_VERBOSE
 
@@ -20,17 +20,11 @@
     int ind;
 }
 
-%token<str> PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP METHOD_REFERENCE ELLIPSIS
-%token<str> AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
-%token<str> SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN UNSIGNED_RIGHT UNSIGNED_RIGHT_ASSIGN 
-%token<str> XOR_ASSIGN OR_ASSIGN
-%token<str>integerLiteral stringLiteral nullLiteral characterLiteral textBlock booleanLiteral FloatingPointLiteral Identifier ABSTRACT CONTINUE FOR NEW ASSERT DEFAULT IF PACKAGE SYNCHRONIZED BOOLEAN GOTO PRIVATE THIS BREAK DOUBLE IMPLEMENTS PROTECTED THROW BYTE ELSE IMPORT PUBLIC THROWS CASE ENUM INSTANCEOF RETURN TRANSIENT CATCH EXTENDS INT SHORT TRY CHAR FINAL INTERFACE STATIC VOID CLASS FINALLY LONG STRICTFP VOLATILE CONST FLOAT NATIVE SUPER WHILE _ EXPORTS OPENS REQUIRES USES MODULE PERMITS SEALED VAR NON_SEALED PROVIDES TO WITH OPEN RECORD TRANSITIVE YIELD
-%token<str> EOF
+%token<str> PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP METHOD_REFERENCE ELLIPSIS AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN UNSIGNED_RIGHT UNSIGNED_RIGHT_ASSIGN XOR_ASSIGN OR_ASSIGN
 
-%type<str> ModuleDirective2 AdditionalBounds AdditiveExpression AmbiguousName AndExpression Annotation Annotations AnnotationInterfaceBody AnnotationInterfaceDeclaration AnnotationInterfaceElementDeclaration AnnotationInterfaceElementModifier AnnotationInterfaceElementModifiers AnnotationInterfaceMemberDeclarations AnnotationInterfaceMemberDeclaration ArgumentList ArrayAccess ArrayCreationExpression ArrayInitializer ArrayType AssertStatement Assignment AssignmentExpression AssignmentOperator BasicForStatement BasicForStatementNoShortIf Block BlockStatement BlockStatements BreakStatement CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassExtends ClassImplements ClassInstanceCreationExpression ClassLiteral ClassMemberDeclaration ClassModifiers ClassModifier ClassOrInterfaceType ClassOrInterfaceTypeToInstantiate ClassPermits ClassType CompactConstructorDeclaration CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstantDeclaration ConstantExpression ConstantModifiers ConstantModifier ConstructorBody ConstructorDeclaration ConstructorDeclarator ConstructorModifier ConstructorModifiers ContinueStatement DefaultValue DimExpr DimExprs Dims ElementValue ElementValueArrayInitializer ElementValueList ElementValuePair ElementValuePairList EnhancedForStatement EnhancedForStatementNoShortIf EnumBody EnumConstant EnumConstantList EnumDeclaration EqualityExpression ExceptionType ExceptionTypeList ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionName ExpressionStatement FieldAccess FieldDeclaration FieldModifier Finally FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate Identifiers IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement InclusiveOrExpression InstanceofExpression IntegralType InterfaceBody InterfaceDeclaration InterfaceExtends InterfaceMemberDeclaration InterfaceMemberDeclarations InterfaceMethodDeclaration InterfaceMethodModifier InterfaceMethodModifiers InterfaceModifier InterfacePermits InterfaceTypeList LabeledStatement LabeledStatementNoShortIf LambdaBody LambdaExpression LambdaParameter LambdaParameterList LambdaParameters LambdaParameterType LeftHandSide Literal LocalClassOrInterfaceDeclaration LocalVariableDeclaration LocalVariableType MarkerAnnotation MethodBody MethodDeclaration MethodDeclarator MethodHeader MethodInvocation MethodModifier MethodModifiers MethodReference ModularCompilationUnit ModuleDirective ModuleDirectives ModuleName ModuleNames MultiplicativeExpression NormalAnnotation NormalClassDeclaration NormalInterfaceDeclaration NumericType OrdinaryCompilationUnit PackageDeclaration PackageName PackageOrTypeName Pattern PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType ReceiverParameter RecordBody RecordBodyDeclaration RecordBodyDeclarations RecordComponent RecordComponentList RecordDeclaration RecordHeader ReferenceType RelationalExpression RequiresModifier RequiresModifiers Result ReturnStatement ShiftExpression SingleElementAnnotation Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticInitializer SynchronizedStatement Throws ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations Type TypeArgument TypeArguments TypeArgumentList TypeArgumentsOrDiamond TypeBound TypeName TypeNames TypeParameter TypeParameters TypeParameterList TypePattern TypeVariable UnannArrayType UnannClassOrInterfaceType UnannClassType UnannInterfaceType UnannPrimitiveType UnannReferenceType UnannType UnannTypeVariable UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression VariableArityParameter VariableArityRecordComponent VariableDeclarator VariableDeclaratorId VariableDeclaratorList VariableInitializer VariableInitializerList VariableModifier VariableModifiers WhileStatement WhileStatementNoShortIf Wildcard WildcardBounds YieldStatement ModuleDeclaration2 
+%token<str>integerLiteral stringLiteral nullLiteral characterLiteral textBlock booleanLiteral FloatingPointLiteral Identifier ABSTRACT CONTINUE FOR NEW ASSERT DEFAULT IF PACKAGE SYNCHRONIZED BOOLEAN PRIVATE THIS BREAK DOUBLE IMPLEMENTS THROW BYTE ELSE PUBLIC THROWS ENUM INSTANCEOF RETURN TRANSIENT EXTENDS INT SHORT CHAR FINAL INTERFACE STATIC VOID CLASS FINALLY LONG STRICTFP VOLATILE FLOAT NATIVE SUPER WHILE _ EXPORTS OPENS REQUIRES USES MODULE PERMITS SEALED VAR NON_SEALED PROVIDES TO WITH OPEN RECORD TRANSITIVE YIELD EOF
 
-%type<str>PrimitiveType2 ClassType2 Dims2 TypeParameter2 TypeArgumentList2 TypeBound2 Wildcard2 ClassExtendsy ClassImplementsy  TypeParametersy ClassPermitsy FormalParameterList2 Identifiery Dimsy FormalParameterListy ReceiverParametery Throwsy TypeArgumentsy VariableDeclaratory FieldModifiers ClassBodyDeclarations ClassBodyy EnumBodyDeclarationsy RecordComponentListy ArgumentListyy EnumConstantListy comay ArgumentListy ExplicitConstructorInvocation2 BlockStatementsy ExplicitConstructorInvocationy VariableInitializerList2 ArrayInitializer3 ArrayInitializer2 ElementValueList2 ElementValueArrayInitializer2 ElementValuePairList2 NormalAnnotation2 AnnotationInterfaceElementDeclaration3 AnnotationInterfaceElementDeclaration2 InterfaceModifiers InterfacePermitsy InterfaceExtendsy ReturnStatement2 IdentifierOrEmpty StatementExpressionList2 InnerFor3 InnerFor2 InnerFor AssertStatement2
-
+%type<ptr> ModuleDirective2 AdditionalBounds AdditiveExpression AmbiguousName AndExpression Annotation Annotations AnnotationInterfaceBody AnnotationInterfaceDeclaration AnnotationInterfaceElementDeclaration AnnotationInterfaceElementModifier AnnotationInterfaceElementModifiers AnnotationInterfaceMemberDeclarations AnnotationInterfaceMemberDeclaration ArgumentList ArrayAccess ArrayCreationExpression ArrayInitializer ArrayType AssertStatement Assignment AssignmentExpression AssignmentOperator Block BlockStatement BlockStatements BreakStatement CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassExtends ClassImplements ClassInstanceCreationExpression ClassLiteral ClassMemberDeclaration ClassModifiers ClassModifier ClassOrInterfaceType ClassOrInterfaceTypeToInstantiate ClassPermits ClassType CompactConstructorDeclaration CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstantDeclaration ConstantExpression ConstantModifiers ConstantModifier ConstructorBody ConstructorDeclaration ConstructorDeclarator ConstructorModifier ConstructorModifiers ContinueStatement DefaultValue DimExpr DimExprs Dims ElementValue ElementValueArrayInitializer ElementValueList ElementValuePair ElementValuePairList EnumBody EnumConstant EnumConstantList EnumDeclaration EqualityExpression ExceptionType ExceptionTypeList ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionName ExpressionStatement FieldAccess FieldDeclaration FieldModifier Finally FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate Identifiers IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement InclusiveOrExpression InstanceofExpression IntegralType InterfaceBody InterfaceDeclaration InterfaceExtends InterfaceMemberDeclaration InterfaceMemberDeclarations InterfaceMethodDeclaration InterfaceMethodModifier InterfaceMethodModifiers InterfaceModifier InterfacePermits InterfaceTypeList LabeledStatement LabeledStatementNoShortIf LambdaBody LambdaExpression LambdaParameter LambdaParameterList LambdaParameters LambdaParameterType LeftHandSide Literal LocalClassOrInterfaceDeclaration LocalVariableDeclaration LocalVariableType MarkerAnnotation MethodBody MethodDeclaration MethodDeclarator MethodHeader MethodInvocation MethodModifier MethodModifiers MethodReference ModularCompilationUnit ModuleDirective ModuleDirectives ModuleName ModuleNames MultiplicativeExpression NormalAnnotation NormalClassDeclaration NormalInterfaceDeclaration NumericType OrdinaryCompilationUnit PackageDeclaration PackageName PackageOrTypeName Pattern PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType ReceiverParameter RecordBody RecordBodyDeclaration RecordBodyDeclarations RecordComponent RecordComponentList RecordDeclaration RecordHeader ReferenceType RelationalExpression RequiresModifier RequiresModifiers Result ReturnStatement ShiftExpression SingleElementAnnotation Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticInitializer SynchronizedStatement Throws ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations Type TypeArgument TypeArguments TypeArgumentList TypeArgumentsOrDiamond TypeBound TypeName TypeNames TypeParameter TypeParameters TypeParameterList TypePattern TypeVariable UnannArrayType UnannClassOrInterfaceType UnannClassType UnannInterfaceType UnannPrimitiveType UnannReferenceType UnannType UnannTypeVariable UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression VariableArityParameter VariableArityRecordComponent VariableDeclarator VariableDeclaratorId VariableDeclaratorList VariableInitializer VariableInitializerList VariableModifier VariableModifiers WhileStatement WhileStatementNoShortIf Wildcard WildcardBounds YieldStatement ModuleDeclaration2 PrimitiveType2 ClassType2 Dims2 TypeParameter2 TypeBound2 TypeArgumentList2 Wildcard2 TypeParametersy ClassExtendsy ClassImplementsy ClassPermitsy ClassBodyDeclarations FieldModifiers VariableDeclaratory TypeArgumentsy Throwsy ReceiverParametery FormalParameterListy Dimsy Identifiery FormalParameterList2 ExplicitConstructorInvocationy BlockStatementsy ExplicitConstructorInvocation2 ArgumentListy comay EnumConstantListy ArgumentListyy ClassBodyy EnumBodyDeclarationsy RecordComponentListy InterfaceExtendsy InterfacePermitsy InterfaceModifiers DefaultValuey ElementValuePairListy ElementValuePairList2 ElementValueListy ElementValueList2 VariableInitializerListy VariableInitializerList2 AssertStatement2 BasicForHeader EnhancedForHeader ForInity Expressiony ForUpdatey StatementExpressionList2 Identifieryy Brackets TypeArgumentsOrDiamondy ClassOrInterfaceTypeToInstant ArgumentList2 DimExprs2 LambdaParameterListy LambdaParameterList2 Identifiers2 ConditionalExpression2 ConditionalExpression3 EqualityExpression2 RelationalExpression2 InstanceofExpression2 ShiftExpression2 AdditiveExpression2 MultiplicativeExpressionSym CastExpression2 CastExpression3
 %start CompilationUnit
 
 
@@ -1438,7 +1432,7 @@ CompactConstructorDeclaration
     ;
 
 
-// grammar for Interfaces -----------------------------------
+//14. grammar for Interfaces -----------------------------------
 
 InterfaceDeclaration
     :NormalInterfaceDeclaration{$$=$1;}
@@ -1579,7 +1573,7 @@ InterfaceMethodDeclaration
 InterfaceMethodModifiers
     :%empty
     |InterfaceMethodModifier InterfaceMethodModifiers{
-            vector<data>v;
+        vector<data>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, $2, "", 1);
 		$$ = makenode("InterfaceMethod", v);  
@@ -1600,8 +1594,9 @@ AnnotationInterfaceDeclaration
         vector<data>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, NULL, "@", 0);
-        insertAttr(v, $3, "", 1);
-        insertAttr(v, $4, "", 1);
+        insertAttr(v, makeleaf($3), "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+        insertAttr(v, $5, "", 1);
 		$$ = makenode("AnnotationInterfaceDeclaration", v); 
     }
     ;
@@ -1631,7 +1626,7 @@ AnnotationInterfaceMemberDeclaration
     |';'{$$ = makeleaf(";");}
     ;
 AnnotationInterfaceElementDeclaration
-    :AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' AnnotationInterfaceElementDeclaration2{
+    :AnnotationInterfaceElementModifiers UnannType Identifier '(' ')' Dimsy DefaultValuey ';' {
         vector<data>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, $2, "", 1);
@@ -1639,35 +1634,16 @@ AnnotationInterfaceElementDeclaration
         insertAttr(v, NULL, "(", 0);
         insertAttr(v, NULL, ")", 0);
         insertAttr(v, $6, "", 1);
+        insertAttr(v, $7, "", 1);
+        insertAttr(v, NULL, ";", 0);
 		$$ = makenode("AnnotationInterfaceBody", v); 
     }
     ;
-AnnotationInterfaceElementDeclaration2
-    : Dims AnnotationInterfaceElementDeclaration3{
-        vector<data>v;
-        insertAttr(v, $1, "", 1);
-        insertAttr(v, $2, "", 1);
-		$$ = makenode("AnnotationInterfaceElementDeclaration2", v);
-    }
-    | DefaultValue ';'{
-        vector<data>v;
-        insertAttr(v, $1, "", 1);
-        insertAttr(v, NULL, ";", 1);
-		$$ = makenode("AnnotationInterfaceElementDeclaration2", v);
-    }
-    | ';'{$$ = makeleaf(";");}
-    ;
 
-AnnotationInterfaceElementDeclaration3
-    :DefaultValue ';'{
-        vector<data>v;
-        insertAttr(v, $1, "", 1);
-        insertAttr(v, NULL, ";", 1);
-		$$ = makenode("AnnotationInterfaceElementDeclaration2", v);
-    }
-    |';'{$$ = makeleaf(";");}
+DefaultValuey
+    : %empty
+    | DefaultValue {$$=$1;}
     ;
-
 
 AnnotationInterfaceElementModifiers
     :%empty
@@ -1678,11 +1654,13 @@ AnnotationInterfaceElementModifiers
 		$$ = makenode("AnnotationInterfaceElementModifiers", v);
     }
     ;
+
 AnnotationInterfaceElementModifier
     :Annotation{$$=$1;}
     |PUBLIC{$$ = makeleaf($1);}
-    |ABSTRACT{$$=makeleaf($1);}
+    |ABSTRACT{$$ = makeleaf($1);}
     ;
+
 DefaultValue
     :DEFAULT ElementValue{
         vector<data>v;
@@ -1691,31 +1669,29 @@ DefaultValue
 		$$ = makenode("DefaultValue", v);
     }
     ;
+
 Annotation
     :NormalAnnotation{$$=$1;}
     |MarkerAnnotation{$$=$1;}
     |SingleElementAnnotation{$$=$1;}
     ;
+
 NormalAnnotation
-    :'@' TypeName '(' NormalAnnotation2{
+    :'@' TypeName '(' ElementValuePairListy ')' {
         vector<data>v;
         insertAttr(v, NULL, "@", 0);
         insertAttr(v, $2, "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v, $4, "", 1);
-		$$ = makenode("NormalAnnotation", v);
-    }
-    ;
-NormalAnnotation2
-    :ElementValuePairList ')'{
-        vector<data>v;
-        insertAttr(v, $1, "", 1);
         insertAttr(v, NULL, ")", 0);
 		$$ = makenode("NormalAnnotation", v);
     }
-    |')'{$$=makeleaf(")");}
     ;
 
+ElementValuePairListy
+    : %empty
+    | ElementValuePairList {$$=$1;}
+    ;
 
 ElementValuePairList
     :ElementValuePair ElementValuePairList2{
@@ -1724,14 +1700,15 @@ ElementValuePairList
         insertAttr(v, $2, "", 1);
 		$$ = makenode("ElementValuePairList", v);
     }
-
     ;
+
 ElementValuePairList2
     :%empty 
-    |',' ElementValuePairList{
+    |',' ElementValuePair ElementValuePairList2{
         vector<data>v;
         insertAttr(v, NULL, ",", 0);
         insertAttr(v, $2, "", 1);
+        insertAttr(v, $3, "", 1);
 		$$ = makenode("ElementValuePairList2", v);
     }
     ;
@@ -1746,44 +1723,28 @@ ElementValuePair
 		$$ = makenode("ElementValuePair", v);
     }
     ;
+
 ElementValue
     :ConditionalExpression{$$=$1;}
     |ElementValueArrayInitializer{$$=$1;}
     |Annotation{$$=$1;}
     ;
+
 ElementValueArrayInitializer
-    :'{'ElementValueList ElementValueArrayInitializer2{
+    :'{' ElementValueListy comay '}' {
         vector<data>v;
         insertAttr(v, NULL, "{", 0);
         insertAttr(v, $2, "", 1);
         insertAttr(v, $3, "", 1);
-		$$ = makenode("ElementValueArrayInitializer", v);
-    }
-    |'{' ',' '}'{
-        vector<data>v;
-        insertAttr(v, NULL, "{", 0);
-        insertAttr(v, NULL, ",", 0);
-        insertAttr(v, NULL, "}", 0);
-		$$ = makenode("ElementValueArrayInitializer", v);
-    }
-    |'{' '}'{
-        vector<data>v;
-        insertAttr(v, NULL, "{", 0);
         insertAttr(v, NULL, "}", 0);
 		$$ = makenode("ElementValueArrayInitializer", v);
     }
     ;
 
-ElementValueArrayInitializer2
-    :',' '}'{
-        vector<data>v;
-        insertAttr(v, NULL, ",", 0);
-        insertAttr(v, NULL, "}", 0);
-		$$ = makenode("ElementValueArrayInitializer2", v);
-    }
-    |'}'{$$=makeleaf("}");}
+ElementValueListy
+    : %empty 
+    | ElementValueList {$$=$1;}
     ;
-
 
 ElementValueList
     :ElementValue ElementValueList2{
@@ -1796,11 +1757,12 @@ ElementValueList
 
 ElementValueList2
     :%empty 
-    |',' ElementValueList{
+    |',' ElementValue ElementValueList2{
         vector<data>v;
         insertAttr(v, NULL, ",", 0);
         insertAttr(v, $2, "", 1);
-		$$ = makenode("ElementValueList2", v);
+        insertAttr(v, $3, "", 1);
+		$$ = makenode("ElementValueList", v);
     }
     ;
 
@@ -1826,34 +1788,24 @@ SingleElementAnnotation
     ;
 
 
-//grammar for array.
+//10. Arrays
 
 ArrayInitializer
-    :'{' ArrayInitializer2 '}'{
+    :'{' VariableInitializerListy comay '}'{
         vector<data>v;
         insertAttr(v, NULL, "{", 0);
         insertAttr(v, $2, "", 1);
+        insertAttr(v, $3, "", 1);
         insertAttr(v, NULL, "}", 0);
 		$$ = makenode("ArrayInitializer", v);
     }
 ;
 
-ArrayInitializer2
-    :VariableInitializerList ArrayInitializer3{
-        vector<data>v;
-        insertAttr(v, $1, "", 1);
-        insertAttr(v, $2, "", 1);
-		$$ = makenode("ArrayInitializer2", v);
-    }
-    |','{$$ = makeleaf(",");}
-    |%empty
-;
-
-ArrayInitializer3
-    :%empty
-    |','{$$=makeleaf(",");}
-;
-
+VariableInitializerListy
+    : %empty
+    | VariableInitializerList {$$=$1;}
+    ;
+    
 VariableInitializerList
     :VariableInitializer VariableInitializerList2{
         vector<data>v;
@@ -1861,57 +1813,57 @@ VariableInitializerList
         insertAttr(v, $2, "", 1);
 		$$ = makenode("VariableInitializerList", v);
     }
-;
+    ;
 
 VariableInitializerList2
     :%empty
-    |',' VariableInitializerList{
+    |',' VariableInitializer VariableInitializerList2{
         vector<data>v;
         insertAttr(v, NULL, ",", 0);
         insertAttr(v, $2, "", 1);
-		$$ = makenode("VariableInitializerList2", v);
+        insertAttr(v,$3,"",1);
+		$$ = makenode("VariableInitializerList", v);
     }
-;
+    ;
 
+//14. Productions from (blocks, statements and patterns)
 
-
-//productions from (blocks, statements and patterns)
 Block
     :%empty
-    |'{' BlockStatements Block '}'{
+    |'{' BlockStatementsy '}'{
         vector<data>v;
         insertAttr(v, NULL, "{", 0);
         insertAttr(v, $2, "", 1);
-        intsertAttr(v,$3, "", 1);
         insertAttr(v, NULL, "}", 0);
 		$$ = makenode("Block", v);
     }
-;
+    ;
 
 BlockStatements
-    :BlockStatement BlockStatements{
+    : BlockStatement {$$=$1;}
+    | BlockStatement BlockStatements{
         vector<data>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, $2, "", 1);
 		$$ = makenode("BlockStatements", v);
     }
-;
+    ;
 
 BlockStatement
-    :LocalClassOrInterfaceDeclaration{$$=$1;}
-    |LocalVariableDeclaration ';'{
+    : LocalClassOrInterfaceDeclaration {$$=$1;}
+    | LocalVariableDeclaration ';' {
         vector<data>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, NULL, ";", 0);
 		$$ = makenode("BlockStatement", v);
     }
-    |Statement{$$=$1;}
-;
+    | Statement {$$=$1;}
+    ;
 
 LocalClassOrInterfaceDeclaration
-    :ClassDeclaration{$$=$1;}
-    |NormalInterfaceDeclaration{$$=$1;}
-;
+    : ClassDeclaration{$$=$1;}
+    | NormalInterfaceDeclaration{$$=$1;}
+    ;
 
 LocalVariableDeclaration
     :VariableModifiers LocalVariableType VariableDeclaratorList{
@@ -1921,12 +1873,12 @@ LocalVariableDeclaration
         insertAttr(v, $3, "", 1);
 		$$ = makenode("LocalVariableDeclaration", v);
     }
-;
+    ;
 
 LocalVariableType
-    :UnannType{$$=$1;}
-    |VAR{$$ = makeleaf($1);}
-;
+    : UnannType{$$=$1;}
+    | VAR{$$ = makeleaf($1);}
+    ;
 
 Statement
     :StatementWithoutTrailingSubstatement{$$=$1;}
@@ -1935,7 +1887,7 @@ Statement
     |IfThenElseStatement{$$=$1;}
     |WhileStatement{$$=$1;}
     |ForStatement{$$=$1;}
-;
+    ;
 
 StatementNoShortIf
     :StatementWithoutTrailingSubstatement{$$=$1;}
@@ -1943,7 +1895,8 @@ StatementNoShortIf
     |IfThenElseStatementNoShortIf{$$=$1;}
     |WhileStatementNoShortIf{$$=$1;}
     |ForStatementNoShortIf{$$=$1;}
-;
+    ;
+
 StatementWithoutTrailingSubstatement
     :Block{$$=$1;}
     |';'{$$=makeleaf(";")}
@@ -1955,7 +1908,7 @@ StatementWithoutTrailingSubstatement
     |SynchronizedStatement{$$=$1;}
     |ThrowStatement{$$=$1;}
     |YieldStatement{$$=$1;}
-;   
+    ;   
 
 LabeledStatement
     :Identifier ':' Statement{
@@ -2058,7 +2011,7 @@ AssertStatement2
 ;
 
 WhileStatement
-    :WHILE '(' Expression ')' Statement{
+    : WHILE '(' Expression ')' Statement{
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v, NULL, "(", 0);
@@ -2082,74 +2035,75 @@ WhileStatementNoShortIf
 ;
 
 ForStatement
-    :BasicForStatement{$$=$1;}
-    |EnhancedForStatement{$$=$1;}
+    : BasicForHeader Statement{
+        vector<data> v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("For_statement", v);
+    }
+    | EnhancedForHeader Statement{
+        vector<data> v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("For_statement", v);
+    }
 ;
 
 ForStatementNoShortIf
-    :BasicForStatementNoShortIf{$$=$1;}
-    |EnhancedForStatementNoShortIf{$$=$1;}
+    : BasicForHeader StatementNoShortIf{
+        vector<data> v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("For_statement_no_short_if", v);
+    }
+    | EnhancedForHeader StatementNoShortIf{
+        vector<data> v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("For_statement_no_short_if", v);
+    }
 ;
 
-BasicForStatement
-    :FOR '(' InnerFor')' Statement{
+BasicForHeader
+    : FOR '(' ForInity ';' Expressiony ';' ForUpdatey ')' {
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,$3, "", 1);
-        insertAttr(v, NULL, ")", 0);
+        insertAttr(v, NULL, ";", 0);
         insertAttr(v,$5, "", 1);
-		$$ = makenode("BasicForStatement", v);
+        insertAttr(v, NULL, ";", 0);
+        insertAttr(v,$7, "", 1);
+        insertAttr(v, NULL, ")", 0);
+		$$ = makenode("Basic_For_Header", v);
     }
-;
-BasicForStatementNoShortIf
-    :FOR '(' InnerFor ')' StatementNoShortIf{
+
+EnhancedForHeader
+    : FOR '(' LocalVariableDeclaration ':' Expression ')' {
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,$3, "", 1);
-        insertAttr(v, NULL, ")", 0);
+        insertAttr(v, NULL, ";", 0);
         insertAttr(v,$5, "", 1);
-		$$ = makenode("BasicForStatementNoShortIf", v);
+        insertAttr(v, NULL, ")", 0);
+		$$ = makenode("Enhanced_For_Header", v);
     }
-;
 
-InnerFor
-    :ForInit ';' InnerFor2{
-            vector<data>v;
-        insertAttr(v,$1, "", 1);
-        insertAttr(v, NULL, ";", 0);
-        insertAttr(v,$3, "", 1);
-		$$ = makenode("InnerFor", v);
-    }
-    |';' InnerFor2{
-        vector<data>v;
-        insertAttr(v, NULL, ";", 0);
-        insertAttr(v,$2, "", 1);
-		$$ = makenode("InnerFor", v);
-    }
-;
+ForInity
+    : %empty
+    | ForInit {$$=$1;}
+    ;
 
-InnerFor2
-    :Expression ';' InnerFor3{
-        vector<data>v;
-        insertAttr(v,$1, "", 1);
-        insertAttr(v, NULL, ";", 0);
-        insertAttr(v,$3, "", 1);
-		$$ = makenode("InnerFor2", v);
-    }
-    |';' InnerFor3{
-        vector<data>v;
-        insertAttr(v, NULL, ";", 0);
-        insertAttr(v,$2, "", 1);
-		$$ = makenode("InnerFor2", v);
-    }
-;
+Expressiony
+    : %empty
+    | Expression {$$=$1;}
+    ;
 
-InnerFor3
-    :%empty
-    |ForUpdate{$$=$1;}
-;
+ForUpdatey
+    : %empty
+    | ForUpdate {$$=$1;}
+    ;
 
 ForInit
     :StatementExpressionList{$$=$1;}
@@ -2171,44 +2125,17 @@ StatementExpressionList
 
 StatementExpressionList2
     :%empty
-    |',' StatementExpressionList{
+    |',' StatementExpression StatementExpressionList2{
         vector<data>v;
         insertAttr(v, NULL, ",", 0);
         insertAttr(v,$2, "", 1);
+        insertAttr(v,$3,"",1);
 		$$ = makenode("StatementExpressionList2", v);
     }
 ;
 
-EnhancedForStatement
-    :FOR '(' LocalVariableDeclaration ':' Expression ')' Statement{
-        vector<data>v;
-        insertAttr(v, makeleaf($1), "", 1);
-        insertAttr(v, NULL, "(", 0);
-        insertAttr(v,$3, "", 1);
-        insertAttr(v, NULL, ":", 0);
-        insertAttr(v,$5, "", 1);
-        insertAttr(v, NULL, ")", 0);
-        insertAttr(v,$7, "", 1);
-		$$ = makenode("EnhancedForStatement", v);
-    }
-;
-
-EnhancedForStatementNoShortIf
-    :FOR '(' LocalVariableDeclaration ':' Expression ')' StatementNoShortIf{
-        vector<data>v;
-        insertAttr(v, makeleaf($1), "", 1);
-        insertAttr(v, NULL, "(", 0);
-        insertAttr(v,$3, "", 1);
-        insertAttr(v, NULL, ":", 0);
-        insertAttr(v,$5, "", 1);
-        insertAttr(v, NULL, ")", 0);
-        insertAttr(v,$7, "", 1);
-		$$ = makenode("EnhancedForStatementNoShortIf", v);
-    }
-;
-
 BreakStatement
-    :BREAK IdentifierOrEmpty ';'{
+    :BREAK Identifieryy ';'{
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v,$2, "", 1);
@@ -2217,7 +2144,7 @@ BreakStatement
     }
 ;
 
-IdentifierOrEmpty
+Identifieryy
     :%empty
     |Identifier{$$=makeleaf($1);}
 ;
@@ -2233,7 +2160,7 @@ YieldStatement
 ;
 
 ContinueStatement
-    :CONTINUE IdentifierOrEmpty ';'{
+    :CONTINUE Identifieryy ';'{
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v,$2, "", 1);
@@ -2243,18 +2170,13 @@ ContinueStatement
 ;
 
 ReturnStatement
-    :RETURN ReturnStatement2 ';'{
+    :RETURN Expressiony ';'{
         vector<data>v;
         insertAttr(v, makeleaf($1), "", 1);
         insertAttr(v,$2, "", 1);
         insertAttr(v, NULL, ";", 0);
 		$$ = makenode("ReturnStatement", v);
     }
-;
-
-ReturnStatement2
-    :%empty
-    |Expression{$$=$1;}
 ;
 
 ThrowStatement
@@ -2296,280 +2218,878 @@ TypePattern
     :LocalVariableDeclaration {$$=$1;}
 ;
 
-
-
 //Grammar for Expressions
-Primary:
-PrimaryNoNewArray
-|ArrayCreationExpression
-;
-PrimaryNoNewArray:
-Literal
-|ClassLiteral
-|THIS
-|TypeName '.' THIS
-|'(' Expression ')'
-|ClassInstanceCreationExpression
-|FieldAccess
-|ArrayAccess
-|MethodInvocation
-|MethodReference
-;
-ClassLiteral:
-TypeName Brackets '.' CLASS
-|NumericType Brackets '.' CLASS
-|BOOLEAN Brackets '.' CLASS
-|VOID '.' CLASS
-;
-Brackets:
 
-|'[' ']' Brackets
-;
-ClassInstanceCreationExpression:
-UnqualifiedClassInstanceCreationExpression
-|ExpressionName '.' UnqualifiedClassInstanceCreationExpression
-|Primary '.' UnqualifiedClassInstanceCreationExpression
-;
-UnqualifiedClassInstanceCreationExpression:
-NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' ClassBody
-NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' ClassBody
-NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')' 
-NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ')' ClassBody
-NEW TypeArguments ClassOrInterfaceTypeToInstantiate '(' ')'
-NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentList ')'
-NEW ClassOrInterfaceTypeToInstantiate '(' ')' ClassBody
-|NEW ClassOrInterfaceTypeToInstantiate '(' ')'
-;
-ClassOrInterfaceTypeToInstantiate:
-ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamond
-|ClassOrInterfaceTypeToInstant 
-;
-ClassOrInterfaceTypeToInstant:
-Annotations Identifier
-|Annotations Identifier '.' ClassOrInterfaceTypeToInstantiate
-;
-TypeArgumentsOrDiamond:
-TypeArguments
-|'<''>'
-;
-FieldAccess:
-Primary '.' Identifier
-|SUPER '.' Identifier
-|TypeName '.' SUPER '.' Identifier
-;
-ArrayAccess:
-ExpressionName '[' Expression ']'
-|PrimaryNoNewArray '[' Expression ']'
-;
-MethodInvocation:
-Identifier '(' ArgumentList ')'
-|Identifier '(' ')'
-|TypeName '.' TypeArguments Identifier '(' ArgumentList ')'
-|TypeName '.' TypeArguments Identifier '(' ')'
-|TypeName '.' Identifier '(' ArgumentList ')'
-|TypeName '.' Identifier '(' ')'
-|ExpressionName '.' TypeArguments Identifier '(' ArgumentList ')'
-|ExpressionName '.' TypeArguments Identifier '(' ')'
-|ExpressionName '.' Identifier '(' ArgumentList ')'
-|ExpressionName '.' Identifier '(' ')'
-|Primary '.' TypeArguments Identifier '(' ArgumentList ')'
-|Primary '.' Identifier '(' ArgumentList ')'
-|Primary '.' TypeArguments Identifier '(' ')'
-|Primary '.' Identifier '(' ')'
-|SUPER '.' TypeArguments Identifier '(' ArgumentList ')'
-|SUPER '.' TypeArguments Identifier '(' ')'
-|SUPER '.' Identifier '(' ArgumentList ')'
-|SUPER '.' Identifier '(' ')'
-|TypeName '.' SUPER '.' TypeArguments Identifier '(' ArgumentList ')'
-|TypeName '.' SUPER '.' Identifier '(' ArgumentList ')'
-|TypeName '.' SUPER '.' TypeArguments Identifier '(' ')'
-|TypeName '.' SUPER '.' Identifier '(' ')'
-;
-ArgumentList:
-Expression
-|Expression ArgumentList
-;
-MethodReference:
-ExpressionName METHOD_REFERENCE TypeArguments Identifier
-|ExpressionName METHOD_REFERENCE Identifier
-|Primary METHOD_REFERENCE TypeArguments Identifier
-|Primary METHOD_REFERENCE Identifier
-|ReferenceType METHOD_REFERENCE TypeArguments Identifier
-|ReferenceType METHOD_REFERENCE Identifier
-|SUPER METHOD_REFERENCE TypeArguments Identifier
-|SUPER METHOD_REFERENCE Identifier
-|TypeName '.' SUPER METHOD_REFERENCE TypeArguments Identifier
-|TypeName '.' SUPER METHOD_REFERENCE Identifier
-|ClassType METHOD_REFERENCE TypeArguments NEW
-|ClassType METHOD_REFERENCE NEW
-|ArrayType METHOD_REFERENCE NEW
-;
-ArrayCreationExpression:
-NEW PrimitiveType DimExprs Dims
-|NEW PrimitiveType DimExprs
-|NEW ClassOrInterfaceType DimExprs
-|NEW ClassOrInterfaceType DimExprs Dims
-|NEW PrimitiveType Dims ArrayInitializer
-|NEW ClassOrInterfaceType Dims ArrayInitializer
-;
-DimExprs:
-DimExpr
-|DimExpr DimExprs
-;
-DimExpr:
-Annotations '[' Expression ']'
-;
-Expression:
-LambdaExpression
-|AssignmentExpression
-;
-LambdaExpression:
-LambdaParameters PTR_OP LambdaBody
-;
-LambdaParameters:
-'(' ')'
-'(' LambdaParameterList ')'
-|Identifier
-;
-LambdaParameterList:
-LambdaParameter
-|LambdaParameter ',' LambdaParameterList
-|Identifier Identifiers
-;
-LambdaParameter:
-VariableModifiers LambdaParameterType VariableDeclaratorId
-VariableArityParameter
-;
-LambdaParameterType:
-UnannType
-|VAR
-;
-LambdaBody:
-Expression
-|Block
-;
-AssignmentExpression:
-ConditionalExpression
-|Assignment
-;
-Assignment:
-LeftHandSide AssignmentOperator Expression
-;
-LeftHandSide:
-ExpressionName
-|FieldAccess
-|ArrayAccess
-;
-AssignmentOperator:
-'='|MUL_ASSIGN|DIV_ASSIGN|MOD_ASSIGN|ADD_ASSIGN|SUB_ASSIGN|LEFT_ASSIGN|RIGHT_ASSIGN|UNSIGNED_RIGHT_ASSIGN|AND_ASSIGN|XOR_ASSIGN|OR_ASSIGN
-;
-ConditionalExpression:
-ConditionalOrExpression
-|ConditionalOrExpression '?' Expression ':' ConditionalExpression
-|ConditionalOrExpression '?' Expression ':' LambdaExpression
-;
-ConditionalOrExpression:
-ConditionalAndExpression
-|ConditionalOrExpression OR_OP ConditionalAndExpression
-;
-ConditionalAndExpression:
-InclusiveOrExpression
-|ConditionalAndExpression AND_OP InclusiveOrExpression
-;
-InclusiveOrExpression:
-ExclusiveOrExpression
-|InclusiveOrExpression '|' ExclusiveOrExpression
-;
-ExclusiveOrExpression:
-AndExpression
-|ExclusiveOrExpression '^' AndExpression
-;
-AndExpression:
-EqualityExpression
-|AndExpression '&' EqualityExpression
-;
-EqualityExpression:
-RelationalExpression
-|EqualityExpression EQ_OP RelationalExpression
-|EqualityExpression NE_OP RelationalExpression
-;
-RelationalExpression:
-ShiftExpression
-|RelationalExpression '<' ShiftExpression
-|RelationalExpression '>' ShiftExpression
-|RelationalExpression LE_OP ShiftExpression
-|RelationalExpression GE_OP ShiftExpression
-|InstanceofExpression
-;
-InstanceofExpression:
-RelationalExpression INSTANCEOF ReferenceType
-|RelationalExpression INSTANCEOF Pattern
-;
-ShiftExpression:
-AdditiveExpression
-|ShiftExpression LEFT_OP AdditiveExpression
-|ShiftExpression RIGHT_OP AdditiveExpression
-|ShiftExpression UNSIGNED_RIGHT AdditiveExpression
-;
-AdditiveExpression:
-MultiplicativeExpression
-|AdditiveExpression '+' MultiplicativeExpression
-|AdditiveExpression '-' MultiplicativeExpression
-;
-MultiplicativeExpression:
-UnaryExpression
-|MultiplicativeExpression '*' UnaryExpression
-|MultiplicativeExpression '/' UnaryExpression
-|MultiplicativeExpression '%' UnaryExpression
-;
-UnaryExpression:
-PreIncrementExpression
-|PreDecrementExpression
-|'+' UnaryExpression
-|'-' UnaryExpression
-|UnaryExpressionNotPlusMinus
-;
-PreIncrementExpression:
-INC_OP UnaryExpression
-;
-PreDecrementExpression:
-DEC_OP UnaryExpression
-;
-UnaryExpressionNotPlusMinus:
-PostfixExpression
-|'~' UnaryExpression
-|'!' UnaryExpression
-|CastExpression
-;
-PostfixExpression:
 Primary
-|ExpressionName
-|PostIncrementExpression
-|PostDecrementExpression
+    :PrimaryNoNewArray{$$=$1;}
+    |ArrayCreationExpression{$$ = $1;}
+    ;
+PrimaryNoNewArray
+    :Literal{$$=$1;}
+    |ClassLiteral{$$=$1;}
+    |THIS {$$ = makeleaf($1;)}
+    |TypeName '.' THIS{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($3), "", 1);
+		$$ = makenode("PrimaryNoNewArray", v);
+    }
+    |'(' Expression ')'{
+        vector<data>v;
+        insertAttr(v, NULL, "(", 0);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ")", 0);
+		$$ = makenode("PrimaryNoNewArray", v);
+    }
+    |ClassInstanceCreationExpression{$$=$1;}
+    |FieldAccess {$$=$1 ;}
+    |ArrayAccess {$$ = $1;}
+    |MethodInvocation {$$ = $1;}
+    |MethodReference {$$ = $1;}
+    ;
+ClassLiteral
+    :TypeName Brackets '.' CLASS{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("ClassLiteral", v);
+    }
+    |NumericType Brackets '.' CLASS{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("ClassLiteral", v);
+    }
+    |BOOLEAN Brackets '.' CLASS{
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,makeleaf($4), "", 1);
+		$$ = makenode("ClassLiteral", v);
+    }
+    |VOID '.' CLASS{
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,makeleaf($3), "", 1);  
+		$$ = makenode("ClassLiteral", v);
+    }
+    ;
+
+Brackets
+    :%empty
+    |'[' ']' Brackets{
+        vector<data>v;
+        insertAttr(v, NULL, "[", 0);
+        insertAttr(v, NULL, "]", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("Brackets", v);
+    }
+    ;
+
+ClassInstanceCreationExpression
+    :UnqualifiedClassInstanceCreationExpression {$$ = $1;}
+    |ExpressionName '.' UnqualifiedClassInstanceCreationExpression{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ClassInstanceCreationExpression", v);
+    }
+    |Primary '.' UnqualifiedClassInstanceCreationExpression{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ClassInstanceCreationExpression", v);
+    }
+    ;
+UnqualifiedClassInstanceCreationExpression
+    :NEW TypeArgumentsy ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v, $2, "", 1);
+        insertAttr(v, $3, "", 1);
+        insertAttr(v, NULL, "(", 1);
+        insertAttr(v, $5, "", 1);
+        insertAttr(v, NULL, ")", 1);
+        insertAttr(v, $7, "", 1);
+		$$ = makenode("UnqualifiedClassInstanceCreationExpression", v);
+    }
+    ;
+
+ClassOrInterfaceTypeToInstantiate
+    : Annotations Identifier ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ClassOrInterfaceTypeToInstantiate", v);
+    }
+    ;
+
+TypeArgumentsOrDiamondy
+    : %empty
+    | TypeArgumentsOrDiamond {$$=$1;}
+    ;
+
+ClassOrInterfaceTypeToInstant
+    : %empty
+    | '.' Annotations Identifier ClassOrInterfaceTypeToInstant  {
+        vector<data>v;
+        insertAttr(v,NULL,".",0);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, makeleaf($3), "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ClassOrInterfaceTypeToInstant", v);
+    }
+    ;
+
+TypeArgumentsOrDiamond
+    :TypeArguments{$$=$1;}
+    |'<''>'{
+        vector<data>v;
+        insertAttr(v, NULL, "<", 0);
+        insertAttr(v, NULL, ">", 0);
+		$$ = makenode("TypeArgumentsOrDiamond", v);
+    }
+    ;
+
+FieldAccess
+    :Primary '.' Identifier{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($3), "", 1);
+		$$ = makenode("FieldAccess", v);
+    }
+    |SUPER '.' Identifier{
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,makeleaf($3), "", 1);
+		$$ = makenode("FieldAccess", v);
+    }
+    |TypeName '.' SUPER '.' Identifier{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($3), "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,makeleaf($5), "", 1);
+		$$ = makenode("FieldAccess", v);
+    }
+    ;
+
+ArrayAccess
+    :ExpressionName '[' Expression ']' {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "[", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, NULL, "]", 0);
+		$$ = makenode("ArrayAccess", v);
+    }
+    |PrimaryNoNewArray '[' Expression ']'{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "[", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, NULL, "]", 0);
+		$$ = makenode("ArrayAccess", v);
+    }
+
+    ;
+
+MethodInvocation
+    :Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
+    |TypeName '.' TypeArgumentsy Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v, $1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,makeleaf($4), "", 1);
+        insertAttr(v,$5, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
+    |ExpressionName '.' TypeArgumentsy Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v, $1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,makeleaf($4), "", 1);
+        insertAttr(v,$5, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
+    |Primary '.' TypeArgumentsy Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v, $1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,makeleaf($4), "", 1);
+        insertAttr(v,$5, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
+    |SUPER '.' TypeArgumentsy Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,makeleaf($4), "", 1);
+        insertAttr(v,$5, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
+    |TypeName '.' SUPER '.' TypeArgumentsy Identifier ArgumentListyy {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v,makeleaf($3), "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, $5 , "", 1);
+        insertAttr(v, makeleaf($6), ".", 0);
+        insertAttr(v,$7, "", 1);
+		$$ = makenode("MethodInvocation", v);
+    }
 ;
-PostIncrementExpression:
-PostfixExpression INC_OP
-;
-PostDecrementExpression:
-PostfixExpression DEC_OP
-;
-CastExpression:
-'(' PrimitiveType ')' UnaryExpression
-|'(' ReferenceType AdditionalBounds ')' UnaryExpressionNotPlusMinus
-|'(' ReferenceType AdditionalBounds ')' LambdaExpression
-;
-ConstantExpression:
+
+ArgumentList
+    : Expression ArgumentList2 {
+        vector<data> v;
+        insertAttr(v, $1,"",1);
+        insertAttr(v,$2,"",1);
+        $$ = makenode("ArgumentList",v);
+    }
+
+ArgumentList2
+    : %empty
+    |',' Expression ArgumentList2 {
+        vector<data>v;
+        insertAttr(v,NULL, ",", 0);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ArgumentList", v);
+    }
+    ;
+
+MethodReference
+    :ExpressionName METHOD_REFERENCE TypeArgumentsy Identifier {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |Primary METHOD_REFERENCE TypeArgumentsy Identifier {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |ReferenceType METHOD_REFERENCE TypeArgumentsy Identifier{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |SUPER METHOD_REFERENCE TypeArgumentsy Identifier {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |TypeName '.' SUPER METHOD_REFERENCE TypeArgumentsy Identifier {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ".", 0);
+        insertAttr(v, makeleaf($3), "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+        insertAttr(v,$5, "", 1);
+        insertAttr(v, makeleaf($6), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |ClassType METHOD_REFERENCE TypeArgumentsy NEW {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, makeleaf($4), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    |ArrayType METHOD_REFERENCE NEW {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,makeleaf($3), "", 1);
+		$$ = makenode("MethodReference", v);
+    }
+    ;
+
+ArrayCreationExpression
+    :NEW PrimitiveType DimExprs Dimsy {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ArrayCreationExpression", v);
+    }
+    |NEW ClassOrInterfaceType DimExprs Dimsy {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ArrayCreationExpression", v);
+    }
+    |NEW PrimitiveType Dims ArrayInitializer {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ArrayCreationExpression", v);
+    }
+    |NEW ClassOrInterfaceType Dims ArrayInitializer {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ArrayCreationExpression", v);
+    }
+    ;
+
+DimExprs
+    :DimExpr DimExprs2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("DimExprs", v);
+    }
+    ;
+
+DimExprs2
+    :%empty
+    |DimExpr DimExprs2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("DimExprs", v);
+    }
+    ;
+
+DimExpr
+    :Annotations '[' Expression ']' {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "[", 0);
+        insertAttr(v,$3, "", 1);
+        insertAttr(v, NULL, "]", 0);
+		$$ = makenode("DimExpr", v);
+    }
+    ;
+
 Expression
+    :LambdaExpression {$$ = $1;}
+    |AssignmentExpression {$$ = $1;}
+    ;
+LambdaExpression
+    :LambdaParameters PTR_OP LambdaBody {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("LambdaExpression", v);
+    }
+    ;
+LambdaParameters
+    :'(' LambdaParameterListy ')' {
+        vector<data>v;
+        insertAttr(v, NULL, "(", 0);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ")", 0);
+		$$ = makenode("LambdaParameters", v);
+    }
+    |Identifier {$$ = makeleaf($1);}
+    ;
+
+LambdaParameterListy
+    : %empty
+    |LambdaParameterList  { $$=$1;
+    }
+    ;
+
+LambdaParameterList
+    :LambdaParameter LambdaParameterList2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("LambdaParameterList", v);
+    }
+    |Identifier Identifiers2 {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("LambdaParameterList", v);
+    }
+    ;
+LambdaParameterList2
+    :%empty 
+    |',' LambdaParameterList {
+        vector<data>v;
+        insertAttr(v, NULL, ",", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("LambdaParameterList2", v);
+    }
+
+Identifiers2
+    :%empty 
+    |',' Identifier Identifiers2 {
+        vector<data>v;
+        insertAttr(v, NULL, ",", 0);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("Identifiers", v);
+    }
+
+LambdaParameter
+    :VariableModifiers LambdaParameterType VariableDeclaratorId {
+        vector<data>v;
+        insertAttr(v, $1, "", 1);
+        insertAttr(v, $2, "", 1);
+        insertAttr(v, $3, "", 1);
+		$$ = makenode("LambdaParameter", v);
+    }
+    |VariableArityParameter {$$ = $1;}
+    ;
+
+LambdaParameterType
+    :UnannType {$$ = $1;}
+    |VAR {$$=  makeleaf($1);}
+    ;
+
+LambdaBody
+    :Expression {$$= $1;}
+    |Block {$$=$1;}
+    ;
+
+AssignmentExpression
+    :ConditionalExpression {$$ = $1;}
+    |Assignment {$$ = $1;}
+    ;
+
+Assignment
+    :LeftHandSide AssignmentOperator Expression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("Assignment", v);
+    }
+    ;
+
+LeftHandSide
+    :ExpressionName {$$ = $1;}
+    |FieldAccess{$$=$1;}
+    |ArrayAccess{$$=$1;}
+    ;
+
+AssignmentOperator
+    :'='{$$ = makeleaf("=");}
+    |MUL_ASSIGN {$$ = makeleaf($1);}
+    |DIV_ASSIGN {$$ = makeleaf($1);}
+    |MOD_ASSIGN{$$ = makeleaf($1);}
+    |ADD_ASSIGN{$$ = makeleaf($1);}
+    |SUB_ASSIGN{$$ = makeleaf($1);}
+    |LEFT_ASSIGN{$$ = makeleaf($1);}
+    |RIGHT_ASSIGN{$$ = makeleaf($1);}
+    |UNSIGNED_RIGHT_ASSIGN{$$ = makeleaf($1);}
+    |AND_ASSIGN{$$ = makeleaf($1);}
+    |XOR_ASSIGN{$$ = makeleaf($1);}
+    |OR_ASSIGN{$$ = makeleaf($1);}
 ;
+
+ConditionalExpression
+    :ConditionalOrExpression ConditionalExpression2{
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("ConditionalExpression", v);
+    }
+    ;
+
+ConditionalExpression2
+    :%empty 
+    |'?' Expression ':' ConditionalExpression3 {
+        vector<data>v;
+        insertAttr(v, NULL, "?", 0);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v, NULL, ":", 0);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("ConditionalExpression2", v);
+    }
+    ;
+
+ConditionalExpression3
+    :ConditionalExpression {$$ = $1 ;}
+    |LambdaExpression { $$ = $1 ; }
+    ;
+
+ConditionalOrExpression
+    :ConditionalAndExpression { $$ = $1 ; }
+    |ConditionalOrExpression OR_OP ConditionalAndExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ConditionalOrExpression", v);
+    }
+    ;
+ConditionalAndExpression
+    :InclusiveOrExpression { $$ = $1 ;}
+    |ConditionalAndExpression AND_OP InclusiveOrExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ConditionalAndExpression", v);
+    }
+    ;
+
+InclusiveOrExpression
+    :ExclusiveOrExpression {$$ = $1;}
+    |InclusiveOrExpression '|' ExclusiveOrExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "|", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("InclusiveOrExpression", v);
+    }
+    ;
+ExclusiveOrExpression
+    :AndExpression {$$ = $1;}
+    |ExclusiveOrExpression '^' AndExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "^", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("ExclusiveOrExpression", v);
+    }
+    ;
+
+AndExpression
+    :EqualityExpression {$$ = $1;}
+    |AndExpression '&' EqualityExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, "&", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("AndExpression", v);
+    }
+    ;
+
+EqualityExpression
+    :RelationalExpression {$$ = $1 ;}
+    |EqualityExpression EqualityExpression2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("EqualityExpression", v);
+    }
+    ;
+
+EqualityExpression2 
+    :EQ_OP RelationalExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("EqualityExpression2 ", v);
+    }
+    |NE_OP RelationalExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2 , "", 1);
+		$$ = makenode("EqualityExpression2", v);
+    }
+    ;
+
+RelationalExpression
+    :ShiftExpression {$$ = $1;}
+    |RelationalExpression RelationalExpression2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("RelationalExpression", v);
+    } 
+    |InstanceofExpression {$$ = $1;}
+    ;
+
+RelationalExpression2 
+    :'<' ShiftExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "<", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("RelationalExpression2", v);
+    }
+    |'>' ShiftExpression {
+        vector<data>v;
+        insertAttr(v, NULL, ">", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("RelationalExpression2", v);
+    }
+    |LE_OP ShiftExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("RelationalExpression2", v);
+    }
+    |GE_OP ShiftExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("RelationalExpression2", v);
+    }
+    ;
+
+InstanceofExpression
+    :RelationalExpression INSTANCEOF InstanceofExpression2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("InstanceofExpression", v);
+    }
+    ;
+
+InstanceofExpression2
+    :ReferenceType {$$ = $1;}
+    |Pattern {$$ = $1;}
+    ;
+
+ShiftExpression
+    :AdditiveExpression {$$= $1;}
+    |ShiftExpression ShiftExpression2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("ShiftExpression", v);
+    }
+    ;
+
+ShiftExpression2
+    :LEFT_OP AdditiveExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("ShiftExpression2", v);
+    }
+    |RIGHT_OP AdditiveExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("ShiftExpression2", v);
+    }
+    |UNSIGNED_RIGHT AdditiveExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("ShiftExpression2", v);
+    }
+    ;
+
+AdditiveExpression
+    :MultiplicativeExpression {$$ = $1;}
+    |AdditiveExpression AdditiveExpression2 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("AdditiveExpression", v);
+    }
+    ;
+
+AdditiveExpression2
+    :'+' MultiplicativeExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "+", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("AdditiveExpression2", v);
+    }
+    |'-' MultiplicativeExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "-", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("AdditiveExpression2", v);
+    }
+    ;
+
+MultiplicativeExpression
+    :UnaryExpression {$$ = $1;}
+    |MultiplicativeExpression MultiplicativeExpressionSym UnaryExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v,$2, "", 1);
+        insertAttr(v,$3,"",1);
+		$$ = makenode("MultiplicativeExpression", v);
+    }
+    ;
+
+MultiplicativeExpressionSym
+    : '*' {$$=makeleaf("*");}
+    | '/' {$$=makeleaf("/");}
+    | '%' {$$=makeleaf("%");}
+    ;
+
+UnaryExpression
+    :PreIncrementExpression {$$ = $1;}
+    |PreDecrementExpression {$$ = $1;}
+    |'+' UnaryExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "+", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("UnaryExpression", v);
+    }
+    |'-' UnaryExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "-", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("UnaryExpression", v);
+    }
+    |UnaryExpressionNotPlusMinus {$$ = $1;}
+    ;
+
+PreIncrementExpression
+    :INC_OP UnaryExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("PreIncrementExpression", v);
+    }
+    ;
+
+PreDecrementExpression
+    :DEC_OP UnaryExpression {
+        vector<data>v;
+        insertAttr(v, makeleaf($1), "", 1);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("PreDecrementExpression", v);
+    }
+    ;
+
+UnaryExpressionNotPlusMinus
+    :PostfixExpression {$$ = $1;}
+    |'~' UnaryExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "~", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("UnaryExpressionNotPlusMinus", v);
+    }
+    |'!' UnaryExpression {
+        vector<data>v;
+        insertAttr(v, NULL, "!", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("UnaryExpressionNotPlusMinus", v);
+    }
+    |CastExpression {$$ = $1;}
+    ;
+
+PostfixExpression
+    :Primary {$$ = $1;}
+    |ExpressionName {$$ = $1;}
+    |PostIncrementExpression { $$ = $1 ;}
+    |PostDecrementExpression { $$ = $1 ;}
+    ;
+
+PostIncrementExpression
+    :PostfixExpression INC_OP {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+		$$ = makenode("PostIncrementExpression", v);
+    }
+    ;
+
+PostDecrementExpression
+    :PostfixExpression DEC_OP {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, makeleaf($2), "", 1);
+		$$ = makenode("PostDecrementExpression", v);
+    }
+    ;
+
+CastExpression
+    : '(' CastExpression2 {
+        vector<data>v;
+        insertAttr(v, NULL, "(", 0);
+        insertAttr(v,$2, "", 1);
+		$$ = makenode("CastExpression", v);
+    }
+
+CastExpression2
+    :PrimitiveType ')' UnaryExpression {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, NULL, ")", 0);
+        insertAttr(v,$3, "", 1);
+		$$ = makenode("CastExpression2", v);
+    }
+    |ReferenceType AdditionalBounds ')' CastExpression3 {
+        vector<data>v;
+        insertAttr(v,$1, "", 1);
+        insertAttr(v, $2, "", 1);
+        insertAttr(v,NULL, ")", 1);
+        insertAttr(v,$4, "", 1);
+		$$ = makenode("CastExpression2", v);
+    }
+    ;
+CastExpression3
+    :UnaryExpressionNotPlusMinus { $$=$1;
+    }
+    |LambdaExpression { $$ = $1 ; }
+    ;
+    
+ConstantExpression
+    :Expression { $$ = $1 ;}
+    ;
 
 %%
 
 int main(){
+    dotfile = fopen("AST.dot", "w");
+	
+	if(dotfile == NULL){
+		print_error();
+		cout<<"cannot open the dot file AST.dot"<<"\nCompilation terminated\n";
+		return -1;
+	}
+
+	beginAST();
     yyparse();
+	endAST();
+
     return 0;
 }
 
-int yyerror(const char* s){
+int yyerror(char const* s){
     cout << "Error: " << s << "in Line no: " << lineno << endl;
     return -1;
 }
