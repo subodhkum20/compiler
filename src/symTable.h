@@ -6,7 +6,7 @@
 #include<algorithm>
 using namespace std;
 
-typedef struct{
+typedef struct symEntry{
     string type;
     int size;
     int offset;
@@ -19,7 +19,9 @@ typedef struct{
 
 typedef map<string, symEntry* > symTable;
 typedef map<string, pair< int, symTable* > > structSymTable;
+typedef map<string,string> typTable;
 extern symTable gst;
+extern typTable typgst;
 extern map<symTable*, symTable*> parentTable;
 extern map<string, pair<string,vector<string> > > funcArg;
 
@@ -28,3 +30,6 @@ void insertSymbol(symTable& table, string id, string type, int size, bool is_ini
 void insertKeywords();
 void symTableInit();
 void makeSymbolTable(string name, string f_type,int flag);
+void removeFuncProto();
+void updSymbolTable(string id, int offset_flag);
+symEntry* lookup(string id);
