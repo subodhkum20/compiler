@@ -106,14 +106,8 @@ extern int yydebug;
     WHILE = 312,
     _ = 313,
     YIELD = 314,
-    eof = 315,
-    INC_OP = 316,
-    DEC_OP = 317,
-    NEXT_QUAD = 318,
-    S = 319,
-    G = 320,
-    A = 321,
-    ChangeTable = 322
+    INC_OP = 315,
+    DEC_OP = 316
   };
 #endif
 
@@ -128,7 +122,7 @@ union YYSTYPE
     constants* num;
     int ind;
 
-#line 132 "parser.hpp"
+#line 126 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

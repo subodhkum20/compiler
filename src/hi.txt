@@ -1,0 +1,68 @@
+WELCOME to Leaf: tests
+Error: Undeclared Identifier tests in Line no: 3
+WELCOME to Leaf: package
+WELCOME TO NODE: Package_declaration
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME to Leaf: public
+WELCOME to Leaf: test_1
+WELCOME to Leaf: int
+WELCOME to Leaf: d
+WELCOME to Leaf: 3
+WELCOME TO NODE: =
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: Field_Declaration
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: Class_Body_Declarations
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME to Leaf: float
+WELCOME to Leaf: a
+WELCOME to Leaf: d
+WELCOME to Leaf: 1
+WELCOME TO NODE: AdditiveExpression
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: =
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+Error: Incorrect type assignment
+ in Line no: 7
+WELCOME TO NODE: Field_Declaration
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: Class_Body_Declarations
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: class
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+TopLevelClassOrInterfaceDeclarations
+WELCOME TO NODE: Top_level_class_or_interface_declarations
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+WELCOME TO NODE: Ordinary_Compilation_Unit
+Welcome to node : 2
+Welcome to node : 2
+Welcome to node : 3
+in compile unit
+WELCOME TO NODE: CompilationUnit
+Welcome to node : 2
+Welcome to node : 3

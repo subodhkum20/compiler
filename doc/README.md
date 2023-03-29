@@ -3,7 +3,7 @@
 
 ## Command to run the Parser : -
 
-./driver.sh -input ../tests/test_7.java
+./driver.sh -input ../tests/test/test_1.java
 
 Above driver script contains the command to run lexer, parser.
 

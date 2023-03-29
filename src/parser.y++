@@ -64,10 +64,10 @@
 %left<str>  RIGHT_OP LEFT_OP EQ_OP NE_OP  AND_OP OR_OP  LE_OP GE_OP  
 %right<str> ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN XOR_ASSIGN OR_ASSIGN UNSIGNED_RIGHT UNSIGNED_RIGHT_ASSIGN
 
-%token<str>integerLiteral stringLiteral nullLiteral characterLiteral textBlock booleanLiteral FloatingPointLiteral Identifier CONTINUE FOR NEW IF PACKAGE SYNCHRONIZED BOOLEAN PRIVATE THIS BREAK DOUBLE THROW BYTE ELSE PUBLIC RETURN INT SHORT CHAR FINAL STATIC VOID CLASS LONG FLOAT SUPER WHILE _ YIELD eof INC_OP DEC_OP 
-%token<ind> NEXT_QUAD
+%token<str>integerLiteral stringLiteral nullLiteral characterLiteral textBlock booleanLiteral FloatingPointLiteral Identifier CONTINUE FOR NEW IF PACKAGE SYNCHRONIZED BOOLEAN PRIVATE THIS BREAK DOUBLE THROW BYTE ELSE PUBLIC RETURN INT SHORT CHAR FINAL STATIC VOID CLASS LONG FLOAT SUPER WHILE _ YIELD INC_OP DEC_OP 
+%type<ind> NEXT_QUAD
 
-%token<ptr> S G A ChangeTable 
+%type<ptr> S G A ChangeTable 
 %type<ind> WRITE_GOTO
 %type<ptr> AdditiveExpression Name AndExpression ArgumentList ArrayAccess ArrayCreationExpression ArrayInitializer Assignment AssignmentExpression AssignmentOperator Block BlockStatement BlockStatements BreakStatement CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassInstanceCreationExpression ClassOrInterfaceTypeToInstantiate CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConclassorBody ConclassorDeclaration ContinueStatement DimExpr DimExprs Dims EqualityExpression ExclusiveOrExpression ExplicitConclassorInvocation Expression ExpressionStatement FieldAccess FieldDeclaration FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate  IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement InclusiveOrExpression IntegralType LabeledStatement LabeledStatementNoShortIf  Literal LocalVariableDeclaration MethodBody MethodDeclaration MethodHeader MethodInvocation MultiplicativeExpression NumericType OrdinaryCompilationUnit PackageDeclaration PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType RelationalExpression ReturnStatement ShiftExpression Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticInitializer SynchronizedStatement ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations  TypeArgumentsOrDiamond UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression VariableDeclaratorList VariableInitializer VariableInitializerList WhileStatement WhileStatementNoShortIf YieldStatement ClassBodyDeclarations Dimsy ArgumentListy comay ClassBodyy BasicForHeader EnhancedForHeader ForInity Expressiony ForUpdatey TypeArgumentsOrDiamondy ClassOrInterfaceTypeToInstant  Modifiers Modifier SimpleName QualifiedName LeftHandSide VOID2 MethodorConstrDeclarator VariableDeclarator Declarator SimpleName2 Declaration_list IF_CODE EXPR_CODE EXPR_STMT_CODE GOTO_COND GOTO_OR GOTO_AND N
 
@@ -84,6 +84,9 @@ Literal
         $$->intVal = stoi(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | FloatingPointLiteral {
         $$=makeleaf($1);
@@ -91,6 +94,9 @@ Literal
         $$->realVal = stod(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | booleanLiteral {
         $$=makeleaf($1);
@@ -100,6 +106,9 @@ Literal
         $$->strVal = string($1);
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | characterLiteral {
         $$=makeleaf($1);
@@ -107,6 +116,9 @@ Literal
         $$->intVal = char_int(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | stringLiteral {
         $$=makeleaf($1);
@@ -114,18 +126,27 @@ Literal
         $$->strVal = string($1);
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | textBlock {
         $$=makeleaf($1);
         $$->type = string("textblock");
         $$->tbval = $1;
         $$->expType = 4;
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | nullLiteral {
         $$=makeleaf($1);
         $$->type = string("null");
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     ;
 
@@ -337,11 +358,11 @@ QualifiedName
 
 //start
 CompilationUnit
-    : OrdinaryCompilationUnit eof {
+    : OrdinaryCompilationUnit {
         cout << "in compile unit\n";
         vector<data> v;
         insertAttr(v, $1, "", 1);
-        insertAttr(v, makeleaf($2), "", 1);
+        // insertAttr(v, makeleaf($2), "", 1);
         $$ = makenode("CompilationUnit",v);
 
         //  Semantics
@@ -382,9 +403,9 @@ TopLevelClassOrInterfaceDeclarations
 		$$ = makenode("Top_level_class_or_interface_declarations",v);
 
         //  Semantics
-		if($1->is_error || $2->is_error)	{
-			$$->is_error = 1;
-		}
+		// if($1->is_error || $2->is_error)	{
+		// 	$$->is_error = 1;
+		// }
     }
     ;
 
@@ -516,7 +537,7 @@ ClassBodyDeclarations
         $$ = makenode("Class_Body_Declarations",v);
 
         // Semantics
-        $$->is_error = $1->is_error || $2->is_error;
+        // $$->is_error = $1->is_error || $2->is_error;
     }
     ;
 
@@ -601,6 +622,10 @@ VariableDeclarator
 			yyerror(("The Attribute " + string($1->tempName) + " is already declared in the same class").c_str());
 			$$->is_error = 1;
 		} 
+		$$->type=$1->type;
+		int num = assign_exp($2, $$->type, $1->type, $3->type, $1->place, $3->place);
+		$$->place = $1->place;
+		backpatch($3->nextlist, num);
     }
     ;
 
@@ -619,7 +644,7 @@ Declarator
 		$$->size = getSize(type);
 
 		//3AC
-		$$->place = qid($$->tempName, NULL);
+		$$->place = qid(string($1), lookup(string($1)));
     }
     | Declarator '[' ']' {
         vector<data> v;
@@ -2910,13 +2935,13 @@ UnaryExpression
 		$$ = makenode("UnaryExpression", v);
 
         //--3AC
-		qid("unary+", lookup("+"));
+		qid plus=qid("unary+", lookup("+"));
         
         //Semantic
         // remember this line
 		if(!($2->is_error)){
 			$$->isInit = $2->isInit;
-			string temp = unaryExp($1->node_name,$2->type);
+			string temp = unaryExp("+",$2->type);
 			if(!temp.empty()){
 				$$->type = temp;
 				$$->intVal = $2->intVal;
@@ -2926,7 +2951,7 @@ UnaryExpression
 				$$->tempName = $2->tempName;
 				$$->place = q;
 				$$->nextlist.clear();
-				emit($2->place, qid("", NULL), q, -1);
+				emit(plus,$2->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -2945,12 +2970,12 @@ UnaryExpression
 
         
         //--3AC
-		$1->place = qid("unary-", lookup("-"));
+		// $1->place = ;
 
         //Semantic
-		if(!($1->is_error || $2->is_error)){
+		if(!($2->is_error)){
 			$$->isInit = $2->isInit;
-			string temp = unaryExp($1->node_name,$2->type);
+			string temp = unaryExp("-",$2->type);
 			if(!temp.empty()){
 				$$->type = temp;
 				$$->intVal = $2->intVal;
@@ -2960,7 +2985,7 @@ UnaryExpression
 				$$->tempName = $2->tempName;
 				$$->place = q;
 				$$->nextlist.clear();
-				emit($1->place, $2->place, qid("", NULL), q, -1);
+				emit(qid("unary-", lookup("-")), $2->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -3055,7 +3080,7 @@ UnaryExpressionNotPlusMinus
         
 
         //semantic
-        $$->place = qid("~", lookup("~"));
+        // $$->place = ;
 
         if(!($2->is_error)){
 			$$->isInit = $2->isInit;
@@ -3069,7 +3094,7 @@ UnaryExpressionNotPlusMinus
 				$$->tempName = $2->tempName;
 				$$->place = q;
 				$$->nextlist.clear();
-				emit($1->place, $2->place, qid("", NULL), q, -1);
+				emit(qid("~", lookup("~")), $2->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -3087,7 +3112,7 @@ UnaryExpressionNotPlusMinus
 		$$ = makenode("UnaryExpressionNotPlusMinus", v);
 
         //semantic
-        $1->place = qid("~", lookup("~"));
+        // $1->place = qid("~", lookup("~"));
 
         if(! ($2->is_error)){
 			$$->isInit = $2->isInit;
@@ -3101,7 +3126,7 @@ UnaryExpressionNotPlusMinus
 				$$->tempName = $2->tempName;
 				$$->place = q;
 				$$->nextlist.clear();
-				emit($1->place, $2->place, qid("", NULL), q, -1);
+				emit(qid("!", lookup("!")), $2->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -3208,11 +3233,11 @@ CastExpression
     }
     ;
 
-%%
+
 
 G 	
     : Identifier 	{
-		$$ = $1;
+		$$ = makeleaf($1);
 		className = $1;
 		classTemp = className ; 
 	}
@@ -3258,33 +3283,32 @@ A
 		gotolablelist.clear();
 		gotolabel.clear();
 	}
+
+%%
     
 int main(int argc, char* argv[]){
 
     dotfile=fopen(argv[1],"w");
 
     if(dotfile == NULL){
-		print_error();
+		/* print_error(); */
 		cout<<"cannot open the dot file AST.dot"<<"\nCompilation terminated\n";
 		return -1;
 	}
 
-    symTableInit();
+    symTable_init();
 	beginAST();
     yyparse();
 
-    for(int i=2; i<argc; i++){
+    /* for(int i=2; i<argc; i++){
         if(!strcmp(argv[i], "-dump-sym-table")) dump_sym_table = 1;
 		else if(!strcmp(argv[i], "-dump-tac")) dump_tac = 1;
 		else if(!strcmp(argv[i], "-dump-all")) dump_tac = dump_sym_table = 1;
-    }
-
-    if(!stop_compiler){
-		setGlobal();
-		if(dump_tac) print3AC();
-		endAST();
-		if(dump_sym_table) printSymbolTable(&globalst, "#Global_Symbol_Table#.csv");
-	}
+    } */
+	setGlobal();
+	print3AC();
+	endAST();
+	printSymbolTable(&globalst, "#Global_Symbol_Table#.csv");
     
     return 0;
 }

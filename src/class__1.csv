@@ -1,0 +1,3 @@
+Name, Type, Size, isInitialized, Offset
+a,float,4,1,0
+d,int,4,1,0

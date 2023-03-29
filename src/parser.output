@@ -11,9 +11,14 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-  270 $@3: %empty
+  275 $@3: %empty
 
-  271 EXPR_STMT_CODE: $@3 ExpressionStatement
+  276 EXPR_STMT_CODE: $@3 ExpressionStatement
+
+
+State 85 conflicts: 2 shift/reduce
+State 233 conflicts: 14 shift/reduce
+State 412 conflicts: 25 shift/reduce
 
 
 Grammar
@@ -53,7 +58,7 @@ Grammar
 
    24 QualifiedName: Name '.' SimpleName
 
-   25 CompilationUnit: OrdinaryCompilationUnit eof
+   25 CompilationUnit: OrdinaryCompilationUnit
 
    26 OrdinaryCompilationUnit: PackageDeclaration TopLevelClassOrInterfaceDeclarations
    27                        | TopLevelClassOrInterfaceDeclarations
@@ -414,6 +419,16 @@ Grammar
 
   269 CastExpression: '(' PrimitiveType ')' UnaryExpression
 
+  270 G: Identifier
+
+  271 S: %empty
+
+  272 NEXT_QUAD: %empty
+
+  273 ChangeTable: %empty
+
+  274 A: %empty
+
 
 Terminals, with rules where they appear
 
@@ -470,7 +485,7 @@ Terminals, with rules where they appear
     textBlock <str> (282) 6
     booleanLiteral <str> (283) 3
     FloatingPointLiteral <str> (284) 2
-    Identifier <str> (285) 23 54 64
+    Identifier <str> (285) 23 54 64 270
     CONTINUE <str> (286) 155 156
     FOR <str> (287) 139 140
     NEW <str> (288) 176 192 193
@@ -500,395 +515,404 @@ Terminals, with rules where they appear
     WHILE <str> (312) 133 134
     _ <str> (313)
     YIELD <str> (314) 154
-    eof <str> (315) 25
-    INC_OP <str> (316) 257 267
-    DEC_OP <str> (317) 258 268
-    NEXT_QUAD <ind> (318) 62 70 92 118 130 131 132 133 134 217 221 224
-    S <ptr> (319) 33 34
-    G <ptr> (320) 33 34
-    A <ptr> (321) 62 63
-    ChangeTable <ptr> (322) 90
+    INC_OP <str> (315) 257 267
+    DEC_OP <str> (316) 258 268
 
 
 Nonterminals, with rules where they appear
 
-    $accept (92)
+    $accept (86)
         on left: 0
-    Literal <ptr> (93)
+    Literal <ptr> (87)
         on left: 1 2 3 4 5 6 7
         on right: 166
-    PrimitiveType <ptr> (94)
+    PrimitiveType <ptr> (88)
         on left: 8 9
         on right: 48 49 57 58 71 97 192 193 269
-    NumericType <ptr> (95)
+    NumericType <ptr> (89)
         on left: 10 11
         on right: 8
-    IntegralType <ptr> (96)
+    IntegralType <ptr> (90)
         on left: 12 13 14 15 16
         on right: 10
-    FloatingPointType <ptr> (97)
+    FloatingPointType <ptr> (91)
         on left: 17 18
         on right: 11
-    Dims <ptr> (98)
+    Dims <ptr> (92)
         on left: 19 20
         on right: 20 68 193
-    Name <ptr> (99)
+    Name <ptr> (93)
         on left: 21 22
         on right: 24 32 174 185 187 202 264
-    SimpleName <ptr> (100)
+    SimpleName <ptr> (94)
         on left: 23
         on right: 21 24 118 119 152 155 177 181 183 184 188 189
-    QualifiedName <ptr> (101)
+    QualifiedName <ptr> (95)
         on left: 24
         on right: 22
-    CompilationUnit <ptr> (102)
+    CompilationUnit <ptr> (96)
         on left: 25
         on right: 0
-    OrdinaryCompilationUnit <ptr> (103)
+    OrdinaryCompilationUnit <ptr> (97)
         on left: 26 27
         on right: 25
-    TopLevelClassOrInterfaceDeclarations <ptr> (104)
+    TopLevelClassOrInterfaceDeclarations <ptr> (98)
         on left: 28 29
         on right: 26 27 29
-    TopLevelClassOrInterfaceDeclaration <ptr> (105)
+    TopLevelClassOrInterfaceDeclaration <ptr> (99)
         on left: 30 31
         on right: 29
-    PackageDeclaration <ptr> (106)
+    PackageDeclaration <ptr> (100)
         on left: 32
         on right: 26
-    ClassDeclaration <ptr> (107)
+    ClassDeclaration <ptr> (101)
         on left: 33 34
         on right: 30 96
-    Modifiers <ptr> (108)
+    Modifiers <ptr> (102)
         on left: 35 36
         on right: 33 36 48 57 59 75
-    Modifier <ptr> (109)
+    Modifier <ptr> (103)
         on left: 37 38 39 40
         on right: 35 36
-    ClassBody <ptr> (110)
+    ClassBody <ptr> (104)
         on left: 41
         on right: 33 34 85
-    ClassBodyDeclarations <ptr> (111)
+    ClassBodyDeclarations <ptr> (105)
         on left: 42 43
         on right: 41 43
-    ClassBodyDeclaration <ptr> (112)
+    ClassBodyDeclaration <ptr> (106)
         on left: 44 45 46 47
         on right: 43
-    FieldDeclaration <ptr> (113)
+    FieldDeclaration <ptr> (107)
         on left: 48 49
         on right: 44
-    VariableDeclaratorList <ptr> (114)
+    VariableDeclaratorList <ptr> (108)
         on left: 50 51
         on right: 48 49 51 97
-    VariableDeclarator <ptr> (115)
+    VariableDeclarator <ptr> (109)
         on left: 52 53
         on right: 50 51
-    Declarator <ptr> (116)
+    Declarator <ptr> (110)
         on left: 54 55
         on right: 52 53 55
-    MethodDeclaration <ptr> (117)
+    MethodDeclaration <ptr> (111)
         on left: 56
         on right: 45
-    MethodHeader <ptr> (118)
+    MethodHeader <ptr> (112)
         on left: 57 58 59 60
         on right: 56
-    VOID2 <ptr> (119)
+    VOID2 <ptr> (113)
         on left: 61
         on right: 59 60
-    MethodorConstrDeclarator <ptr> (120)
+    MethodorConstrDeclarator <ptr> (114)
         on left: 62 63
         on right: 57 58 59 60 75
-    SimpleName2 <ptr> (121)
+    SimpleName2 <ptr> (115)
         on left: 64
         on right: 62 63 71
-    VariableInitializer <ptr> (122)
+    VariableInitializer <ptr> (116)
         on left: 65 66
         on right: 53 88 89
-    Dimsy <ptr> (123)
+    Dimsy <ptr> (117)
         on left: 67 68
         on right: 63 71 192
-    FormalParameterList <ptr> (124)
+    FormalParameterList <ptr> (118)
         on left: 69 70
         on right: 62 70
-    FormalParameter <ptr> (125)
+    FormalParameter <ptr> (119)
         on left: 71
         on right: 69 70
-    MethodBody <ptr> (126)
+    MethodBody <ptr> (120)
         on left: 72 73
         on right: 56
-    StaticInitializer <ptr> (127)
+    StaticInitializer <ptr> (121)
         on left: 74
         on right: 46
-    ConclassorDeclaration <ptr> (128)
+    ConclassorDeclaration <ptr> (122)
         on left: 75
         on right: 47
-    ConclassorBody <ptr> (129)
+    ConclassorBody <ptr> (123)
         on left: 76 77
         on right: 75
-    ExplicitConclassorInvocation <ptr> (130)
+    ExplicitConclassorInvocation <ptr> (124)
         on left: 78 79
         on right: 76
-    ArgumentListy <ptr> (131)
+    ArgumentListy <ptr> (125)
         on left: 80 81
         on right: 78 79 176 187 188 189
-    comay <ptr> (132)
+    comay <ptr> (126)
         on left: 82 83
         on right: 86 87
-    ClassBodyy <ptr> (133)
+    ClassBodyy <ptr> (127)
         on left: 84 85
         on right: 176
-    ArrayInitializer <ptr> (134)
+    ArrayInitializer <ptr> (128)
         on left: 86 87
         on right: 66 193
-    VariableInitializerList <ptr> (135)
+    VariableInitializerList <ptr> (129)
         on left: 88 89
         on right: 86 89
-    Block <ptr> (136)
+    Block <ptr> (130)
         on left: 90
         on right: 72 74 109 160
-    BlockStatements <ptr> (137)
+    BlockStatements <ptr> (131)
         on left: 91 92
         on right: 76 77 90 92
-    BlockStatement <ptr> (138)
+    BlockStatement <ptr> (132)
         on left: 93 94
         on right: 92
-    Declaration_list <ptr> (139)
+    Declaration_list <ptr> (133)
         on left: 95 96
         on right: 93
-    LocalVariableDeclaration <ptr> (140)
+    LocalVariableDeclaration <ptr> (134)
         on left: 97
         on right: 95 140 148
-    Statement <ptr> (141)
+    Statement <ptr> (135)
         on left: 98 99 100 101 102 103
         on right: 94 118 130 131 133 135 136
-    StatementNoShortIf <ptr> (142)
+    StatementNoShortIf <ptr> (136)
         on left: 104 105 106 107 108
         on right: 119 131 132 134 137 138
-    StatementWithoutTrailingSubstatement <ptr> (143)
+    StatementWithoutTrailingSubstatement <ptr> (137)
         on left: 109 110 111 112 113 114 115 116 117
         on right: 98 104
-    LabeledStatement <ptr> (144)
+    LabeledStatement <ptr> (138)
         on left: 118
         on right: 99
-    LabeledStatementNoShortIf <ptr> (145)
+    LabeledStatementNoShortIf <ptr> (139)
         on left: 119
         on right: 105
-    ExpressionStatement <ptr> (146)
+    ExpressionStatement <ptr> (140)
         on left: 120
         on right: 111
-    StatementExpression <ptr> (147)
+    StatementExpression <ptr> (141)
         on left: 121 122 123 124 125 126 127
         on right: 120 150 151 162
-    IF_CODE <ptr> (148)
+    IF_CODE <ptr> (142)
         on left: 129
         on right: 130 131 132
-    $@1 (149)
+    $@1 (143)
         on left: 128
         on right: 129
-    IfThenStatement <ptr> (150)
+    IfThenStatement <ptr> (144)
         on left: 130
         on right: 100
-    IfThenElseStatement <ptr> (151)
+    IfThenElseStatement <ptr> (145)
         on left: 131
         on right: 101
-    IfThenElseStatementNoShortIf <ptr> (152)
+    IfThenElseStatementNoShortIf <ptr> (146)
         on left: 132
         on right: 106
-    WhileStatement <ptr> (153)
+    WhileStatement <ptr> (147)
         on left: 133
         on right: 102
-    WhileStatementNoShortIf <ptr> (154)
+    WhileStatementNoShortIf <ptr> (148)
         on left: 134
         on right: 107
-    ForStatement <ptr> (155)
+    ForStatement <ptr> (149)
         on left: 135 136
         on right: 103
-    ForStatementNoShortIf <ptr> (156)
+    ForStatementNoShortIf <ptr> (150)
         on left: 137 138
         on right: 108
-    BasicForHeader <ptr> (157)
+    BasicForHeader <ptr> (151)
         on left: 139
         on right: 135 137
-    EnhancedForHeader <ptr> (158)
+    EnhancedForHeader <ptr> (152)
         on left: 140
         on right: 136 138
-    ForInity <ptr> (159)
+    ForInity <ptr> (153)
         on left: 141 142
         on right: 139
-    Expressiony <ptr> (160)
+    Expressiony <ptr> (154)
         on left: 143 144
         on right: 139
-    ForUpdatey <ptr> (161)
+    ForUpdatey <ptr> (155)
         on left: 145 146
         on right: 139
-    ForInit <ptr> (162)
+    ForInit <ptr> (156)
         on left: 147 148
         on right: 142
-    ForUpdate <ptr> (163)
+    ForUpdate <ptr> (157)
         on left: 149
         on right: 146
-    StatementExpressionList <ptr> (164)
+    StatementExpressionList <ptr> (158)
         on left: 150 151
         on right: 147 149 151
-    BreakStatement <ptr> (165)
+    BreakStatement <ptr> (159)
         on left: 152 153
         on right: 112
-    YieldStatement <ptr> (166)
+    YieldStatement <ptr> (160)
         on left: 154
         on right: 117
-    ContinueStatement <ptr> (167)
+    ContinueStatement <ptr> (161)
         on left: 155 156
         on right: 113
-    ReturnStatement <ptr> (168)
+    ReturnStatement <ptr> (162)
         on left: 157 158
         on right: 114
-    ThrowStatement <ptr> (169)
+    ThrowStatement <ptr> (163)
         on left: 159
         on right: 116
-    SynchronizedStatement <ptr> (170)
+    SynchronizedStatement <ptr> (164)
         on left: 160
         on right: 115
-    EXPR_CODE <ptr> (171)
+    EXPR_CODE <ptr> (165)
         on left: 162
         on right: 133 134
-    $@2 (172)
+    $@2 (166)
         on left: 161
         on right: 162
-    N <ptr> (173)
+    N <ptr> (167)
         on left: 163
         on right: 131 132
-    Primary <ptr> (174)
+    Primary <ptr> (168)
         on left: 164 165
         on right: 175 183 188 263
-    PrimaryNoNewArray <ptr> (175)
+    PrimaryNoNewArray <ptr> (169)
         on left: 166 167 168 169 170 171 172
         on right: 164 186
-    ClassInstanceCreationExpression <ptr> (176)
+    ClassInstanceCreationExpression <ptr> (170)
         on left: 173 174 175
         on right: 127 169
-    UnqualifiedClassInstanceCreationExpression <ptr> (177)
+    UnqualifiedClassInstanceCreationExpression <ptr> (171)
         on left: 176
         on right: 173 174 175
-    ClassOrInterfaceTypeToInstantiate <ptr> (178)
+    ClassOrInterfaceTypeToInstantiate <ptr> (172)
         on left: 177
         on right: 176
-    TypeArgumentsOrDiamondy <ptr> (179)
+    TypeArgumentsOrDiamondy <ptr> (173)
         on left: 178 179
         on right: 177
-    ClassOrInterfaceTypeToInstant <ptr> (180)
+    ClassOrInterfaceTypeToInstant <ptr> (174)
         on left: 180 181
         on right: 177 181
-    TypeArgumentsOrDiamond <ptr> (181)
+    TypeArgumentsOrDiamond <ptr> (175)
         on left: 182
         on right: 179
-    FieldAccess <ptr> (182)
+    FieldAccess <ptr> (176)
         on left: 183 184
         on right: 170 203
-    ArrayAccess <ptr> (183)
+    ArrayAccess <ptr> (177)
         on left: 185 186
         on right: 171 204
-    MethodInvocation <ptr> (184)
+    MethodInvocation <ptr> (178)
         on left: 187 188 189
         on right: 126 172
-    ArgumentList <ptr> (185)
+    ArgumentList <ptr> (179)
         on left: 190 191
         on right: 81 191
-    ArrayCreationExpression <ptr> (186)
+    ArrayCreationExpression <ptr> (180)
         on left: 192 193
         on right: 165
-    DimExprs <ptr> (187)
+    DimExprs <ptr> (181)
         on left: 194 195
         on right: 192 195
-    DimExpr <ptr> (188)
+    DimExpr <ptr> (182)
         on left: 196
         on right: 194 195
-    Expression <ptr> (189)
+    Expression <ptr> (183)
         on left: 197
         on right: 65 129 140 144 154 157 159 160 168 185 186 190 191 196 217
-    AssignmentExpression <ptr> (190)
+    AssignmentExpression <ptr> (184)
         on left: 198 199
         on right: 197 201
-    Assignment <ptr> (191)
+    Assignment <ptr> (185)
         on left: 201
         on right: 121 198
-    $@4 (192)
+    $@4 (186)
         on left: 200
         on right: 201
-    LeftHandSide <ptr> (193)
+    LeftHandSide <ptr> (187)
         on left: 202 203 204
         on right: 201
-    AssignmentOperator <ptr> (194)
+    AssignmentOperator <ptr> (188)
         on left: 205 206 207 208 209 210 211 212 213 214 215 216
         on right: 201
-    ConditionalExpression <ptr> (195)
+    ConditionalExpression <ptr> (189)
         on left: 217 218
         on right: 199 217
-    GOTO_COND <ptr> (196)
+    GOTO_COND <ptr> (190)
         on left: 219
         on right: 217
-    WRITE_GOTO <ind> (197)
+    WRITE_GOTO <ind> (191)
         on left: 220
         on right: 217
-    ConditionalOrExpression <ptr> (198)
+    ConditionalOrExpression <ptr> (192)
         on left: 221 222
         on right: 218 219 223
-    GOTO_OR <ptr> (199)
+    GOTO_OR <ptr> (193)
         on left: 223
         on right: 221
-    ConditionalAndExpression <ptr> (200)
+    ConditionalAndExpression <ptr> (194)
         on left: 224 225
         on right: 221 222 226
-    GOTO_AND <ptr> (201)
+    GOTO_AND <ptr> (195)
         on left: 226
         on right: 224
-    InclusiveOrExpression <ptr> (202)
+    InclusiveOrExpression <ptr> (196)
         on left: 227 228
         on right: 224 225 227
-    ExclusiveOrExpression <ptr> (203)
+    ExclusiveOrExpression <ptr> (197)
         on left: 229 230
         on right: 227 228 229
-    AndExpression <ptr> (204)
+    AndExpression <ptr> (198)
         on left: 231 232
         on right: 229 230 231
-    EqualityExpression <ptr> (205)
+    EqualityExpression <ptr> (199)
         on left: 233 234 235
         on right: 231 232 233 234
-    RelationalExpression <ptr> (206)
+    RelationalExpression <ptr> (200)
         on left: 236 237 238 239 240
         on right: 233 234 235 236 237 238 239
-    ShiftExpression <ptr> (207)
+    ShiftExpression <ptr> (201)
         on left: 241 242 243 244
         on right: 236 237 238 239 240 241 242 243
-    AdditiveExpression <ptr> (208)
+    AdditiveExpression <ptr> (202)
         on left: 245 246 247
         on right: 241 242 243 244 245 246
-    MultiplicativeExpression <ptr> (209)
+    MultiplicativeExpression <ptr> (203)
         on left: 248 249 250 251
         on right: 245 246 247 248 249 250
-    UnaryExpression <ptr> (210)
+    UnaryExpression <ptr> (204)
         on left: 252 253 254 255 256
         on right: 248 249 250 251 254 255 257 258 260 261 269
-    PreIncrementExpression <ptr> (211)
+    PreIncrementExpression <ptr> (205)
         on left: 257
         on right: 122 252
-    PreDecrementExpression <ptr> (212)
+    PreDecrementExpression <ptr> (206)
         on left: 258
         on right: 123 253
-    UnaryExpressionNotPlusMinus <ptr> (213)
+    UnaryExpressionNotPlusMinus <ptr> (207)
         on left: 259 260 261 262
         on right: 256
-    PostfixExpression <ptr> (214)
+    PostfixExpression <ptr> (208)
         on left: 263 264 265 266
         on right: 259 267 268
-    PostIncrementExpression <ptr> (215)
+    PostIncrementExpression <ptr> (209)
         on left: 267
         on right: 124 265
-    PostDecrementExpression <ptr> (216)
+    PostDecrementExpression <ptr> (210)
         on left: 268
         on right: 125 266
-    CastExpression <ptr> (217)
+    CastExpression <ptr> (211)
         on left: 269
         on right: 262
+    G <ptr> (212)
+        on left: 270
+        on right: 33 34
+    S <ptr> (213)
+        on left: 271
+        on right: 33 34
+    NEXT_QUAD <ind> (214)
+        on left: 272
+        on right: 62 70 92 118 130 131 132 133 134 217 221 224
+    ChangeTable <ptr> (215)
+        on left: 273
+        on right: 90
+    A <ptr> (216)
+        on left: 274
+        on right: 62 63
 
 
 State 0
@@ -965,21 +989,23 @@ State 7
 
    34 ClassDeclaration: CLASS . G S ClassBody
 
-    G  shift, and go to state 20
+    Identifier  shift, and go to state 20
+
+    G  go to state 21
 
 
 State 8
 
     0 $accept: CompilationUnit . $end
 
-    $end  shift, and go to state 21
+    $end  shift, and go to state 22
 
 
 State 9
 
-   25 CompilationUnit: OrdinaryCompilationUnit . eof
+   25 CompilationUnit: OrdinaryCompilationUnit .
 
-    eof  shift, and go to state 22
+    $default  reduce using rule 25 (CompilationUnit)
 
 
 State 10
@@ -1091,23 +1117,25 @@ State 19
 
 State 20
 
-   34 ClassDeclaration: CLASS G . S ClassBody
+  270 G: Identifier .
 
-    S  shift, and go to state 29
+    $default  reduce using rule 270 (G)
 
 
 State 21
 
-    0 $accept: CompilationUnit $end .
+   34 ClassDeclaration: CLASS G . S ClassBody
 
-    $default  accept
+    $default  reduce using rule 271 (S)
+
+    S  go to state 29
 
 
 State 22
 
-   25 CompilationUnit: OrdinaryCompilationUnit eof .
+    0 $accept: CompilationUnit $end .
 
-    $default  reduce using rule 25 (CompilationUnit)
+    $default  accept
 
 
 State 23
@@ -1128,7 +1156,9 @@ State 25
 
    33 ClassDeclaration: Modifiers CLASS . G S ClassBody
 
-    G  shift, and go to state 30
+    Identifier  shift, and go to state 20
+
+    G  go to state 30
 
 
 State 26
@@ -1167,7 +1197,9 @@ State 30
 
    33 ClassDeclaration: Modifiers CLASS G . S ClassBody
 
-    S  shift, and go to state 34
+    $default  reduce using rule 271 (S)
+
+    S  go to state 34
 
 
 State 31
@@ -1448,7 +1480,9 @@ State 60
 
    90 Block: '{' . ChangeTable BlockStatements '}'
 
-    ChangeTable  shift, and go to state 76
+    $default  reduce using rule 273 (ChangeTable)
+
+    ChangeTable  go to state 76
 
 
 State 61
@@ -1682,7 +1716,9 @@ State 81
    62 MethodorConstrDeclarator: SimpleName2 '(' . A FormalParameterList ')' NEXT_QUAD
    63                         | SimpleName2 '(' . A ')' Dimsy
 
-    A  shift, and go to state 147
+    $default  reduce using rule 274 (A)
+
+    A  go to state 147
 
 
 State 82
@@ -1716,6 +1752,8 @@ State 85
     THIS   shift, and go to state 149
     SUPER  shift, and go to state 150
 
+    THIS      [reduce using rule 91 (BlockStatements)]
+    SUPER     [reduce using rule 91 (BlockStatements)]
     $default  reduce using rule 91 (BlockStatements)
 
     ExplicitConclassorInvocation  go to state 151
@@ -1734,8 +1772,11 @@ State 87
    90 Block: '{' ChangeTable BlockStatements . '}'
    92 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
-    '}'        shift, and go to state 153
-    NEXT_QUAD  shift, and go to state 154
+    '}'  shift, and go to state 153
+
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 154
 
 
 State 88
@@ -2456,7 +2497,9 @@ State 126
 
   217 ConditionalExpression: GOTO_COND . NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
 
-    NEXT_QUAD  shift, and go to state 192
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 192
 
 
 State 127
@@ -2475,7 +2518,9 @@ State 128
 
   221 ConditionalOrExpression: GOTO_OR . NEXT_QUAD ConditionalAndExpression
 
-    NEXT_QUAD  shift, and go to state 195
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 195
 
 
 State 129
@@ -2492,7 +2537,9 @@ State 130
 
   224 ConditionalAndExpression: GOTO_AND . NEXT_QUAD InclusiveOrExpression
 
-    NEXT_QUAD  shift, and go to state 197
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 197
 
 
 State 131
@@ -2712,8 +2759,11 @@ State 152
    77 ConclassorBody: '{' BlockStatements . '}'
    92 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
-    '}'        shift, and go to state 224
-    NEXT_QUAD  shift, and go to state 154
+    '}'  shift, and go to state 224
+
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 154
 
 
 State 153
@@ -4478,8 +4528,11 @@ State 223
    76 ConclassorBody: '{' ExplicitConclassorInvocation BlockStatements . '}'
    92 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
-    '}'        shift, and go to state 320
-    NEXT_QUAD  shift, and go to state 154
+    '}'  shift, and go to state 320
+
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 154
 
 
 State 224
@@ -4692,7 +4745,21 @@ State 233
     INC_OP                shift, and go to state 107
     DEC_OP                shift, and go to state 108
 
-    $default  reduce using rule 158 (ReturnStatement)
+    '('                   [reduce using rule 158 (ReturnStatement)]
+    integerLiteral        [reduce using rule 158 (ReturnStatement)]
+    stringLiteral         [reduce using rule 158 (ReturnStatement)]
+    nullLiteral           [reduce using rule 158 (ReturnStatement)]
+    characterLiteral      [reduce using rule 158 (ReturnStatement)]
+    textBlock             [reduce using rule 158 (ReturnStatement)]
+    booleanLiteral        [reduce using rule 158 (ReturnStatement)]
+    FloatingPointLiteral  [reduce using rule 158 (ReturnStatement)]
+    Identifier            [reduce using rule 158 (ReturnStatement)]
+    NEW                   [reduce using rule 158 (ReturnStatement)]
+    THIS                  [reduce using rule 158 (ReturnStatement)]
+    SUPER                 [reduce using rule 158 (ReturnStatement)]
+    INC_OP                [reduce using rule 158 (ReturnStatement)]
+    DEC_OP                [reduce using rule 158 (ReturnStatement)]
+    $default              reduce using rule 158 (ReturnStatement)
 
     Literal                                     go to state 109
     Name                                        go to state 110
@@ -4900,7 +4967,9 @@ State 248
   130 IfThenStatement: IF_CODE . NEXT_QUAD Statement
   131 IfThenElseStatement: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
 
-    NEXT_QUAD  shift, and go to state 336
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 336
 
 
 State 249
@@ -5920,14 +5989,18 @@ State 316
 
    62 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' . NEXT_QUAD
 
-    NEXT_QUAD  shift, and go to state 361
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 361
 
 
 State 317
 
    70 FormalParameterList: FormalParameterList ',' . NEXT_QUAD FormalParameter
 
-    NEXT_QUAD  shift, and go to state 362
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 362
 
 
 State 318
@@ -6127,7 +6200,9 @@ State 330
 
   133 WhileStatement: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
 
-    NEXT_QUAD  shift, and go to state 376
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 376
 
 
 State 331
@@ -6151,7 +6226,9 @@ State 333
 
   118 LabeledStatement: SimpleName ':' . NEXT_QUAD Statement
 
-    NEXT_QUAD  shift, and go to state 378
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 378
 
 
 State 334
@@ -6921,7 +6998,9 @@ State 385
   131 IfThenElseStatement: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
   132 IfThenElseStatementNoShortIf: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 414
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 414
 
 
 State 386
@@ -7162,7 +7241,9 @@ State 399
 
   217 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' . NEXT_QUAD ConditionalExpression
 
-    NEXT_QUAD  shift, and go to state 421
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 421
 
 
 State 400
@@ -7433,7 +7514,9 @@ State 411
   133 WhileStatement: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
   134 WhileStatementNoShortIf: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 430
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 430
 
 
 State 412
@@ -7466,7 +7549,32 @@ State 412
     YIELD                 shift, and go to state 235
     INC_OP                shift, and go to state 107
     DEC_OP                shift, and go to state 108
-    NEXT_QUAD             shift, and go to state 378
+
+    '('                   [reduce using rule 272 (NEXT_QUAD)]
+    '{'                   [reduce using rule 272 (NEXT_QUAD)]
+    ';'                   [reduce using rule 272 (NEXT_QUAD)]
+    integerLiteral        [reduce using rule 272 (NEXT_QUAD)]
+    stringLiteral         [reduce using rule 272 (NEXT_QUAD)]
+    nullLiteral           [reduce using rule 272 (NEXT_QUAD)]
+    characterLiteral      [reduce using rule 272 (NEXT_QUAD)]
+    textBlock             [reduce using rule 272 (NEXT_QUAD)]
+    booleanLiteral        [reduce using rule 272 (NEXT_QUAD)]
+    FloatingPointLiteral  [reduce using rule 272 (NEXT_QUAD)]
+    Identifier            [reduce using rule 272 (NEXT_QUAD)]
+    CONTINUE              [reduce using rule 272 (NEXT_QUAD)]
+    FOR                   [reduce using rule 272 (NEXT_QUAD)]
+    NEW                   [reduce using rule 272 (NEXT_QUAD)]
+    IF                    [reduce using rule 272 (NEXT_QUAD)]
+    SYNCHRONIZED          [reduce using rule 272 (NEXT_QUAD)]
+    THIS                  [reduce using rule 272 (NEXT_QUAD)]
+    BREAK                 [reduce using rule 272 (NEXT_QUAD)]
+    THROW                 [reduce using rule 272 (NEXT_QUAD)]
+    RETURN                [reduce using rule 272 (NEXT_QUAD)]
+    SUPER                 [reduce using rule 272 (NEXT_QUAD)]
+    WHILE                 [reduce using rule 272 (NEXT_QUAD)]
+    YIELD                 [reduce using rule 272 (NEXT_QUAD)]
+    INC_OP                [reduce using rule 272 (NEXT_QUAD)]
+    DEC_OP                [reduce using rule 272 (NEXT_QUAD)]
 
     Literal                                     go to state 109
     Name                                        go to state 110
@@ -7505,6 +7613,7 @@ State 412
     PostfixExpression                           go to state 266
     PostIncrementExpression                     go to state 267
     PostDecrementExpression                     go to state 268
+    NEXT_QUAD                                   go to state 378
 
 
 State 413
@@ -7738,7 +7847,9 @@ State 428
 
   133 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD Statement
 
-    NEXT_QUAD  shift, and go to state 443
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 443
 
 
 State 429
@@ -7794,7 +7905,9 @@ State 435
 
   132 IfThenElseStatementNoShortIf: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 447
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 447
 
 
 State 436
@@ -7939,7 +8052,9 @@ State 438
 
   131 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD Statement
 
-    NEXT_QUAD  shift, and go to state 448
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 448
 
 
 State 439
@@ -8094,7 +8209,9 @@ State 445
 
   134 WhileStatementNoShortIf: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 455
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 455
 
 
 State 446
@@ -8346,7 +8463,9 @@ State 454
   133 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD Statement
   134 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 460
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 460
 
 
 State 455
@@ -8380,7 +8499,9 @@ State 458
   131 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD Statement
   132 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 463
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 463
 
 
 State 459
@@ -8567,14 +8688,18 @@ State 465
 
   134 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 468
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 468
 
 
 State 466
 
   132 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD StatementNoShortIf
 
-    NEXT_QUAD  shift, and go to state 469
+    $default  reduce using rule 272 (NEXT_QUAD)
+
+    NEXT_QUAD  go to state 469
 
 
 State 467

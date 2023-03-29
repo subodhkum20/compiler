@@ -30,9 +30,9 @@ void symTable_init(){
 	Goffset.push(0);
 	Loffset.push(0);
 	blockSz.push(0);
-	parent_table.insert(make_pair(&gst, nullptr));
+	parent_table.insert(make_pair(&globalst, nullptr));
 	class_parent_table.insert(make_pair(&class_gst, nullptr));
-	curr_table = &gst;
+	curr_table = &globalst;
 	curr_class_table = &class_gst;
 	curr_typ = &typ_gst;
 	insertKeywords();
@@ -117,7 +117,7 @@ void updSymbolTable(string id, int offset_flag){
 
 // look up the hirerachy up till the global sym table from the curr sym table that corresponds to the id - done
 sym_entry* lookup(string id){
-	sym_table* temp = curr_table;
+	sym_table* temp = curr_classure;
 	while(temp){
 		if((*temp).find(id)!=(*temp).end()) return (*temp)[id];
 		temp = parent_table[temp];
@@ -134,7 +134,7 @@ string funcProtoLookup(string id){
 
 // find total size of local variables a function - done
 int func_local_size(string name){
-	return gst[name]->size;
+	return globalst[name]->size;
 }
 
 // look up for a symbol in current symbol table only (only the current scope) - done
@@ -400,7 +400,7 @@ string lookupType(string a){
 
 // set global variables - needs to be changed for java datatypes
 void setGlobal(){
-	for(auto &it: gst){
+	for(auto &it: globalst){
 		if(it.second->type.substr(0,2) == "in" || it.second->type.substr(0,2)=="ch"){
 			it.second->is_global = 1;
 			globaldecl.insert(make_pair(it.first,make_pair("0", 0)));
@@ -411,7 +411,7 @@ void setGlobal(){
 
 // write the specified symbol table into a csv file - done
 void printSymbolTable(sym_table* table, string file_name){
-	if(!dump_sym_table) return;
+	// if(!dump_sym_table) return;
 	FILE* file = fopen(file_name.c_str(), "w");
   	fprintf( file,"Name, Type, Size, isInitialized, Offset\n");
   	for(auto it: (*table)){

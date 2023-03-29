@@ -7,8 +7,8 @@ if [[ $1  == "-input" && $3 == "" ]];then
 	# else
 		bison -v -d --defines=parser.hpp --output=parser.cpp parser.y++
 		flex lexer.l
-		g++ lex.yy.c parser.cpp ast.cpp 
-		cat $2 | ./a.out "AST.dot" 1>hi.txt
+		g++ lex.yy.c parser.cpp ast.cpp symTable.cpp typecheck.cpp 3ac.cpp
+		cat $2 | ./a.out "AST.dot" 1>hi.txt -dump-all
 		dot AST.dot -T png -o AST.png
 	# fi
 elif [[ $1 == "-input" && $3 == "-out" ]];then 1>/dev/null

@@ -37,7 +37,7 @@ qid newtemp(string type){
     // creating temp variables
     string temp_var = "#V"+to_string(counter);
     counter++;
-    insertSymbol(*currTable, temp_var, type, getSize(type), 0, NULL);
+    insertSymbol(*curr_table, temp_var, type, getSize(type), 0, NULL);
     return qid(temp_var, lookup(temp_var));
 }
 
