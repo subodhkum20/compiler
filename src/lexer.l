@@ -15,72 +15,33 @@
 
         unordered_map<string,yytokentype>m(
                 {
-                        {"abstract",ABSTRACT},
                         {"continue",CONTINUE},
                         {"for",FOR},
                         {"new",NEW},
-                        // {"switch",SWITCH},
-                        {"assert",ASSERT},
-                        {"default",DEFAULT},
                         {"if",IF},
                         {"package",PACKAGE},
                         {"synchronized",SYNCHRONIZED},
                         {"boolean",BOOLEAN},
-                        // {"do",DO},
-                        // {"goto",GOTO},
                         {"private",PRIVATE},
                         {"this",THIS},
                         {"break",BREAK},
                         {"double",DOUBLE},
-                        // {"implements",IMPLEMENTS},
-                        // {"protected",PROTECTED},
                         {"throw",THROW},
                         {"byte",BYTE},
                         {"else",ELSE},
-                        // {"import",IMPORT},
                         {"public",PUBLIC},
-                        // {"throws",THROWS},
-                        // {"case",CASE},
-                        {"enum",ENUM},
-                        {"instanceof",INSTANCEOF},
                         {"return",RETURN},
-                        {"transient",TRANSIENT},
-                        // {"catch",CATCH},
-                        // {"extends",EXTENDS},
                         {"int",INT},
                         {"short",SHORT},
-                        // {"try",TRY},
                         {"char",CHAR},
                         {"final",FINAL},
-                        {"interface",INTERFACE},
                         {"static",STATIC},
                         {"void",VOID},
                         {"class",CLASS},
-                        // {"finally",FINALLY},
                         {"long",LONG},
-                        {"strictfp",STRICTFP},
-                        {"volatile",VOLATILE},
-                        // {"const",CONST},
                         {"float",FLOAT},
-                        {"native",NATIVE},
                         {"super",SUPER},
                         {"while",WHILE},
-                        // {"_",UNDERSCORE},
-                        {"exports",EXPORTS},
-                        {"opens",OPENS},
-                        {"requires",REQUIRES},
-                        {"uses",USES},
-                        {"module",MODULE},
-                        {"permits",PERMITS},
-                        {"sealed",SEALED},
-                        {"var",VAR},
-                        {"non-sealed",NON_SEALED},
-                        {"provides",PROVIDES},
-                        {"to",TO},
-                        {"with",WITH},
-                        {"open",OPEN},
-                        {"record",RECORD},
-                        {"transitive",TRANSITIVE},
                         {"yield",YIELD}
                 }
         )
@@ -125,8 +86,8 @@ textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
 
 {LineTerminators}       {count();}
 {whitespace}            {}
-{comments}              {}
-{keyword}               {yylval.str = strdup(yytext); count();cout<<yytext<<endl;return m[string(yytext)];}
+{comments}              {count();}
+{keyword}               {yylval.str = strdup(yytext); count(); return m[string(yytext)];}
 {integerLiteral}        {yylval.str = strdup(yytext); count(); return integerLiteral;}
 {stringLiteral}         {yylval.str = strdup(yytext); count(); return stringLiteral;}
 {boolean}               {yylval.str = strdup(yytext); count(); return booleanLiteral;}
@@ -137,8 +98,6 @@ textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
 {Identifier}            {yylval.str = strdup(yytext); count(); return Identifier;}
 ">>>"                   {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT); }
 ">>>="                  {yylval.str = strdup(yytext); count(); return(UNSIGNED_RIGHT_ASSIGN); }
-"::"                    {yylval.str = strdup(yytext); count(); return(METHOD_REFERENCE); }
-"..."			{yylval.str = strdup(yytext); count(); return(ELLIPSIS); }
 ">>="			{yylval.str = strdup(yytext); count(); return(RIGHT_ASSIGN); }
 "<<="			{yylval.str = strdup(yytext); count(); return(LEFT_ASSIGN); }
 "+="			{yylval.str = strdup(yytext); count(); return(ADD_ASSIGN); }
@@ -153,7 +112,6 @@ textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
 "<<"			{yylval.str = strdup(yytext); count(); return(LEFT_OP); }
 "++"			{yylval.str = strdup(yytext); count(); return(INC_OP); }
 "--"			{yylval.str = strdup(yytext); count(); return(DEC_OP); }
-"->"			{yylval.str = strdup(yytext); count(); return(PTR_OP); }
 "&&"			{yylval.str = strdup(yytext); count(); return(AND_OP); }
 "||"			{yylval.str = strdup(yytext); count(); return(OR_OP); }
 "<="			{yylval.str = strdup(yytext); count(); return(LE_OP); }
@@ -197,9 +155,14 @@ int yywrap()
       return(1);
 }
 
+
+
 void count(void)
 {
       for (int i = 0; yytext[i] != '\0'; i++) 
         if (yytext[i] == '\n') line ++;
       return;  
 }
+
+
+

@@ -7,19 +7,19 @@ if [[ $1  == "-input" && $3 == "" ]];then
 	# else
 		bison -v -d --defines=parser.hpp --output=parser.cpp parser.y++
 		flex lexer.l
-		g++ lex.yy.c parser.cpp ast.cpp
-		cat $2 | ./a.out>>"AST.dot" 1>hi.txt
+		g++ lex.yy.c parser.cpp ast.cpp 
+		cat $2 | ./a.out "AST.dot" 1>hi.txt
 		dot AST.dot -T png -o AST.png
 	# fi
 elif [[ $1 == "-input" && $3 == "-out" ]];then 1>/dev/null
 	if test -f "./a.out"; then
-		cat $2 | ./a.out>>"ast.dot">>$4 1>/dev/null
+		cat $2 | ./a.out $4 1>/dev/null
 		dot $4 -T png -o AST.png
 	else
 		bison -v -d --defines=parser.hpp --output=parser.cpp parser.y++
 		flex lexer.l
 		g++ lex.yy.c parser.cpp ast.cpp
-		cat $2 | ./a.out>> $4
+		cat $2 | ./a.out $4
 		dot $4 -T png -o AST.png
 	fi
 elif [[ $1 == "-help" ]];then
