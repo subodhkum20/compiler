@@ -20,7 +20,6 @@
                         {"new",NEW},
                         {"if",IF},
                         {"package",PACKAGE},
-                        {"synchronized",SYNCHRONIZED},
                         {"boolean",BOOLEAN},
                         {"private",PRIVATE},
                         {"this",THIS},
@@ -40,7 +39,6 @@
                         {"class",CLASS},
                         {"long",LONG},
                         {"float",FLOAT},
-                        {"super",SUPER},
                         {"while",WHILE},
                         {"yield",YIELD}
                 }
@@ -54,7 +52,7 @@ whitespace  [ \t\f]|{LineTerminators}
 oneLineComment  [/]{2}[^\r\n]+
 multiLineComment    "/*"([^*]|\*+[^*/])*\*+"/"
 comments    {oneLineComment}|{multiLineComment}
-keyword abstract|continue|for|new|switch|assert|default|if|package|synchronized|boolean|do|goto|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while|_|exports|opens|requires|uses|module|permits|sealed|var|non-sealed|provides|to|with|open|record|transitive|yield
+keyword abstract|continue|for|new|switch|assert|default|if|package|boolean|do|goto|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|while|_|exports|opens|requires|uses|module|permits|sealed|var|non-sealed|provides|to|with|open|record|transitive|yield
 Identifier       [a-zA-Z$_][a-zA-Z0-9$_]*
 hexAndUnderscore    [0-9a-fA-F_]+
 hexDigits   {hex}|{hex}{hexAndUnderscore}?{hex}

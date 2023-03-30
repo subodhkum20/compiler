@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
 #include"3ac.h"
+#include <bits/stdc++.h>
 using namespace std;
 
 
@@ -10,7 +10,7 @@ typedef struct{
 	string node_name;
 	string type;
 	int expType = 0;	// 1 -> Variable, 2 -> Array, 3-> Function, 4 -> Constant, 5 -> string  			 	
-	int isInit;
+	int isInit=0;
 	int intVal;
 	double realVal;
 	string strVal;
@@ -39,11 +39,11 @@ typedef struct{
 	treeNode* node;
 	string str;
 	bool is_node;
-}data;
+}data2;
 
 void beginAST();
 void endAST();
 
-void insertAttr(vector<data>&, treeNode* , string , int );
+void insertAttr(vector<data2>&, treeNode* , string , int );
 treeNode *makeleaf(string);
-treeNode *makenode(string , vector<data>&);
+treeNode *makenode(string , vector<data2>&);

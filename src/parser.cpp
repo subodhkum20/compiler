@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -34,6 +34,10 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -41,14 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30802
 
-/* Identify Bison output.  */
-#define YYBISON 1
-
-/* Bison version.  */
-#define YYBISON_VERSION "3.5.1"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -68,9 +69,9 @@
 /* First part of user prologue.  */
 #line 1 "parser.y++"
 
+    #include "ast.h"
     #include<iostream>
     #include<stdio.h>
-    #include "ast.h"
     #include <fstream>
     using namespace std;
     
@@ -85,17 +86,14 @@
     FILE* dotfile;
     stack<int> block_stack;
 
-    bool fn_decl = 0;
     int func_flag = 0;
-    int dump_tac = 0;
-    int dump_sym_table = 0;
-    int only_lexer = 0;
+    int dump_tac = 1;  // testing
+    int dump_sym_table = 1; // testing
     int block_count = 0;
-    int Anon_StructCounter=0;
     int if_found = 0;
+	int isArray = 0;
     int previous_if_found = 0;
     int stop_compiler = 0;		// shows error while parsing
-    int isArray = 0;			// true when array is declared
     int type_delim = 0;	
 
     string funcName = "";
@@ -120,7 +118,7 @@
     #define YYERROR_VERBOSE
 
 
-#line 124 "parser.cpp"
+#line 122 "parser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -143,118 +141,223 @@
 #  endif
 # endif
 
-/* Enabling verbose error messages.  */
-#ifdef YYERROR_VERBOSE
-# undef YYERROR_VERBOSE
-# define YYERROR_VERBOSE 1
-#else
-# define YYERROR_VERBOSE 0
-#endif
-
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_YY_PARSER_HPP_INCLUDED
-# define YY_YY_PARSER_HPP_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    RIGHT_OP = 258,
-    LEFT_OP = 259,
-    EQ_OP = 260,
-    NE_OP = 261,
-    AND_OP = 262,
-    OR_OP = 263,
-    LE_OP = 264,
-    GE_OP = 265,
-    ADD_ASSIGN = 266,
-    SUB_ASSIGN = 267,
-    MUL_ASSIGN = 268,
-    DIV_ASSIGN = 269,
-    MOD_ASSIGN = 270,
-    LEFT_ASSIGN = 271,
-    RIGHT_ASSIGN = 272,
-    AND_ASSIGN = 273,
-    XOR_ASSIGN = 274,
-    OR_ASSIGN = 275,
-    UNSIGNED_RIGHT = 276,
-    UNSIGNED_RIGHT_ASSIGN = 277,
-    integerLiteral = 278,
-    stringLiteral = 279,
-    nullLiteral = 280,
-    characterLiteral = 281,
-    textBlock = 282,
-    booleanLiteral = 283,
-    FloatingPointLiteral = 284,
-    Identifier = 285,
-    CONTINUE = 286,
-    FOR = 287,
-    NEW = 288,
-    IF = 289,
-    PACKAGE = 290,
-    SYNCHRONIZED = 291,
-    BOOLEAN = 292,
-    PRIVATE = 293,
-    THIS = 294,
-    BREAK = 295,
-    DOUBLE = 296,
-    THROW = 297,
-    BYTE = 298,
-    ELSE = 299,
-    PUBLIC = 300,
-    RETURN = 301,
-    INT = 302,
-    SHORT = 303,
-    CHAR = 304,
-    FINAL = 305,
-    STATIC = 306,
-    VOID = 307,
-    CLASS = 308,
-    LONG = 309,
-    FLOAT = 310,
-    SUPER = 311,
-    WHILE = 312,
-    _ = 313,
-    YIELD = 314,
-    INC_OP = 315,
-    DEC_OP = 316
-  };
-#endif
-
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
+#include "parser.hpp"
+/* Symbol kind.  */
+enum yysymbol_kind_t
 {
-#line 55 "parser.y++"
- 
-    char* str;
-    treeNode* ptr;
-    constants* num;
-    int ind;
-
-#line 245 "parser.cpp"
-
+  YYSYMBOL_YYEMPTY = -2,
+  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
+  YYSYMBOL_YYerror = 1,                    /* error  */
+  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
+  YYSYMBOL_3_ = 3,                         /* '('  */
+  YYSYMBOL_4_ = 4,                         /* ')'  */
+  YYSYMBOL_5_ = 5,                         /* '{'  */
+  YYSYMBOL_6_ = 6,                         /* '}'  */
+  YYSYMBOL_7_ = 7,                         /* '['  */
+  YYSYMBOL_8_ = 8,                         /* ']'  */
+  YYSYMBOL_9_ = 9,                         /* '.'  */
+  YYSYMBOL_10_ = 10,                       /* '+'  */
+  YYSYMBOL_11_ = 11,                       /* '-'  */
+  YYSYMBOL_12_ = 12,                       /* '*'  */
+  YYSYMBOL_13_ = 13,                       /* '/'  */
+  YYSYMBOL_14_ = 14,                       /* '%'  */
+  YYSYMBOL_15_ = 15,                       /* '&'  */
+  YYSYMBOL_16_ = 16,                       /* '|'  */
+  YYSYMBOL_17_ = 17,                       /* '^'  */
+  YYSYMBOL_18_ = 18,                       /* ','  */
+  YYSYMBOL_19_ = 19,                       /* ';'  */
+  YYSYMBOL_20_ = 20,                       /* '<'  */
+  YYSYMBOL_21_ = 21,                       /* '>'  */
+  YYSYMBOL_22_ = 22,                       /* '~'  */
+  YYSYMBOL_23_ = 23,                       /* '!'  */
+  YYSYMBOL_24_ = 24,                       /* '?'  */
+  YYSYMBOL_25_ = 25,                       /* ':'  */
+  YYSYMBOL_26_ = 26,                       /* '='  */
+  YYSYMBOL_RIGHT_OP = 27,                  /* RIGHT_OP  */
+  YYSYMBOL_LEFT_OP = 28,                   /* LEFT_OP  */
+  YYSYMBOL_EQ_OP = 29,                     /* EQ_OP  */
+  YYSYMBOL_NE_OP = 30,                     /* NE_OP  */
+  YYSYMBOL_AND_OP = 31,                    /* AND_OP  */
+  YYSYMBOL_OR_OP = 32,                     /* OR_OP  */
+  YYSYMBOL_LE_OP = 33,                     /* LE_OP  */
+  YYSYMBOL_GE_OP = 34,                     /* GE_OP  */
+  YYSYMBOL_ADD_ASSIGN = 35,                /* ADD_ASSIGN  */
+  YYSYMBOL_SUB_ASSIGN = 36,                /* SUB_ASSIGN  */
+  YYSYMBOL_MUL_ASSIGN = 37,                /* MUL_ASSIGN  */
+  YYSYMBOL_DIV_ASSIGN = 38,                /* DIV_ASSIGN  */
+  YYSYMBOL_MOD_ASSIGN = 39,                /* MOD_ASSIGN  */
+  YYSYMBOL_LEFT_ASSIGN = 40,               /* LEFT_ASSIGN  */
+  YYSYMBOL_RIGHT_ASSIGN = 41,              /* RIGHT_ASSIGN  */
+  YYSYMBOL_AND_ASSIGN = 42,                /* AND_ASSIGN  */
+  YYSYMBOL_XOR_ASSIGN = 43,                /* XOR_ASSIGN  */
+  YYSYMBOL_OR_ASSIGN = 44,                 /* OR_ASSIGN  */
+  YYSYMBOL_UNSIGNED_RIGHT = 45,            /* UNSIGNED_RIGHT  */
+  YYSYMBOL_UNSIGNED_RIGHT_ASSIGN = 46,     /* UNSIGNED_RIGHT_ASSIGN  */
+  YYSYMBOL_integerLiteral = 47,            /* integerLiteral  */
+  YYSYMBOL_stringLiteral = 48,             /* stringLiteral  */
+  YYSYMBOL_nullLiteral = 49,               /* nullLiteral  */
+  YYSYMBOL_characterLiteral = 50,          /* characterLiteral  */
+  YYSYMBOL_textBlock = 51,                 /* textBlock  */
+  YYSYMBOL_booleanLiteral = 52,            /* booleanLiteral  */
+  YYSYMBOL_FloatingPointLiteral = 53,      /* FloatingPointLiteral  */
+  YYSYMBOL_Identifier = 54,                /* Identifier  */
+  YYSYMBOL_CONTINUE = 55,                  /* CONTINUE  */
+  YYSYMBOL_FOR = 56,                       /* FOR  */
+  YYSYMBOL_NEW = 57,                       /* NEW  */
+  YYSYMBOL_IF = 58,                        /* IF  */
+  YYSYMBOL_PACKAGE = 59,                   /* PACKAGE  */
+  YYSYMBOL_BOOLEAN = 60,                   /* BOOLEAN  */
+  YYSYMBOL_PRIVATE = 61,                   /* PRIVATE  */
+  YYSYMBOL_THIS = 62,                      /* THIS  */
+  YYSYMBOL_BREAK = 63,                     /* BREAK  */
+  YYSYMBOL_DOUBLE = 64,                    /* DOUBLE  */
+  YYSYMBOL_THROW = 65,                     /* THROW  */
+  YYSYMBOL_BYTE = 66,                      /* BYTE  */
+  YYSYMBOL_ELSE = 67,                      /* ELSE  */
+  YYSYMBOL_PUBLIC = 68,                    /* PUBLIC  */
+  YYSYMBOL_RETURN = 69,                    /* RETURN  */
+  YYSYMBOL_INT = 70,                       /* INT  */
+  YYSYMBOL_SHORT = 71,                     /* SHORT  */
+  YYSYMBOL_CHAR = 72,                      /* CHAR  */
+  YYSYMBOL_FINAL = 73,                     /* FINAL  */
+  YYSYMBOL_STATIC = 74,                    /* STATIC  */
+  YYSYMBOL_VOID = 75,                      /* VOID  */
+  YYSYMBOL_CLASS = 76,                     /* CLASS  */
+  YYSYMBOL_LONG = 77,                      /* LONG  */
+  YYSYMBOL_FLOAT = 78,                     /* FLOAT  */
+  YYSYMBOL_WHILE = 79,                     /* WHILE  */
+  YYSYMBOL__ = 80,                         /* _  */
+  YYSYMBOL_YIELD = 81,                     /* YIELD  */
+  YYSYMBOL_eof = 82,                       /* eof  */
+  YYSYMBOL_INC_OP = 83,                    /* INC_OP  */
+  YYSYMBOL_DEC_OP = 84,                    /* DEC_OP  */
+  YYSYMBOL_YYACCEPT = 85,                  /* $accept  */
+  YYSYMBOL_Literal = 86,                   /* Literal  */
+  YYSYMBOL_PrimitiveType = 87,             /* PrimitiveType  */
+  YYSYMBOL_NumericType = 88,               /* NumericType  */
+  YYSYMBOL_IntegralType = 89,              /* IntegralType  */
+  YYSYMBOL_FloatingPointType = 90,         /* FloatingPointType  */
+  YYSYMBOL_Dims = 91,                      /* Dims  */
+  YYSYMBOL_Name = 92,                      /* Name  */
+  YYSYMBOL_SimpleName = 93,                /* SimpleName  */
+  YYSYMBOL_QualifiedName = 94,             /* QualifiedName  */
+  YYSYMBOL_CompilationUnit = 95,           /* CompilationUnit  */
+  YYSYMBOL_OrdinaryCompilationUnit = 96,   /* OrdinaryCompilationUnit  */
+  YYSYMBOL_TopLevelClassOrInterfaceDeclarations = 97, /* TopLevelClassOrInterfaceDeclarations  */
+  YYSYMBOL_TopLevelClassOrInterfaceDeclaration = 98, /* TopLevelClassOrInterfaceDeclaration  */
+  YYSYMBOL_ClassDeclaration = 99,          /* ClassDeclaration  */
+  YYSYMBOL_Modifiers = 100,                /* Modifiers  */
+  YYSYMBOL_Modifier = 101,                 /* Modifier  */
+  YYSYMBOL_ClassBody = 102,                /* ClassBody  */
+  YYSYMBOL_ClassBodyDeclarations = 103,    /* ClassBodyDeclarations  */
+  YYSYMBOL_ClassBodyDeclaration = 104,     /* ClassBodyDeclaration  */
+  YYSYMBOL_FieldDeclaration = 105,         /* FieldDeclaration  */
+  YYSYMBOL_VariableDeclaratorList = 106,   /* VariableDeclaratorList  */
+  YYSYMBOL_VariableDeclarator = 107,       /* VariableDeclarator  */
+  YYSYMBOL_Declarator = 108,               /* Declarator  */
+  YYSYMBOL_MethodDeclaration = 109,        /* MethodDeclaration  */
+  YYSYMBOL_MethodHeader = 110,             /* MethodHeader  */
+  YYSYMBOL_VOID2 = 111,                    /* VOID2  */
+  YYSYMBOL_MethodorConstrDeclarator = 112, /* MethodorConstrDeclarator  */
+  YYSYMBOL_SimpleName2 = 113,              /* SimpleName2  */
+  YYSYMBOL_VariableInitializer = 114,      /* VariableInitializer  */
+  YYSYMBOL_Dimsy = 115,                    /* Dimsy  */
+  YYSYMBOL_FormalParameterList = 116,      /* FormalParameterList  */
+  YYSYMBOL_FormalParameter = 117,          /* FormalParameter  */
+  YYSYMBOL_MethodBody = 118,               /* MethodBody  */
+  YYSYMBOL_StaticInitializer = 119,        /* StaticInitializer  */
+  YYSYMBOL_ConstructorDeclaration = 120,   /* ConstructorDeclaration  */
+  YYSYMBOL_ConstructorBody = 121,          /* ConstructorBody  */
+  YYSYMBOL_ExplicitConstructorInvocation = 122, /* ExplicitConstructorInvocation  */
+  YYSYMBOL_ArgumentListy = 123,            /* ArgumentListy  */
+  YYSYMBOL_ClassBodyy = 124,               /* ClassBodyy  */
+  YYSYMBOL_Block = 125,                    /* Block  */
+  YYSYMBOL_BlockStatements = 126,          /* BlockStatements  */
+  YYSYMBOL_BlockStatement = 127,           /* BlockStatement  */
+  YYSYMBOL_Declaration_list = 128,         /* Declaration_list  */
+  YYSYMBOL_LocalVariableDeclaration = 129, /* LocalVariableDeclaration  */
+  YYSYMBOL_Statement = 130,                /* Statement  */
+  YYSYMBOL_StatementNoShortIf = 131,       /* StatementNoShortIf  */
+  YYSYMBOL_StatementWithoutTrailingSubstatement = 132, /* StatementWithoutTrailingSubstatement  */
+  YYSYMBOL_LabeledStatement = 133,         /* LabeledStatement  */
+  YYSYMBOL_LabeledStatementNoShortIf = 134, /* LabeledStatementNoShortIf  */
+  YYSYMBOL_ExpressionStatement = 135,      /* ExpressionStatement  */
+  YYSYMBOL_StatementExpression = 136,      /* StatementExpression  */
+  YYSYMBOL_IF_CODE = 137,                  /* IF_CODE  */
+  YYSYMBOL_138_1 = 138,                    /* $@1  */
+  YYSYMBOL_IfThenStatement = 139,          /* IfThenStatement  */
+  YYSYMBOL_IfThenElseStatement = 140,      /* IfThenElseStatement  */
+  YYSYMBOL_IfThenElseStatementNoShortIf = 141, /* IfThenElseStatementNoShortIf  */
+  YYSYMBOL_WhileStatement = 142,           /* WhileStatement  */
+  YYSYMBOL_WhileStatementNoShortIf = 143,  /* WhileStatementNoShortIf  */
+  YYSYMBOL_ForStatement = 144,             /* ForStatement  */
+  YYSYMBOL_ForStatementNoShortIf = 145,    /* ForStatementNoShortIf  */
+  YYSYMBOL_BasicForHeader = 146,           /* BasicForHeader  */
+  YYSYMBOL_EnhancedForHeader = 147,        /* EnhancedForHeader  */
+  YYSYMBOL_ForInity = 148,                 /* ForInity  */
+  YYSYMBOL_Expressiony = 149,              /* Expressiony  */
+  YYSYMBOL_ForUpdatey = 150,               /* ForUpdatey  */
+  YYSYMBOL_ForInit = 151,                  /* ForInit  */
+  YYSYMBOL_ForUpdate = 152,                /* ForUpdate  */
+  YYSYMBOL_StatementExpressionList = 153,  /* StatementExpressionList  */
+  YYSYMBOL_BreakStatement = 154,           /* BreakStatement  */
+  YYSYMBOL_ContinueStatement = 155,        /* ContinueStatement  */
+  YYSYMBOL_ReturnStatement = 156,          /* ReturnStatement  */
+  YYSYMBOL_ThrowStatement = 157,           /* ThrowStatement  */
+  YYSYMBOL_EXPR_CODE = 158,                /* EXPR_CODE  */
+  YYSYMBOL_159_2 = 159,                    /* $@2  */
+  YYSYMBOL_N = 160,                        /* N  */
+  YYSYMBOL_Primary = 161,                  /* Primary  */
+  YYSYMBOL_PrimaryNoNewArray = 162,        /* PrimaryNoNewArray  */
+  YYSYMBOL_ClassInstanceCreationExpression = 163, /* ClassInstanceCreationExpression  */
+  YYSYMBOL_UnqualifiedClassInstanceCreationExpression = 164, /* UnqualifiedClassInstanceCreationExpression  */
+  YYSYMBOL_ClassOrInterfaceTypeToInstantiate = 165, /* ClassOrInterfaceTypeToInstantiate  */
+  YYSYMBOL_TypeArgumentsOrDiamondy = 166,  /* TypeArgumentsOrDiamondy  */
+  YYSYMBOL_ClassOrInterfaceTypeToInstant = 167, /* ClassOrInterfaceTypeToInstant  */
+  YYSYMBOL_TypeArgumentsOrDiamond = 168,   /* TypeArgumentsOrDiamond  */
+  YYSYMBOL_ArrayAccess = 169,              /* ArrayAccess  */
+  YYSYMBOL_MethodInvocation = 170,         /* MethodInvocation  */
+  YYSYMBOL_ArgumentList = 171,             /* ArgumentList  */
+  YYSYMBOL_ArrayCreationExpression = 172,  /* ArrayCreationExpression  */
+  YYSYMBOL_DimExprs = 173,                 /* DimExprs  */
+  YYSYMBOL_DimExpr = 174,                  /* DimExpr  */
+  YYSYMBOL_Expression = 175,               /* Expression  */
+  YYSYMBOL_AssignmentExpression = 176,     /* AssignmentExpression  */
+  YYSYMBOL_Assignment = 177,               /* Assignment  */
+  YYSYMBOL_178_4 = 178,                    /* $@4  */
+  YYSYMBOL_LeftHandSide = 179,             /* LeftHandSide  */
+  YYSYMBOL_AssignmentOperator = 180,       /* AssignmentOperator  */
+  YYSYMBOL_ConditionalExpression = 181,    /* ConditionalExpression  */
+  YYSYMBOL_GOTO_COND = 182,                /* GOTO_COND  */
+  YYSYMBOL_WRITE_GOTO = 183,               /* WRITE_GOTO  */
+  YYSYMBOL_ConditionalOrExpression = 184,  /* ConditionalOrExpression  */
+  YYSYMBOL_GOTO_OR = 185,                  /* GOTO_OR  */
+  YYSYMBOL_ConditionalAndExpression = 186, /* ConditionalAndExpression  */
+  YYSYMBOL_GOTO_AND = 187,                 /* GOTO_AND  */
+  YYSYMBOL_InclusiveOrExpression = 188,    /* InclusiveOrExpression  */
+  YYSYMBOL_ExclusiveOrExpression = 189,    /* ExclusiveOrExpression  */
+  YYSYMBOL_AndExpression = 190,            /* AndExpression  */
+  YYSYMBOL_EqualityExpression = 191,       /* EqualityExpression  */
+  YYSYMBOL_RelationalExpression = 192,     /* RelationalExpression  */
+  YYSYMBOL_ShiftExpression = 193,          /* ShiftExpression  */
+  YYSYMBOL_AdditiveExpression = 194,       /* AdditiveExpression  */
+  YYSYMBOL_MultiplicativeExpression = 195, /* MultiplicativeExpression  */
+  YYSYMBOL_UnaryExpression = 196,          /* UnaryExpression  */
+  YYSYMBOL_PreIncrementExpression = 197,   /* PreIncrementExpression  */
+  YYSYMBOL_PreDecrementExpression = 198,   /* PreDecrementExpression  */
+  YYSYMBOL_UnaryExpressionNotPlusMinus = 199, /* UnaryExpressionNotPlusMinus  */
+  YYSYMBOL_PostfixExpression = 200,        /* PostfixExpression  */
+  YYSYMBOL_PostIncrementExpression = 201,  /* PostIncrementExpression  */
+  YYSYMBOL_PostDecrementExpression = 202,  /* PostDecrementExpression  */
+  YYSYMBOL_CastExpression = 203,           /* CastExpression  */
+  YYSYMBOL_G = 204,                        /* G  */
+  YYSYMBOL_S = 205,                        /* S  */
+  YYSYMBOL_NEXT_QUAD = 206,                /* NEXT_QUAD  */
+  YYSYMBOL_ChangeTable = 207,              /* ChangeTable  */
+  YYSYMBOL_A = 208                         /* A  */
 };
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
-#endif
+typedef enum yysymbol_kind_t yysymbol_kind_t;
 
-
-extern YYSTYPE yylval;
-
-int yyparse (void);
-
-#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
 
 
 
@@ -293,6 +396,18 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
+#endif
+
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -354,6 +469,7 @@ typedef int yytype_uint16;
 
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
+
 /* Stored state numbers (used for stacks). */
 typedef yytype_int16 yy_state_t;
 
@@ -371,6 +487,7 @@ typedef int yy_state_fast_t;
 #  define YY_(Msgid) Msgid
 # endif
 #endif
+
 
 #ifndef YY_ATTRIBUTE_PURE
 # if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
@@ -390,17 +507,23 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(E) ((void) (E))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(E) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -429,7 +552,7 @@ typedef int yy_state_fast_t;
 
 #define YY_ASSERT(E) ((void) (0 && (E)))
 
-#if ! defined yyoverflow || YYERROR_VERBOSE
+#if !defined yyoverflow
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -494,8 +617,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
-
+#endif /* !defined yyoverflow */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
@@ -558,27 +680,29 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  22
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1506
+#define YYLAST   1053
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  86
+#define YYNTOKENS  85
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  131
+#define YYNNTS  124
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  275
+#define YYNRULES  255
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  470
+#define YYNSTATES  413
 
-#define YYUNDEFTOK  2
-#define YYMAXUTOK   316
+/* YYMAXUTOK -- Last valid token kind.  */
+#define YYMAXUTOK   315
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, with out-of-bounds checking.  */
-#define YYTRANSLATE(YYX)                                                \
-  (0 <= (YYX) && (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+#define YYTRANSLATE(YYX)                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
+   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
+   : YYSYMBOL_YYUNDEF)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
@@ -615,76 +739,78 @@ static const yytype_int8 yytranslate[] =
       49,    50,    51,    52,    53,    54,    55,    56,    57,    58,
       59,    60,    61,    62,    63,    64,    65,    66,    67,    68,
       69,    70,    71,    72,    73,    74,    75,    76,    77,    78,
-      79,    80,    81,    82,    83,    84,    85
+      79,    80,    81,    82,    83,    84
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    81,    81,    91,   101,   113,   123,   133,   142,   155,
-     158,   169,   172,   178,   187,   195,   203,   211,   222,   230,
-     241,   252,   273,   274,   277,   320,   361,   378,   391,   397,
-     398,   413,   414,   420,   440,   464,   489,   490,   507,   511,
-     515,   519,   526,   532,   533,   545,   546,   547,   548,   552,
-     567,   585,   588,   601,   610,   633,   649,   679,   690,   703,
-     715,   728,   743,   754,   812,   857,   877,   878,   882,   883,
-     887,   890,   909,   941,   942,   946,   957,   973,   981,   991,
-    1002,  1016,  1017,  1022,  1023,  1027,  1028,  1034,  1042,  1052,
-    1053,  1066,  1082,  1083,  1109,  1110,  1114,  1115,  1119,  1132,
-    1133,  1134,  1135,  1136,  1137,  1141,  1142,  1143,  1144,  1145,
-    1149,  1150,  1151,  1152,  1153,  1154,  1155,  1156,  1157,  1161,
-    1190,  1200,  1209,  1210,  1211,  1212,  1213,  1214,  1215,  1219,
-    1219,  1234,  1255,  1279,  1303,  1325,  1347,  1361,  1378,  1393,
-    1410,  1433,  1453,  1454,  1458,  1459,  1463,  1464,  1468,  1469,
-    1473,  1477,  1480,  1491,  1502,  1512,  1524,  1536,  1550,  1564,
-    1573,  1586,  1601,  1601,  1633,  1644,  1645,  1648,  1649,  1650,
-    1651,  1652,  1653,  1654,  1659,  1660,  1667,  1677,  1690,  1700,
-    1701,  1705,  1706,  1716,  1725,  1732,  1742,  1750,  1762,  1770,
-    1780,  1793,  1808,  1831,  1839,  1850,  1851,  1861,  1871,  1876,
-    1877,  1881,  1881,  1923,  1924,  1925,  1929,  1931,  1934,  1937,
-    1940,  1943,  1946,  1949,  1952,  1955,  1958,  1961,  1967,  2017,
-    2021,  2039,  2047,  2082,  2086,  2103,  2137,  2141,  2158,  2199,
-    2202,  2243,  2247,  2288,  2292,  2331,  2372,  2376,  2422,  2466,
-    2500,  2533,  2538,  2576,  2615,  2625,  2629,  2688,  2747,  2752,
-    2819,  2884,  2923,  2928,  2929,  2930,  2965,  2999,  3003,  3039,
-    3073,  3075,  3108,  3140,  3144,  3145,  3146,  3147,  3151,  3188,
-    3226,  3239,  3247,  3259,  3265,  3278
+       0,    78,    78,    85,    92,   101,   108,   115,   121,   131,
+     135,   146,   149,   155,   164,   172,   180,   188,   199,   207,
+     218,   229,   250,   251,   254,   303,   344,   352,   358,   359,
+     369,   370,   378,   397,   421,   422,   439,   443,   447,   451,
+     458,   470,   471,   483,   484,   485,   486,   490,   504,   520,
+     523,   533,   542,   560,   577,   600,   610,   623,   634,   646,
+     660,   671,   724,   764,   783,   787,   788,   792,   795,   811,
+     837,   838,   853,   864,   880,   888,   898,   912,   913,   923,
+     924,   944,   960,   961,   981,   982,   986,   987,   991,  1006,
+    1007,  1008,  1009,  1010,  1011,  1015,  1016,  1017,  1018,  1019,
+    1023,  1024,  1025,  1026,  1027,  1028,  1029,  1033,  1062,  1090,
+    1096,  1097,  1098,  1099,  1100,  1101,  1102,  1106,  1106,  1121,
+    1142,  1166,  1190,  1212,  1234,  1248,  1265,  1280,  1297,  1316,
+    1336,  1337,  1341,  1342,  1346,  1347,  1351,  1352,  1356,  1360,
+    1363,  1374,  1385,  1395,  1407,  1421,  1433,  1442,  1456,  1456,
+    1488,  1499,  1500,  1503,  1504,  1505,  1506,  1507,  1508,  1513,
+    1514,  1521,  1531,  1544,  1554,  1555,  1559,  1560,  1570,  1579,
+    1596,  1616,  1624,  1637,  1652,  1666,  1677,  1678,  1688,  1698,
+    1703,  1704,  1708,  1708,  1743,  1744,  1748,  1750,  1753,  1756,
+    1759,  1762,  1765,  1768,  1771,  1774,  1777,  1780,  1786,  1835,
+    1839,  1854,  1862,  1899,  1903,  1916,  1951,  1955,  1969,  2004,
+    2007,  2048,  2052,  2093,  2097,  2136,  2177,  2181,  2227,  2271,
+    2305,  2338,  2343,  2381,  2420,  2430,  2434,  2493,  2552,  2557,
+    2624,  2689,  2728,  2733,  2734,  2735,  2768,  2800,  2804,  2840,
+    2874,  2876,  2909,  2940,  2944,  2945,  2946,  2947,  2951,  2988,
+    3026,  3038,  3047,  3056,  3062,  3073
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || 0
+/** Accessing symbol of state STATE.  */
+#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
+
+#if YYDEBUG || 0
+/* The user-facing name of the symbol whose (internal) number is
+   YYSYMBOL.  No bounds checking.  */
+static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
+
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "'('", "')'", "'{'", "'}'", "'['", "']'",
-  "'.'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", "','",
-  "';'", "'<'", "'>'", "'~'", "'!'", "'?'", "':'", "'='", "RIGHT_OP",
-  "LEFT_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP", "LE_OP", "GE_OP",
-  "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", "MOD_ASSIGN",
-  "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN", "OR_ASSIGN",
-  "UNSIGNED_RIGHT", "UNSIGNED_RIGHT_ASSIGN", "integerLiteral",
+  "\"end of file\"", "error", "\"invalid token\"", "'('", "')'", "'{'",
+  "'}'", "'['", "']'", "'.'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'",
+  "'|'", "'^'", "','", "';'", "'<'", "'>'", "'~'", "'!'", "'?'", "':'",
+  "'='", "RIGHT_OP", "LEFT_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP",
+  "LE_OP", "GE_OP", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN",
+  "MOD_ASSIGN", "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN",
+  "OR_ASSIGN", "UNSIGNED_RIGHT", "UNSIGNED_RIGHT_ASSIGN", "integerLiteral",
   "stringLiteral", "nullLiteral", "characterLiteral", "textBlock",
   "booleanLiteral", "FloatingPointLiteral", "Identifier", "CONTINUE",
-  "FOR", "NEW", "IF", "PACKAGE", "SYNCHRONIZED", "BOOLEAN", "PRIVATE",
-  "THIS", "BREAK", "DOUBLE", "THROW", "BYTE", "ELSE", "PUBLIC", "RETURN",
-  "INT", "SHORT", "CHAR", "FINAL", "STATIC", "VOID", "CLASS", "LONG",
-  "FLOAT", "SUPER", "WHILE", "_", "YIELD", "INC_OP", "DEC_OP", "$accept",
-  "Literal", "PrimitiveType", "NumericType", "IntegralType",
-  "FloatingPointType", "Dims", "Name", "SimpleName", "QualifiedName",
-  "CompilationUnit", "OrdinaryCompilationUnit",
-  "TopLevelClassOrInterfaceDeclarations",
-  "TopLevelClassOrInterfaceDeclaration", "PackageDeclaration",
-  "ClassDeclaration", "Modifiers", "Modifier", "ClassBody",
-  "ClassBodyDeclarations", "ClassBodyDeclaration", "FieldDeclaration",
-  "VariableDeclaratorList", "VariableDeclarator", "Declarator",
-  "MethodDeclaration", "MethodHeader", "VOID2", "MethodorConstrDeclarator",
-  "SimpleName2", "VariableInitializer", "Dimsy", "FormalParameterList",
-  "FormalParameter", "MethodBody", "StaticInitializer",
-  "ConclassorDeclaration", "ConclassorBody",
-  "ExplicitConclassorInvocation", "ArgumentListy", "comay", "ClassBodyy",
-  "ArrayInitializer", "VariableInitializerList", "Block",
+  "FOR", "NEW", "IF", "PACKAGE", "BOOLEAN", "PRIVATE", "THIS", "BREAK",
+  "DOUBLE", "THROW", "BYTE", "ELSE", "PUBLIC", "RETURN", "INT", "SHORT",
+  "CHAR", "FINAL", "STATIC", "VOID", "CLASS", "LONG", "FLOAT", "WHILE",
+  "_", "YIELD", "eof", "INC_OP", "DEC_OP", "$accept", "Literal",
+  "PrimitiveType", "NumericType", "IntegralType", "FloatingPointType",
+  "Dims", "Name", "SimpleName", "QualifiedName", "CompilationUnit",
+  "OrdinaryCompilationUnit", "TopLevelClassOrInterfaceDeclarations",
+  "TopLevelClassOrInterfaceDeclaration", "ClassDeclaration", "Modifiers",
+  "Modifier", "ClassBody", "ClassBodyDeclarations", "ClassBodyDeclaration",
+  "FieldDeclaration", "VariableDeclaratorList", "VariableDeclarator",
+  "Declarator", "MethodDeclaration", "MethodHeader", "VOID2",
+  "MethodorConstrDeclarator", "SimpleName2", "VariableInitializer",
+  "Dimsy", "FormalParameterList", "FormalParameter", "MethodBody",
+  "StaticInitializer", "ConstructorDeclaration", "ConstructorBody",
+  "ExplicitConstructorInvocation", "ArgumentListy", "ClassBodyy", "Block",
   "BlockStatements", "BlockStatement", "Declaration_list",
   "LocalVariableDeclaration", "Statement", "StatementNoShortIf",
   "StatementWithoutTrailingSubstatement", "LabeledStatement",
@@ -694,17 +820,16 @@ static const char *const yytname[] =
   "WhileStatementNoShortIf", "ForStatement", "ForStatementNoShortIf",
   "BasicForHeader", "EnhancedForHeader", "ForInity", "Expressiony",
   "ForUpdatey", "ForInit", "ForUpdate", "StatementExpressionList",
-  "BreakStatement", "YieldStatement", "ContinueStatement",
-  "ReturnStatement", "ThrowStatement", "SynchronizedStatement",
-  "EXPR_CODE", "$@2", "N", "Primary", "PrimaryNoNewArray",
-  "ClassInstanceCreationExpression",
+  "BreakStatement", "ContinueStatement", "ReturnStatement",
+  "ThrowStatement", "EXPR_CODE", "$@2", "N", "Primary",
+  "PrimaryNoNewArray", "ClassInstanceCreationExpression",
   "UnqualifiedClassInstanceCreationExpression",
   "ClassOrInterfaceTypeToInstantiate", "TypeArgumentsOrDiamondy",
-  "ClassOrInterfaceTypeToInstant", "TypeArgumentsOrDiamond", "FieldAccess",
-  "ArrayAccess", "MethodInvocation", "ArgumentList",
-  "ArrayCreationExpression", "DimExprs", "DimExpr", "Expression",
-  "AssignmentExpression", "Assignment", "$@4", "LeftHandSide",
-  "AssignmentOperator", "ConditionalExpression", "GOTO_COND", "WRITE_GOTO",
+  "ClassOrInterfaceTypeToInstant", "TypeArgumentsOrDiamond", "ArrayAccess",
+  "MethodInvocation", "ArgumentList", "ArrayCreationExpression",
+  "DimExprs", "DimExpr", "Expression", "AssignmentExpression",
+  "Assignment", "$@4", "LeftHandSide", "AssignmentOperator",
+  "ConditionalExpression", "GOTO_COND", "WRITE_GOTO",
   "ConditionalOrExpression", "GOTO_OR", "ConditionalAndExpression",
   "GOTO_AND", "InclusiveOrExpression", "ExclusiveOrExpression",
   "AndExpression", "EqualityExpression", "RelationalExpression",
@@ -714,603 +839,481 @@ static const char *const yytname[] =
   "PostIncrementExpression", "PostDecrementExpression", "CastExpression",
   "G", "S", "NEXT_QUAD", "ChangeTable", "A", YY_NULLPTR
 };
+
+static const char *
+yysymbol_name (yysymbol_kind_t yysymbol)
+{
+  return yytname[yysymbol];
+}
 #endif
 
-# ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,    40,    41,   123,   125,    91,    93,    46,
-      43,    45,    42,    47,    37,    38,   124,    94,    44,    59,
-      60,    62,   126,    33,    63,    58,    61,   258,   259,   260,
-     261,   262,   263,   264,   265,   266,   267,   268,   269,   270,
-     271,   272,   273,   274,   275,   276,   277,   278,   279,   280,
-     281,   282,   283,   284,   285,   286,   287,   288,   289,   290,
-     291,   292,   293,   294,   295,   296,   297,   298,   299,   300,
-     301,   302,   303,   304,   305,   306,   307,   308,   309,   310,
-     311,   312,   313,   314,   315,   316
-};
-# endif
-
-#define YYPACT_NINF (-409)
+#define YYPACT_NINF (-357)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-268)
+#define YYTABLE_NINF (-248)
 
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      79,  -409,   -19,  -409,  -409,  -409,  -409,    -4,    71,  -409,
-    -409,   256,   256,  -409,    32,    50,  -409,    57,  -409,  -409,
-    -409,  -409,  -409,  -409,  -409,    -4,  -409,   -19,  -409,    68,
-    -409,  -409,  -409,  -409,    68,  1276,  -409,  -409,  -409,  -409,
-    -409,  -409,  -409,  -409,   109,  -409,  -409,  -409,    69,  -409,
-    -409,  -409,   416,  -409,  -409,  -409,    27,    78,  -409,  -409,
-    -409,  -409,   134,    73,  -409,    15,  -409,   136,  -409,    69,
-      78,   156,  -409,  -409,  -409,  -409,  -409,    98,  -409,   155,
-    1310,  -409,    81,  -409,  -409,   -26,  -409,   178,  -409,  -409,
-    -409,  1036,  1255,  1421,  1421,  1421,  1421,  -409,  -409,  -409,
-    -409,  -409,  -409,  -409,   717,  -409,   180,  1421,  1421,  -409,
-    1419,  -409,  -409,   185,   225,  -409,  -409,  1025,  1126,  -409,
-    -409,  -409,  -409,  -409,  1253,  -409,  -409,    65,  -409,   202,
-    -409,   218,   220,   223,    76,    74,    -1,   110,   133,  -409,
-    -409,  -409,  -409,   112,  -409,  -409,  -409,   191,  -409,   237,
-     238,  -409,   233,  -409,   957,   240,   244,  -409,  -409,   243,
-     232,   148,  -409,  -409,  -409,  -409,  -409,  -409,   246,   245,
-     252,   -19,  -409,  -409,  1421,  1421,   -24,   -24,  1421,  -409,
-    -409,  -409,  -409,  -409,  -409,  -409,  -409,  -409,  -409,  -409,
-    -409,  -409,  1421,  -409,  -409,  1421,  -409,  1421,  1421,  1421,
-    1421,  1421,  1421,  1421,  1421,  1421,  1421,  1421,  1421,  1421,
-    1421,  1421,  1421,  1421,  1421,  -409,  -409,   250,    78,    61,
-    -409,  1421,  1421,   254,  -409,  1421,  -409,     2,   262,  -409,
-     263,     4,  1421,  1421,   265,  1421,    98,   247,  -409,  -409,
-    -409,  -409,   255,  -409,  -409,  -409,  -409,   257,  -409,  -409,
-    -409,  -409,  -409,  1075,  1075,  -409,  -409,  -409,  -409,  -409,
-    -409,    49,    51,  -409,  -409,  -409,   112,   114,   117,  1421,
-    -409,  -409,  1310,   267,  1366,   275,   246,  -409,   -19,   261,
-    1421,   279,   280,   268,  -409,   277,   -19,  -409,   289,  -409,
-     285,  1421,  -409,   202,   218,   220,   223,    76,    74,    74,
-      -1,    -1,    -1,    -1,   110,   110,   110,   133,   133,  -409,
-    -409,  -409,   286,  -409,  -409,   250,  -409,  -409,   291,   292,
-    -409,  -409,   287,  1196,   295,  1421,  -409,   288,   293,   294,
-    -409,   296,   281,  -409,  -409,  -409,  1131,  -409,  -409,  -409,
-    -409,  -409,   250,   302,  -409,  -409,  -409,   245,   283,  -409,
-    -409,   304,  1421,  -409,  1421,  -409,  1421,  -409,  -409,   297,
-    -409,  -409,   865,   307,   310,  -409,   309,   301,   316,  -409,
-    -409,  1421,   317,  -409,  -409,  -409,  -409,  -409,  1075,   311,
-     313,  -409,  -409,   271,  -409,  -409,  -409,  -409,  -409,  1131,
-    1131,  -409,  -409,  -409,  -409,    68,   332,  -409,   337,  -409,
-    -409,  -409,  -409,  1421,    33,  1421,   340,   109,   341,    33,
-    -409,  -409,  1171,   278,  1131,  -409,  -409,  -409,  -409,  -409,
-    -409,  1421,   344,  -409,   334,  -409,  -409,  -409,  -409,  -409,
-    -409,   351,   330,  -409,  -409,  -409,  1171,  1171,  -409,  -409,
-    -409,  -409,    33,  1075,   352,  -409,  1171,  1171,  1075,   290,
-     355,  -409,  -409,  -409,  -409,  -409,  -409,  -409,  -409,  -409,
-    1131,   364,   299,  1131,  -409,  -409,  -409,  -409,  1171,  1171
+    -357,    14,  -357,   126,  -357,  -357,  -357,  -357,  -357,  -357,
+     -46,  -357,  -357,   -47,    83,  -357,  -357,   -46,  -357,    35,
+    -357,  -357,  -357,    35,   643,  -357,  -357,  -357,  -357,  -357,
+    -357,  -357,  -357,    45,  -357,  -357,  -357,     0,  -357,  -357,
+    -357,   463,  -357,  -357,  -357,    23,    27,  -357,  -357,  -357,
+    -357,    82,    70,  -357,     9,  -357,   107,  -357,     0,    27,
+     109,  -357,  -357,  -357,  -357,  -357,    62,  -357,   138,   956,
+    -357,   123,  -357,  -357,    86,  -357,   146,  -357,  -357,  -357,
+     683,   956,   956,   956,   956,  -357,  -357,  -357,  -357,  -357,
+    -357,  -357,  -357,   489,  -357,   956,   956,  -357,   955,  -357,
+    -357,  -357,   154,  -357,  -357,  -357,  1007,  -357,  -357,  -357,
+    -357,  -357,   449,  -357,  -357,    80,  -357,   153,  -357,   177,
+     137,   180,   175,    75,    46,   196,   148,  -357,  -357,  -357,
+    -357,   139,  -357,  -357,  -357,   149,  -357,   194,  -357,   195,
+    -357,   606,   207,   227,    50,   201,  -357,  -357,  -357,  -357,
+     229,   230,   241,  -357,  -357,   956,   956,     1,     1,   956,
+    -357,  -357,  -357,  -357,  -357,  -357,  -357,  -357,  -357,  -357,
+    -357,  -357,  -357,   956,  -357,  -357,   956,  -357,   956,   956,
+     956,   956,   956,   956,   956,   956,   956,   956,   956,   956,
+     956,   956,   956,   956,   956,   956,  -357,  -357,   238,    27,
+      26,  -357,   956,   240,  -357,   956,  -357,     7,   245,  -357,
+       8,   956,   886,   249,    62,   228,  -357,  -357,  -357,  -357,
+     235,  -357,  -357,  -357,  -357,   236,  -357,  -357,  -357,  -357,
+    -357,   722,   722,  -357,  -357,  -357,  -357,    -4,     3,  -357,
+    -357,  -357,   139,   141,   145,   956,  -357,   956,   252,  -357,
+     202,   248,   956,   261,   253,  -357,   264,   202,  -357,  -357,
+     271,  -357,   268,   956,  -357,   153,   177,   137,   180,   175,
+      75,    75,    46,    46,    46,    46,   196,   196,   196,   148,
+     148,  -357,  -357,  -357,   269,  -357,  -357,   238,  -357,  -357,
+     280,  -357,  -357,   266,   816,   289,  -357,   276,   278,  -357,
+     287,  -357,   290,  -357,  -357,  -357,   778,  -357,  -357,  -357,
+     301,   903,  -357,  -357,   230,   293,  -357,  -357,   311,  -357,
+     956,  -357,   956,  -357,  -357,   294,   238,  -357,  -357,   556,
+     302,  -357,   299,   307,   309,  -357,  -357,   956,  -357,  -357,
+    -357,  -357,   722,   323,   304,  -357,  -357,   263,  -357,  -357,
+    -357,  -357,  -357,   778,   778,  -357,  -357,  -357,    35,  -357,
+     327,  -357,  -357,  -357,  -357,   956,   761,   956,   329,   335,
+     761,  -357,  -357,  -357,   273,   778,  -357,  -357,  -357,  -357,
+    -357,   956,   337,  -357,   324,  -357,  -357,  -357,  -357,  -357,
+     778,  -357,  -357,  -357,  -357,   761,   722,   338,  -357,   722,
+     277,   342,  -357,  -357,  -357,  -357,  -357,  -357,  -357,   778,
+     778,  -357,  -357
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
-static const yytype_int16 yydefact[] =
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
+static const yytype_uint8 yydefact[] =
 {
-      29,    32,     0,    39,    38,    41,    40,     0,     0,    26,
-      28,    29,    29,    31,     0,    36,    24,     0,    22,    23,
-     271,   272,     1,    30,    27,     0,    37,     0,    33,     0,
-     272,    25,    43,    35,     0,     0,    34,    42,    10,    19,
-      13,    15,    14,    17,    40,    62,    16,    18,     0,     9,
-      11,    12,     0,    44,    45,    46,     0,     0,    47,    48,
-     274,    75,    55,     0,    51,    53,    59,     0,    65,     0,
-       0,     0,    74,    57,    73,    61,    92,     0,    50,     0,
-       0,   275,     0,    58,    60,    92,    76,   273,    55,    52,
-      56,     0,    83,     0,     0,     0,     0,     2,     6,     8,
-       5,     7,     4,     3,     0,   168,     0,     0,     0,   167,
-     265,    54,    67,   264,   165,   170,   174,   171,   172,   173,
-     166,    66,   198,   199,     0,   200,   273,   219,   273,   223,
-     273,   226,   229,   231,   233,   236,   241,   245,   248,   252,
-     253,   254,   257,   260,   266,   267,   263,     0,    49,     0,
-       0,    92,   273,    91,     0,     0,     0,    84,    89,     0,
-      83,   265,   171,   172,   255,   256,   261,   262,     0,   181,
-       0,     0,   258,   259,    81,     0,     0,     0,     0,   206,
-     210,   211,   208,   207,   209,   212,   213,   215,   216,   217,
-     214,   201,     0,   220,   224,     0,   227,     0,     0,     0,
+      28,     0,    26,    27,     1,    31,    37,    36,    39,    38,
+       0,    29,    30,     0,    34,   251,   252,     0,    35,     0,
+     252,    41,    33,     0,     0,    32,    40,    10,    19,    13,
+      15,    14,    17,    38,    60,    16,    18,     0,     9,    11,
+      12,     0,    42,    43,    44,     0,     0,    45,    46,   254,
+      72,    53,     0,    49,    51,    57,     0,    63,     0,     0,
+       0,    71,    55,    70,    59,    82,     0,    48,     0,     0,
+     255,     0,    56,    58,    82,    73,   253,    53,    50,    54,
+       0,     0,     0,     0,     0,     2,     6,     8,     5,     7,
+       4,     3,    24,     0,   154,     0,     0,   153,   245,    22,
+      23,    52,   244,   151,   156,   159,   157,   158,   152,    64,
+     179,   180,     0,   181,   253,   199,   253,   203,   253,   206,
+     209,   211,   213,   216,   221,   225,   228,   232,   233,   234,
+     237,   240,   246,   247,   243,     0,    47,     0,    82,   253,
+      81,     0,     0,     0,   245,   157,   235,   236,   241,   242,
+       0,   166,     0,   238,   239,    77,     0,     0,     0,     0,
+     186,   190,   191,   188,   187,   189,   192,   193,   195,   196,
+     197,   194,   182,     0,   200,   204,     0,   207,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   268,   269,    68,     0,     0,
-      70,    81,    81,   273,    78,     0,   111,     0,     0,   129,
-       0,     0,     0,   159,     0,     0,     0,    22,    97,   110,
-      93,    94,     0,    95,    99,   100,   112,     0,   273,   101,
-     102,   103,   104,     0,     0,   113,   118,   114,   115,   117,
-     116,   170,   173,   122,   123,   124,     0,   125,   126,     0,
-     169,    88,    84,     0,     0,     0,    68,   195,     0,   179,
-      81,   185,     0,    82,   191,     0,     0,   175,   184,   176,
-       0,     0,   221,   222,   225,   228,   230,   232,   234,   235,
-     237,   238,   240,   239,   243,   242,   244,   246,   247,   249,
-     250,   251,     0,    69,    64,    68,   273,   273,     0,     0,
-      77,   157,     0,   142,     0,     0,   154,     0,     0,     0,
-     273,     0,    98,   273,    96,   121,     0,   136,   137,   270,
-      90,    87,    20,     0,   194,   193,   196,   181,     0,   178,
-     180,     0,    81,   188,     0,   186,    81,   187,   202,     0,
-      72,    63,     0,     0,     0,   156,   149,   151,     0,   143,
-     148,     0,     0,   153,   160,   158,   162,   155,     0,     0,
-      22,   131,   164,    99,   106,   273,   107,   108,   109,     0,
-       0,    21,   197,   182,   183,    85,     0,   192,     0,   273,
-      71,    79,    80,     0,     0,   144,     0,     0,     0,     0,
-     119,   273,     0,     0,     0,   138,   139,    86,   177,   190,
-     189,     0,     0,   152,     0,   145,   130,   161,   273,   163,
-     162,     0,    22,   120,   105,   273,     0,     0,   273,   164,
-     218,   141,   146,     0,     0,   273,     0,     0,     0,     0,
-       0,   147,   150,   134,   273,   162,   164,   132,   273,   140,
-       0,     0,     0,     0,   135,   273,   273,   133,     0,     0
+       0,     0,     0,     0,     0,     0,   248,   249,    65,     0,
+       0,    67,    77,   253,    75,     0,   101,     0,     0,   117,
+       0,     0,     0,     0,     0,    22,    87,   100,    83,    84,
+       0,    85,    89,    90,   102,     0,   253,    91,    92,    93,
+      94,     0,     0,   103,   104,   105,   106,   116,   115,   110,
+     111,   112,     0,   113,   114,     0,   155,     0,    65,   176,
+       0,   164,    77,     0,    78,   173,     0,     0,    25,   160,
+       0,   161,     0,     0,   201,   202,   205,   208,   210,   212,
+     214,   215,   217,   218,   220,   219,   223,   222,   224,   226,
+     227,   229,   230,   231,     0,    66,    62,    65,   253,   253,
+       0,    74,   144,     0,   130,     0,   142,     0,     0,   146,
+       0,   253,    88,   253,    86,   109,     0,   124,   125,   250,
+       0,     0,   175,   177,   166,     0,   163,   165,     0,   171,
+       0,   169,    77,   170,   183,     0,    20,    69,    61,     0,
+       0,   143,   137,   139,     0,   131,   136,     0,   141,   147,
+     145,   148,     0,     0,    22,   119,   150,    89,    96,   253,
+      97,    98,    99,     0,     0,   178,   167,   168,    79,   174,
+       0,   253,    21,    68,    76,     0,     0,   132,     0,     0,
+       0,   107,   253,   253,     0,     0,   126,   127,    80,   162,
+     172,     0,     0,   140,     0,   133,   118,   253,   149,   148,
+       0,   253,   150,   198,   129,   134,     0,     0,   108,     0,
+       0,     0,   135,   138,   122,   253,   120,   253,   128,     0,
+       0,   123,   121
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -409,  -409,   -32,  -409,  -409,  -409,  -159,     8,   -27,  -409,
-    -409,  -409,   147,  -409,  -409,   215,    10,  -409,   -30,  -409,
-    -409,  -409,   -51,   298,  -409,  -409,  -409,   319,   -18,   154,
-     -90,  -268,  -409,    11,  -409,  -409,  -409,  -409,  -409,  -216,
-     214,  -409,   101,  -409,   -43,   -73,  -409,  -409,    56,   449,
-     206,  -143,  -409,  -409,  -409,  -316,  -111,  -409,  -409,  -409,
-    -409,  -409,  -409,  -409,  -409,   107,   538,  -409,  -409,  -409,
-    -409,  -409,  -385,  -409,  -409,  -409,  -409,  -409,  -409,  -406,
-    -409,  -408,  -409,  -409,    89,    47,  -409,  -409,    34,  -409,
-     -33,   194,   129,  -409,  -409,  -409,   104,   236,    93,   259,
-    -409,  -409,  -409,   -35,  -409,  -409,  -409,  -409,   195,  -409,
-     221,   217,   224,   222,   -10,   -75,   -21,    20,   -79,   300,
-     363,  -409,   408,   471,   511,  -409,   392,   394,   -88,  -409,
-    -409
+    -357,  -357,    -3,  -357,  -357,  -357,    24,   -59,   -92,  -357,
+    -357,  -357,  -357,  -357,   213,    89,  -357,   -23,  -357,  -357,
+    -357,   -55,   291,  -357,  -357,  -357,   314,     5,   159,  -357,
+    -235,  -357,    33,  -357,  -357,  -357,  -357,  -357,  -185,  -357,
+      15,   -70,  -357,  -357,    71,   172,  -334,  -139,  -357,  -357,
+    -357,  -288,  -132,  -357,  -357,  -357,  -357,  -357,  -357,  -357,
+    -357,  -130,  -126,  -357,  -357,  -357,  -357,  -357,  -356,  -357,
+    -357,  -357,  -357,   -25,  -357,   -24,  -357,  -357,   -43,    77,
+    -357,  -357,    56,  -357,   -12,     6,  -357,  -357,  -357,   125,
+     -62,   108,    55,  -357,  -357,  -357,    -7,  -357,  -357,  -357,
+    -357,   199,  -357,   200,   203,   197,   208,    58,  -153,     2,
+      51,   198,    57,   106,  -357,   155,   204,   242,  -357,   362,
+     360,   -71,  -357,  -357
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
-      -1,   109,   218,    49,    50,    51,   313,   110,    18,    19,
-       8,     9,    10,    11,    12,    13,    14,    15,    33,    35,
-      53,    54,    63,    64,    65,    55,    56,    57,    66,    67,
-     111,   314,   219,   220,    73,    58,    59,    86,   151,   282,
-     159,   418,   112,   160,   239,    87,   240,   241,   242,   337,
-     415,   434,   245,   384,   246,   247,   435,   324,   249,   250,
-     386,   251,   387,   252,   388,   436,   437,   368,   424,   450,
-     369,   451,   370,   255,   256,   257,   258,   259,   260,   408,
-     409,   413,   113,   114,   115,   116,   170,   349,   279,   350,
-     117,   118,   119,   283,   120,   276,   277,   284,   122,   123,
-     291,   124,   191,   125,   126,   359,   127,   128,   129,   130,
-     131,   132,   133,   134,   135,   136,   137,   138,   139,   140,
-     141,   142,   143,   144,   145,   146,    21,    29,   154,    76,
-     147
+       0,    97,   199,    38,    39,    40,   285,    98,    99,   100,
+       1,     2,     3,    11,    12,    13,    14,    22,    24,    42,
+      43,    52,    53,    54,    44,    45,    46,    55,    56,   101,
+     286,   200,   201,    62,    47,    48,    75,   138,   253,   379,
+     217,    76,   218,   219,   220,   307,   346,   347,   223,   348,
+     224,   225,   349,   295,   227,   228,   350,   229,   351,   230,
+     352,   353,   354,   334,   384,   401,   335,   402,   336,   233,
+     234,   235,   236,   369,   370,   374,   102,   103,   104,   105,
+     152,   316,   251,   317,   106,   107,   254,   108,   248,   249,
+     255,   110,   111,   263,   112,   172,   113,   114,   325,   115,
+     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
+     126,   127,   128,   129,   130,   131,   132,   133,   134,    16,
+      19,   141,    65,   135
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      31,    61,   158,    48,    36,   318,   319,   367,   345,   275,
-      17,   244,   152,    74,   164,   165,   166,   167,    82,   423,
-      69,   321,    79,   326,   444,    26,   207,   208,   172,   173,
-      16,   449,    60,   286,    71,    16,   225,   149,   192,    75,
-     195,    80,   197,   248,   209,    52,    72,   360,   462,   461,
-      20,    83,    84,  -128,   150,  -127,    16,   452,    16,   155,
-     162,   162,   162,   162,   351,   316,    27,  -128,  -128,  -127,
-    -127,    22,   168,    32,   162,   162,    28,   169,   223,   317,
-      97,    98,    99,   100,   101,   102,   103,    16,   367,   193,
-     104,    77,    78,   429,   203,   204,   105,   194,     1,    77,
-     148,   161,   161,   161,   161,   201,   202,   205,   206,    25,
-     244,   244,     3,   106,    60,   161,   161,   107,   108,     4,
-     210,   211,   236,    62,     5,     6,   367,   237,   300,   301,
-     302,   303,    68,   309,   310,   311,   396,   -65,     2,    81,
-     398,     3,   248,   248,   281,   212,   213,   214,     4,    31,
-     288,   174,    88,     5,     6,   175,     7,   176,    23,    24,
-     336,    85,   162,    90,   162,   162,   162,   162,   162,   162,
-     162,   162,   162,   162,   162,   162,   162,   162,   162,   162,
-     162,   162,   340,   391,   153,   332,   304,   305,   306,   171,
-     339,   298,   299,   383,   177,   217,   215,   216,  -266,  -266,
-     322,  -267,  -267,   161,   327,   161,   161,   161,   161,   161,
-     161,   161,   161,   161,   161,   161,   161,   161,   161,   161,
-     161,   161,   161,   287,   289,   385,   237,   237,   361,   362,
-     307,   308,   178,   196,   198,   244,   162,   199,   200,   224,
-     221,   222,   376,   261,   269,   378,   383,   383,   270,   271,
-     272,   347,    38,   274,   278,   280,    39,   312,    40,   169,
-     320,   253,    41,    42,    43,   323,   325,   248,   330,    46,
-      47,   383,   333,   341,   334,     1,   335,   161,   385,   385,
-      92,   348,   352,   262,   353,   355,   354,   163,   163,   163,
-     163,   236,   356,   357,   342,   363,   364,   414,   371,    77,
-     244,   163,   163,   385,   394,   244,   365,   373,   395,   380,
-     392,   421,   374,   375,   411,   377,   121,   383,     3,   404,
-     383,   407,   399,   430,   378,     4,   401,   156,   121,   402,
-       5,     6,   248,     7,   403,   405,   419,   248,   412,  -105,
-     443,   420,   261,   261,   426,   428,   438,   447,   441,   385,
-     448,   237,   385,   442,   445,   446,   454,   455,   458,   459,
-     253,   253,   380,   380,   427,   417,   460,   466,   465,   238,
-     463,    70,   315,   400,   273,    89,   344,   468,   469,   366,
-     346,   393,   262,   262,   358,   432,   440,   380,   162,   163,
-     293,   163,   163,   163,   163,   163,   163,   163,   163,   163,
-     163,   163,   163,   163,   163,   163,   163,   163,   163,   432,
-     432,   285,   261,   263,   290,   295,   237,    30,   294,   432,
-     432,   237,   297,   296,    34,   261,     0,     0,   292,   161,
-       0,     0,     0,   380,     0,     0,   380,     0,     0,     0,
-       0,   432,   432,   389,     0,     0,     0,     0,     0,     0,
-       0,     0,   262,     0,   264,     0,     0,     0,     0,     0,
-       0,   156,     0,   163,     0,   262,     0,   261,   328,   329,
-      68,   331,     0,     0,     0,     0,     0,    38,   261,   261,
-       0,    39,     0,    40,     0,   253,     0,    41,    42,    43,
-       0,     0,    45,   261,    46,    47,   389,   389,   261,     0,
-       0,   261,     0,   261,     0,     0,     0,   262,   121,     0,
-     343,     0,   263,   263,     0,     0,     0,   265,   262,   262,
-       0,   389,     0,     0,     0,   261,   261,     0,     0,     0,
-       0,   261,   261,   262,     0,   261,   261,   261,   262,     0,
-       0,   262,   382,   262,     0,     0,     0,     0,     0,   261,
-     253,     0,   261,   264,   264,   253,     0,   261,   261,     0,
-       0,   372,   266,     0,     0,   262,   262,   389,     0,     0,
-     389,   262,   262,     0,     0,   262,   262,   262,     0,     0,
-       0,     0,   263,     0,     0,     0,     0,     0,     0,   262,
-     397,     0,   262,     0,     0,   263,   416,   262,   262,     0,
-       0,     0,     0,   243,     0,     0,     0,   406,     0,     0,
-       0,     0,     0,     0,     0,   163,   265,   265,   433,     0,
-     439,     0,     0,   264,     0,   267,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,   264,   263,     0,   422,
-       0,   425,     0,   416,     0,     0,     0,     0,   263,   263,
-       0,     0,   433,   456,     0,     0,     0,     0,     0,     0,
-       0,   266,   266,   263,     0,   268,   464,     0,   263,   467,
-       0,   263,     0,   263,   464,   467,     0,     0,   264,     0,
-       0,     0,     0,     0,     0,     0,   265,     0,     0,   264,
-     264,     0,   254,     0,     0,   263,   263,     0,     0,   265,
-       0,   263,   263,   338,   264,   263,   263,   263,     0,   264,
-       0,     0,   264,     0,   264,     0,     0,     0,     0,   263,
-       0,     0,   263,     0,   267,   267,     0,   263,   263,     0,
-       0,   266,     0,     0,     0,     0,   264,   264,     0,     0,
-       0,   265,   264,   264,   266,     0,   264,   264,   264,     0,
-       0,     0,   265,   265,     0,     0,     0,     0,     0,     0,
-     264,     0,     0,   264,   268,   268,     0,   265,   264,   264,
-       0,    16,   265,     0,     0,   265,     0,   265,    38,     0,
-       0,     0,    39,     0,    40,   381,   266,     0,    41,    42,
-      43,   254,   254,     0,   267,    46,    47,   266,   266,   265,
-     265,     0,     0,     0,     0,   265,   265,   267,     0,   265,
-     265,   265,   266,     0,     0,     0,     0,   266,     0,     0,
-     266,     0,   266,   265,     0,     0,   265,   410,     0,     0,
-       0,   265,   265,     0,   268,     0,     0,     0,     0,   338,
-       0,     0,     0,     0,   266,   266,     0,   268,     0,   267,
-     266,   266,     0,     0,   266,   266,   266,     0,     0,     0,
-     267,   267,     0,   381,     0,     0,     0,     0,   266,     0,
-       0,   266,     0,     0,   390,   267,   266,   266,     0,     0,
-     267,     0,     0,   267,     0,   267,     0,     0,     0,   268,
-       0,     0,   453,     0,     0,     0,     0,   457,     0,     0,
-     268,   268,     0,     0,     0,     0,     0,   267,   267,   453,
-       0,     0,   457,   267,   267,   268,   254,   267,   267,   267,
-     268,     0,     0,   268,     0,   268,    38,   390,   390,     0,
-      39,   267,    40,     0,   267,     0,    41,    42,    43,   267,
-     267,     0,     0,    46,    47,     0,     0,   268,   268,     0,
-       0,     0,   390,   268,   268,     0,     0,   268,   268,   268,
-     225,     0,    60,     0,     0,     0,     0,     0,     0,     0,
-       0,   268,     0,     0,   268,     0,   226,     0,     0,   268,
-     268,   254,     0,     0,     0,     0,   254,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,   390,     0,
-       0,   390,     0,     0,    97,    98,    99,   100,   101,   102,
-     103,    16,   227,   228,   104,   229,     0,   230,    38,     3,
-     105,   231,    39,   232,    40,     0,     4,   233,    41,    42,
-      43,     5,     6,     0,     7,    46,    47,   106,   234,    91,
-     235,   107,   108,     0,     0,     0,    93,    94,     0,     0,
-       0,  -204,     0,     0,     0,     0,     0,     0,    95,    96,
-    -204,  -204,  -204,  -204,  -204,  -204,  -204,  -204,  -204,  -204,
-       0,  -204,     0,     0,     0,     0,     0,     0,   225,     0,
-      60,     0,     0,    97,    98,    99,   100,   101,   102,   103,
-      16,     0,     0,   104,   226,     0,     0,    38,     0,   105,
-       0,    39,     0,    40,     0,     0,     0,    41,    42,    43,
-       0,     0,     0,     0,    46,    47,   106,     0,     0,     0,
-     107,   108,    97,    98,    99,   100,   101,   102,   103,    16,
-     227,   228,   104,   229,   225,   230,    60,     0,   105,   231,
-       0,   232,     0,     0,     0,   233,     0,     0,     0,     0,
-     226,     0,  -205,     0,     0,   106,   234,     0,   235,   107,
-     108,  -205,  -205,  -205,  -205,  -205,  -205,  -205,  -205,  -205,
-    -205,     0,  -205,     0,   225,     0,    60,     0,    97,    98,
-      99,   100,   101,   102,   103,    16,   227,   228,   104,   229,
-     226,   230,     0,     0,   105,   231,     0,   232,     0,   225,
-       0,   233,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   106,   379,     0,   235,   107,   108,     0,    97,    98,
-      99,   100,   101,   102,   103,    16,   227,   228,   104,   229,
-       0,   230,     0,     0,   105,   231,     0,   232,     0,     0,
-       0,   233,     0,    97,    98,    99,   100,   101,   102,   103,
-      16,   106,   431,   104,   235,   107,   108,    38,    91,   105,
-      92,    39,     0,    40,     0,    93,    94,    41,    42,    43,
-       0,     0,     0,   157,    46,    47,   106,    95,    96,   179,
-     107,   108,    37,     0,     0,     0,     0,     0,   180,   181,
-     182,   183,   184,   185,   186,   187,   188,   189,     0,   190,
-       0,     0,    97,    98,    99,   100,   101,   102,   103,    16,
-       0,     0,   104,    91,     0,    92,     0,     0,   105,     0,
-      93,    94,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    95,    96,     0,   106,     0,    38,     3,   107,
-     108,    39,     0,    40,     0,     4,     0,    41,    42,    43,
-       5,    44,    45,     0,    46,    47,     0,    97,    98,    99,
-     100,   101,   102,   103,    16,     0,     0,   104,     0,    91,
-       0,     0,     0,   105,   342,     0,    93,    94,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    95,    96,
-     106,     0,     0,     0,   107,   108,     0,     0,     0,     0,
+      25,   151,   222,    71,   139,  -156,   333,   109,    15,   226,
+     383,   231,  -158,   312,     4,   232,    68,   290,   143,   376,
+     377,    37,   144,   144,   144,   144,   292,   296,    49,    17,
+     288,   272,   273,   274,   275,    69,   144,   144,    58,   403,
+      21,   392,    61,   173,   289,   176,    60,   178,    50,   215,
+      49,    64,   327,   155,    51,    92,   398,   156,   257,   157,
+      63,    92,    92,    72,    73,   258,   260,   318,   203,   145,
+     145,   145,   145,   188,   189,   411,   412,   142,   333,  -156,
+    -156,    57,   388,   145,   145,   -63,  -158,  -158,    66,    67,
+     150,   190,   222,   222,   256,   184,   185,   262,   237,   226,
+     226,   231,   231,    18,   174,   232,   232,   333,   186,   187,
+      70,   264,   175,    41,    74,   293,    77,   144,   297,   144,
+     144,   144,   144,   144,   144,   144,   144,   144,   144,   144,
+     144,   144,   144,   144,   144,   144,   144,   360,   214,   215,
+     215,    66,   136,   143,     6,     5,    79,   238,   137,   298,
+     300,     7,   140,   198,   180,   306,     8,     9,   314,   302,
+     193,   194,   195,   158,   145,   151,   145,   145,   145,   145,
+     145,   145,   145,   145,   145,   145,   145,   145,   145,   145,
+     145,   145,   145,   145,   177,   310,   144,     6,   237,   237,
+     276,   277,   278,   179,     7,   181,   239,   202,   240,     8,
+       9,   204,    10,   222,   182,   183,   191,   192,   159,    27,
+     226,   245,   231,    28,   344,    29,   232,   328,   329,    30,
+      31,    32,   196,   197,  -246,  -246,    35,    36,  -247,  -247,
+     341,   246,   342,   145,   259,   261,   247,   238,   238,   250,
+     270,   271,   279,   280,   252,   284,   291,   241,   294,   310,
+     215,   237,   301,   303,   304,   305,    92,   222,   359,   311,
+     222,   344,   344,   237,   226,   319,   231,   226,   315,   231,
+     232,   320,   321,   232,   322,   368,   323,   326,   375,   146,
+     147,   148,   149,   344,   330,   331,   239,   239,   240,   240,
+     381,   214,   337,   153,   154,   338,   242,   339,   344,   237,
+     238,   389,   390,   382,   215,   385,   340,   215,    66,   355,
+     237,   237,   238,   221,   357,   358,   396,   344,   344,   361,
+     399,   364,   144,   237,   365,   366,   372,   237,   367,   373,
+     -95,   380,   237,   386,   409,   378,   410,   241,   241,   387,
+     391,   394,   405,   395,   407,   243,   408,   237,   238,   239,
+     362,   240,   237,   237,   216,    59,   237,    78,   287,   238,
+     238,   239,   363,   240,   397,   332,   237,   237,   400,   145,
+     356,   324,   238,   313,   393,   265,   238,   268,   266,    20,
+      23,   238,   267,   244,     0,     0,   242,   242,     0,   269,
+       0,   281,   282,   283,     0,     0,   238,   239,     0,   240,
+     241,   238,   238,     0,   308,   238,     0,     0,   239,   239,
+     240,   240,   241,     0,     0,   238,   238,     0,     0,     0,
+       0,   239,     0,   240,     0,   239,     0,   240,     0,     0,
+     239,     0,   240,     0,     0,   243,   243,     0,     0,     0,
+       0,     0,     0,   309,     0,   239,     0,   240,   241,   242,
+     239,   239,   240,   240,   239,     0,   240,     0,     0,   241,
+     241,   242,     0,     0,   239,   239,   240,   240,     0,     0,
+       0,     0,   241,   244,   244,   160,   241,     0,   345,     0,
+       0,   241,     0,     0,   161,   162,   163,   164,   165,   166,
+     167,   168,   169,   170,     0,   171,   241,   242,   243,     0,
+       0,   241,   241,     0,     0,   241,     0,     0,   242,   242,
+     243,     0,     0,     0,   371,   241,   241,    57,     0,     0,
+       0,   242,     0,    27,     0,   242,   308,    28,     0,    29,
+     242,     0,     0,    30,    31,    32,   244,     0,    34,     0,
+      35,    36,     0,    92,     0,   242,   243,   345,   244,    27,
+     242,   242,     0,    28,   242,    29,     0,   243,   243,    30,
+      31,    32,   371,     0,   242,   242,    35,    36,   404,     0,
+     243,   406,     0,     0,   243,     0,     0,     0,     0,   243,
+       0,   404,   406,     0,   244,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,   243,   244,   244,     0,     0,   243,
+     243,     0,     0,   243,     0,     0,     0,     0,   244,   205,
+       0,    49,   244,   243,   243,     0,    27,   244,     0,     0,
+      28,     0,    29,     0,     0,   206,    30,    31,    32,     0,
+       0,     0,   244,    35,    36,     0,     0,   244,   244,     0,
+       0,   244,     0,     0,     0,     0,     0,     0,     0,    26,
+       0,   244,   244,    85,    86,    87,    88,    89,    90,    91,
+      92,   207,   208,    93,   209,     0,    27,     6,    94,   210,
+      28,   211,    29,     0,     7,   212,    30,    31,    32,     8,
+       9,     0,    10,    35,    36,   213,    80,     0,     0,    95,
+      96,     0,     0,    81,    82,     0,     0,     0,     0,     0,
+       0,     0,     0,    27,     6,    83,    84,    28,     0,    29,
+       0,     7,     0,    30,    31,    32,     8,    33,    34,     0,
+      35,    36,     0,     0,     0,   205,     0,    49,     0,     0,
+      85,    86,    87,    88,    89,    90,    91,    92,     0,     0,
+      93,   206,     0,    27,     0,    94,     0,    28,     0,    29,
+       0,     0,     0,    30,    31,    32,     0,     0,     0,     0,
+      35,    36,     0,     0,   205,     0,    95,    96,     0,    85,
+      86,    87,    88,    89,    90,    91,    92,   207,   208,    93,
+     209,   205,     0,    49,    94,   210,     0,   211,     0,     0,
+       0,   212,     0,     0,     0,     0,     0,   206,     0,     0,
+       0,   213,     0,     0,     0,    95,    96,     0,    85,    86,
+      87,    88,    89,    90,    91,    92,     0,     0,    93,   205,
+       0,     0,     0,    94,     0,    85,    86,    87,    88,    89,
+      90,    91,    92,   207,   208,    93,   209,     0,     0,     0,
+      94,   210,     0,   211,    95,    96,     0,   212,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,   343,     0,     0,
+       0,    95,    96,    85,    86,    87,    88,    89,    90,    91,
+      92,     0,     0,    93,     0,     0,    27,     0,    94,     0,
+      28,     0,    29,     0,     0,     0,    30,    31,    32,    80,
+       0,     0,     0,    35,    36,     0,    81,    82,     0,    95,
+      96,     0,     0,     0,     0,   299,    80,     0,    83,    84,
+       0,   326,     0,    81,    82,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    83,    84,     0,     0,     0,
+       0,     0,     0,    85,    86,    87,    88,    89,    90,    91,
+      92,     0,     0,    93,     0,     0,     0,     0,    94,     0,
+      85,    86,    87,    88,    89,    90,    91,    92,   155,    80,
+      93,     0,   156,     0,   157,    94,    81,    82,     0,    95,
+      96,     0,     0,     0,     0,     0,     0,     0,    83,    84,
+       0,  -184,     0,     0,     0,     0,    95,    96,     0,     0,
+    -184,  -184,  -184,  -184,  -184,  -184,  -184,  -184,  -184,  -184,
+       0,  -184,     0,    85,    86,    87,    88,    89,    90,    91,
+      92,     0,     0,    93,   159,     0,     0,     0,    94,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    97,    98,    99,   100,   101,   102,   103,
-      16,     0,   174,   104,    91,     0,   175,     0,   176,   105,
-       0,    93,    94,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    95,    96,  -203,   106,     0,     0,     0,
-     107,   108,     0,     0,  -203,  -203,  -203,  -203,  -203,  -203,
-    -203,  -203,  -203,  -203,     0,  -203,     0,     0,    97,    98,
-      99,   100,   101,   102,   103,    16,     0,     0,   104,     0,
-       0,     0,     0,     0,   105,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   106,     0,     0,     0,   107,   108
+       0,     0,     0,  -185,     0,     0,     0,     0,     0,    95,
+      96,     0,  -185,  -185,  -185,  -185,  -185,  -185,  -185,  -185,
+    -185,  -185,     0,  -185
 };
 
 static const yytype_int16 yycheck[] =
 {
-      27,    44,    92,    35,    34,   221,   222,   323,   276,   168,
-       2,   154,    85,    56,    93,    94,    95,    96,    69,   404,
-      52,    19,     7,    19,   430,    15,    27,    28,   107,   108,
-      54,   439,     5,    57,    52,    54,     3,    63,   126,    57,
-     128,    26,   130,   154,    45,    35,    19,   315,   456,   455,
-      54,    69,    70,     4,    80,     4,    54,   442,    54,    91,
-      93,    94,    95,    96,   280,     4,     9,    18,    19,    18,
-      19,     0,   104,     5,   107,   108,    19,   104,   151,    18,
-      47,    48,    49,    50,    51,    52,    53,    54,   404,    24,
-      57,    18,    19,   409,    20,    21,    63,    32,    19,    18,
-      19,    93,    94,    95,    96,    29,    30,    33,    34,    77,
-     253,   254,    62,    80,     5,   107,   108,    84,    85,    69,
-      10,    11,   154,    54,    74,    75,   442,   154,   203,   204,
-     205,   206,    54,   212,   213,   214,   352,     3,    59,     3,
-     356,    62,   253,   254,   171,    12,    13,    14,    69,   176,
-     177,     3,    54,    74,    75,     7,    77,     9,    11,    12,
-     248,     5,   195,     8,   197,   198,   199,   200,   201,   202,
-     203,   204,   205,   206,   207,   208,   209,   210,   211,   212,
-     213,   214,   272,   342,     6,   236,   207,   208,   209,     9,
-     269,   201,   202,   336,     9,     4,    84,    85,    84,    85,
-     227,    84,    85,   195,   231,   197,   198,   199,   200,   201,
-     202,   203,   204,   205,   206,   207,   208,   209,   210,   211,
-     212,   213,   214,   176,   177,   336,   253,   254,   316,   317,
-     210,   211,     7,    31,    16,   378,   269,    17,    15,     6,
-       3,     3,   330,   154,     4,   333,   389,   390,     4,     6,
-      18,   278,    61,     7,     9,     3,    65,     7,    67,   286,
-       6,   154,    71,    72,    73,     3,     3,   378,     3,    78,
-      79,   414,    25,     6,    19,    19,    19,   269,   389,   390,
-       5,    20,     3,   154,     4,     8,    18,    93,    94,    95,
-      96,   323,     3,     8,     8,     4,     4,   385,     3,    18,
-     443,   107,   108,   414,    21,   448,    19,    19,     4,   336,
-       8,   399,    19,    19,     3,    19,    80,   460,    62,    18,
-     463,     4,    25,   411,   412,    69,    19,    91,    92,    19,
-      74,    75,   443,    77,    25,    19,     4,   448,    25,    68,
-     428,     4,   253,   254,     4,     4,    68,   435,     4,   460,
-     438,   378,   463,    19,     3,    25,     4,   445,    68,     4,
-     253,   254,   389,   390,   407,   395,   454,    68,     4,   154,
-     458,    52,   218,   362,   160,    77,   275,   465,   466,   323,
-     276,   347,   253,   254,   291,   412,   421,   414,   421,   195,
-     195,   197,   198,   199,   200,   201,   202,   203,   204,   205,
-     206,   207,   208,   209,   210,   211,   212,   213,   214,   436,
-     437,   175,   323,   154,   178,   198,   443,    25,   197,   446,
-     447,   448,   200,   199,    30,   336,    -1,    -1,   192,   421,
-      -1,    -1,    -1,   460,    -1,    -1,   463,    -1,    -1,    -1,
-      -1,   468,   469,   336,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,   323,    -1,   154,    -1,    -1,    -1,    -1,    -1,
-      -1,   225,    -1,   269,    -1,   336,    -1,   378,   232,   233,
-      54,   235,    -1,    -1,    -1,    -1,    -1,    61,   389,   390,
-      -1,    65,    -1,    67,    -1,   378,    -1,    71,    72,    73,
-      -1,    -1,    76,   404,    78,    79,   389,   390,   409,    -1,
-      -1,   412,    -1,   414,    -1,    -1,    -1,   378,   272,    -1,
-     274,    -1,   253,   254,    -1,    -1,    -1,   154,   389,   390,
-      -1,   414,    -1,    -1,    -1,   436,   437,    -1,    -1,    -1,
-      -1,   442,   443,   404,    -1,   446,   447,   448,   409,    -1,
-      -1,   412,   336,   414,    -1,    -1,    -1,    -1,    -1,   460,
-     443,    -1,   463,   253,   254,   448,    -1,   468,   469,    -1,
-      -1,   325,   154,    -1,    -1,   436,   437,   460,    -1,    -1,
-     463,   442,   443,    -1,    -1,   446,   447,   448,    -1,    -1,
-      -1,    -1,   323,    -1,    -1,    -1,    -1,    -1,    -1,   460,
-     354,    -1,   463,    -1,    -1,   336,   390,   468,   469,    -1,
-      -1,    -1,    -1,   154,    -1,    -1,    -1,   371,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,   421,   253,   254,   412,    -1,
-     414,    -1,    -1,   323,    -1,   154,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,   336,   378,    -1,   403,
-      -1,   405,    -1,   437,    -1,    -1,    -1,    -1,   389,   390,
-      -1,    -1,   446,   447,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,   253,   254,   404,    -1,   154,   460,    -1,   409,   463,
-      -1,   412,    -1,   414,   468,   469,    -1,    -1,   378,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,   323,    -1,    -1,   389,
-     390,    -1,   154,    -1,    -1,   436,   437,    -1,    -1,   336,
-      -1,   442,   443,   254,   404,   446,   447,   448,    -1,   409,
-      -1,    -1,   412,    -1,   414,    -1,    -1,    -1,    -1,   460,
-      -1,    -1,   463,    -1,   253,   254,    -1,   468,   469,    -1,
-      -1,   323,    -1,    -1,    -1,    -1,   436,   437,    -1,    -1,
-      -1,   378,   442,   443,   336,    -1,   446,   447,   448,    -1,
-      -1,    -1,   389,   390,    -1,    -1,    -1,    -1,    -1,    -1,
-     460,    -1,    -1,   463,   253,   254,    -1,   404,   468,   469,
-      -1,    54,   409,    -1,    -1,   412,    -1,   414,    61,    -1,
-      -1,    -1,    65,    -1,    67,   336,   378,    -1,    71,    72,
-      73,   253,   254,    -1,   323,    78,    79,   389,   390,   436,
-     437,    -1,    -1,    -1,    -1,   442,   443,   336,    -1,   446,
-     447,   448,   404,    -1,    -1,    -1,    -1,   409,    -1,    -1,
-     412,    -1,   414,   460,    -1,    -1,   463,   378,    -1,    -1,
-      -1,   468,   469,    -1,   323,    -1,    -1,    -1,    -1,   390,
-      -1,    -1,    -1,    -1,   436,   437,    -1,   336,    -1,   378,
-     442,   443,    -1,    -1,   446,   447,   448,    -1,    -1,    -1,
-     389,   390,    -1,   414,    -1,    -1,    -1,    -1,   460,    -1,
-      -1,   463,    -1,    -1,   336,   404,   468,   469,    -1,    -1,
-     409,    -1,    -1,   412,    -1,   414,    -1,    -1,    -1,   378,
-      -1,    -1,   443,    -1,    -1,    -1,    -1,   448,    -1,    -1,
-     389,   390,    -1,    -1,    -1,    -1,    -1,   436,   437,   460,
-      -1,    -1,   463,   442,   443,   404,   378,   446,   447,   448,
-     409,    -1,    -1,   412,    -1,   414,    61,   389,   390,    -1,
-      65,   460,    67,    -1,   463,    -1,    71,    72,    73,   468,
-     469,    -1,    -1,    78,    79,    -1,    -1,   436,   437,    -1,
-      -1,    -1,   414,   442,   443,    -1,    -1,   446,   447,   448,
-       3,    -1,     5,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,   460,    -1,    -1,   463,    -1,    19,    -1,    -1,   468,
-     469,   443,    -1,    -1,    -1,    -1,   448,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   460,    -1,
-      -1,   463,    -1,    -1,    47,    48,    49,    50,    51,    52,
-      53,    54,    55,    56,    57,    58,    -1,    60,    61,    62,
-      63,    64,    65,    66,    67,    -1,    69,    70,    71,    72,
-      73,    74,    75,    -1,    77,    78,    79,    80,    81,     3,
-      83,    84,    85,    -1,    -1,    -1,    10,    11,    -1,    -1,
-      -1,    26,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      -1,    46,    -1,    -1,    -1,    -1,    -1,    -1,     3,    -1,
-       5,    -1,    -1,    47,    48,    49,    50,    51,    52,    53,
-      54,    -1,    -1,    57,    19,    -1,    -1,    61,    -1,    63,
-      -1,    65,    -1,    67,    -1,    -1,    -1,    71,    72,    73,
-      -1,    -1,    -1,    -1,    78,    79,    80,    -1,    -1,    -1,
-      84,    85,    47,    48,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,     3,    60,     5,    -1,    63,    64,
-      -1,    66,    -1,    -1,    -1,    70,    -1,    -1,    -1,    -1,
-      19,    -1,    26,    -1,    -1,    80,    81,    -1,    83,    84,
-      85,    35,    36,    37,    38,    39,    40,    41,    42,    43,
-      44,    -1,    46,    -1,     3,    -1,     5,    -1,    47,    48,
-      49,    50,    51,    52,    53,    54,    55,    56,    57,    58,
-      19,    60,    -1,    -1,    63,    64,    -1,    66,    -1,     3,
-      -1,    70,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    80,    81,    -1,    83,    84,    85,    -1,    47,    48,
-      49,    50,    51,    52,    53,    54,    55,    56,    57,    58,
-      -1,    60,    -1,    -1,    63,    64,    -1,    66,    -1,    -1,
-      -1,    70,    -1,    47,    48,    49,    50,    51,    52,    53,
-      54,    80,    81,    57,    83,    84,    85,    61,     3,    63,
-       5,    65,    -1,    67,    -1,    10,    11,    71,    72,    73,
-      -1,    -1,    -1,    18,    78,    79,    80,    22,    23,    26,
-      84,    85,     6,    -1,    -1,    -1,    -1,    -1,    35,    36,
-      37,    38,    39,    40,    41,    42,    43,    44,    -1,    46,
-      -1,    -1,    47,    48,    49,    50,    51,    52,    53,    54,
-      -1,    -1,    57,     3,    -1,     5,    -1,    -1,    63,    -1,
-      10,    11,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    22,    23,    -1,    80,    -1,    61,    62,    84,
-      85,    65,    -1,    67,    -1,    69,    -1,    71,    72,    73,
-      74,    75,    76,    -1,    78,    79,    -1,    47,    48,    49,
-      50,    51,    52,    53,    54,    -1,    -1,    57,    -1,     3,
-      -1,    -1,    -1,    63,     8,    -1,    10,    11,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
-      80,    -1,    -1,    -1,    84,    85,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      23,    93,   141,    58,    74,     9,   294,    69,    54,   141,
+     366,   141,     9,   248,     0,   141,     7,   202,    80,   353,
+     354,    24,    81,    82,    83,    84,    19,    19,     5,    76,
+       4,   184,   185,   186,   187,    26,    95,    96,    41,   395,
+       5,   375,    19,   114,    18,   116,    41,   118,    33,   141,
+       5,    46,   287,     3,    54,    54,   390,     7,    57,     9,
+      45,    54,    54,    58,    59,   157,   158,   252,   138,    81,
+      82,    83,    84,    27,    28,   409,   410,    80,   366,    83,
+      84,    54,   370,    95,    96,     3,    83,    84,    18,    19,
+      93,    45,   231,   232,   156,    20,    21,   159,   141,   231,
+     232,   231,   232,    14,    24,   231,   232,   395,    33,    34,
+       3,   173,    32,    24,     5,   207,    54,   176,   210,   178,
+     179,   180,   181,   182,   183,   184,   185,   186,   187,   188,
+     189,   190,   191,   192,   193,   194,   195,   322,   141,   231,
+     232,    18,    19,   205,    61,    19,     8,   141,    62,   211,
+     212,    68,     6,     4,    17,   226,    73,    74,   250,   214,
+      12,    13,    14,     9,   176,   257,   178,   179,   180,   181,
+     182,   183,   184,   185,   186,   187,   188,   189,   190,   191,
+     192,   193,   194,   195,    31,   247,   245,    61,   231,   232,
+     188,   189,   190,    16,    68,    15,   141,     3,   141,    73,
+      74,     6,    76,   342,    29,    30,    10,    11,     7,    60,
+     342,     4,   342,    64,   306,    66,   342,   288,   289,    70,
+      71,    72,    83,    84,    83,    84,    77,    78,    83,    84,
+     301,     4,   303,   245,   157,   158,     7,   231,   232,     9,
+     182,   183,   191,   192,     3,     7,     6,   141,     3,   311,
+     342,   294,     3,    25,    19,    19,    54,   396,   320,     7,
+     399,   353,   354,   306,   396,     4,   396,   399,    20,   399,
+     396,    18,     8,   399,     3,   337,     8,     8,   349,    81,
+      82,    83,    84,   375,     4,    19,   231,   232,   231,   232,
+     361,   294,     3,    95,    96,    19,   141,    19,   390,   342,
+     294,   372,   373,   365,   396,   367,    19,   399,    18,     8,
+     353,   354,   306,   141,    21,     4,   387,   409,   410,    25,
+     391,    19,   381,   366,    25,    18,     3,   370,    19,    25,
+      67,     4,   375,     4,   405,   358,   407,   231,   232,     4,
+      67,     4,     4,    19,    67,   141,     4,   390,   342,   294,
+     326,   294,   395,   396,   141,    41,   399,    66,   199,   353,
+     354,   306,   329,   306,   389,   294,   409,   410,   392,   381,
+     314,   263,   366,   248,   381,   176,   370,   180,   178,    17,
+      20,   375,   179,   141,    -1,    -1,   231,   232,    -1,   181,
+      -1,   193,   194,   195,    -1,    -1,   390,   342,    -1,   342,
+     294,   395,   396,    -1,   232,   399,    -1,    -1,   353,   354,
+     353,   354,   306,    -1,    -1,   409,   410,    -1,    -1,    -1,
+      -1,   366,    -1,   366,    -1,   370,    -1,   370,    -1,    -1,
+     375,    -1,   375,    -1,    -1,   231,   232,    -1,    -1,    -1,
+      -1,    -1,    -1,   245,    -1,   390,    -1,   390,   342,   294,
+     395,   396,   395,   396,   399,    -1,   399,    -1,    -1,   353,
+     354,   306,    -1,    -1,   409,   410,   409,   410,    -1,    -1,
+      -1,    -1,   366,   231,   232,    26,   370,    -1,   306,    -1,
+      -1,   375,    -1,    -1,    35,    36,    37,    38,    39,    40,
+      41,    42,    43,    44,    -1,    46,   390,   342,   294,    -1,
+      -1,   395,   396,    -1,    -1,   399,    -1,    -1,   353,   354,
+     306,    -1,    -1,    -1,   342,   409,   410,    54,    -1,    -1,
+      -1,   366,    -1,    60,    -1,   370,   354,    64,    -1,    66,
+     375,    -1,    -1,    70,    71,    72,   294,    -1,    75,    -1,
+      77,    78,    -1,    54,    -1,   390,   342,   375,   306,    60,
+     395,   396,    -1,    64,   399,    66,    -1,   353,   354,    70,
+      71,    72,   390,    -1,   409,   410,    77,    78,   396,    -1,
+     366,   399,    -1,    -1,   370,    -1,    -1,    -1,    -1,   375,
+      -1,   409,   410,    -1,   342,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,   390,   353,   354,    -1,    -1,   395,
+     396,    -1,    -1,   399,    -1,    -1,    -1,    -1,   366,     3,
+      -1,     5,   370,   409,   410,    -1,    60,   375,    -1,    -1,
+      64,    -1,    66,    -1,    -1,    19,    70,    71,    72,    -1,
+      -1,    -1,   390,    77,    78,    -1,    -1,   395,   396,    -1,
+      -1,   399,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     6,
+      -1,   409,   410,    47,    48,    49,    50,    51,    52,    53,
+      54,    55,    56,    57,    58,    -1,    60,    61,    62,    63,
+      64,    65,    66,    -1,    68,    69,    70,    71,    72,    73,
+      74,    -1,    76,    77,    78,    79,     3,    -1,    -1,    83,
+      84,    -1,    -1,    10,    11,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    60,    61,    22,    23,    64,    -1,    66,
+      -1,    68,    -1,    70,    71,    72,    73,    74,    75,    -1,
+      77,    78,    -1,    -1,    -1,     3,    -1,     5,    -1,    -1,
+      47,    48,    49,    50,    51,    52,    53,    54,    -1,    -1,
+      57,    19,    -1,    60,    -1,    62,    -1,    64,    -1,    66,
+      -1,    -1,    -1,    70,    71,    72,    -1,    -1,    -1,    -1,
+      77,    78,    -1,    -1,     3,    -1,    83,    84,    -1,    47,
+      48,    49,    50,    51,    52,    53,    54,    55,    56,    57,
+      58,     3,    -1,     5,    62,    63,    -1,    65,    -1,    -1,
+      -1,    69,    -1,    -1,    -1,    -1,    -1,    19,    -1,    -1,
+      -1,    79,    -1,    -1,    -1,    83,    84,    -1,    47,    48,
+      49,    50,    51,    52,    53,    54,    -1,    -1,    57,     3,
+      -1,    -1,    -1,    62,    -1,    47,    48,    49,    50,    51,
+      52,    53,    54,    55,    56,    57,    58,    -1,    -1,    -1,
+      62,    63,    -1,    65,    83,    84,    -1,    69,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    79,    -1,    -1,
+      -1,    83,    84,    47,    48,    49,    50,    51,    52,    53,
+      54,    -1,    -1,    57,    -1,    -1,    60,    -1,    62,    -1,
+      64,    -1,    66,    -1,    -1,    -1,    70,    71,    72,     3,
+      -1,    -1,    -1,    77,    78,    -1,    10,    11,    -1,    83,
+      84,    -1,    -1,    -1,    -1,    19,     3,    -1,    22,    23,
+      -1,     8,    -1,    10,    11,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    22,    23,    -1,    -1,    -1,
       -1,    -1,    -1,    47,    48,    49,    50,    51,    52,    53,
-      54,    -1,     3,    57,     3,    -1,     7,    -1,     9,    63,
-      -1,    10,    11,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    22,    23,    26,    80,    -1,    -1,    -1,
-      84,    85,    -1,    -1,    35,    36,    37,    38,    39,    40,
-      41,    42,    43,    44,    -1,    46,    -1,    -1,    47,    48,
-      49,    50,    51,    52,    53,    54,    -1,    -1,    57,    -1,
-      -1,    -1,    -1,    -1,    63,    -1,    -1,    -1,    -1,    -1,
+      54,    -1,    -1,    57,    -1,    -1,    -1,    -1,    62,    -1,
+      47,    48,    49,    50,    51,    52,    53,    54,     3,     3,
+      57,    -1,     7,    -1,     9,    62,    10,    11,    -1,    83,
+      84,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
+      -1,    26,    -1,    -1,    -1,    -1,    83,    84,    -1,    -1,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      -1,    46,    -1,    47,    48,    49,    50,    51,    52,    53,
+      54,    -1,    -1,    57,     7,    -1,    -1,    -1,    62,    -1,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    80,    -1,    -1,    -1,    84,    85
+      -1,    -1,    -1,    26,    -1,    -1,    -1,    -1,    -1,    83,
+      84,    -1,    35,    36,    37,    38,    39,    40,    41,    42,
+      43,    44,    -1,    46
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    19,    59,    62,    69,    74,    75,    77,    96,    97,
-      98,    99,   100,   101,   102,   103,    54,    93,    94,    95,
-      54,   212,     0,    98,    98,    77,   102,     9,    19,   213,
-     212,    94,     5,   104,   213,   105,   104,     6,    61,    65,
-      67,    71,    72,    73,    75,    76,    78,    79,    88,    89,
-      90,    91,   102,   106,   107,   111,   112,   113,   121,   122,
-       5,   130,    54,   108,   109,   110,   114,   115,    54,    88,
-     113,   114,    19,   120,   130,   114,   215,    18,    19,     7,
-      26,     3,   108,   114,   114,     5,   123,   131,    54,   109,
-       8,     3,     5,    10,    11,    22,    23,    47,    48,    49,
-      50,    51,    52,    53,    57,    63,    80,    84,    85,    87,
-      93,   116,   128,   168,   169,   170,   171,   176,   177,   178,
-     180,   183,   184,   185,   187,   189,   190,   192,   193,   194,
-     195,   196,   197,   198,   199,   200,   201,   202,   203,   204,
-     205,   206,   207,   208,   209,   210,   211,   216,    19,    63,
-      80,   124,   131,     6,   214,    88,   183,    18,   116,   126,
-     129,    93,   176,   177,   204,   204,   204,   204,    88,    94,
-     172,     9,   204,   204,     3,     7,     9,     9,     7,    26,
-      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      46,   188,   214,    24,    32,   214,    31,   214,    16,    17,
-      15,    29,    30,    20,    21,    33,    34,    27,    28,    45,
-      10,    11,    12,    13,    14,    84,    85,     4,    88,   118,
-     119,     3,     3,   131,     6,     3,    19,    55,    56,    58,
-      60,    64,    66,    70,    81,    83,    88,    94,   101,   130,
-     132,   133,   134,   135,   137,   138,   140,   141,   142,   144,
-     145,   147,   149,   151,   152,   159,   160,   161,   162,   163,
-     164,   170,   178,   185,   205,   206,   208,   209,   210,     4,
-       4,     6,    18,   126,     7,    92,   181,   182,     9,   174,
-       3,    94,   125,   179,   183,   183,    57,   171,    94,   171,
-     183,   186,   183,   194,   196,   197,   198,   199,   200,   200,
-     201,   201,   201,   201,   202,   202,   202,   203,   203,   204,
-     204,   204,     7,    92,   117,   115,     4,    18,   125,   125,
-       6,    19,    94,     3,   143,     3,    19,    94,   183,   183,
-       3,   183,   108,    25,    19,    19,   214,   135,   135,   204,
-     116,     6,     8,   183,   128,   117,   182,    94,    20,   173,
-     175,   125,     3,     4,    18,     8,     3,     8,   184,   191,
-     117,   214,   214,     4,     4,    19,   134,   141,   153,   156,
-     158,     3,   183,    19,    19,    19,   214,    19,   214,    81,
-      94,   135,   136,   137,   139,   142,   146,   148,   150,   151,
-     152,    92,     8,   174,    21,     4,   125,   183,   125,    25,
-     119,    19,    19,    25,    18,    19,   183,     4,   165,   166,
-     135,     3,    25,   167,   214,   136,   136,   104,   127,     4,
-       4,   214,   183,   158,   154,   183,     4,   130,     4,   141,
-     214,    81,    94,   136,   137,   142,   151,   152,    68,   136,
-     189,     4,    19,   214,   165,     3,    25,   214,   214,   167,
-     155,   157,   158,   135,     4,   214,   136,   135,    68,     4,
-     214,   165,   167,   214,   136,     4,    68,   136,   214,   214
+       0,    95,    96,    97,     0,    19,    61,    68,    73,    74,
+      76,    98,    99,   100,   101,    54,   204,    76,   100,   205,
+     204,     5,   102,   205,   103,   102,     6,    60,    64,    66,
+      70,    71,    72,    74,    75,    77,    78,    87,    88,    89,
+      90,   100,   104,   105,   109,   110,   111,   119,   120,     5,
+     125,    54,   106,   107,   108,   112,   113,    54,    87,   111,
+     112,    19,   118,   125,   112,   207,    18,    19,     7,    26,
+       3,   106,   112,   112,     5,   121,   126,    54,   107,     8,
+       3,    10,    11,    22,    23,    47,    48,    49,    50,    51,
+      52,    53,    54,    57,    62,    83,    84,    86,    92,    93,
+      94,   114,   161,   162,   163,   164,   169,   170,   172,   175,
+     176,   177,   179,   181,   182,   184,   185,   186,   187,   188,
+     189,   190,   191,   192,   193,   194,   195,   196,   197,   198,
+     199,   200,   201,   202,   203,   208,    19,    62,   122,   126,
+       6,   206,    87,   175,    92,   169,   196,   196,   196,   196,
+      87,    93,   165,   196,   196,     3,     7,     9,     9,     7,
+      26,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    46,   180,   206,    24,    32,   206,    31,   206,    16,
+      17,    15,    29,    30,    20,    21,    33,    34,    27,    28,
+      45,    10,    11,    12,    13,    14,    83,    84,     4,    87,
+     116,   117,     3,   126,     6,     3,    19,    55,    56,    58,
+      63,    65,    69,    79,    87,    93,    99,   125,   127,   128,
+     129,   130,   132,   133,   135,   136,   137,   139,   140,   142,
+     144,   146,   147,   154,   155,   156,   157,   163,   170,   177,
+     197,   198,   200,   201,   202,     4,     4,     7,   173,   174,
+       9,   167,     3,   123,   171,   175,   175,    57,    93,   164,
+      93,   164,   175,   178,   175,   186,   188,   189,   190,   191,
+     192,   192,   193,   193,   193,   193,   194,   194,   194,   195,
+     195,   196,   196,   196,     7,    91,   115,   113,     4,    18,
+     123,     6,    19,    93,     3,   138,    19,    93,   175,    19,
+     175,     3,   106,    25,    19,    19,   206,   130,   130,   196,
+     175,     7,   115,   174,    93,    20,   166,   168,   123,     4,
+      18,     8,     3,     8,   176,   183,     8,   115,   206,   206,
+       4,    19,   129,   136,   148,   151,   153,     3,    19,    19,
+      19,   206,   206,    79,    93,   130,   131,   132,   134,   137,
+     141,   143,   145,   146,   147,     8,   167,    21,     4,   175,
+     123,    25,    91,   117,    19,    25,    18,    19,   175,   158,
+     159,   130,     3,    25,   160,   206,   131,   131,   102,   124,
+       4,   206,   175,   153,   149,   175,     4,     4,   136,   206,
+     206,    67,   131,   181,     4,    19,   206,   158,   131,   206,
+     160,   150,   152,   153,   130,     4,   130,    67,     4,   206,
+     206,   131,   131
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    86,    87,    87,    87,    87,    87,    87,    87,    88,
-      88,    89,    89,    90,    90,    90,    90,    90,    91,    91,
-      92,    92,    93,    93,    94,    95,    96,    97,    97,    98,
-      98,    99,    99,   100,   101,   101,   102,   102,   103,   103,
-     103,   103,   104,   105,   105,   106,   106,   106,   106,   107,
-     107,   108,   108,   109,   109,   110,   110,   111,   112,   112,
-     112,   112,   113,   114,   114,   115,   116,   116,   117,   117,
-     118,   118,   119,   120,   120,   121,   122,   123,   123,   124,
-     124,   125,   125,   126,   126,   127,   127,   128,   128,   129,
-     129,   130,   131,   131,   132,   132,   133,   133,   134,   135,
-     135,   135,   135,   135,   135,   136,   136,   136,   136,   136,
-     137,   137,   137,   137,   137,   137,   137,   137,   137,   138,
-     139,   140,   141,   141,   141,   141,   141,   141,   141,   143,
-     142,   144,   145,   146,   147,   148,   149,   149,   150,   150,
-     151,   152,   153,   153,   154,   154,   155,   155,   156,   156,
-     157,   158,   158,   159,   159,   160,   161,   161,   162,   162,
-     163,   164,   166,   165,   167,   168,   168,   169,   169,   169,
-     169,   169,   169,   169,   170,   170,   170,   171,   172,   173,
-     173,   174,   174,   175,   176,   176,   177,   177,   178,   178,
-     178,   179,   179,   180,   180,   181,   181,   182,   183,   184,
-     184,   186,   185,   187,   187,   187,   188,   188,   188,   188,
-     188,   188,   188,   188,   188,   188,   188,   188,   189,   189,
-     190,   191,   192,   192,   193,   194,   194,   195,   196,   196,
-     197,   197,   198,   198,   199,   199,   199,   200,   200,   200,
-     200,   200,   201,   201,   201,   201,   202,   202,   202,   203,
-     203,   203,   203,   204,   204,   204,   204,   204,   205,   206,
-     207,   207,   207,   207,   208,   208,   208,   208,   209,   210,
-     211,   212,   213,   214,   215,   216
+       0,    85,    86,    86,    86,    86,    86,    86,    86,    87,
+      87,    88,    88,    89,    89,    89,    89,    89,    90,    90,
+      91,    91,    92,    92,    93,    94,    95,    96,    97,    97,
+      98,    98,    99,    99,   100,   100,   101,   101,   101,   101,
+     102,   103,   103,   104,   104,   104,   104,   105,   105,   106,
+     106,   107,   107,   108,   108,   109,   110,   110,   110,   110,
+     111,   112,   112,   113,   114,   115,   115,   116,   116,   117,
+     118,   118,   119,   120,   121,   121,   122,   123,   123,   124,
+     124,   125,   126,   126,   127,   127,   128,   128,   129,   130,
+     130,   130,   130,   130,   130,   131,   131,   131,   131,   131,
+     132,   132,   132,   132,   132,   132,   132,   133,   134,   135,
+     136,   136,   136,   136,   136,   136,   136,   138,   137,   139,
+     140,   141,   142,   143,   144,   144,   145,   145,   146,   147,
+     148,   148,   149,   149,   150,   150,   151,   151,   152,   153,
+     153,   154,   154,   155,   155,   156,   156,   157,   159,   158,
+     160,   161,   161,   162,   162,   162,   162,   162,   162,   163,
+     163,   163,   164,   165,   166,   166,   167,   167,   168,   169,
+     169,   170,   170,   171,   171,   172,   173,   173,   174,   175,
+     176,   176,   178,   177,   179,   179,   180,   180,   180,   180,
+     180,   180,   180,   180,   180,   180,   180,   180,   181,   181,
+     182,   183,   184,   184,   185,   186,   186,   187,   188,   188,
+     189,   189,   190,   190,   191,   191,   191,   192,   192,   192,
+     192,   192,   193,   193,   193,   193,   194,   194,   194,   195,
+     195,   195,   195,   196,   196,   196,   196,   196,   197,   198,
+     199,   199,   199,   199,   200,   200,   200,   200,   201,   202,
+     203,   204,   205,   206,   207,   208
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       2,     3,     1,     1,     1,     3,     1,     2,     1,     0,
-       2,     1,     1,     3,     5,     4,     1,     2,     1,     1,
-       1,     1,     3,     0,     2,     1,     1,     1,     1,     4,
-       3,     1,     3,     1,     3,     1,     3,     2,     3,     2,
-       3,     2,     1,     6,     5,     1,     1,     1,     0,     1,
-       1,     4,     3,     1,     1,     2,     3,     4,     3,     5,
-       5,     0,     1,     0,     1,     0,     1,     4,     3,     1,
-       3,     4,     0,     3,     1,     1,     2,     1,     2,     1,
+       2,     3,     1,     1,     1,     3,     1,     1,     0,     2,
+       1,     1,     5,     4,     1,     2,     1,     1,     1,     1,
+       3,     0,     2,     1,     1,     1,     1,     4,     3,     1,
+       3,     1,     3,     1,     3,     2,     3,     2,     3,     2,
+       1,     6,     5,     1,     1,     0,     1,     1,     4,     3,
+       1,     1,     2,     3,     4,     3,     5,     0,     1,     0,
+       1,     4,     0,     3,     1,     1,     2,     1,     2,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     4,
-       3,     2,     1,     1,     1,     1,     1,     1,     1,     0,
-       5,     3,     7,     7,     7,     7,     2,     2,     2,     2,
-       8,     6,     0,     1,     0,     1,     0,     1,     1,     1,
-       1,     1,     3,     3,     2,     3,     3,     2,     3,     1,
-       3,     5,     0,     2,     0,     1,     1,     1,     1,     3,
-       1,     1,     1,     1,     1,     3,     3,     6,     3,     0,
-       1,     0,     3,     2,     3,     3,     4,     4,     4,     6,
-       6,     1,     3,     4,     4,     1,     2,     3,     1,     1,
-       1,     0,     4,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     4,     4,     2,
+       1,     1,     1,     1,     1,     1,     1,     0,     5,     3,
+       7,     7,     7,     7,     2,     2,     2,     2,     8,     6,
+       0,     1,     0,     1,     0,     1,     1,     1,     1,     1,
+       3,     3,     2,     3,     2,     3,     2,     3,     0,     2,
+       0,     1,     1,     1,     1,     3,     1,     1,     1,     1,
+       3,     3,     6,     3,     0,     1,     0,     3,     2,     4,
+       4,     4,     6,     1,     3,     4,     1,     2,     3,     1,
+       1,     1,     0,     4,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     7,     1,
        2,     0,     3,     1,     2,     3,     1,     2,     3,     1,
        3,     1,     3,     1,     3,     3,     1,     3,     3,     3,
@@ -1321,14 +1324,15 @@ static const yytype_int8 yyr2[] =
 };
 
 
+enum { YYENOMEM = -2 };
+
 #define yyerrok         (yyerrstatus = 0)
 #define yyclearin       (yychar = YYEMPTY)
-#define YYEMPTY         (-2)
-#define YYEOF           0
 
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -1350,10 +1354,9 @@ static const yytype_int8 yyr2[] =
       }                                                           \
   while (0)
 
-/* Error token number */
-#define YYTERROR        1
-#define YYERRCODE       256
-
+/* Backward compatibility with an undocumented macro.
+   Use YYerror or YYUNDEF. */
+#define YYERRCODE YYUNDEF
 
 
 /* Enable debugging if requested.  */
@@ -1370,19 +1373,16 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-#ifndef YY_LOCATION_PRINT
-# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-#endif
 
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Type, Value); \
+                  Kind, Value); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -1393,18 +1393,15 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyo,
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
   FILE *yyoutput = yyo;
-  YYUSE (yyoutput);
+  YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yytype < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1414,12 +1411,13 @@ yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyo,
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
 {
   YYFPRINTF (yyo, "%s %s (",
-             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
+             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  yy_symbol_value_print (yyo, yytype, yyvaluep);
+  yy_symbol_value_print (yyo, yykind, yyvaluep);
   YYFPRINTF (yyo, ")");
 }
 
@@ -1452,7 +1450,8 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
+                 int yyrule)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1464,9 +1463,8 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       yystos[+yyssp[yyi + 1 - yynrhs]],
-                       &yyvsp[(yyi + 1) - (yynrhs)]
-                                              );
+                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
+                       &yyvsp[(yyi + 1) - (yynrhs)]);
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -1481,8 +1479,8 @@ do {                                    \
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args)
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
+# define YYDPRINTF(Args) ((void) 0)
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
@@ -1505,265 +1503,38 @@ int yydebug;
 #endif
 
 
-#if YYERROR_VERBOSE
 
-# ifndef yystrlen
-#  if defined __GLIBC__ && defined _STRING_H
-#   define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
-#  else
-/* Return the length of YYSTR.  */
-static YYPTRDIFF_T
-yystrlen (const char *yystr)
-{
-  YYPTRDIFF_T yylen;
-  for (yylen = 0; yystr[yylen]; yylen++)
-    continue;
-  return yylen;
-}
-#  endif
-# endif
 
-# ifndef yystpcpy
-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
-#   define yystpcpy stpcpy
-#  else
-/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
-   YYDEST.  */
-static char *
-yystpcpy (char *yydest, const char *yysrc)
-{
-  char *yyd = yydest;
-  const char *yys = yysrc;
 
-  while ((*yyd++ = *yys++) != '\0')
-    continue;
-
-  return yyd - 1;
-}
-#  endif
-# endif
-
-# ifndef yytnamerr
-/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
-   quotes and backslashes, so that it's suitable for yyerror.  The
-   heuristic is that double-quoting is unnecessary unless the string
-   contains an apostrophe, a comma, or backslash (other than
-   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
-   null, do not copy; instead, return the length of what the result
-   would have been.  */
-static YYPTRDIFF_T
-yytnamerr (char *yyres, const char *yystr)
-{
-  if (*yystr == '"')
-    {
-      YYPTRDIFF_T yyn = 0;
-      char const *yyp = yystr;
-
-      for (;;)
-        switch (*++yyp)
-          {
-          case '\'':
-          case ',':
-            goto do_not_strip_quotes;
-
-          case '\\':
-            if (*++yyp != '\\')
-              goto do_not_strip_quotes;
-            else
-              goto append;
-
-          append:
-          default:
-            if (yyres)
-              yyres[yyn] = *yyp;
-            yyn++;
-            break;
-
-          case '"':
-            if (yyres)
-              yyres[yyn] = '\0';
-            return yyn;
-          }
-    do_not_strip_quotes: ;
-    }
-
-  if (yyres)
-    return yystpcpy (yyres, yystr) - yyres;
-  else
-    return yystrlen (yystr);
-}
-# endif
-
-/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
-   about the unexpected token YYTOKEN for the state stack whose top is
-   YYSSP.
-
-   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
-   not large enough to hold the message.  In that case, also set
-   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
-   required number of bytes is too large to store.  */
-static int
-yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
-                yy_state_t *yyssp, int yytoken)
-{
-  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
-  /* Internationalized format string. */
-  const char *yyformat = YY_NULLPTR;
-  /* Arguments of yyformat: reported tokens (one for the "unexpected",
-     one per "expected"). */
-  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
-  /* Actual size of YYARG. */
-  int yycount = 0;
-  /* Cumulated lengths of YYARG.  */
-  YYPTRDIFF_T yysize = 0;
-
-  /* There are many possibilities here to consider:
-     - If this state is a consistent state with a default action, then
-       the only way this function was invoked is if the default action
-       is an error action.  In that case, don't check for expected
-       tokens because there are none.
-     - The only way there can be no lookahead present (in yychar) is if
-       this state is a consistent state with a default action.  Thus,
-       detecting the absence of a lookahead is sufficient to determine
-       that there is no unexpected or expected token to report.  In that
-       case, just report a simple "syntax error".
-     - Don't assume there isn't a lookahead just because this state is a
-       consistent state with a default action.  There might have been a
-       previous inconsistent state, consistent state with a non-default
-       action, or user semantic action that manipulated yychar.
-     - Of course, the expected token list depends on states to have
-       correct lookahead information, and it depends on the parser not
-       to perform extra reductions after fetching a lookahead from the
-       scanner and before detecting a syntax error.  Thus, state merging
-       (from LALR or IELR) and default reductions corrupt the expected
-       token list.  However, the list is correct for canonical LR with
-       one exception: it will still contain any token that will not be
-       accepted due to an error action in a later state.
-  */
-  if (yytoken != YYEMPTY)
-    {
-      int yyn = yypact[+*yyssp];
-      YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
-      yysize = yysize0;
-      yyarg[yycount++] = yytname[yytoken];
-      if (!yypact_value_is_default (yyn))
-        {
-          /* Start YYX at -YYN if negative to avoid negative indexes in
-             YYCHECK.  In other words, skip the first -YYN actions for
-             this state because they are default actions.  */
-          int yyxbegin = yyn < 0 ? -yyn : 0;
-          /* Stay within bounds of both yycheck and yytname.  */
-          int yychecklim = YYLAST - yyn + 1;
-          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-          int yyx;
-
-          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
-                && !yytable_value_is_error (yytable[yyx + yyn]))
-              {
-                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-                  {
-                    yycount = 1;
-                    yysize = yysize0;
-                    break;
-                  }
-                yyarg[yycount++] = yytname[yyx];
-                {
-                  YYPTRDIFF_T yysize1
-                    = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
-                  if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-                    yysize = yysize1;
-                  else
-                    return 2;
-                }
-              }
-        }
-    }
-
-  switch (yycount)
-    {
-# define YYCASE_(N, S)                      \
-      case N:                               \
-        yyformat = S;                       \
-      break
-    default: /* Avoid compiler warnings. */
-      YYCASE_(0, YY_("syntax error"));
-      YYCASE_(1, YY_("syntax error, unexpected %s"));
-      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
-      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
-      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
-      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
-# undef YYCASE_
-    }
-
-  {
-    /* Don't count the "%s"s in the final size, but reserve room for
-       the terminator.  */
-    YYPTRDIFF_T yysize1 = yysize + (yystrlen (yyformat) - 2 * yycount) + 1;
-    if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-      yysize = yysize1;
-    else
-      return 2;
-  }
-
-  if (*yymsg_alloc < yysize)
-    {
-      *yymsg_alloc = 2 * yysize;
-      if (! (yysize <= *yymsg_alloc
-             && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
-        *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
-      return 1;
-    }
-
-  /* Avoid sprintf, as that infringes on the user's name space.
-     Don't have undefined behavior even if the translation
-     produced a string with the wrong number of "%s"s.  */
-  {
-    char *yyp = *yymsg;
-    int yyi = 0;
-    while ((*yyp = *yyformat) != '\0')
-      if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
-        {
-          yyp += yytnamerr (yyp, yyarg[yyi++]);
-          yyformat += 2;
-        }
-      else
-        {
-          ++yyp;
-          ++yyformat;
-        }
-  }
-  return 0;
-}
-#endif /* YYERROR_VERBOSE */
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
+yydestruct (const char *yymsg,
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
 {
-  YYUSE (yyvaluep);
+  YY_USE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
-
-
-/* The lookahead symbol.  */
+/* Lookahead token kind.  */
 int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
 /* Number of syntax errors so far.  */
 int yynerrs;
+
+
 
 
 /*----------.
@@ -1773,43 +1544,36 @@ int yynerrs;
 int
 yyparse (void)
 {
-    yy_state_fast_t yystate;
+    yy_state_fast_t yystate = 0;
     /* Number of tokens to shift before error messages enabled.  */
-    int yyerrstatus;
+    int yyerrstatus = 0;
 
-    /* The stacks and their tools:
-       'yyss': related to states.
-       'yyvs': related to semantic values.
-
-       Refer to the stacks through separate pointers, to allow yyoverflow
+    /* Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
 
-    /* The state stack.  */
+    /* Their size.  */
+    YYPTRDIFF_T yystacksize = YYINITDEPTH;
+
+    /* The state stack: array, bottom, top.  */
     yy_state_t yyssa[YYINITDEPTH];
-    yy_state_t *yyss;
-    yy_state_t *yyssp;
+    yy_state_t *yyss = yyssa;
+    yy_state_t *yyssp = yyss;
 
-    /* The semantic value stack.  */
+    /* The semantic value stack: array, bottom, top.  */
     YYSTYPE yyvsa[YYINITDEPTH];
-    YYSTYPE *yyvs;
-    YYSTYPE *yyvsp;
-
-    YYPTRDIFF_T yystacksize;
+    YYSTYPE *yyvs = yyvsa;
+    YYSTYPE *yyvsp = yyvs;
 
   int yyn;
+  /* The return value of yyparse.  */
   int yyresult;
-  /* Lookahead token as an internal (translated) token number.  */
-  int yytoken = 0;
+  /* Lookahead symbol kind.  */
+  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 
-#if YYERROR_VERBOSE
-  /* Buffer for error messages, and its allocated size.  */
-  char yymsgbuf[128];
-  char *yymsg = yymsgbuf;
-  YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
-#endif
+
 
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
@@ -1817,16 +1581,10 @@ yyparse (void)
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
-  yyssp = yyss = yyssa;
-  yyvsp = yyvs = yyvsa;
-  yystacksize = YYINITDEPTH;
-
   YYDPRINTF ((stderr, "Starting parse\n"));
 
-  yystate = 0;
-  yyerrstatus = 0;
-  yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -1848,10 +1606,11 @@ yysetstate:
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
   YY_IGNORE_USELESS_CAST_END
+  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1879,7 +1638,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1890,10 +1649,10 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
-# undef YYSTACK_RELOCATE
+#  undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
       }
@@ -1911,6 +1670,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1932,17 +1692,28 @@ yybackup:
 
   /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
+  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
+      YYDPRINTF ((stderr, "Reading a token\n"));
       yychar = yylex ();
     }
 
   if (yychar <= YYEOF)
     {
-      yychar = yytoken = YYEOF;
+      yychar = YYEOF;
+      yytoken = YYSYMBOL_YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
+    }
+  else if (yychar == YYerror)
+    {
+      /* The scanner already issued an error message, process directly
+         to error recovery.  But do not keep the error token as
+         lookahead, it is too special and may lead us to an endless
+         loop in error recovery. */
+      yychar = YYUNDEF;
+      yytoken = YYSYMBOL_YYerror;
+      goto yyerrlab1;
     }
   else
     {
@@ -2012,38 +1783,32 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2:
-#line 81 "parser.y++"
+  case 2: /* Literal: integerLiteral  */
+#line 78 "parser.y++"
                      {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("int");
         (yyval.ptr)->intVal = stoi(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2028 "parser.cpp"
+#line 1796 "parser.cpp"
     break;
 
-  case 3:
-#line 91 "parser.y++"
+  case 3: /* Literal: FloatingPointLiteral  */
+#line 85 "parser.y++"
                            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("float");
         (yyval.ptr)->realVal = stod(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2043 "parser.cpp"
+#line 1808 "parser.cpp"
     break;
 
-  case 4:
-#line 101 "parser.y++"
+  case 4: /* Literal: booleanLiteral  */
+#line 92 "parser.y++"
                      {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("boolean");
@@ -2052,81 +1817,67 @@ yyreduce:
         (yyval.ptr)->strVal = string((yyvsp[0].str));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2060 "parser.cpp"
+#line 1822 "parser.cpp"
     break;
 
-  case 5:
-#line 113 "parser.y++"
+  case 5: /* Literal: characterLiteral  */
+#line 101 "parser.y++"
                        {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("char");
         (yyval.ptr)->intVal = char_int(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2075 "parser.cpp"
+#line 1834 "parser.cpp"
     break;
 
-  case 6:
-#line 123 "parser.y++"
+  case 6: /* Literal: stringLiteral  */
+#line 108 "parser.y++"
                     {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("string");
         (yyval.ptr)->strVal = string((yyvsp[0].str));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2090 "parser.cpp"
+#line 1846 "parser.cpp"
     break;
 
-  case 7:
-#line 133 "parser.y++"
+  case 7: /* Literal: textBlock  */
+#line 115 "parser.y++"
                 {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("textblock");
         (yyval.ptr)->tbval = (yyvsp[0].str);
         (yyval.ptr)->expType = 4;
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2104 "parser.cpp"
+#line 1857 "parser.cpp"
     break;
 
-  case 8:
-#line 142 "parser.y++"
+  case 8: /* Literal: nullLiteral  */
+#line 121 "parser.y++"
                   {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("null");
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
-		sym_entry* temp = new sym_entry;
-		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
-		(yyval.ptr)->nextlist.clear();
     }
-#line 2118 "parser.cpp"
+#line 1868 "parser.cpp"
     break;
 
-  case 9:
-#line 155 "parser.y++"
+  case 9: /* PrimitiveType: NumericType  */
+#line 131 "parser.y++"
                   {
         type = (yyvsp[0].ptr)->type;
-        (yyval.ptr) = (yyvsp[0].ptr);}
-#line 2126 "parser.cpp"
+        (yyval.ptr) = (yyvsp[0].ptr);
+	}
+#line 1877 "parser.cpp"
     break;
 
-  case 10:
-#line 158 "parser.y++"
+  case 10: /* PrimitiveType: BOOLEAN  */
+#line 135 "parser.y++"
               {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2134,27 +1885,27 @@ yyreduce:
         type = (yyvsp[0].str);
         (yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2138 "parser.cpp"
+#line 1889 "parser.cpp"
     break;
 
-  case 11:
-#line 169 "parser.y++"
+  case 11: /* NumericType: IntegralType  */
+#line 146 "parser.y++"
                    {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2146 "parser.cpp"
+#line 1897 "parser.cpp"
     break;
 
-  case 12:
-#line 172 "parser.y++"
+  case 12: /* NumericType: FloatingPointType  */
+#line 149 "parser.y++"
                         {
         (yyval.ptr) = (yyvsp[0].ptr) ;
     }
-#line 2154 "parser.cpp"
+#line 1905 "parser.cpp"
     break;
 
-  case 13:
-#line 178 "parser.y++"
+  case 13: /* IntegralType: BYTE  */
+#line 155 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2164,11 +1915,11 @@ yyreduce:
 		(yyval.ptr)->type = (yyvsp[0].str);
 
     }
-#line 2168 "parser.cpp"
+#line 1919 "parser.cpp"
     break;
 
-  case 14:
-#line 187 "parser.y++"
+  case 14: /* IntegralType: SHORT  */
+#line 164 "parser.y++"
             {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2177,11 +1928,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2181 "parser.cpp"
+#line 1932 "parser.cpp"
     break;
 
-  case 15:
-#line 195 "parser.y++"
+  case 15: /* IntegralType: INT  */
+#line 172 "parser.y++"
           {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2190,11 +1941,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2194 "parser.cpp"
+#line 1945 "parser.cpp"
     break;
 
-  case 16:
-#line 203 "parser.y++"
+  case 16: /* IntegralType: LONG  */
+#line 180 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2203,11 +1954,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2207 "parser.cpp"
+#line 1958 "parser.cpp"
     break;
 
-  case 17:
-#line 211 "parser.y++"
+  case 17: /* IntegralType: CHAR  */
+#line 188 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2216,11 +1967,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2220 "parser.cpp"
+#line 1971 "parser.cpp"
     break;
 
-  case 18:
-#line 222 "parser.y++"
+  case 18: /* FloatingPointType: FLOAT  */
+#line 199 "parser.y++"
             {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2229,11 +1980,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2233 "parser.cpp"
+#line 1984 "parser.cpp"
     break;
 
-  case 19:
-#line 230 "parser.y++"
+  case 19: /* FloatingPointType: DOUBLE  */
+#line 207 "parser.y++"
              {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2242,13 +1993,13 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2246 "parser.cpp"
+#line 1997 "parser.cpp"
     break;
 
-  case 20:
-#line 241 "parser.y++"
+  case 20: /* Dims: '[' ']'  */
+#line 218 "parser.y++"
            {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "[", 0);
         insertAttr(v, NULL, "]", 0);
 		(yyval.ptr) = makenode("Dims", v);
@@ -2258,13 +2009,13 @@ yyreduce:
         (yyval.ptr)->type = "*";
 
     }
-#line 2262 "parser.cpp"
+#line 2013 "parser.cpp"
     break;
 
-  case 21:
-#line 252 "parser.y++"
+  case 21: /* Dims: '[' ']' Dims  */
+#line 229 "parser.y++"
                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "[", 0);
         insertAttr(v, NULL, "]", 0);
         insertAttr(v, (yyvsp[0].ptr), "", 1);
@@ -2279,41 +2030,47 @@ yyreduce:
             (yyval.ptr)->is_error = 1;
         }
     }
-#line 2283 "parser.cpp"
+#line 2034 "parser.cpp"
     break;
 
-  case 22:
-#line 273 "parser.y++"
+  case 22: /* Name: SimpleName  */
+#line 250 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2289 "parser.cpp"
+#line 2040 "parser.cpp"
     break;
 
-  case 23:
-#line 274 "parser.y++"
+  case 23: /* Name: QualifiedName  */
+#line 251 "parser.y++"
                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2295 "parser.cpp"
+#line 2046 "parser.cpp"
     break;
 
-  case 24:
-#line 277 "parser.y++"
+  case 24: /* SimpleName: Identifier  */
+#line 254 "parser.y++"
                {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
 
         // Semantics
+		cout << "in Simplename\n";
 		string temp = primaryExpression(string((yyvsp[0].str)));  
 		// if type is there in the symbol table then this means the variable is already declared
 		if(temp == ""){
 			yyerror(("Undeclared Identifier " + string((yyvsp[0].str))).c_str());
-			(yyval.ptr)->is_error = 1;
 		}
 		else{
 			if(temp.substr(0, 5) == "FUNC_"){
 				(yyval.ptr)->expType = 3;
 			}
-			else if(temp.back() == '*'){
-				(yyval.ptr)->expType = 2; 
+			else
+			{
+				if((*curr_table)[string((yyvsp[0].str))]->init == 0){
+					yyerror("Uninitialized variable used ");
+				}
+				if(temp.back() == '*'){
+					(yyval.ptr)->expType = 2; 
+				}
+				else (yyval.ptr)->expType = 1;
 			}
-			else (yyval.ptr)->expType = 1;
 
 			if(temp.substr(0,5)=="FUNC_" && temp.back() == '#'){
 				temp.pop_back();
@@ -2337,13 +2094,13 @@ yyreduce:
 			}
 		}
     }
-#line 2341 "parser.cpp"
+#line 2098 "parser.cpp"
     break;
 
-  case 25:
-#line 320 "parser.y++"
+  case 25: /* QualifiedName: Name '.' SimpleName  */
+#line 303 "parser.y++"
                         {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, (yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL,".",0);
         insertAttr(v, (yyvsp[0].ptr), "", 1);
@@ -2379,177 +2136,119 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 2383 "parser.cpp"
+#line 2140 "parser.cpp"
     break;
 
-  case 26:
-#line 361 "parser.y++"
+  case 26: /* CompilationUnit: OrdinaryCompilationUnit  */
+#line 344 "parser.y++"
                               {
-        cout << "in compile unit\n";
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v, (yyvsp[0].ptr), "", 1);
-        // insertAttr(v, makeleaf($2), "", 1);
         (yyval.ptr) = makenode("CompilationUnit",v);
-
-        //  Semantics
-        if(((yyvsp[0].ptr)->is_error )){
-            (yyval.ptr)->is_error = 1;
-        }
-
-        // ...
     }
-#line 2402 "parser.cpp"
+#line 2150 "parser.cpp"
     break;
 
-  case 27:
-#line 378 "parser.y++"
-                                                              {
-        vector<data> v;
-		insertAttr(v,(yyvsp[-1].ptr),"",1);
-		insertAttr(v,(yyvsp[0].ptr),"",1);
-		(yyval.ptr) = makenode("Ordinary_Compilation_Unit",v);
-
-        //  Semantics
-        if(((yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error)){
-            (yyval.ptr)->is_error = 1;
-        }
-
-        //  ...
-    }
-#line 2420 "parser.cpp"
-    break;
-
-  case 28:
-#line 391 "parser.y++"
+  case 27: /* OrdinaryCompilationUnit: TopLevelClassOrInterfaceDeclarations  */
+#line 352 "parser.y++"
                                            {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2428 "parser.cpp"
+#line 2158 "parser.cpp"
     break;
 
-  case 29:
-#line 397 "parser.y++"
+  case 28: /* TopLevelClassOrInterfaceDeclarations: %empty  */
+#line 358 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2434 "parser.cpp"
+#line 2164 "parser.cpp"
     break;
 
-  case 30:
-#line 398 "parser.y++"
+  case 29: /* TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations TopLevelClassOrInterfaceDeclaration  */
+#line 359 "parser.y++"
                                                                                {
-        cout << "TopLevelClassOrInterfaceDeclarations\n";
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v,(yyvsp[-1].ptr),"",1);
 		insertAttr(v,(yyvsp[0].ptr),"",1);
 		(yyval.ptr) = makenode("Top_level_class_or_interface_declarations",v);
-
-        //  Semantics
-		// if($1->is_error || $2->is_error)	{
-		// 	$$->is_error = 1;
-		// }
+		cout << "leaving top level\n";
     }
-#line 2451 "parser.cpp"
+#line 2176 "parser.cpp"
     break;
 
-  case 31:
-#line 413 "parser.y++"
+  case 30: /* TopLevelClassOrInterfaceDeclaration: ClassDeclaration  */
+#line 369 "parser.y++"
                        { (yyval.ptr) = (yyvsp[0].ptr);}
-#line 2457 "parser.cpp"
+#line 2182 "parser.cpp"
     break;
 
-  case 32:
-#line 414 "parser.y++"
+  case 31: /* TopLevelClassOrInterfaceDeclaration: ';'  */
+#line 370 "parser.y++"
          {
         (yyval.ptr) = makeleaf(";");
     }
-#line 2465 "parser.cpp"
+#line 2190 "parser.cpp"
     break;
 
-  case 33:
-#line 420 "parser.y++"
-                       {
-        vector<data> v;
-		insertAttr(v,makeleaf((yyvsp[-2].str)),"",1);
-        insertAttr(v,(yyvsp[-1].ptr),"",1);
-        insertAttr(v,NULL,";",0);
-		(yyval.ptr) = makenode("Package_declaration",v);
-
-        // Semantics
-        if(!(yyvsp[-1].ptr)->is_error){
-            insertSymbol(*curr_table, (yyvsp[-2].str), (yyvsp[-1].ptr)->tempName, 0, 0, NULL);
-        }
-        else{
-            (yyval.ptr)->is_error = 1;
-        }
-    }
-#line 2485 "parser.cpp"
-    break;
-
-  case 34:
-#line 440 "parser.y++"
+  case 32: /* ClassDeclaration: Modifiers CLASS G S ClassBody  */
+#line 378 "parser.y++"
                                     {
-        vector<data> v;
-        insertAttr(v,(yyvsp[-4].ptr),"",1);
+		vector<data2>v;
+        if((yyvsp[-4].ptr) != NULL) insertAttr(v,(yyvsp[-4].ptr),"",1);
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode((yyvsp[-3].str),v);
 
         // Semantics
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error) {
-			if(!currTypeLookup("class_" + string((yyvsp[-2].ptr)->tempName))){
-				printStructTable("class_" + string((yyvsp[-2].ptr)->tempName));
-				type = "class_" + string((yyvsp[-2].ptr)->tempName);
-				(yyval.ptr)->type = type;
-			}
-			else {
-				yyerror(("redefinition of " + string((yyvsp[-2].ptr)->tempName)).c_str());
-				(yyval.ptr)->is_error = 1;
-			}
+		cout << "hiii\n";
+		if(!currTypeLookup("class_" + string((yyvsp[-2].ptr)->tempName))){
+			cout << "hi\n";
+			printStructTable("class_" + string((yyvsp[-2].ptr)->tempName));
+			(yyval.ptr)->type = "class_" + string((yyvsp[-2].ptr)->tempName);
 		}
-		else{
-			(yyval.ptr)->is_error = 1;
+		else {
+			yyerror(("redefinition of class " + string((yyvsp[-2].ptr)->tempName)).c_str());
 		}
-
+		type = "";
     }
-#line 2514 "parser.cpp"
+#line 2214 "parser.cpp"
     break;
 
-  case 35:
-#line 464 "parser.y++"
+  case 33: /* ClassDeclaration: CLASS G S ClassBody  */
+#line 397 "parser.y++"
                           {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode((yyvsp[-3].str),v);
 
         // Semantics
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error) {
-			if(!currTypeLookup("class_" + string((yyvsp[-2].ptr)->tempName))){
-				printStructTable("class_" + string((yyvsp[-2].ptr)->type));
-				type = string("class_" + string((yyvsp[-2].ptr)->tempName));
-				(yyval.ptr)->type = type;
-			}
-			else {
-				yyerror(("redefinition of " + string((yyvsp[-2].ptr)->tempName)).c_str());
-				(yyval.ptr)->is_error = 1;
-			}
+		cout << "hiii\n";
+		if(!currTypeLookup("class_" + string((yyvsp[-2].ptr)->tempName))){
+			cout << "hi\n";
+			printStructTable("class_" + string((yyvsp[-2].ptr)->tempName));
+			cout << "hii\n";
+			type = string("class_" + string((yyvsp[-2].ptr)->tempName));
+			(yyval.ptr)->type = type;
 		}
-		else{
+		else {
+			yyerror(("redefinition of class " + string((yyvsp[-2].ptr)->tempName)).c_str());
 			(yyval.ptr)->is_error = 1;
 		}
+		type = "";
     }
-#line 2541 "parser.cpp"
+#line 2240 "parser.cpp"
     break;
 
-  case 36:
-#line 489 "parser.y++"
+  case 34: /* Modifiers: Modifier  */
+#line 421 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2547 "parser.cpp"
+#line 2246 "parser.cpp"
     break;
 
-  case 37:
-#line 490 "parser.y++"
+  case 35: /* Modifiers: Modifier Modifiers  */
+#line 422 "parser.y++"
                          {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("modifier",v);
@@ -2562,101 +2261,107 @@ yyreduce:
             (yyval.ptr)->type = string((yyvsp[-1].ptr)->type + "_" + (yyvsp[0].ptr)->type);
         }
     }
-#line 2566 "parser.cpp"
+#line 2265 "parser.cpp"
     break;
 
-  case 38:
-#line 507 "parser.y++"
+  case 36: /* Modifier: PUBLIC  */
+#line 439 "parser.y++"
            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "public";
     }
-#line 2575 "parser.cpp"
+#line 2274 "parser.cpp"
     break;
 
-  case 39:
-#line 511 "parser.y++"
+  case 37: /* Modifier: PRIVATE  */
+#line 443 "parser.y++"
             {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "private";
     }
-#line 2584 "parser.cpp"
+#line 2283 "parser.cpp"
     break;
 
-  case 40:
-#line 515 "parser.y++"
+  case 38: /* Modifier: STATIC  */
+#line 447 "parser.y++"
            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "static";
     }
-#line 2593 "parser.cpp"
+#line 2292 "parser.cpp"
     break;
 
-  case 41:
-#line 519 "parser.y++"
+  case 39: /* Modifier: FINAL  */
+#line 451 "parser.y++"
           {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "final";
     }
-#line 2602 "parser.cpp"
+#line 2301 "parser.cpp"
     break;
 
-  case 42:
-#line 526 "parser.y++"
+  case 40: /* ClassBody: '{' ClassBodyDeclarations '}'  */
+#line 458 "parser.y++"
                                     {
-        (yyval.ptr) = (yyvsp[-1].ptr);
+		vector<data2> v;
+		cout<<"entered Class body"<<endl;
+        insertAttr(v,NULL,"{",0);
+        if((yyvsp[-1].ptr) != NULL) insertAttr(v,(yyvsp[-1].ptr),"",1);
+        insertAttr(v,NULL,"}",0);
+        (yyval.ptr) = makenode("classBody",v);
+		cout << "leaving class body\n";
     }
-#line 2610 "parser.cpp"
+#line 2315 "parser.cpp"
     break;
 
-  case 43:
-#line 532 "parser.y++"
+  case 41: /* ClassBodyDeclarations: %empty  */
+#line 470 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2616 "parser.cpp"
+#line 2321 "parser.cpp"
     break;
 
-  case 44:
-#line 533 "parser.y++"
+  case 42: /* ClassBodyDeclarations: ClassBodyDeclarations ClassBodyDeclaration  */
+#line 471 "parser.y++"
                                                 {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Class_Body_Declarations",v);
 
         // Semantics
-        // $$->is_error = $1->is_error || $2->is_error;
+		cout << "in classbodydeclarations\n";
     }
-#line 2630 "parser.cpp"
+#line 2335 "parser.cpp"
     break;
 
-  case 45:
-#line 545 "parser.y++"
+  case 43: /* ClassBodyDeclaration: FieldDeclaration  */
+#line 483 "parser.y++"
                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2636 "parser.cpp"
+#line 2341 "parser.cpp"
     break;
 
-  case 46:
-#line 546 "parser.y++"
+  case 44: /* ClassBodyDeclaration: MethodDeclaration  */
+#line 484 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2642 "parser.cpp"
+#line 2347 "parser.cpp"
     break;
 
-  case 47:
-#line 547 "parser.y++"
+  case 45: /* ClassBodyDeclaration: StaticInitializer  */
+#line 485 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2648 "parser.cpp"
+#line 2353 "parser.cpp"
     break;
 
-  case 48:
-#line 548 "parser.y++"
-                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2654 "parser.cpp"
+  case 46: /* ClassBodyDeclaration: ConstructorDeclaration  */
+#line 486 "parser.y++"
+                             {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 2359 "parser.cpp"
     break;
 
-  case 49:
-#line 552 "parser.y++"
+  case 47: /* FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList ';'  */
+#line 490 "parser.y++"
                                                          {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-3].ptr),"",1);
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2667,16 +2372,15 @@ yyreduce:
 		type = (yyvsp[-2].ptr)->type ;
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-3].ptr)->is_error || (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error;
 
     }
-#line 2674 "parser.cpp"
+#line 2378 "parser.cpp"
     break;
 
-  case 50:
-#line 567 "parser.y++"
+  case 48: /* FieldDeclaration: PrimitiveType VariableDeclaratorList ';'  */
+#line 504 "parser.y++"
                                                {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,NULL,";",0);
@@ -2686,80 +2390,71 @@ yyreduce:
         type = (yyvsp[-2].ptr)->type ;
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error;
-		
     }
-#line 2693 "parser.cpp"
+#line 2395 "parser.cpp"
     break;
 
-  case 51:
-#line 585 "parser.y++"
+  case 49: /* VariableDeclaratorList: VariableDeclarator  */
+#line 520 "parser.y++"
                          {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2701 "parser.cpp"
+#line 2403 "parser.cpp"
     break;
 
-  case 52:
-#line 588 "parser.y++"
+  case 50: /* VariableDeclaratorList: VariableDeclaratorList ',' VariableDeclarator  */
+#line 523 "parser.y++"
                                                     {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,NULL,",",0);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Variable_Declarator_List",v);
-
-        //  Semantics
-        (yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[0].ptr)->is_error; 
     }
-#line 2716 "parser.cpp"
+#line 2415 "parser.cpp"
     break;
 
-  case 53:
-#line 601 "parser.y++"
+  case 51: /* VariableDeclarator: Declarator  */
+#line 533 "parser.y++"
                  {
         (yyval.ptr) = (yyvsp[0].ptr);
 
 		// Semantics
 		if (insertStructAttr((yyvsp[0].ptr)->tempName, (yyvsp[0].ptr)->type, (yyvsp[0].ptr)->size, 0) != 1){
 			yyerror(("The Attribute " + string((yyvsp[0].ptr)->tempName) + " is already declared in the same class").c_str());
-			(yyval.ptr)->is_error = 1;
 		} 
+		cout << "in Variable declarator\n";
     }
-#line 2730 "parser.cpp"
+#line 2429 "parser.cpp"
     break;
 
-  case 54:
-#line 610 "parser.y++"
+  case 52: /* VariableDeclarator: Declarator '=' VariableInitializer  */
+#line 542 "parser.y++"
                                          {
-        vector<data>v;
+
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr)=makenode("=",v);
 
         // Semantics
         if(assignExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type,"=") == ""){
-            yyerror("Incorrect type assignment\n");
-            (yyval.ptr)->is_error = 1;
+            yyerror("Incorrect type assignment");
         }
 		if (insertStructAttr((yyvsp[-2].ptr)->tempName, (yyvsp[-2].ptr)->type, (yyvsp[-2].ptr)->size, 1) != 1){
 			yyerror(("The Attribute " + string((yyvsp[-2].ptr)->tempName) + " is already declared in the same class").c_str());
-			(yyval.ptr)->is_error = 1;
 		} 
-		(yyval.ptr)->type=(yyvsp[-2].ptr)->type;
-		int num = assign_exp((yyvsp[-1].str), (yyval.ptr)->type, (yyvsp[-2].ptr)->type, (yyvsp[0].ptr)->type, (yyvsp[-2].ptr)->place, (yyvsp[0].ptr)->place);
-		(yyval.ptr)->place = (yyvsp[-2].ptr)->place;
-		backpatch((yyvsp[0].ptr)->nextlist, num);
     }
-#line 2755 "parser.cpp"
+#line 2449 "parser.cpp"
     break;
 
-  case 55:
-#line 633 "parser.y++"
+  case 53: /* Declarator: Identifier  */
+#line 560 "parser.y++"
                  {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
 		// Semantics
+		cout << "in declartor\n";
         type_delim = 1;
 		(yyval.ptr)->expType = 1; // Variable
 		if(type != "") (yyval.ptr)->type = type;
@@ -2770,61 +2465,53 @@ yyreduce:
 		(yyval.ptr)->size = getSize(type);
 
 		//3AC
-		(yyval.ptr)->place = qid(string((yyvsp[0].str)), lookup(string((yyvsp[0].str))));
+		(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
     }
-#line 2776 "parser.cpp"
+#line 2471 "parser.cpp"
     break;
 
-  case 56:
-#line 649 "parser.y++"
+  case 54: /* Declarator: Declarator '[' ']'  */
+#line 577 "parser.y++"
                          {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-2].ptr), "", 1);
 		insertAttr(v, NULL, "[ ]", 0);
 		(yyval.ptr) = makenode("direct_declarator", v);
 
 		// Semantics
-		if(!(yyvsp[-2].ptr)->is_error){
-			if((yyvsp[-2].ptr)->expType <=2 ) {
-				(yyval.ptr)->expType = 2;
-				(yyval.ptr)->type = (yyvsp[-2].ptr)->type + "*";
-				(yyval.ptr)->tempName = (yyvsp[-2].ptr)->tempName;
-				(yyval.ptr)->size = 4;	
-				(yyval.ptr)->intVal = 8;
+		if((yyvsp[-2].ptr)->expType <=2 ) {
+			(yyval.ptr)->expType = 2;
+			(yyval.ptr)->type = (yyvsp[-2].ptr)->type + "*";
+			(yyval.ptr)->tempName = (yyvsp[-2].ptr)->tempName;
+			(yyval.ptr)->size = 4;	
+			(yyval.ptr)->intVal = 8;
 
-				//3AC
-				(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
-				array_dims.push_back(0);
-				isArray = 1;
-			}
-			else {
-				yyerror(( (yyvsp[-2].ptr)->tempName + " declared as function returning an array").c_str());
-				(yyval.ptr)->is_error = 1;
-			}
+			//3AC
+			(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
+			array_dims.push_back(0);
 		}
-		else (yyval.ptr)->is_error = 1;
+		else yyerror(( (yyvsp[-2].ptr)->tempName + " declared as function returning an array").c_str());
     }
-#line 2808 "parser.cpp"
+#line 2496 "parser.cpp"
     break;
 
-  case 57:
-#line 679 "parser.y++"
+  case 55: /* MethodDeclaration: MethodHeader MethodBody  */
+#line 600 "parser.y++"
                              {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Method_declaration",v);
 
         // Semantics
-        (yyval.ptr)->is_error = (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 2822 "parser.cpp"
+#line 2509 "parser.cpp"
     break;
 
-  case 58:
-#line 690 "parser.y++"
+  case 56: /* MethodHeader: Modifiers PrimitiveType MethodorConstrDeclarator  */
+#line 610 "parser.y++"
                                                      {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -2834,15 +2521,15 @@ yyreduce:
 		type = "";
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
+
     }
-#line 2840 "parser.cpp"
+#line 2527 "parser.cpp"
     break;
 
-  case 59:
-#line 703 "parser.y++"
+  case 57: /* MethodHeader: PrimitiveType MethodorConstrDeclarator  */
+#line 623 "parser.y++"
                                            {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Method_Header",v);
@@ -2851,15 +2538,14 @@ yyreduce:
 		type = "";
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 2857 "parser.cpp"
+#line 2543 "parser.cpp"
     break;
 
-  case 60:
-#line 715 "parser.y++"
+  case 58: /* MethodHeader: Modifiers VOID2 MethodorConstrDeclarator  */
+#line 634 "parser.y++"
                                              {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -2869,15 +2555,14 @@ yyreduce:
 		type = "";
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 2875 "parser.cpp"
+#line 2560 "parser.cpp"
     break;
 
-  case 61:
-#line 728 "parser.y++"
+  case 59: /* MethodHeader: VOID2 MethodorConstrDeclarator  */
+#line 646 "parser.y++"
                                    {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Method_Header",v);
@@ -2886,13 +2571,12 @@ yyreduce:
 		type = "";
 		className = classTemp;
 		type_delim = 0;
-		(yyval.ptr)->is_error = (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 2892 "parser.cpp"
+#line 2576 "parser.cpp"
     break;
 
-  case 62:
-#line 743 "parser.y++"
+  case 60: /* VOID2: VOID  */
+#line 660 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2901,13 +2585,13 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2905 "parser.cpp"
+#line 2589 "parser.cpp"
     break;
 
-  case 63:
-#line 754 "parser.y++"
+  case 61: /* MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' NEXT_QUAD  */
+#line 671 "parser.y++"
                                                           {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-5].ptr),"",1);
         insertAttr(v,NULL,"(",0);
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2915,15 +2599,14 @@ yyreduce:
         (yyval.ptr) = makenode("Methdod_declarator",v);
 
 		// Semantics
-		if(!(yyvsp[-5].ptr)->is_error && !(yyvsp[-2].ptr)->is_error){
 			if((yyvsp[-5].ptr)->expType == 1) {
 				(yyval.ptr)->tempName = (yyvsp[-5].ptr)->tempName;
 				(yyval.ptr)->expType = 3;
-				(yyval.ptr)->type = (yyvsp[-5].ptr)->type;
+				(yyval.ptr)->type = "FUNC_" + string((yyvsp[-5].ptr)->type);
 				(yyval.ptr)->size = getSize((yyval.ptr)->type);
 
 				vector<string> temp = getFuncArgs((yyvsp[-5].ptr)->tempName);
-				if(temp.size() == 1 && temp[0] == "#NO_FUNC"){
+				if(temp.size() >=1 && temp[0] == "#NO_FUNC"){
 					insertFuncArg((yyval.ptr)->tempName, funcArgs, (yyval.ptr)->type);
 					funcArgs.clear();
 					funcName = string((yyvsp[-5].ptr)->tempName);
@@ -2948,7 +2631,6 @@ yyreduce:
 					}
 					else {
 						yyerror(("Conflicting types for function " + (yyvsp[-5].ptr)->tempName).c_str());
-						(yyval.ptr)->is_error = 1;
 					}
 				}
 			}
@@ -2959,29 +2641,25 @@ yyreduce:
 				else{
 					yyerror( ((yyvsp[-5].ptr)->tempName + "declared as function of function").c_str());
 				}
-				(yyval.ptr)->is_error = 1;
 			}
-		}
-		else (yyval.ptr)->is_error =1;
 	}
-#line 2968 "parser.cpp"
+#line 2647 "parser.cpp"
     break;
 
-  case 64:
-#line 812 "parser.y++"
+  case 62: /* MethodorConstrDeclarator: SimpleName2 '(' A ')' Dimsy  */
+#line 724 "parser.y++"
                                       {
-		vector<data> v;
+		vector<data2> v;
 		insertAttr(v, (yyvsp[-4].ptr), "", 1);
 		insertAttr(v, NULL, "( )", 0);
         if((yyvsp[0].ptr) != NULL) insertAttr(v,(yyvsp[0].ptr),"",1);
 		(yyval.ptr) = makenode("direct_declarator", v);
 
 		// Semantics
-		if(!(yyvsp[-4].ptr)->is_error){
 			if((yyvsp[-4].ptr)->expType == 1) {
 				(yyval.ptr)->tempName = (yyvsp[-4].ptr)->tempName;
 				(yyval.ptr)->expType = 3;
-				(yyval.ptr)->type = (yyvsp[-4].ptr)->type;
+				(yyval.ptr)->type = "FUNC_" + string((yyvsp[-4].ptr)->type);
 				(yyval.ptr)->size = getSize((yyval.ptr)->type);
 
 				vector<string> temp = getFuncArgs((yyvsp[-4].ptr)->tempName);
@@ -2993,7 +2671,6 @@ yyreduce:
 				}
 				else {
 					yyerror(("Conflicting types for function " + (yyvsp[-4].ptr)->tempName).c_str());
-					(yyval.ptr)->is_error = 1;
 				}
 				//3AC
 				(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
@@ -3006,16 +2683,13 @@ yyreduce:
 				else{
 					yyerror( ((yyvsp[-4].ptr)->tempName + "declared as function of function").c_str());
 				}
-				(yyval.ptr)->is_error = 1;
 			}
-		}
-		else (yyval.ptr)->is_error = 1;
 	}
-#line 3015 "parser.cpp"
+#line 2689 "parser.cpp"
     break;
 
-  case 65:
-#line 857 "parser.y++"
+  case 63: /* SimpleName2: Identifier  */
+#line 764 "parser.y++"
                  {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -3025,7 +2699,6 @@ yyreduce:
 		if(type != "") (yyval.ptr)->type = type;
 		else {
             yyerror("Undeclared Type\n");
-            (yyval.ptr)->is_error = 1;
         }
 		(yyval.ptr)->tempName = string((yyvsp[0].str));
 		(yyval.ptr)->size = getSize(type);
@@ -3033,65 +2706,56 @@ yyreduce:
 		//3AC
 		(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
     }
-#line 3037 "parser.cpp"
+#line 2710 "parser.cpp"
     break;
 
-  case 66:
-#line 877 "parser.y++"
+  case 64: /* VariableInitializer: Expression  */
+#line 783 "parser.y++"
                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3043 "parser.cpp"
+#line 2716 "parser.cpp"
     break;
 
-  case 67:
-#line 878 "parser.y++"
-                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3049 "parser.cpp"
-    break;
-
-  case 68:
-#line 882 "parser.y++"
+  case 65: /* Dimsy: %empty  */
+#line 787 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3055 "parser.cpp"
+#line 2722 "parser.cpp"
     break;
 
-  case 69:
-#line 883 "parser.y++"
+  case 66: /* Dimsy: Dims  */
+#line 788 "parser.y++"
            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3061 "parser.cpp"
+#line 2728 "parser.cpp"
     break;
 
-  case 70:
-#line 887 "parser.y++"
+  case 67: /* FormalParameterList: FormalParameter  */
+#line 792 "parser.y++"
                       {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 3069 "parser.cpp"
+#line 2736 "parser.cpp"
     break;
 
-  case 71:
-#line 890 "parser.y++"
+  case 68: /* FormalParameterList: FormalParameterList ',' NEXT_QUAD FormalParameter  */
+#line 795 "parser.y++"
                                                         {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-3].ptr),"",1);
         insertAttr(v,NULL,",",0);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Formal_Parameter_list",v);
 
         // Semantics
-        if(!(yyvsp[-3].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
-			// 3AC
-			backpatch((yyvsp[-3].ptr)->nextlist, (yyvsp[-1].ind));
-			(yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
-		}
-		else (yyval.ptr)->is_error = 1;;
+        // 3AC
+		backpatch((yyvsp[-3].ptr)->nextlist, (yyvsp[-1].ind));
+		(yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
     }
-#line 3089 "parser.cpp"
+#line 2753 "parser.cpp"
     break;
 
-  case 72:
-#line 909 "parser.y++"
+  case 69: /* FormalParameter: PrimitiveType SimpleName2 Dimsy  */
+#line 811 "parser.y++"
                                       {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -3102,58 +2766,63 @@ yyreduce:
             (yyvsp[-1].ptr)->type = string((yyvsp[-1].ptr)->type + (yyvsp[0].ptr)->type );
             (yyvsp[-1].ptr)->expType = 2;
         }
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[-1].ptr)->is_error){
-			type_delim = 0;
-			type = "";
-			if((yyvsp[-1].ptr)->expType == 1 || (yyvsp[-1].ptr)->expType == 2) {
-				if(currLookup((yyvsp[-1].ptr)->tempName)) {
-					yyerror(("Redeclaration of Parameter " + (yyvsp[-1].ptr)->tempName).c_str());
-					(yyval.ptr)->is_error = 1;
-				}
-				else {
-					paramInsert(*curr_table, (yyvsp[-1].ptr)->tempName, (yyvsp[-1].ptr)->type, (yyvsp[-1].ptr)->size, true, NULL);
-				}
-				funcArgs.push_back((yyvsp[-1].ptr)->type);
-			}
+		type_delim = 0;
+		type = "";
+		if((yyvsp[-1].ptr)->expType == 1 || (yyvsp[-1].ptr)->expType == 2) {
+			paramInsert(*curr_table, (yyvsp[-1].ptr)->tempName, (yyvsp[-1].ptr)->type, (yyvsp[-1].ptr)->size, 1, NULL);
+			funcArgs.push_back((yyvsp[-1].ptr)->type);
 		}
-		else (yyval.ptr)->is_error = 1;
+		else {
+			yyerror("Argument type is not variable or array");
+		}
     }
-#line 3122 "parser.cpp"
+#line 2780 "parser.cpp"
     break;
 
-  case 73:
-#line 941 "parser.y++"
+  case 70: /* MethodBody: Block  */
+#line 837 "parser.y++"
             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3128 "parser.cpp"
+#line 2786 "parser.cpp"
     break;
 
-  case 74:
-#line 942 "parser.y++"
-          {(yyval.ptr)=makeleaf(";");}
-#line 3134 "parser.cpp"
+  case 71: /* MethodBody: ';'  */
+#line 838 "parser.y++"
+          {
+		(yyval.ptr)=makeleaf(";");
+		// if(func_flag>=2){
+			int bc = block_stack.top();
+			block_stack.pop();
+			string str = "Block" + to_string(bc);
+			string name = funcName+str+".csv";
+			printSymbolTable(curr_table, name);
+			updSymbolTable(str,0);
+		// 	func_flag--;
+		// }
+	}
+#line 2803 "parser.cpp"
     break;
 
-  case 75:
-#line 946 "parser.y++"
+  case 72: /* StaticInitializer: STATIC Block  */
+#line 853 "parser.y++"
                    {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,makeleaf((yyvsp[-1].str)),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("StaticInitilizer",v);
 
         (yyval.ptr)->is_error = (yyvsp[0].ptr)->is_error;
     }
-#line 3147 "parser.cpp"
+#line 2816 "parser.cpp"
     break;
 
-  case 76:
-#line 957 "parser.y++"
-                                                        {
-        vector<data> v;
+  case 73: /* ConstructorDeclaration: Modifiers MethodorConstrDeclarator ConstructorBody  */
+#line 864 "parser.y++"
+                                                         {
+        vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
-        (yyval.ptr) = makenode("Conclassor_declaration",v);
+        (yyval.ptr) = makenode("Constructor_declaration",v);
 
         // Semantics
 		type = "";
@@ -3161,359 +2830,272 @@ yyreduce:
 		type_delim = 0;
 		(yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 3165 "parser.cpp"
+#line 2834 "parser.cpp"
     break;
 
-  case 77:
-#line 973 "parser.y++"
-                                                           {
-        vector<data> v;
+  case 74: /* ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements '}'  */
+#line 880 "parser.y++"
+                                                            {
+        vector<data2> v;
         insertAttr(v,NULL,"{",0);
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,NULL,"}",0);
-        (yyval.ptr) = makenode("Conclassor_body",v);
+        (yyval.ptr) = makenode("Constructor_body",v);
     }
-#line 3178 "parser.cpp"
+#line 2847 "parser.cpp"
     break;
 
-  case 78:
-#line 981 "parser.y++"
+  case 75: /* ConstructorBody: '{' BlockStatements '}'  */
+#line 888 "parser.y++"
                               {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,NULL,"{",0);
         insertAttr(v,(yyvsp[-1].ptr),"",1);
         insertAttr(v,NULL,"}",0);
-        (yyval.ptr) = makenode("Conclassor_body",v);
+        (yyval.ptr) = makenode("Constructor_body",v);
     }
-#line 3190 "parser.cpp"
+#line 2859 "parser.cpp"
     break;
 
-  case 79:
-#line 991 "parser.y++"
+  case 76: /* ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' ';'  */
+#line 898 "parser.y++"
                                      {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,makeleaf((yyvsp[-4].str)),"",1);
         insertAttr(v,NULL,"(",0);
         insertAttr(v,(yyvsp[-2].ptr),"",1);
         insertAttr(v,NULL,")",0);
         insertAttr(v,NULL,";",0);
-        (yyval.ptr) = makenode("ExplicitConclassorInvocation",v);
+        (yyval.ptr) = makenode("ExplicitConstructorInvocation",v);
 
 
     }
-#line 3206 "parser.cpp"
+#line 2875 "parser.cpp"
     break;
 
-  case 80:
-#line 1002 "parser.y++"
-                                      {
-        vector<data> v;
-        insertAttr(v,makeleaf((yyvsp[-4].str)),"",1);
-        insertAttr(v,NULL,"(",0);
-        insertAttr(v,(yyvsp[-2].ptr),"",1);
-        insertAttr(v,NULL,")",0);
-        insertAttr(v,NULL,";",0);
-        (yyval.ptr) = makenode("ExplicitConclassorInvocation",v);
-
-
-    }
-#line 3222 "parser.cpp"
-    break;
-
-  case 81:
-#line 1016 "parser.y++"
+  case 77: /* ArgumentListy: %empty  */
+#line 912 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3228 "parser.cpp"
+#line 2881 "parser.cpp"
     break;
 
-  case 82:
-#line 1017 "parser.y++"
+  case 78: /* ArgumentListy: ArgumentList  */
+#line 913 "parser.y++"
                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3234 "parser.cpp"
+#line 2887 "parser.cpp"
     break;
 
-  case 83:
-#line 1022 "parser.y++"
+  case 79: /* ClassBodyy: %empty  */
+#line 923 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3240 "parser.cpp"
+#line 2893 "parser.cpp"
     break;
 
-  case 84:
-#line 1023 "parser.y++"
-          {(yyval.ptr)=makeleaf(",");}
-#line 3246 "parser.cpp"
-    break;
-
-  case 85:
-#line 1027 "parser.y++"
-             {(yyval.ptr)=NULL;}
-#line 3252 "parser.cpp"
-    break;
-
-  case 86:
-#line 1028 "parser.y++"
+  case 80: /* ClassBodyy: ClassBody  */
+#line 924 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3258 "parser.cpp"
+#line 2899 "parser.cpp"
     break;
 
-  case 87:
-#line 1034 "parser.y++"
-                                          {
-        vector<data>v;
-        insertAttr(v, NULL, "{", 0);
-        insertAttr(v, (yyvsp[-2].ptr), "", 1);
-        insertAttr(v, (yyvsp[-1].ptr), "", 1);
-        insertAttr(v, NULL, "}", 0);
-		(yyval.ptr) = makenode("ArrayInitializer", v);
-    }
-#line 3271 "parser.cpp"
-    break;
-
-  case 88:
-#line 1042 "parser.y++"
-                  {
-        vector<data>v;
-        insertAttr(v, NULL, "{", 0);
-        insertAttr(v, (yyvsp[-1].ptr), "", 1);
-        insertAttr(v, NULL, "}", 0);
-		(yyval.ptr) = makenode("ArrayInitializer", v);
-    }
-#line 3283 "parser.cpp"
-    break;
-
-  case 89:
-#line 1052 "parser.y++"
-                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3289 "parser.cpp"
-    break;
-
-  case 90:
-#line 1053 "parser.y++"
-                                                      {
-        vector<data>v;
-        insertAttr(v, (yyvsp[-2].ptr), "", 1);
-        insertAttr(v, NULL, ",", 0);
-        insertAttr(v, (yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("VariableInitializerList", v);
-    }
-#line 3301 "parser.cpp"
-    break;
-
-  case 91:
-#line 1066 "parser.y++"
+  case 81: /* Block: '{' ChangeTable BlockStatements '}'  */
+#line 944 "parser.y++"
                                         {
         (yyval.ptr) =(yyvsp[-1].ptr);
-        
-        if(func_flag>=2){
+        cout << "in Block\n";
+        // if(func_flag>=2){
 			int bc = block_stack.top();
 			block_stack.pop();
 			string str = "Block" + to_string(bc);
 			string name = funcName+str+".csv";
 			printSymbolTable(curr_table, name);
 			updSymbolTable(str,0);
-			func_flag--;
-		}
+		// 	func_flag--;
+		// }
     }
-#line 3319 "parser.cpp"
+#line 2917 "parser.cpp"
     break;
 
-  case 92:
-#line 1082 "parser.y++"
+  case 82: /* BlockStatements: %empty  */
+#line 960 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3325 "parser.cpp"
+#line 2923 "parser.cpp"
     break;
 
-  case 93:
-#line 1083 "parser.y++"
+  case 83: /* BlockStatements: BlockStatements NEXT_QUAD BlockStatement  */
+#line 961 "parser.y++"
                                                {
-        vector<data>v;
-        insertAttr(v, (yyvsp[-2].ptr), "", 1);
+		cout << "in Block statements\n";
+        vector<data2>v;
+        if((yyvsp[-2].ptr) != NULL) insertAttr(v, (yyvsp[-2].ptr), "", 1);
         insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("BlockStatements", v);
 
-        if((yyvsp[-2].ptr)->is_error || (yyvsp[0].ptr)->is_error)	{
-			(yyval.ptr)->is_error = 1;
-		}
-
-        backpatch((yyvsp[-2].ptr)->nextlist, (yyvsp[-1].ind));
-        (yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
-
-        backpatch((yyvsp[-2].ptr)->nextlist, (yyvsp[-1].ind));
-        (yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
-		(yyvsp[-2].ptr)->caselist.insert((yyvsp[-2].ptr)->caselist.end(), (yyvsp[0].ptr)->caselist.begin(), (yyvsp[0].ptr)->caselist.end());
-        (yyval.ptr)->caselist = (yyvsp[-2].ptr)->caselist;
-		(yyvsp[-2].ptr)->continuelist.insert((yyvsp[-2].ptr)->continuelist.end(), (yyvsp[0].ptr)->continuelist.begin(), (yyvsp[0].ptr)->continuelist.end());
-		(yyvsp[-2].ptr)->breaklist.insert((yyvsp[-2].ptr)->breaklist.end(), (yyvsp[0].ptr)->breaklist.begin(), (yyvsp[0].ptr)->breaklist.end());
-        (yyval.ptr)->continuelist = (yyvsp[-2].ptr)->continuelist;
-        (yyval.ptr)->breaklist = (yyvsp[-2].ptr)->breaklist;
-
+        // backpatch($1->nextlist, $2);
+        // $$->nextlist = $3->nextlist;
+		// $1->caselist.insert($1->caselist.end(), $3->caselist.begin(), $3->caselist.end());
+        // $$->caselist = $1->caselist;
+		// $1->continuelist.insert($1->continuelist.end(), $3->continuelist.begin(), $3->continuelist.end());
+		// $1->breaklist.insert($1->breaklist.end(), $3->breaklist.begin(), $3->breaklist.end());
+        // $$->continuelist = $1->continuelist;
+        // $$->breaklist = $1->breaklist;
+		cout << "in Block statements2\n";
     }
-#line 3353 "parser.cpp"
+#line 2945 "parser.cpp"
     break;
 
-  case 94:
-#line 1109 "parser.y++"
+  case 84: /* BlockStatement: Declaration_list  */
+#line 981 "parser.y++"
                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3359 "parser.cpp"
+#line 2951 "parser.cpp"
     break;
 
-  case 95:
-#line 1110 "parser.y++"
+  case 85: /* BlockStatement: Statement  */
+#line 982 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3365 "parser.cpp"
+#line 2957 "parser.cpp"
     break;
 
-  case 96:
-#line 1114 "parser.y++"
+  case 86: /* Declaration_list: LocalVariableDeclaration ';'  */
+#line 986 "parser.y++"
                                    {(yyval.ptr)=(yyvsp[-1].ptr);}
-#line 3371 "parser.cpp"
+#line 2963 "parser.cpp"
     break;
 
-  case 97:
-#line 1115 "parser.y++"
+  case 87: /* Declaration_list: ClassDeclaration  */
+#line 987 "parser.y++"
                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3377 "parser.cpp"
+#line 2969 "parser.cpp"
     break;
 
-  case 98:
-#line 1119 "parser.y++"
+  case 88: /* LocalVariableDeclaration: PrimitiveType VariableDeclaratorList  */
+#line 991 "parser.y++"
                                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, (yyvsp[-1].ptr), "", 1);
         insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("LocalVariableDeclaration", v);
 
         // Semantics
-        (yyval.ptr)->is_error = (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
+		cout << "in local variable declaration\n";
+		type = (yyvsp[-1].ptr)->type ;
+		type_delim = 0;
     }
-#line 3391 "parser.cpp"
+#line 2985 "parser.cpp"
     break;
 
-  case 99:
-#line 1132 "parser.y++"
+  case 89: /* Statement: StatementWithoutTrailingSubstatement  */
+#line 1006 "parser.y++"
                                          {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3397 "parser.cpp"
+#line 2991 "parser.cpp"
     break;
 
-  case 100:
-#line 1133 "parser.y++"
+  case 90: /* Statement: LabeledStatement  */
+#line 1007 "parser.y++"
                      {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3403 "parser.cpp"
+#line 2997 "parser.cpp"
     break;
 
-  case 101:
-#line 1134 "parser.y++"
+  case 91: /* Statement: IfThenStatement  */
+#line 1008 "parser.y++"
                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3409 "parser.cpp"
+#line 3003 "parser.cpp"
     break;
 
-  case 102:
-#line 1135 "parser.y++"
+  case 92: /* Statement: IfThenElseStatement  */
+#line 1009 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3415 "parser.cpp"
+#line 3009 "parser.cpp"
     break;
 
-  case 103:
-#line 1136 "parser.y++"
+  case 93: /* Statement: WhileStatement  */
+#line 1010 "parser.y++"
                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3421 "parser.cpp"
+#line 3015 "parser.cpp"
     break;
 
-  case 104:
-#line 1137 "parser.y++"
+  case 94: /* Statement: ForStatement  */
+#line 1011 "parser.y++"
                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3427 "parser.cpp"
+#line 3021 "parser.cpp"
     break;
 
-  case 105:
-#line 1141 "parser.y++"
+  case 95: /* StatementNoShortIf: StatementWithoutTrailingSubstatement  */
+#line 1015 "parser.y++"
                                          {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3433 "parser.cpp"
+#line 3027 "parser.cpp"
     break;
 
-  case 106:
-#line 1142 "parser.y++"
+  case 96: /* StatementNoShortIf: LabeledStatementNoShortIf  */
+#line 1016 "parser.y++"
                               {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3439 "parser.cpp"
+#line 3033 "parser.cpp"
     break;
 
-  case 107:
-#line 1143 "parser.y++"
+  case 97: /* StatementNoShortIf: IfThenElseStatementNoShortIf  */
+#line 1017 "parser.y++"
                                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3445 "parser.cpp"
+#line 3039 "parser.cpp"
     break;
 
-  case 108:
-#line 1144 "parser.y++"
+  case 98: /* StatementNoShortIf: WhileStatementNoShortIf  */
+#line 1018 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3451 "parser.cpp"
+#line 3045 "parser.cpp"
     break;
 
-  case 109:
-#line 1145 "parser.y++"
+  case 99: /* StatementNoShortIf: ForStatementNoShortIf  */
+#line 1019 "parser.y++"
                           {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3457 "parser.cpp"
+#line 3051 "parser.cpp"
     break;
 
-  case 110:
-#line 1149 "parser.y++"
+  case 100: /* StatementWithoutTrailingSubstatement: Block  */
+#line 1023 "parser.y++"
           {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3463 "parser.cpp"
+#line 3057 "parser.cpp"
     break;
 
-  case 111:
-#line 1150 "parser.y++"
+  case 101: /* StatementWithoutTrailingSubstatement: ';'  */
+#line 1024 "parser.y++"
         {(yyval.ptr)=makeleaf(";");}
-#line 3469 "parser.cpp"
+#line 3063 "parser.cpp"
     break;
 
-  case 112:
-#line 1151 "parser.y++"
+  case 102: /* StatementWithoutTrailingSubstatement: ExpressionStatement  */
+#line 1025 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3475 "parser.cpp"
+#line 3069 "parser.cpp"
     break;
 
-  case 113:
-#line 1152 "parser.y++"
+  case 103: /* StatementWithoutTrailingSubstatement: BreakStatement  */
+#line 1026 "parser.y++"
                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3481 "parser.cpp"
+#line 3075 "parser.cpp"
     break;
 
-  case 114:
-#line 1153 "parser.y++"
+  case 104: /* StatementWithoutTrailingSubstatement: ContinueStatement  */
+#line 1027 "parser.y++"
                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3487 "parser.cpp"
+#line 3081 "parser.cpp"
     break;
 
-  case 115:
-#line 1154 "parser.y++"
+  case 105: /* StatementWithoutTrailingSubstatement: ReturnStatement  */
+#line 1028 "parser.y++"
                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3493 "parser.cpp"
+#line 3087 "parser.cpp"
     break;
 
-  case 116:
-#line 1155 "parser.y++"
-                          {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3499 "parser.cpp"
-    break;
-
-  case 117:
-#line 1156 "parser.y++"
+  case 106: /* StatementWithoutTrailingSubstatement: ThrowStatement  */
+#line 1029 "parser.y++"
                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3505 "parser.cpp"
+#line 3093 "parser.cpp"
     break;
 
-  case 118:
-#line 1157 "parser.y++"
-                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3511 "parser.cpp"
-    break;
-
-  case 119:
-#line 1161 "parser.y++"
+  case 107: /* LabeledStatement: SimpleName ':' NEXT_QUAD Statement  */
+#line 1033 "parser.y++"
                                         {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, (yyvsp[-3].ptr), "", 1);
         insertAttr(v, NULL, ":", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -3538,82 +3120,97 @@ yyreduce:
 		(yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
 
     }
-#line 3542 "parser.cpp"
+#line 3124 "parser.cpp"
     break;
 
-  case 120:
-#line 1190 "parser.y++"
-                                      {
-        vector<data>v;
-        insertAttr(v, (yyvsp[-2].ptr), "", 1);
+  case 108: /* LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD StatementNoShortIf  */
+#line 1062 "parser.y++"
+                                                {
+        vector<data2>v;
+        insertAttr(v, (yyvsp[-3].ptr), "", 1);
         insertAttr(v, NULL, ":", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("LabeledStatementNoShortIf", v);
+
+		//semantic
+		if((yyvsp[0].ptr)->is_error)	{
+			(yyval.ptr)->is_error = 1;
+		}
+
+		if(gotolabel.find((yyvsp[-3].ptr)->tempName) != gotolabel.end()){
+			yyerror(string("duplicate label \'" + string((yyvsp[-3].ptr)->tempName) + "\'").c_str());
+			(yyval.ptr)->is_error = 1;
+		}
+		else{
+			gotolabel.insert({string((yyvsp[-3].ptr)->tempName), (yyvsp[-1].ind)});
+		}
+		(yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
+		(yyval.ptr)->caselist = (yyvsp[0].ptr)->caselist;
+		(yyval.ptr)->continuelist = (yyvsp[0].ptr)->continuelist;
+		(yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
+
     }
-#line 3554 "parser.cpp"
+#line 3154 "parser.cpp"
     break;
 
-  case 121:
-#line 1200 "parser.y++"
+  case 109: /* ExpressionStatement: StatementExpression ';'  */
+#line 1090 "parser.y++"
                             {
-        vector<data>v;
-        insertAttr(v,(yyvsp[-1].ptr), "", 1);
-        insertAttr(v, NULL, ";", 0);
-		(yyval.ptr) = makenode("ExpressionStatement", v);
+		(yyval.ptr) = (yyvsp[-1].ptr);
     }
-#line 3565 "parser.cpp"
+#line 3162 "parser.cpp"
     break;
 
-  case 122:
-#line 1209 "parser.y++"
+  case 110: /* StatementExpression: Assignment  */
+#line 1096 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3571 "parser.cpp"
+#line 3168 "parser.cpp"
     break;
 
-  case 123:
-#line 1210 "parser.y++"
+  case 111: /* StatementExpression: PreIncrementExpression  */
+#line 1097 "parser.y++"
                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3577 "parser.cpp"
+#line 3174 "parser.cpp"
     break;
 
-  case 124:
-#line 1211 "parser.y++"
+  case 112: /* StatementExpression: PreDecrementExpression  */
+#line 1098 "parser.y++"
                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3583 "parser.cpp"
+#line 3180 "parser.cpp"
     break;
 
-  case 125:
-#line 1212 "parser.y++"
+  case 113: /* StatementExpression: PostIncrementExpression  */
+#line 1099 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3589 "parser.cpp"
+#line 3186 "parser.cpp"
     break;
 
-  case 126:
-#line 1213 "parser.y++"
+  case 114: /* StatementExpression: PostDecrementExpression  */
+#line 1100 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3595 "parser.cpp"
+#line 3192 "parser.cpp"
     break;
 
-  case 127:
-#line 1214 "parser.y++"
+  case 115: /* StatementExpression: MethodInvocation  */
+#line 1101 "parser.y++"
                      {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3601 "parser.cpp"
+#line 3198 "parser.cpp"
     break;
 
-  case 128:
-#line 1215 "parser.y++"
+  case 116: /* StatementExpression: ClassInstanceCreationExpression  */
+#line 1102 "parser.y++"
                                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3607 "parser.cpp"
+#line 3204 "parser.cpp"
     break;
 
-  case 129:
-#line 1219 "parser.y++"
+  case 117: /* $@1: %empty  */
+#line 1106 "parser.y++"
          {if_found = 1;}
-#line 3613 "parser.cpp"
+#line 3210 "parser.cpp"
     break;
 
-  case 130:
-#line 1219 "parser.y++"
+  case 118: /* IF_CODE: IF $@1 '(' Expression ')'  */
+#line 1106 "parser.y++"
                                             {
         if((yyvsp[-1].ptr)->truelist.empty() && (yyvsp[-1].ptr)->falselist.empty()) {
             int a = code.size();
@@ -3627,13 +3224,13 @@ yyreduce:
         (yyval.ptr) = (yyvsp[-1].ptr);
 		if_found = 0;
     }
-#line 3631 "parser.cpp"
+#line 3228 "parser.cpp"
     break;
 
-  case 131:
-#line 1234 "parser.y++"
+  case 119: /* IfThenStatement: IF_CODE NEXT_QUAD Statement  */
+#line 1121 "parser.y++"
                                 {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-2].ptr), "", 1);
 		insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("if", v);
@@ -3650,13 +3247,13 @@ yyreduce:
         (yyval.ptr)->continuelist = (yyvsp[0].ptr)->continuelist;
         (yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
     }
-#line 3654 "parser.cpp"
+#line 3251 "parser.cpp"
     break;
 
-  case 132:
-#line 1255 "parser.y++"
+  case 120: /* IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement  */
+#line 1142 "parser.y++"
                                                                     {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-6].ptr), "", 1);
 		insertAttr(v, (yyvsp[-4].ptr), "", 1);
 		insertAttr(v, (yyvsp[0].ptr), "", 1);
@@ -3676,13 +3273,13 @@ yyreduce:
 		(yyvsp[-4].ptr)->continuelist.insert((yyvsp[-4].ptr)->continuelist.end(), (yyvsp[0].ptr)->continuelist.begin(), (yyvsp[0].ptr)->continuelist.end());
 		(yyval.ptr)->continuelist = (yyvsp[-4].ptr)->continuelist;
     }
-#line 3680 "parser.cpp"
+#line 3277 "parser.cpp"
     break;
 
-  case 133:
-#line 1279 "parser.y++"
+  case 121: /* IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf  */
+#line 1166 "parser.y++"
                                                                               {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-6].ptr), "", 1);
 		insertAttr(v, (yyvsp[-4].ptr), "", 1);
 		insertAttr(v, (yyvsp[0].ptr), "", 1);
@@ -3702,13 +3299,13 @@ yyreduce:
 		(yyvsp[-4].ptr)->continuelist.insert((yyvsp[-4].ptr)->continuelist.end(), (yyvsp[0].ptr)->continuelist.begin(), (yyvsp[0].ptr)->continuelist.end());
 		(yyval.ptr)->continuelist = (yyvsp[-4].ptr)->continuelist;
     }
-#line 3706 "parser.cpp"
+#line 3303 "parser.cpp"
     break;
 
-  case 134:
-#line 1303 "parser.y++"
+  case 122: /* WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement  */
+#line 1190 "parser.y++"
                                                            {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-3].ptr), "", 1);
 		insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("while-loop", v);
@@ -3726,13 +3323,13 @@ yyreduce:
         (yyval.ptr)->nextlist.insert((yyval.ptr)->nextlist.end(), (yyvsp[0].ptr)->breaklist.begin(), (yyvsp[0].ptr)->breaklist.end());
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), (yyvsp[-4].ind));
     }
-#line 3730 "parser.cpp"
+#line 3327 "parser.cpp"
     break;
 
-  case 135:
-#line 1325 "parser.y++"
+  case 123: /* WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf  */
+#line 1212 "parser.y++"
                                                                      {
-        vector<data> v;
+        vector<data2> v;
 		insertAttr(v, (yyvsp[-3].ptr), "", 1);
 		insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("while-loop", v);
@@ -3750,13 +3347,13 @@ yyreduce:
         (yyval.ptr)->nextlist.insert((yyval.ptr)->nextlist.end(), (yyvsp[0].ptr)->breaklist.begin(), (yyvsp[0].ptr)->breaklist.end());
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), (yyvsp[-4].ind));
     }
-#line 3754 "parser.cpp"
+#line 3351 "parser.cpp"
     break;
 
-  case 136:
-#line 1347 "parser.y++"
+  case 124: /* ForStatement: BasicForHeader Statement  */
+#line 1234 "parser.y++"
                               {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("For_statement", v);
@@ -3769,13 +3366,13 @@ yyreduce:
 
         //3ac
     }
-#line 3773 "parser.cpp"
+#line 3370 "parser.cpp"
     break;
 
-  case 137:
-#line 1361 "parser.y++"
+  case 125: /* ForStatement: EnhancedForHeader Statement  */
+#line 1248 "parser.y++"
                                  {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("For_statement", v);
@@ -3788,13 +3385,13 @@ yyreduce:
 
         //3ac
     }
-#line 3792 "parser.cpp"
+#line 3389 "parser.cpp"
     break;
 
-  case 138:
-#line 1378 "parser.y++"
+  case 126: /* ForStatementNoShortIf: BasicForHeader StatementNoShortIf  */
+#line 1265 "parser.y++"
                                        {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("For_statement_no_short_if", v);
@@ -3808,13 +3405,13 @@ yyreduce:
         //3ac
 
     }
-#line 3812 "parser.cpp"
+#line 3409 "parser.cpp"
     break;
 
-  case 139:
-#line 1393 "parser.y++"
+  case 127: /* ForStatementNoShortIf: EnhancedForHeader StatementNoShortIf  */
+#line 1280 "parser.y++"
                                           {
-        vector<data> v;
+        vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("For_statement_no_short_if", v);
@@ -3827,13 +3424,13 @@ yyreduce:
 
         //3ac
     }
-#line 3831 "parser.cpp"
+#line 3428 "parser.cpp"
     break;
 
-  case 140:
-#line 1410 "parser.y++"
+  case 128: /* BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey ')'  */
+#line 1297 "parser.y++"
                                                           {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-7].str)), "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,(yyvsp[-5].ptr), "", 1);
@@ -3846,20 +3443,16 @@ yyreduce:
 
         //semantic 
 
-        if((yyvsp[-5].ptr)->is_error || (yyvsp[-3].ptr)->is_error || (yyvsp[-1].ptr)->is_error)	{
-			(yyval.ptr)->is_error = 1;
-		}
-
         //3ac
 
     }
-#line 3857 "parser.cpp"
+#line 3450 "parser.cpp"
     break;
 
-  case 141:
-#line 1433 "parser.y++"
+  case 129: /* EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression ')'  */
+#line 1316 "parser.y++"
                                                           {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-5].str)), "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
@@ -3876,87 +3469,87 @@ yyreduce:
 
         //3ac
     }
-#line 3880 "parser.cpp"
+#line 3473 "parser.cpp"
     break;
 
-  case 142:
-#line 1453 "parser.y++"
+  case 130: /* ForInity: %empty  */
+#line 1336 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3886 "parser.cpp"
+#line 3479 "parser.cpp"
     break;
 
-  case 143:
-#line 1454 "parser.y++"
+  case 131: /* ForInity: ForInit  */
+#line 1337 "parser.y++"
               {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3892 "parser.cpp"
+#line 3485 "parser.cpp"
     break;
 
-  case 144:
-#line 1458 "parser.y++"
+  case 132: /* Expressiony: %empty  */
+#line 1341 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3898 "parser.cpp"
+#line 3491 "parser.cpp"
     break;
 
-  case 145:
-#line 1459 "parser.y++"
+  case 133: /* Expressiony: Expression  */
+#line 1342 "parser.y++"
                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3904 "parser.cpp"
+#line 3497 "parser.cpp"
     break;
 
-  case 146:
-#line 1463 "parser.y++"
+  case 134: /* ForUpdatey: %empty  */
+#line 1346 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3910 "parser.cpp"
+#line 3503 "parser.cpp"
     break;
 
-  case 147:
-#line 1464 "parser.y++"
+  case 135: /* ForUpdatey: ForUpdate  */
+#line 1347 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3916 "parser.cpp"
+#line 3509 "parser.cpp"
     break;
 
-  case 148:
-#line 1468 "parser.y++"
+  case 136: /* ForInit: StatementExpressionList  */
+#line 1351 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3922 "parser.cpp"
+#line 3515 "parser.cpp"
     break;
 
-  case 149:
-#line 1469 "parser.y++"
+  case 137: /* ForInit: LocalVariableDeclaration  */
+#line 1352 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3928 "parser.cpp"
+#line 3521 "parser.cpp"
     break;
 
-  case 150:
-#line 1473 "parser.y++"
+  case 138: /* ForUpdate: StatementExpressionList  */
+#line 1356 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3934 "parser.cpp"
+#line 3527 "parser.cpp"
     break;
 
-  case 151:
-#line 1477 "parser.y++"
+  case 139: /* StatementExpressionList: StatementExpression  */
+#line 1360 "parser.y++"
                         {
 		(yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 3942 "parser.cpp"
+#line 3535 "parser.cpp"
     break;
 
-  case 152:
-#line 1480 "parser.y++"
+  case 140: /* StatementExpressionList: StatementExpression ',' StatementExpressionList  */
+#line 1363 "parser.y++"
                                                     {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, ",", 0);
         insertAttr(v,(yyvsp[0].ptr),"",1);
 		(yyval.ptr) = makenode("StatementExpressionList2", v);
     }
-#line 3954 "parser.cpp"
+#line 3547 "parser.cpp"
     break;
 
-  case 153:
-#line 1491 "parser.y++"
+  case 141: /* BreakStatement: BREAK SimpleName ';'  */
+#line 1374 "parser.y++"
                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, ";", 0);
@@ -3966,11 +3559,11 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->breaklist.push_back(a);
     }
-#line 3970 "parser.cpp"
+#line 3563 "parser.cpp"
     break;
 
-  case 154:
-#line 1502 "parser.y++"
+  case 142: /* BreakStatement: BREAK ';'  */
+#line 1385 "parser.y++"
               {
         (yyval.ptr) = makeleaf((yyvsp[-1].str));
         
@@ -3978,27 +3571,13 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->breaklist.push_back(a);
     }
-#line 3982 "parser.cpp"
+#line 3575 "parser.cpp"
     break;
 
-  case 155:
-#line 1512 "parser.y++"
-                         {
-        vector<data>v;
-        insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
-        insertAttr(v,(yyvsp[-1].ptr), "", 1);
-        insertAttr(v, NULL, ";", 0);
-		(yyval.ptr) = makenode("YieldStatement", v);
-
-        // semantics
-    }
-#line 3996 "parser.cpp"
-    break;
-
-  case 156:
-#line 1524 "parser.y++"
+  case 143: /* ContinueStatement: CONTINUE SimpleName ';'  */
+#line 1395 "parser.y++"
                             {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, ";", 0);
@@ -4009,13 +3588,13 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->continuelist.push_back(a);
     }
-#line 4013 "parser.cpp"
+#line 3592 "parser.cpp"
     break;
 
-  case 157:
-#line 1536 "parser.y++"
+  case 144: /* ContinueStatement: CONTINUE ';'  */
+#line 1407 "parser.y++"
                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v, NULL, ";", 0);
 		(yyval.ptr) = makenode("ContinueStatement", v);
@@ -4025,43 +3604,41 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->continuelist.push_back(a);
     }
-#line 4029 "parser.cpp"
+#line 3608 "parser.cpp"
     break;
 
-  case 158:
-#line 1550 "parser.y++"
+  case 145: /* ReturnStatement: RETURN Expression ';'  */
+#line 1421 "parser.y++"
                           {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, ";", 0);
 		(yyval.ptr) = makenode("ReturnStatement", v);
 
         // Semantics
-        if((yyvsp[-1].ptr)->is_error)	{
-			(yyval.ptr)->is_error = 1;
-		}
+
 		backpatch((yyvsp[-1].ptr)->nextlist,code.size());
         emit(qid("RETURN", NULL), (yyvsp[-1].ptr)->place, qid("", NULL), qid("", NULL), -1);
     }
-#line 4048 "parser.cpp"
+#line 3625 "parser.cpp"
     break;
 
-  case 159:
-#line 1564 "parser.y++"
-             {
-        (yyval.ptr) = makeleaf((yyvsp[0].str));
+  case 146: /* ReturnStatement: RETURN ';'  */
+#line 1433 "parser.y++"
+                 {
+        (yyval.ptr) = makeleaf((yyvsp[-1].str));
 
         // Semantics
         emit(qid("RETURN", NULL), qid("", NULL), qid("", NULL), qid("", NULL), -1);
     }
-#line 4059 "parser.cpp"
+#line 3636 "parser.cpp"
     break;
 
-  case 160:
-#line 1573 "parser.y++"
+  case 147: /* ThrowStatement: THROW Expression ';'  */
+#line 1442 "parser.y++"
                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, ";", 0);
@@ -4070,34 +3647,17 @@ yyreduce:
         // Semantics
         yyerror("Not implemented yet\n");        
     }
-#line 4074 "parser.cpp"
+#line 3651 "parser.cpp"
     break;
 
-  case 161:
-#line 1586 "parser.y++"
-                                          {
-        vector<data>v;
-        insertAttr(v, makeleaf((yyvsp[-4].str)), "", 1);
-        insertAttr(v, NULL, "(", 0);
-        insertAttr(v,(yyvsp[-2].ptr), "", 1);
-        insertAttr(v, NULL, ")", 0);
-        insertAttr(v,(yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("SynchronizedStatement", v);
-
-        // Semantics
-        yyerror("Not implemented yet\n"); 
-    }
-#line 4091 "parser.cpp"
-    break;
-
-  case 162:
-#line 1601 "parser.y++"
+  case 148: /* $@2: %empty  */
+#line 1456 "parser.y++"
       {if_found = 1;}
-#line 4097 "parser.cpp"
+#line 3657 "parser.cpp"
     break;
 
-  case 163:
-#line 1601 "parser.y++"
+  case 149: /* EXPR_CODE: $@2 StatementExpression  */
+#line 1456 "parser.y++"
                                           {
         if((yyvsp[0].ptr)->truelist.empty() && (yyvsp[0].ptr)->falselist.empty()) {
             int a = code.size();
@@ -4111,108 +3671,102 @@ yyreduce:
         (yyval.ptr) = (yyvsp[0].ptr);
 		if_found = 0;
     }
-#line 4115 "parser.cpp"
+#line 3675 "parser.cpp"
     break;
 
-  case 164:
-#line 1633 "parser.y++"
+  case 150: /* N: %empty  */
+#line 1488 "parser.y++"
              {
         int a = code.size();
 		(yyval.ptr) = new treeNode;
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->nextlist.push_back(a);
     }
-#line 4126 "parser.cpp"
+#line 3686 "parser.cpp"
     break;
 
-  case 165:
-#line 1644 "parser.y++"
+  case 151: /* Primary: PrimaryNoNewArray  */
+#line 1499 "parser.y++"
                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4132 "parser.cpp"
+#line 3692 "parser.cpp"
     break;
 
-  case 166:
-#line 1645 "parser.y++"
+  case 152: /* Primary: ArrayCreationExpression  */
+#line 1500 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4138 "parser.cpp"
+#line 3698 "parser.cpp"
     break;
 
-  case 167:
-#line 1648 "parser.y++"
+  case 153: /* PrimaryNoNewArray: Literal  */
+#line 1503 "parser.y++"
             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4144 "parser.cpp"
+#line 3704 "parser.cpp"
     break;
 
-  case 168:
-#line 1649 "parser.y++"
+  case 154: /* PrimaryNoNewArray: THIS  */
+#line 1504 "parser.y++"
           {(yyval.ptr) = makeleaf((yyvsp[0].str));}
-#line 4150 "parser.cpp"
+#line 3710 "parser.cpp"
     break;
 
-  case 169:
-#line 1650 "parser.y++"
+  case 155: /* PrimaryNoNewArray: '(' Expression ')'  */
+#line 1505 "parser.y++"
                        {(yyval.ptr)=(yyvsp[-1].ptr);}
-#line 4156 "parser.cpp"
+#line 3716 "parser.cpp"
     break;
 
-  case 170:
-#line 1651 "parser.y++"
+  case 156: /* PrimaryNoNewArray: ClassInstanceCreationExpression  */
+#line 1506 "parser.y++"
                                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4162 "parser.cpp"
+#line 3722 "parser.cpp"
     break;
 
-  case 171:
-#line 1652 "parser.y++"
-                 {(yyval.ptr)=(yyvsp[0].ptr) ;}
-#line 4168 "parser.cpp"
-    break;
-
-  case 172:
-#line 1653 "parser.y++"
+  case 157: /* PrimaryNoNewArray: ArrayAccess  */
+#line 1507 "parser.y++"
                  {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4174 "parser.cpp"
+#line 3728 "parser.cpp"
     break;
 
-  case 173:
-#line 1654 "parser.y++"
+  case 158: /* PrimaryNoNewArray: MethodInvocation  */
+#line 1508 "parser.y++"
                       {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4180 "parser.cpp"
+#line 3734 "parser.cpp"
     break;
 
-  case 174:
-#line 1659 "parser.y++"
+  case 159: /* ClassInstanceCreationExpression: UnqualifiedClassInstanceCreationExpression  */
+#line 1513 "parser.y++"
                                                 {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4186 "parser.cpp"
+#line 3740 "parser.cpp"
     break;
 
-  case 175:
-#line 1660 "parser.y++"
+  case 160: /* ClassInstanceCreationExpression: Name '.' UnqualifiedClassInstanceCreationExpression  */
+#line 1514 "parser.y++"
                                                         {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, ".", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassInstanceCreationExpression", v);
     }
-#line 4198 "parser.cpp"
+#line 3752 "parser.cpp"
     break;
 
-  case 176:
-#line 1667 "parser.y++"
+  case 161: /* ClassInstanceCreationExpression: Primary '.' UnqualifiedClassInstanceCreationExpression  */
+#line 1521 "parser.y++"
                                                            {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, ".", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassInstanceCreationExpression", v);
     }
-#line 4210 "parser.cpp"
+#line 3764 "parser.cpp"
     break;
 
-  case 177:
-#line 1677 "parser.y++"
+  case 162: /* UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy  */
+#line 1531 "parser.y++"
                                                                             {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-5].str)), "", 1);
         insertAttr(v, (yyvsp[-4].ptr), "", 1);
         insertAttr(v, NULL, "(", 1);
@@ -4221,129 +3775,122 @@ yyreduce:
         insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnqualifiedClassInstanceCreationExpression", v);
     }
-#line 4225 "parser.cpp"
+#line 3779 "parser.cpp"
     break;
 
-  case 178:
-#line 1690 "parser.y++"
+  case 163: /* ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy  */
+#line 1544 "parser.y++"
                                                                        {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassOrInterfaceTypeToInstantiate", v);
     }
-#line 4237 "parser.cpp"
+#line 3791 "parser.cpp"
     break;
 
-  case 179:
-#line 1700 "parser.y++"
+  case 164: /* TypeArgumentsOrDiamondy: %empty  */
+#line 1554 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 4243 "parser.cpp"
+#line 3797 "parser.cpp"
     break;
 
-  case 180:
-#line 1701 "parser.y++"
+  case 165: /* TypeArgumentsOrDiamondy: TypeArgumentsOrDiamond  */
+#line 1555 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4249 "parser.cpp"
+#line 3803 "parser.cpp"
     break;
 
-  case 181:
-#line 1705 "parser.y++"
+  case 166: /* ClassOrInterfaceTypeToInstant: %empty  */
+#line 1559 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 4255 "parser.cpp"
+#line 3809 "parser.cpp"
     break;
 
-  case 182:
-#line 1706 "parser.y++"
+  case 167: /* ClassOrInterfaceTypeToInstant: '.' SimpleName ClassOrInterfaceTypeToInstant  */
+#line 1560 "parser.y++"
                                                     {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,NULL,".",0);
         insertAttr(v, (yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassOrInterfaceTypeToInstant", v);
     }
-#line 4267 "parser.cpp"
+#line 3821 "parser.cpp"
     break;
 
-  case 183:
-#line 1716 "parser.y++"
+  case 168: /* TypeArgumentsOrDiamond: '<' '>'  */
+#line 1570 "parser.y++"
            {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "<", 0);
         insertAttr(v, NULL, ">", 0);
 		(yyval.ptr) = makenode("TypeArgumentsOrDiamond", v);
     }
-#line 4278 "parser.cpp"
+#line 3832 "parser.cpp"
     break;
 
-  case 184:
-#line 1725 "parser.y++"
-                           {
-        vector<data>v;
-        insertAttr(v,(yyvsp[-2].ptr), "", 1);
-        insertAttr(v, NULL, ".", 0);
-        insertAttr(v, (yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("FieldAccess", v);
-    }
-#line 4290 "parser.cpp"
-    break;
-
-  case 185:
-#line 1732 "parser.y++"
-                         {
-        vector<data>v;
-        insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
-        insertAttr(v, NULL, ".", 0);
-        insertAttr(v,(yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("FieldAccess", v);
-    }
-#line 4302 "parser.cpp"
-    break;
-
-  case 186:
-#line 1742 "parser.y++"
+  case 169: /* ArrayAccess: Name '[' Expression ']'  */
+#line 1579 "parser.y++"
                              {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
         insertAttr(v, NULL, "[", 0);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, "]", 0);
 		(yyval.ptr) = makenode("ArrayAccess", v);
+
+		// Semantics
+		if((yyvsp[-3].ptr)->expType == 2){
+			string tmp = (yyvsp[-3].ptr)->type;
+			(yyval.ptr)->type = tmp.substr(0,tmp.length()-1);
+			if(((yyval.ptr)->type)[tmp.length()-2]=='*') (yyval.ptr)->expType = 2;
+			else (yyval.ptr)->expType = 1;
+		}
+		yyerror("Accessing field of a non-array construct");
     }
-#line 4315 "parser.cpp"
+#line 3854 "parser.cpp"
     break;
 
-  case 187:
-#line 1750 "parser.y++"
-                                         {
-        vector<data>v;
+  case 170: /* ArrayAccess: ArrayAccess '[' Expression ']'  */
+#line 1596 "parser.y++"
+                                   {
+        vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
         insertAttr(v, NULL, "[", 0);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, "]", 0);
 		(yyval.ptr) = makenode("ArrayAccess", v);
+		// Semantics
+		if((yyvsp[-3].ptr)->expType == 2){
+			string tmp = (yyvsp[-3].ptr)->type;
+			(yyval.ptr)->type = tmp.substr(0,tmp.length()-1);
+			if(((yyval.ptr)->type)[tmp.length()-2]=='*') (yyval.ptr)->expType = 2;
+			else (yyval.ptr)->expType = 1;
+		}
+		yyerror("Accessing field of a non-array construct");
     }
-#line 4328 "parser.cpp"
+#line 3875 "parser.cpp"
     break;
 
-  case 188:
-#line 1762 "parser.y++"
+  case 171: /* MethodInvocation: Name '(' ArgumentListy ')'  */
+#line 1616 "parser.y++"
                                 {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, (yyvsp[-3].ptr), "", 1);
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, ")", 0);
 		(yyval.ptr) = makenode("MethodInvocation", v);
     }
-#line 4341 "parser.cpp"
+#line 3888 "parser.cpp"
     break;
 
-  case 189:
-#line 1770 "parser.y++"
+  case 172: /* MethodInvocation: Primary '.' SimpleName '(' ArgumentListy ')'  */
+#line 1624 "parser.y++"
                                                   {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, (yyvsp[-5].ptr), "", 1);
         insertAttr(v, NULL, ".", 0);
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
@@ -4352,26 +3899,11 @@ yyreduce:
         insertAttr(v, NULL, ")", 0);
 		(yyval.ptr) = makenode("MethodInvocation", v);
     }
-#line 4356 "parser.cpp"
+#line 3903 "parser.cpp"
     break;
 
-  case 190:
-#line 1780 "parser.y++"
-                                                {
-        vector<data>v;
-        insertAttr(v, makeleaf((yyvsp[-5].str)), "", 1);
-        insertAttr(v, NULL, ".", 0);
-        insertAttr(v,(yyvsp[-3].ptr), "", 1);
-        insertAttr(v, NULL, "(", 0);
-        insertAttr(v,(yyvsp[-1].ptr), "", 1);
-        insertAttr(v, NULL, ")", 0);
-		(yyval.ptr) = makenode("MethodInvocation", v);
-    }
-#line 4371 "parser.cpp"
-    break;
-
-  case 191:
-#line 1793 "parser.y++"
+  case 173: /* ArgumentList: Expression  */
+#line 1637 "parser.y++"
                  {
         (yyval.ptr)=(yyvsp[0].ptr);
 
@@ -4387,134 +3919,107 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4391 "parser.cpp"
+#line 3923 "parser.cpp"
     break;
 
-  case 192:
-#line 1808 "parser.y++"
+  case 174: /* ArgumentList: ArgumentList ',' Expression  */
+#line 1652 "parser.y++"
                                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, ",", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ArgumentList", v);
 
         //semantic
-        if(!((yyvsp[-2].ptr)->is_error || (yyvsp[0].ptr)->is_error)){
-			string temp = argExp((yyvsp[-2].ptr)->type, (yyvsp[0].ptr)->type, 2);
-
-			if((yyvsp[-2].ptr)->isInit && (yyvsp[0].ptr)->isInit) (yyval.ptr)->isInit=1;
-			currArgs.back().push_back((yyvsp[0].ptr)->type);
-			(yyval.ptr)->type = "void";
-
-			//--3AC
-		}
-		else{
-			(yyval.ptr)->is_error = 1;
-		}
+		if((yyvsp[-2].ptr)->isInit && (yyvsp[0].ptr)->isInit) (yyval.ptr)->isInit=1;
+		currArgs.back().push_back((yyvsp[0].ptr)->type);
+		(yyval.ptr)->type = "void";
     }
-#line 4417 "parser.cpp"
+#line 3940 "parser.cpp"
     break;
 
-  case 193:
-#line 1831 "parser.y++"
+  case 175: /* ArrayCreationExpression: NEW PrimitiveType DimExprs Dimsy  */
+#line 1666 "parser.y++"
                                       {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-3].str)), "", 1);
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ArrayCreationExpression", v);
     }
-#line 4430 "parser.cpp"
+#line 3953 "parser.cpp"
     break;
 
-  case 194:
-#line 1839 "parser.y++"
-                                             {
-        vector<data>v;
-        insertAttr(v, makeleaf((yyvsp[-3].str)), "", 1);
-        insertAttr(v,(yyvsp[-2].ptr), "", 1);
-        insertAttr(v,(yyvsp[-1].ptr), "", 1);
-        insertAttr(v,(yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("ArrayCreationExpression", v);
-    }
-#line 4443 "parser.cpp"
-    break;
-
-  case 195:
-#line 1850 "parser.y++"
+  case 176: /* DimExprs: DimExpr  */
+#line 1677 "parser.y++"
             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4449 "parser.cpp"
+#line 3959 "parser.cpp"
     break;
 
-  case 196:
-#line 1851 "parser.y++"
+  case 177: /* DimExprs: DimExprs DimExpr  */
+#line 1678 "parser.y++"
                      {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("DimExprs", v);
     }
-#line 4460 "parser.cpp"
+#line 3970 "parser.cpp"
     break;
 
-  case 197:
-#line 1861 "parser.y++"
+  case 178: /* DimExpr: '[' Expression ']'  */
+#line 1688 "parser.y++"
                         {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "[", 0);
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, NULL, "]", 0);
 		(yyval.ptr) = makenode("DimExpr", v);
     }
-#line 4472 "parser.cpp"
+#line 3982 "parser.cpp"
     break;
 
-  case 198:
-#line 1871 "parser.y++"
+  case 179: /* Expression: AssignmentExpression  */
+#line 1698 "parser.y++"
                           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4478 "parser.cpp"
+#line 3988 "parser.cpp"
     break;
 
-  case 199:
-#line 1876 "parser.y++"
+  case 180: /* AssignmentExpression: Assignment  */
+#line 1703 "parser.y++"
                 {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4484 "parser.cpp"
+#line 3994 "parser.cpp"
     break;
 
-  case 200:
-#line 1877 "parser.y++"
+  case 181: /* AssignmentExpression: ConditionalExpression  */
+#line 1704 "parser.y++"
                            {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4490 "parser.cpp"
+#line 4000 "parser.cpp"
     break;
 
-  case 201:
-#line 1881 "parser.y++"
+  case 182: /* $@4: %empty  */
+#line 1708 "parser.y++"
                                      {if_found = 0;}
-#line 4496 "parser.cpp"
+#line 4006 "parser.cpp"
     break;
 
-  case 202:
-#line 1881 "parser.y++"
+  case 183: /* Assignment: LeftHandSide AssignmentOperator $@4 AssignmentExpression  */
+#line 1708 "parser.y++"
                                                                           {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
-        insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
-		(yyval.ptr) = makenode("Assignment", v);
+		(yyval.ptr) = makenode((yyvsp[-2].ptr)->tempName , v);
 
         //Semantics
+		cout << "in Assignment\n";
 		string temp = assignExp((yyvsp[-3].ptr)->type,(yyvsp[0].ptr)->type,string((yyvsp[-2].ptr)->tempName));
 
-		if(!(yyvsp[-3].ptr)->is_error && !(yyvsp[0].ptr)->is_error && (yyvsp[-3].ptr)->expType!=4){
+		if((yyvsp[-3].ptr)->expType!=4){
 			if(!temp.empty()){
-				if(temp =="ok"){
-					(yyval.ptr)->type = (yyvsp[-3].ptr)->type;
-				}
-				else if(temp == "warning"){
-					(yyval.ptr)->type = (yyvsp[-3].ptr)->type;
-				} 
+				(yyval.ptr)->type = (yyvsp[-3].ptr)->type;
 				if((yyvsp[-3].ptr)->expType == 3 && (yyvsp[0].ptr)->isInit){
 					updInit((yyvsp[-3].ptr)->tempName);
 				}
@@ -4526,136 +4031,128 @@ yyreduce:
 			}
 			else{
 				yyerror(("Incompatible types when assigning " + (yyvsp[0].ptr)->type + " type to " + (yyvsp[-3].ptr)->type).c_str());
-				(yyval.ptr)->is_error = 1;
 			}
 		}
 		else{
 			if((yyvsp[-3].ptr)->expType==4){
 				yyerror("Left operand in assignment operation cannot be a constant expression");
 			}
-			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4540 "parser.cpp"
+#line 4043 "parser.cpp"
     break;
 
-  case 203:
-#line 1923 "parser.y++"
+  case 184: /* LeftHandSide: Name  */
+#line 1743 "parser.y++"
           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4546 "parser.cpp"
+#line 4049 "parser.cpp"
     break;
 
-  case 204:
-#line 1924 "parser.y++"
+  case 185: /* LeftHandSide: ArrayAccess  */
+#line 1744 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4552 "parser.cpp"
+#line 4055 "parser.cpp"
     break;
 
-  case 205:
-#line 1925 "parser.y++"
-                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4558 "parser.cpp"
-    break;
-
-  case 206:
-#line 1929 "parser.y++"
+  case 186: /* AssignmentOperator: '='  */
+#line 1748 "parser.y++"
         {(yyval.ptr) = makeleaf("=");
     (yyval.ptr)->tempName = "=";}
-#line 4565 "parser.cpp"
+#line 4062 "parser.cpp"
     break;
 
-  case 207:
-#line 1931 "parser.y++"
+  case 187: /* AssignmentOperator: DIV_ASSIGN  */
+#line 1750 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4573 "parser.cpp"
+#line 4070 "parser.cpp"
     break;
 
-  case 208:
-#line 1934 "parser.y++"
+  case 188: /* AssignmentOperator: MUL_ASSIGN  */
+#line 1753 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4581 "parser.cpp"
+#line 4078 "parser.cpp"
     break;
 
-  case 209:
-#line 1937 "parser.y++"
+  case 189: /* AssignmentOperator: MOD_ASSIGN  */
+#line 1756 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4589 "parser.cpp"
+#line 4086 "parser.cpp"
     break;
 
-  case 210:
-#line 1940 "parser.y++"
+  case 190: /* AssignmentOperator: ADD_ASSIGN  */
+#line 1759 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4597 "parser.cpp"
+#line 4094 "parser.cpp"
     break;
 
-  case 211:
-#line 1943 "parser.y++"
+  case 191: /* AssignmentOperator: SUB_ASSIGN  */
+#line 1762 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4605 "parser.cpp"
+#line 4102 "parser.cpp"
     break;
 
-  case 212:
-#line 1946 "parser.y++"
+  case 192: /* AssignmentOperator: LEFT_ASSIGN  */
+#line 1765 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4613 "parser.cpp"
+#line 4110 "parser.cpp"
     break;
 
-  case 213:
-#line 1949 "parser.y++"
+  case 193: /* AssignmentOperator: RIGHT_ASSIGN  */
+#line 1768 "parser.y++"
                  {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4621 "parser.cpp"
+#line 4118 "parser.cpp"
     break;
 
-  case 214:
-#line 1952 "parser.y++"
+  case 194: /* AssignmentOperator: UNSIGNED_RIGHT_ASSIGN  */
+#line 1771 "parser.y++"
                           {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4629 "parser.cpp"
+#line 4126 "parser.cpp"
     break;
 
-  case 215:
-#line 1955 "parser.y++"
+  case 195: /* AssignmentOperator: AND_ASSIGN  */
+#line 1774 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4637 "parser.cpp"
+#line 4134 "parser.cpp"
     break;
 
-  case 216:
-#line 1958 "parser.y++"
+  case 196: /* AssignmentOperator: XOR_ASSIGN  */
+#line 1777 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4645 "parser.cpp"
+#line 4142 "parser.cpp"
     break;
 
-  case 217:
-#line 1961 "parser.y++"
+  case 197: /* AssignmentOperator: OR_ASSIGN  */
+#line 1780 "parser.y++"
               {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4653 "parser.cpp"
+#line 4150 "parser.cpp"
     break;
 
-  case 218:
-#line 1967 "parser.y++"
+  case 198: /* ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression  */
+#line 1786 "parser.y++"
                                                                                     {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-6].ptr), "", 1);
         insertAttr(v,(yyvsp[-4].ptr), "", 1);
         insertAttr(v, NULL, ":", 0);
@@ -4663,102 +4160,103 @@ yyreduce:
 		(yyval.ptr) = makenode("ConditionalExpression2", v);
 
         // Semantics
-		string temp = condExp((yyvsp[-4].ptr)->type, (yyvsp[0].ptr)->type);
-
-		if(!(yyvsp[-6].ptr)->is_error && !(yyvsp[-4].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
-			if(!temp.empty()){
-
-				if_found = previous_if_found;
-				(yyval.ptr)->type = "int";
-				if((yyvsp[-6].ptr)->intVal) (yyval.ptr)->intVal = (yyvsp[-4].ptr)->intVal;
-				else (yyval.ptr)->intVal = (yyvsp[0].ptr)->intVal;
-				if((yyvsp[-6].ptr)->isInit==1 && (yyvsp[-4].ptr)->isInit==1 && (yyvsp[0].ptr)->isInit==1) (yyval.ptr)->isInit=1;
-
-				// 3AC
-				qid temp1 = newtemp((yyval.ptr)->type);
-
-				backpatch((yyvsp[-6].ptr)->truelist, (yyvsp[-5].ind));
-				backpatch((yyvsp[-6].ptr)->falselist, (yyvsp[-1].ind));
-				backpatch((yyvsp[-4].ptr)->nextlist, (yyvsp[-3].ind)-1);
-				backpatch((yyvsp[-4].ptr)->truelist, (yyvsp[-3].ind)-1);
-				backpatch((yyvsp[-4].ptr)->falselist, (yyvsp[-3].ind)-1);
-
-				code[(yyvsp[-3].ind)-1].arg1 = (yyvsp[-4].ptr)->place;
-				code[(yyvsp[-3].ind)-1].res = temp1;
-
-				backpatch((yyvsp[0].ptr)->nextlist, code.size());
-				backpatch((yyvsp[0].ptr)->falselist, code.size());
-				backpatch((yyvsp[0].ptr)->truelist, code.size());
-
-				emit(qid("=", NULL), (yyvsp[0].ptr)->place, qid("", NULL), temp1, -1);
-				(yyval.ptr)->nextlist.push_back((yyvsp[-3].ind));
-				(yyval.ptr)->place = temp1;
-			}
-			else {
-				yyerror("type mismatch in conditional expression");
-				(yyval.ptr)->is_error = 1;
-			}
+		if_found = previous_if_found;
+		if((yyvsp[-6].ptr)->isInit == 0) {
+			yyerror("Condition is not initialized");
 		}
-		else{
-			(yyval.ptr)->is_error = 1;
+		if((yyvsp[-6].ptr)->intVal) {
+			if((yyvsp[-4].ptr)->isInit == 0){
+				yyerror("Expression is not initialized");
+			}
+			(yyval.ptr)->type = (yyvsp[-4].ptr)->type;
+			(yyval.ptr)->intVal = (yyvsp[-4].ptr)->intVal;
 		}
+		else {
+			if((yyvsp[0].ptr)->isInit == 0){
+				yyerror("Expression is not initialized");
+			}
+			(yyval.ptr)->type = (yyvsp[0].ptr)->type;
+			(yyval.ptr)->intVal = (yyvsp[0].ptr)->intVal;
+		}
+		(yyval.ptr)->isInit=1;
 
+		// 3AC
+		qid temp1 = newtemp((yyval.ptr)->type);
+
+		backpatch((yyvsp[-6].ptr)->truelist, (yyvsp[-5].ind));
+		backpatch((yyvsp[-6].ptr)->falselist, (yyvsp[-1].ind));
+		backpatch((yyvsp[-4].ptr)->nextlist, (yyvsp[-3].ind)-1);
+		backpatch((yyvsp[-4].ptr)->truelist, (yyvsp[-3].ind)-1);
+		backpatch((yyvsp[-4].ptr)->falselist, (yyvsp[-3].ind)-1);
+
+		code[(yyvsp[-3].ind)-1].arg1 = (yyvsp[-4].ptr)->place;
+		code[(yyvsp[-3].ind)-1].res = temp1;
+
+		backpatch((yyvsp[0].ptr)->nextlist, code.size());
+		backpatch((yyvsp[0].ptr)->falselist, code.size());
+		backpatch((yyvsp[0].ptr)->truelist, code.size());
+
+		emit(qid("=", NULL), (yyvsp[0].ptr)->place, qid("", NULL), temp1, -1);
+		(yyval.ptr)->nextlist.push_back((yyvsp[-3].ind));
+		(yyval.ptr)->place = temp1;
     }
-#line 4708 "parser.cpp"
+#line 4204 "parser.cpp"
     break;
 
-  case 219:
-#line 2017 "parser.y++"
+  case 199: /* ConditionalExpression: ConditionalOrExpression  */
+#line 1835 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4714 "parser.cpp"
+#line 4210 "parser.cpp"
     break;
 
-  case 220:
-#line 2021 "parser.y++"
+  case 200: /* GOTO_COND: ConditionalOrExpression '?'  */
+#line 1839 "parser.y++"
                                       {
 		previous_if_found = if_found;
 		if_found = 0;
 		(yyval.ptr) = (yyvsp[-1].ptr);
-		if(!(yyvsp[-1].ptr)->is_error){
-			if((yyvsp[-1].ptr)->truelist.empty()){
-				backpatch((yyvsp[-1].ptr)->nextlist, code.size());
-				emit(qid("GOTO", NULL), qid("IF", lookup("if")), (yyvsp[-1].ptr)->place, qid("", NULL), 0);
-				(yyvsp[-1].ptr)->truelist.push_back(code.size()-1);
-				emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
-				(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
-			}
+		if((yyvsp[-1].ptr)->truelist.empty()){
+			backpatch((yyvsp[-1].ptr)->nextlist, code.size());
+			emit(qid("GOTO", NULL), qid("IF", lookup("if")), (yyvsp[-1].ptr)->place, qid("", NULL), 0);
+			(yyvsp[-1].ptr)->truelist.push_back(code.size()-1);
+			emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
+			(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 		}
-		else (yyval.ptr)->is_error = 1;
 	}
-#line 4734 "parser.cpp"
+#line 4227 "parser.cpp"
     break;
 
-  case 221:
-#line 2039 "parser.y++"
+  case 201: /* WRITE_GOTO: %empty  */
+#line 1854 "parser.y++"
                  {
 		emit(qid("=", NULL), qid("", NULL), qid("", NULL), qid("", NULL), -1);
 		emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
 		(yyval.ind) = code.size()-1;
 	}
-#line 4744 "parser.cpp"
+#line 4237 "parser.cpp"
     break;
 
-  case 222:
-#line 2047 "parser.y++"
+  case 202: /* ConditionalOrExpression: GOTO_OR NEXT_QUAD ConditionalAndExpression  */
+#line 1862 "parser.y++"
                                                         {
-		vector<data> attr;
+		vector<data2> attr;
 		insertAttr(attr, (yyvsp[-2].ptr), "", 1);
 		insertAttr(attr, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("||",attr);
 
 		// Semantics
 
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
-			(yyval.ptr)->type = string("int");
-			(yyval.ptr)->isInit = (((yyvsp[-2].ptr)->isInit) & ((yyvsp[0].ptr)->isInit));   
-			(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal || (yyvsp[0].ptr)->intVal;
+		if((yyvsp[-2].ptr)->type != "boolean" || (yyvsp[0].ptr)->type != "boolean" ) {
+			yyerror("Incorrect types used in conditional OR expression");
+		}
+		(yyval.ptr)->type = "boolean";
+		if((yyvsp[-2].ptr)->isInit == 0 || (yyvsp[0].ptr)->isInit == 0 ) {
+			yyerror("Uninitialized expressions used in the conditional OR expression");
+		}
+		(yyval.ptr)->isInit = (((yyvsp[-2].ptr)->isInit) & ((yyvsp[0].ptr)->isInit));   
+		(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal || (yyvsp[0].ptr)->intVal;
 
-			// 3AC
+		// 3AC
 			if((yyvsp[0].ptr)->truelist.empty() && if_found){
 				backpatch((yyvsp[0].ptr)->nextlist, code.size());
 				emit(qid("GOTO", NULL), qid("IF", lookup("if")), (yyvsp[0].ptr)->place, qid("", NULL), 0);
@@ -4775,52 +4273,50 @@ yyreduce:
 			(yyval.ptr)->truelist = (yyvsp[-2].ptr)->truelist;
 			(yyval.ptr)->truelist.insert((yyval.ptr)->truelist.end(), (yyvsp[0].ptr)->truelist.begin(), (yyvsp[0].ptr)->truelist.end());
 			(yyval.ptr)->falselist = (yyvsp[0].ptr)->falselist;
-		}
-		else{
-			(yyval.ptr)->is_error = 1;
-		}
+
 	}
-#line 4784 "parser.cpp"
+#line 4279 "parser.cpp"
     break;
 
-  case 223:
-#line 2082 "parser.y++"
+  case 203: /* ConditionalOrExpression: ConditionalAndExpression  */
+#line 1899 "parser.y++"
                               { (yyval.ptr) = (yyvsp[0].ptr) ; }
-#line 4790 "parser.cpp"
+#line 4285 "parser.cpp"
     break;
 
-  case 224:
-#line 2086 "parser.y++"
+  case 204: /* GOTO_OR: ConditionalOrExpression OR_OP  */
+#line 1903 "parser.y++"
                                         {
 		(yyval.ptr) = (yyvsp[-1].ptr);
-		if(!(yyvsp[-1].ptr)->is_error){
-			if((yyvsp[-1].ptr)->truelist.empty() && if_found){
+		if((yyvsp[-1].ptr)->truelist.empty() && if_found){
 				backpatch((yyvsp[-1].ptr)->nextlist, code.size());
 				emit(qid("GOTO", NULL), qid("IF", lookup("if")), (yyvsp[-1].ptr)->place, qid("", NULL), 0);
 				(yyvsp[-1].ptr)->truelist.push_back(code.size()-1);
 				emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
 				(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 			}
-		}
-		else (yyval.ptr)->is_error = 1;
-		
 	}
-#line 4809 "parser.cpp"
+#line 4300 "parser.cpp"
     break;
 
-  case 225:
-#line 2103 "parser.y++"
+  case 205: /* ConditionalAndExpression: GOTO_AND NEXT_QUAD InclusiveOrExpression  */
+#line 1916 "parser.y++"
                                               {
-		vector<data> attr;
+		vector<data2> attr;
 		insertAttr(attr, (yyvsp[-2].ptr), "", 1);
 		insertAttr(attr, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("&&",attr);
 
 		// Semantics
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
-			(yyval.ptr)->type = string("int");
+			if((yyvsp[-2].ptr)->type != "boolean" || (yyvsp[0].ptr)->type != "boolean" ) {
+				yyerror("Incorrect types used in conditional AND expression");
+			}
+			(yyval.ptr)->type = "boolean";
+			if((yyvsp[-2].ptr)->isInit == 0 || (yyvsp[0].ptr)->isInit == 0 ) {
+				yyerror("Uninitialized expressions used in the conditional AND expression");
+			}
 			(yyval.ptr)->isInit = (((yyvsp[-2].ptr)->isInit) & ((yyvsp[0].ptr)->isInit));   
-			(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal && (yyvsp[0].ptr)->intVal;
+			(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal || (yyvsp[0].ptr)->intVal;
 
 			// 3AC
 			if((yyvsp[0].ptr)->truelist.empty() && if_found){
@@ -4839,95 +4335,82 @@ yyreduce:
 			(yyval.ptr)->truelist = (yyvsp[0].ptr)->truelist;
 			(yyval.ptr)->falselist = (yyvsp[-2].ptr)->falselist;
 			(yyval.ptr)->falselist.insert((yyval.ptr)->falselist.end(), (yyvsp[0].ptr)->falselist.begin(), (yyvsp[0].ptr)->falselist.end());
-		}
-		else{
-			(yyval.ptr)->is_error = 1;
-		}
 	}
-#line 4848 "parser.cpp"
+#line 4340 "parser.cpp"
     break;
 
-  case 226:
-#line 2137 "parser.y++"
+  case 206: /* ConditionalAndExpression: InclusiveOrExpression  */
+#line 1951 "parser.y++"
                            { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 4854 "parser.cpp"
+#line 4346 "parser.cpp"
     break;
 
-  case 227:
-#line 2141 "parser.y++"
+  case 207: /* GOTO_AND: ConditionalAndExpression AND_OP  */
+#line 1955 "parser.y++"
                                           {
 		(yyval.ptr) = (yyvsp[-1].ptr);
 		
-		if(!(yyvsp[-1].ptr)->is_error){
-			if((yyvsp[-1].ptr)->truelist.empty() && if_found){
+		if((yyvsp[-1].ptr)->truelist.empty() && if_found){
 				backpatch((yyvsp[-1].ptr)->nextlist, code.size());
 				emit(qid("GOTO", NULL), qid("IF", lookup("if")), (yyvsp[-1].ptr)->place, qid("", NULL), 0);
 				(yyvsp[-1].ptr)->truelist.push_back(code.size()-1);
 				emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
 				(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 			}
-		}
-		else (yyval.ptr)->is_error = 1;
 	}
-#line 4873 "parser.cpp"
+#line 4362 "parser.cpp"
     break;
 
-  case 228:
-#line 2158 "parser.y++"
+  case 208: /* InclusiveOrExpression: InclusiveOrExpression '|' ExclusiveOrExpression  */
+#line 1969 "parser.y++"
                                                      {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, "|", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("InclusiveOrExpression", v);
 
         //Semantics
+		
 		if((yyvsp[-2].ptr)->isInit ==1 && (yyvsp[0].ptr)->isInit ==1) (yyval.ptr)->isInit = 1;
+		else {
+			yyerror("Unitialized operands with OR operator");
+		}
 		string temp = bitExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
 
-		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
-			if(!temp.empty()){
-				if(temp =="ok"){
-					(yyval.ptr)->type = "int";
-				}
-				else (yyval.ptr)->type = "int";
-				
-				(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal | (yyvsp[0].ptr)->intVal;
+		if(!temp.empty()){
+			(yyval.ptr)->type = "boolean";	
+			(yyval.ptr)->intVal = (yyvsp[-2].ptr)->intVal | (yyvsp[0].ptr)->intVal;
 
-				// 3AC
-				if((yyvsp[-2].ptr)->expType == 4 && (yyvsp[0].ptr)->expType == 4){
-					(yyval.ptr)->place = qid(to_string((yyval.ptr)->intVal), (yyvsp[-2].ptr)->place.second);
-					(yyval.ptr)->expType = 4;
-				}
-				else{
-					qid temp1 = newtemp((yyval.ptr)->type);
-					emit(qid("|", NULL), (yyvsp[-2].ptr)->place, (yyvsp[0].ptr)->place, temp1, -1);
-					(yyval.ptr)->place = temp1;
-				}
-				(yyval.ptr)->nextlist.clear();
+			// 3AC
+			if((yyvsp[-2].ptr)->expType == 4 && (yyvsp[0].ptr)->expType == 4){
+				(yyval.ptr)->place = qid(to_string((yyval.ptr)->intVal), (yyvsp[-2].ptr)->place.second);
+				(yyval.ptr)->expType = 4;
 			}
 			else{
-				yyerror(("Invalid operands of types \'" + (yyvsp[-2].ptr)->type + "\' and \'" + (yyvsp[0].ptr)->type + "\' to binary |").c_str());
-				(yyval.ptr)->is_error = 1;
+				qid temp1 = newtemp((yyval.ptr)->type);
+				emit(qid("|", NULL), (yyvsp[-2].ptr)->place, (yyvsp[0].ptr)->place, temp1, -1);
+				(yyval.ptr)->place = temp1;
 			}
+			(yyval.ptr)->nextlist.clear();
 		}
 		else{
-			(yyval.ptr)->is_error = 1;
+			yyerror(("Invalid operands of types \'" + string((yyvsp[-2].ptr)->type) + "\' and \'" + string((yyvsp[0].ptr)->type) + "\' to boolean").c_str());
 		}
     }
-#line 4919 "parser.cpp"
+#line 4402 "parser.cpp"
     break;
 
-  case 229:
-#line 2199 "parser.y++"
+  case 209: /* InclusiveOrExpression: ExclusiveOrExpression  */
+#line 2004 "parser.y++"
                            {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4925 "parser.cpp"
+#line 4408 "parser.cpp"
     break;
 
-  case 230:
-#line 2202 "parser.y++"
+  case 210: /* ExclusiveOrExpression: ExclusiveOrExpression '^' AndExpression  */
+#line 2007 "parser.y++"
                                              {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, "^", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -4967,19 +4450,19 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4971 "parser.cpp"
+#line 4454 "parser.cpp"
     break;
 
-  case 231:
-#line 2243 "parser.y++"
+  case 211: /* ExclusiveOrExpression: AndExpression  */
+#line 2048 "parser.y++"
                    {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4977 "parser.cpp"
+#line 4460 "parser.cpp"
     break;
 
-  case 232:
-#line 2247 "parser.y++"
+  case 212: /* AndExpression: AndExpression '&' EqualityExpression  */
+#line 2052 "parser.y++"
                                           {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, "&", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5019,19 +4502,19 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5023 "parser.cpp"
+#line 4506 "parser.cpp"
     break;
 
-  case 233:
-#line 2288 "parser.y++"
+  case 213: /* AndExpression: EqualityExpression  */
+#line 2093 "parser.y++"
                         {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5029 "parser.cpp"
+#line 4512 "parser.cpp"
     break;
 
-  case 234:
-#line 2292 "parser.y++"
+  case 214: /* EqualityExpression: EqualityExpression EQ_OP RelationalExpression  */
+#line 2097 "parser.y++"
                                                    {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5039,7 +4522,7 @@ yyreduce:
 
         //Semantics
 		if((yyvsp[-2].ptr)->isInit ==1 && (yyvsp[0].ptr)->isInit ==1) (yyval.ptr)->isInit = 1;
-		string temp = eqExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
+		string temp = relExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
 
 		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
 			if(!temp.empty()){
@@ -5069,13 +4552,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5073 "parser.cpp"
+#line 4556 "parser.cpp"
     break;
 
-  case 235:
-#line 2331 "parser.y++"
+  case 215: /* EqualityExpression: EqualityExpression NE_OP RelationalExpression  */
+#line 2136 "parser.y++"
                                                    {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5083,7 +4566,7 @@ yyreduce:
 
         //Semantics
 		if((yyvsp[-2].ptr)->isInit ==1 && (yyvsp[0].ptr)->isInit ==1) (yyval.ptr)->isInit = 1;
-		string temp = eqExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
+		string temp = relExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
 
 		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
 			if(!temp.empty()){
@@ -5115,19 +4598,19 @@ yyreduce:
 
         
     }
-#line 5119 "parser.cpp"
+#line 4602 "parser.cpp"
     break;
 
-  case 236:
-#line 2372 "parser.y++"
+  case 216: /* EqualityExpression: RelationalExpression  */
+#line 2177 "parser.y++"
                           {(yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 5125 "parser.cpp"
+#line 4608 "parser.cpp"
     break;
 
-  case 237:
-#line 2376 "parser.y++"
+  case 217: /* RelationalExpression: RelationalExpression '<' ShiftExpression  */
+#line 2181 "parser.y++"
                                                {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "<", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5172,13 +4655,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5176 "parser.cpp"
+#line 4659 "parser.cpp"
     break;
 
-  case 238:
-#line 2422 "parser.y++"
+  case 218: /* RelationalExpression: RelationalExpression '>' ShiftExpression  */
+#line 2227 "parser.y++"
                                                {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "<", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5221,13 +4704,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5225 "parser.cpp"
+#line 4708 "parser.cpp"
     break;
 
-  case 239:
-#line 2466 "parser.y++"
+  case 219: /* RelationalExpression: RelationalExpression GE_OP ShiftExpression  */
+#line 2271 "parser.y++"
                                                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5260,13 +4743,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5264 "parser.cpp"
+#line 4747 "parser.cpp"
     break;
 
-  case 240:
-#line 2500 "parser.y++"
+  case 220: /* RelationalExpression: RelationalExpression LE_OP ShiftExpression  */
+#line 2305 "parser.y++"
                                                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5298,19 +4781,19 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5302 "parser.cpp"
+#line 4785 "parser.cpp"
     break;
 
-  case 241:
-#line 2533 "parser.y++"
+  case 221: /* RelationalExpression: ShiftExpression  */
+#line 2338 "parser.y++"
                      {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5308 "parser.cpp"
+#line 4791 "parser.cpp"
     break;
 
-  case 242:
-#line 2538 "parser.y++"
+  case 222: /* ShiftExpression: ShiftExpression LEFT_OP AdditiveExpression  */
+#line 2343 "parser.y++"
                                                 {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5347,13 +4830,13 @@ yyreduce:
 		}
 
     }
-#line 5351 "parser.cpp"
+#line 4834 "parser.cpp"
     break;
 
-  case 243:
-#line 2576 "parser.y++"
+  case 223: /* ShiftExpression: ShiftExpression RIGHT_OP AdditiveExpression  */
+#line 2381 "parser.y++"
                                                  {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5391,13 +4874,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5395 "parser.cpp"
+#line 4878 "parser.cpp"
     break;
 
-  case 244:
-#line 2615 "parser.y++"
+  case 224: /* ShiftExpression: ShiftExpression UNSIGNED_RIGHT AdditiveExpression  */
+#line 2420 "parser.y++"
                                                        {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5406,19 +4889,19 @@ yyreduce:
         yyerror("Not implemented yet!\n");
 
     }
-#line 5410 "parser.cpp"
+#line 4893 "parser.cpp"
     break;
 
-  case 245:
-#line 2625 "parser.y++"
+  case 225: /* ShiftExpression: AdditiveExpression  */
+#line 2430 "parser.y++"
                         {(yyval.ptr)= (yyvsp[0].ptr);}
-#line 5416 "parser.cpp"
+#line 4899 "parser.cpp"
     break;
 
-  case 246:
-#line 2629 "parser.y++"
+  case 226: /* AdditiveExpression: AdditiveExpression '+' MultiplicativeExpression  */
+#line 2434 "parser.y++"
                                                       {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "+", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5427,7 +4910,7 @@ yyreduce:
         //Semantic
 		if((yyvsp[-2].ptr)->isInit ==1 && (yyvsp[0].ptr)->isInit ==1) (yyval.ptr)->isInit = 1;
 		
-		string temp = addExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type,'+');
+		string temp = addExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
 		
 		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
 			if(!temp.empty()){
@@ -5476,13 +4959,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5480 "parser.cpp"
+#line 4963 "parser.cpp"
     break;
 
-  case 247:
-#line 2688 "parser.y++"
+  case 227: /* AdditiveExpression: AdditiveExpression '-' MultiplicativeExpression  */
+#line 2493 "parser.y++"
                                                       {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "-", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
@@ -5491,7 +4974,7 @@ yyreduce:
         //Semantic
 		if((yyvsp[-2].ptr)->isInit ==1 && (yyvsp[0].ptr)->isInit ==1) (yyval.ptr)->isInit = 1;
 
-		string temp = addExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type,'-');
+		string temp = addExp((yyvsp[-2].ptr)->type,(yyvsp[0].ptr)->type);
 		if(!(yyvsp[-2].ptr)->is_error && !(yyvsp[0].ptr)->is_error){
 			if(!temp.empty()){
 				if(temp == "int")(yyval.ptr)->type = "int";
@@ -5540,19 +5023,19 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
 	}
-#line 5544 "parser.cpp"
+#line 5027 "parser.cpp"
     break;
 
-  case 248:
-#line 2747 "parser.y++"
+  case 228: /* AdditiveExpression: MultiplicativeExpression  */
+#line 2552 "parser.y++"
                               {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5550 "parser.cpp"
+#line 5033 "parser.cpp"
     break;
 
-  case 249:
-#line 2752 "parser.y++"
+  case 229: /* MultiplicativeExpression: MultiplicativeExpression '*' UnaryExpression  */
+#line 2557 "parser.y++"
                                                   {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "*", 1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -5618,13 +5101,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5622 "parser.cpp"
+#line 5105 "parser.cpp"
     break;
 
-  case 250:
-#line 2819 "parser.y++"
+  case 230: /* MultiplicativeExpression: MultiplicativeExpression '/' UnaryExpression  */
+#line 2624 "parser.y++"
                                                   {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "/", 1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -5688,13 +5171,13 @@ yyreduce:
 		}
 
     }
-#line 5692 "parser.cpp"
+#line 5175 "parser.cpp"
     break;
 
-  case 251:
-#line 2884 "parser.y++"
+  case 231: /* MultiplicativeExpression: MultiplicativeExpression '%' UnaryExpression  */
+#line 2689 "parser.y++"
                                                   {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v,NULL, "%", 1);
         insertAttr(v,(yyvsp[0].ptr),"",1);
@@ -5732,38 +5215,36 @@ yyreduce:
 
 
     }
-#line 5736 "parser.cpp"
+#line 5219 "parser.cpp"
     break;
 
-  case 252:
-#line 2923 "parser.y++"
+  case 232: /* MultiplicativeExpression: UnaryExpression  */
+#line 2728 "parser.y++"
                      {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5742 "parser.cpp"
+#line 5225 "parser.cpp"
     break;
 
-  case 253:
-#line 2928 "parser.y++"
+  case 233: /* UnaryExpression: PreIncrementExpression  */
+#line 2733 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5748 "parser.cpp"
+#line 5231 "parser.cpp"
     break;
 
-  case 254:
-#line 2929 "parser.y++"
+  case 234: /* UnaryExpression: PreDecrementExpression  */
+#line 2734 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5754 "parser.cpp"
+#line 5237 "parser.cpp"
     break;
 
-  case 255:
-#line 2930 "parser.y++"
+  case 235: /* UnaryExpression: '+' UnaryExpression  */
+#line 2735 "parser.y++"
                          {
         // $1=makeleaf("+");
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "+", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnaryExpression", v);
 
-        //--3AC
-		qid plus=qid("unary+", lookup("+"));
         
         //Semantic
         // remember this line
@@ -5779,7 +5260,7 @@ yyreduce:
 				(yyval.ptr)->tempName = (yyvsp[0].ptr)->tempName;
 				(yyval.ptr)->place = q;
 				(yyval.ptr)->nextlist.clear();
-				emit(plus,(yyvsp[0].ptr)->place, qid("", NULL), q, -1);
+				emit(qid("unary+", lookup("+")),(yyvsp[0].ptr)->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -5790,20 +5271,18 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5794 "parser.cpp"
+#line 5275 "parser.cpp"
     break;
 
-  case 256:
-#line 2965 "parser.y++"
+  case 236: /* UnaryExpression: '-' UnaryExpression  */
+#line 2768 "parser.y++"
                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "-", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnaryExpression", v);
 
         
-        //--3AC
-		// $1->place = ;
 
         //Semantic
 		if(!((yyvsp[0].ptr)->is_error)){
@@ -5818,7 +5297,7 @@ yyreduce:
 				(yyval.ptr)->tempName = (yyvsp[0].ptr)->tempName;
 				(yyval.ptr)->place = q;
 				(yyval.ptr)->nextlist.clear();
-				emit(qid("unary-", lookup("-")), (yyvsp[0].ptr)->place, qid("", NULL), q, -1);
+				emit(qid("unary-", lookup("-")),(yyvsp[0].ptr)->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -5829,19 +5308,19 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5833 "parser.cpp"
+#line 5312 "parser.cpp"
     break;
 
-  case 257:
-#line 2999 "parser.y++"
+  case 237: /* UnaryExpression: UnaryExpressionNotPlusMinus  */
+#line 2800 "parser.y++"
                                  {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5839 "parser.cpp"
+#line 5318 "parser.cpp"
     break;
 
-  case 258:
-#line 3003 "parser.y++"
+  case 238: /* PreIncrementExpression: INC_OP UnaryExpression  */
+#line 2804 "parser.y++"
                             {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("PreIncrementExpression", v);
@@ -5873,13 +5352,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5877 "parser.cpp"
+#line 5356 "parser.cpp"
     break;
 
-  case 259:
-#line 3039 "parser.y++"
+  case 239: /* PreDecrementExpression: DEC_OP UnaryExpression  */
+#line 2840 "parser.y++"
                             {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("PreDecrementExpression", v);
@@ -5909,26 +5388,26 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5913 "parser.cpp"
+#line 5392 "parser.cpp"
     break;
 
-  case 260:
-#line 3073 "parser.y++"
+  case 240: /* UnaryExpressionNotPlusMinus: PostfixExpression  */
+#line 2874 "parser.y++"
                        {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5919 "parser.cpp"
+#line 5398 "parser.cpp"
     break;
 
-  case 261:
-#line 3075 "parser.y++"
+  case 241: /* UnaryExpressionNotPlusMinus: '~' UnaryExpression  */
+#line 2876 "parser.y++"
                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "~", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnaryExpressionNotPlusMinus", v);
         
 
         //semantic
-        // $$->place = ;
+        (yyval.ptr)->place = qid("~", lookup("~"));
 
         if(!((yyvsp[0].ptr)->is_error)){
 			(yyval.ptr)->isInit = (yyvsp[0].ptr)->isInit;
@@ -5953,19 +5432,18 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5957 "parser.cpp"
+#line 5436 "parser.cpp"
     break;
 
-  case 262:
-#line 3108 "parser.y++"
+  case 242: /* UnaryExpressionNotPlusMinus: '!' UnaryExpression  */
+#line 2909 "parser.y++"
                          {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "!", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnaryExpressionNotPlusMinus", v);
 
         //semantic
-        // $1->place = qid("~", lookup("~"));
 
         if(! ((yyvsp[0].ptr)->is_error)){
 			(yyval.ptr)->isInit = (yyvsp[0].ptr)->isInit;
@@ -5979,7 +5457,7 @@ yyreduce:
 				(yyval.ptr)->tempName = (yyvsp[0].ptr)->tempName;
 				(yyval.ptr)->place = q;
 				(yyval.ptr)->nextlist.clear();
-				emit(qid("!", lookup("!")), (yyvsp[0].ptr)->place, qid("", NULL), q, -1);
+				emit(qid("~", lookup("~")), (yyvsp[0].ptr)->place, qid("", NULL), q, -1);
 			}
 			else{
 				yyerror("Type inconsistent with operator");
@@ -5990,43 +5468,43 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5994 "parser.cpp"
+#line 5472 "parser.cpp"
     break;
 
-  case 263:
-#line 3140 "parser.y++"
+  case 243: /* UnaryExpressionNotPlusMinus: CastExpression  */
+#line 2940 "parser.y++"
                     {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 6000 "parser.cpp"
+#line 5478 "parser.cpp"
     break;
 
-  case 264:
-#line 3144 "parser.y++"
+  case 244: /* PostfixExpression: Primary  */
+#line 2944 "parser.y++"
              {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 6006 "parser.cpp"
+#line 5484 "parser.cpp"
     break;
 
-  case 265:
-#line 3145 "parser.y++"
+  case 245: /* PostfixExpression: Name  */
+#line 2945 "parser.y++"
           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 6012 "parser.cpp"
+#line 5490 "parser.cpp"
     break;
 
-  case 266:
-#line 3146 "parser.y++"
+  case 246: /* PostfixExpression: PostIncrementExpression  */
+#line 2946 "parser.y++"
                              { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 6018 "parser.cpp"
+#line 5496 "parser.cpp"
     break;
 
-  case 267:
-#line 3147 "parser.y++"
+  case 247: /* PostfixExpression: PostDecrementExpression  */
+#line 2947 "parser.y++"
                              { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 6024 "parser.cpp"
+#line 5502 "parser.cpp"
     break;
 
-  case 268:
-#line 3151 "parser.y++"
+  case 248: /* PostIncrementExpression: PostfixExpression INC_OP  */
+#line 2951 "parser.y++"
                               {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, makeleaf((yyvsp[0].str)), "", 1);
 		(yyval.ptr) = makenode("PostIncrementExpression", v);
@@ -6059,13 +5537,13 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 6063 "parser.cpp"
+#line 5541 "parser.cpp"
     break;
 
-  case 269:
-#line 3188 "parser.y++"
+  case 249: /* PostDecrementExpression: PostfixExpression DEC_OP  */
+#line 2988 "parser.y++"
                               {
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v, makeleaf((yyvsp[0].str)), "", 1);
 		(yyval.ptr) = makenode("PostDecrementExpression", v);
@@ -6099,84 +5577,81 @@ yyreduce:
 		}
 
     }
-#line 6103 "parser.cpp"
+#line 5581 "parser.cpp"
     break;
 
-  case 270:
-#line 3226 "parser.y++"
+  case 250: /* CastExpression: '(' PrimitiveType ')' UnaryExpression  */
+#line 3026 "parser.y++"
                                              { // 1
-        vector<data>v;
+        vector<data2>v;
         insertAttr(v, NULL, "(", 0);
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
         insertAttr(v, NULL, ")", 0);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("CastExpression", v);
     }
-#line 6116 "parser.cpp"
+#line 5594 "parser.cpp"
     break;
 
-  case 271:
-#line 3239 "parser.y++"
+  case 251: /* G: Identifier  */
+#line 3038 "parser.y++"
                         {
 		(yyval.ptr) = makeleaf((yyvsp[0].str));
+		(yyval.ptr)->tempName = string((yyvsp[0].str));
 		className = (yyvsp[0].str);
 		classTemp = className ; 
 	}
-#line 6126 "parser.cpp"
+#line 5605 "parser.cpp"
     break;
 
-  case 272:
-#line 3247 "parser.y++"
+  case 252: /* S: %empty  */
+#line 3047 "parser.y++"
              {
-		(yyval.ptr) = new treeNode;
 		createStructTable();
-
 		if(type != "") {
 			yyerror(("cannot combine with previous " + type + " declaration specifier").c_str());
-			(yyval.ptr)->is_error = 1;
 		}
 	}
-#line 6140 "parser.cpp"
+#line 5616 "parser.cpp"
     break;
 
-  case 273:
-#line 3259 "parser.y++"
+  case 253: /* NEXT_QUAD: %empty  */
+#line 3056 "parser.y++"
                  {
 		(yyval.ind) = code.size();
 	}
-#line 6148 "parser.cpp"
+#line 5624 "parser.cpp"
     break;
 
-  case 274:
-#line 3265 "parser.y++"
+  case 254: /* ChangeTable: %empty  */
+#line 3062 "parser.y++"
                  {
-		if(func_flag){
-			string str = "Block" +to_string(block_count);
-			block_stack.push(block_count);
-			block_count++;
-			func_flag++;
-			makeSymbolTable(str, "",0);
-		}
-		else func_flag++;
+		(yyval.ptr)=NULL;
+		string str = "Block" +to_string(block_count);
+		block_stack.push(block_count);
+		block_count++;
+		// func_flag++;
+		makeSymbolTable(str, "",0);
 	}
-#line 6163 "parser.cpp"
+#line 5637 "parser.cpp"
     break;
 
-  case 275:
-#line 3278 "parser.y++"
+  case 255: /* A: %empty  */
+#line 3073 "parser.y++"
                         {
+		(yyval.ptr)=NULL;
 		type ="";
-		func_flag = 0;
+		// func_flag = 0;
 		funcArgs.clear();
 		createParamList();
 		gotolablelist.clear();
 		gotolabel.clear();
 	}
-#line 6176 "parser.cpp"
+#line 5651 "parser.cpp"
     break;
 
 
-#line 6180 "parser.cpp"
+#line 5655 "parser.cpp"
 
       default: break;
     }
@@ -6191,11 +5666,10 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
-  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
+  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
-  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
 
@@ -6219,49 +5693,13 @@ yyreduce:
 yyerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
-  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
-
+  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
-#if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
-#else
-# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
-                                        yyssp, yytoken)
-      {
-        char const *yymsgp = YY_("syntax error");
-        int yysyntax_error_status;
-        yysyntax_error_status = YYSYNTAX_ERROR;
-        if (yysyntax_error_status == 0)
-          yymsgp = yymsg;
-        else if (yysyntax_error_status == 1)
-          {
-            if (yymsg != yymsgbuf)
-              YYSTACK_FREE (yymsg);
-            yymsg = YY_CAST (char *, YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
-            if (!yymsg)
-              {
-                yymsg = yymsgbuf;
-                yymsg_alloc = sizeof yymsgbuf;
-                yysyntax_error_status = 2;
-              }
-            else
-              {
-                yysyntax_error_status = YYSYNTAX_ERROR;
-                yymsgp = yymsg;
-              }
-          }
-        yyerror (yymsgp);
-        if (yysyntax_error_status == 2)
-          goto yyexhaustedlab;
-      }
-# undef YYSYNTAX_ERROR
-#endif
     }
-
-
 
   if (yyerrstatus == 3)
     {
@@ -6295,6 +5733,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -6311,13 +5750,14 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
+  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))
         {
-          yyn += YYTERROR;
-          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
+          yyn += YYSYMBOL_YYerror;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
             {
               yyn = yytable[yyn];
               if (0 < yyn)
@@ -6331,7 +5771,7 @@ yyerrlab1:
 
 
       yydestruct ("Error: popping",
-                  yystos[yystate], yyvsp);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -6343,7 +5783,7 @@ yyerrlab1:
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -6354,7 +5794,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -6362,24 +5802,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow || YYERROR_VERBOSE
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  /* Fall through.  */
-#endif
+  goto yyreturnlab;
 
 
-/*-----------------------------------------------------.
-| yyreturn -- parsing is finished, return the result.  |
-`-----------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -6395,28 +5833,24 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  yystos[+*yyssp], yyvsp);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-#if YYERROR_VERBOSE
-  if (yymsg != yymsgbuf)
-    YYSTACK_FREE (yymsg);
-#endif
+
   return yyresult;
 }
-#line 3287 "parser.y++"
+
+#line 3084 "parser.y++"
 
     
 int main(int argc, char* argv[]){
 
     dotfile=fopen(argv[1],"w");
-
     if(dotfile == NULL){
-		/* print_error(); */
 		cout<<"cannot open the dot file AST.dot"<<"\nCompilation terminated\n";
 		return -1;
 	}
@@ -6424,23 +5858,23 @@ int main(int argc, char* argv[]){
     symTable_init();
 	beginAST();
     yyparse();
-
-    /* for(int i=2; i<argc; i++){
+/* 
+    for(int i=2; i<argc; i++){
         if(!strcmp(argv[i], "-dump-sym-table")) dump_sym_table = 1;
 		else if(!strcmp(argv[i], "-dump-tac")) dump_tac = 1;
 		else if(!strcmp(argv[i], "-dump-all")) dump_tac = dump_sym_table = 1;
     } */
-	setGlobal();
-	print3AC();
+
+    setGlobal();
+	/* if(dump_tac) print3AC(); */
 	endAST();
-	printSymbolTable(&globalst, "#Global_Symbol_Table#.csv");
-    
+	if(dump_sym_table) printSymbolTable(&globalst, "Global_Symbol_Table.csv");
     return 0;
 }
 
 void yyerror(char const* s){
     cout << "Error: " << s << " in Line no: " << line << endl;
-    return;
+    exit(-1);
 }
 
 // set type as int and read integer value correctly depending on the base
@@ -6489,4 +5923,4 @@ void set_real_type(){
 	yylval.num->str = strdup(yytext);
 	yylval.num->type = string("float");
 	sscanf(yytext, "%lf", &(yylval.num->realVal));
-}
+} 

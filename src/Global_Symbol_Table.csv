@@ -1,8 +1,6 @@
 Name, Type, Size, isInitialized, Offset
 !,operator,16,1,1456
 !=,operator,16,1,1232
-#V0,int,4,0,1656
-#V1,float,4,0,1664
 %,operator,16,1,1552
 %=,operator,16,1,1008
 &,operator,16,1,1440
@@ -41,6 +39,7 @@ Name, Type, Size, isInitialized, Offset
 >>>=,operator,16,1,864
 ?,operator,16,1,1632
 @,operator,16,1,1264
+System.out.println,FUNC_void,4,0,1648
 [,operator,16,1,1392
 ],operator,16,1,1408
 ^,operator,16,1,1600
@@ -52,6 +51,8 @@ break,keyword,16,1,192
 byte,keyword,16,1,240
 char,keyword,16,1,384
 class,keyword,16,1,464
+class_test,class_test,12,0,0
+class_test2,class_test2,12,0,0
 continue,keyword,16,1,16
 default,keyword,16,1,80
 double,keyword,16,1,208
@@ -86,7 +87,6 @@ static,keyword,16,1,432
 strictfp,keyword,16,1,496
 super,keyword,16,1,560
 synchronized,keyword,16,1,128
-system.out.println,FUNC_void,4,0,1648
 this,keyword,16,1,176
 throw,keyword,16,1,224
 to,keyword,16,1,752

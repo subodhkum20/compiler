@@ -25,24 +25,21 @@ typedef struct sym_entry{
 	int isArray = 0;
 	int size_of_pointed = 0;
 	int is_global = 0;
+	vector<string> func_args;
 
 	vector<int> array_dims;
 	string storage_class;
 }sym_entry;
 
 typedef map<string, sym_entry* > sym_table; 
-typedef map<string, pair< int, sym_table* > > class_sym_table;
 typedef map<string, string> typ_table;
 
 extern sym_table globalst;
-extern class_sym_table class_globalst;
 extern map<sym_table*, sym_table*> parent_table;
-extern map<class_sym_table*, class_sym_table*> class_parent_table;
 extern map<string, pair<string,vector<string> > > func_arg;
 extern int class_offset;
 extern sym_table* curr_table;
 extern sym_table* curr_classure;
-extern class_sym_table *curr_class_table;
 extern stack<int> Goffset, Loffset, blockSz;
 extern int avl;
 extern typ_table typ_gst;  
@@ -56,7 +53,7 @@ void removeFuncProto();
 void updSymbolTable(string id,int flag);
 sym_entry* lookup(string id);
 sym_entry* currLookup(string id);
-void insertKeywords();
+void initgst();
 string getType(string id);
 void createStructTable();
 int insertStructAttr(string attr, string type, int size, bool init);

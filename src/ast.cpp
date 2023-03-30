@@ -13,8 +13,8 @@ void endAST(){
 }
 
 
-void insertAttr(vector<data> &v, treeNode* nod, string s, int flag){
-	data d;
+void insertAttr(vector<data2> &v, treeNode* nod, string s, int flag){
+	data2 d;
 	d.node = nod;
 	d.str = s;
 	d.is_node = flag;
@@ -22,7 +22,7 @@ void insertAttr(vector<data> &v, treeNode* nod, string s, int flag){
 }
 
 treeNode *makeleaf(string str){
-	cout << "WELCOME to Leaf: " << str << endl;
+	// cout << "WELCOME to Leaf: " << str << endl;
 	//making leaf node and printing it in dot file
 	
 	string tmp = "";
@@ -42,19 +42,18 @@ treeNode *makeleaf(string str){
 	else{
 		fprintf(dotfile, "\t%lu [label=\"%s\" shape=box style=filled color=\"dodgerblue\" fillcolor=\"lightyellow\"];\n", node->node_id,node->node_name.c_str() );
 	}
-
+	// cout << "Returning from leaf: " << str << endl ;
 	return node;
 }
 
-treeNode *makenode(string s, vector<data> &v){
+treeNode *makenode(string s, vector<data2> &v){
 	//making node and printing it in dot file
-	cout << "WELCOME TO NODE: " << s << endl ;
+	// cout << "WELCOME TO NODE: " << s << endl ;
 	treeNode *node = new treeNode;
 	node->node_name = s;
 	node->node_id = ++NodeCounter;
 
 	vector<int> op_id;
-
 	for(int i = 0; i<v.size(); ++i){
 		if(!v[i].is_node){
 			int opid = ++NodeCounter;
@@ -66,15 +65,15 @@ treeNode *makenode(string s, vector<data> &v){
 
 	int j=0;
 	for(int i=0; i<v.size(); ++i){
-		// if string or node is NULL, dont print in dot 
-		if(v[i].is_node && v[i].node) 
+		// if string or node is NULL, dont print in dot
+		if(v[i].is_node && v[i].node!=NULL) 
             fprintf(dotfile, "\t%lu -> %lu;\n", node->node_id, v[i].node->node_id);
-		cout << "Welcome to node : 2\n";
+		// cout << "Welcome to node : 2\n";
 		if(!v[i].is_node){
 			if(v[i].str!="") fprintf(dotfile, "\t%lu -> %lu;\n", node->node_id, op_id[j]);
 			j++;
 		}
 	}
-	cout << "Welcome to node : 3\n";
+	// cout << "Returning from node: " << s << endl ;
 	return node;
 }
