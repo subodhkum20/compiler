@@ -81,6 +81,9 @@ Literal
         $$->intVal = stoi(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | FloatingPointLiteral {
         $$=makeleaf($1);
@@ -88,6 +91,10 @@ Literal
         $$->realVal = stod(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
+
     }
     | booleanLiteral {
         $$=makeleaf($1);
@@ -97,6 +104,9 @@ Literal
         $$->strVal = string($1);
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | characterLiteral {
         $$=makeleaf($1);
@@ -104,6 +114,9 @@ Literal
         $$->intVal = char_int(string($1));
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | stringLiteral {
         $$=makeleaf($1);
@@ -111,18 +124,27 @@ Literal
         $$->strVal = string($1);
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | textBlock {
         $$=makeleaf($1);
         $$->type = string("textblock");
         $$->tbval = $1;
         $$->expType = 4;
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     | nullLiteral {
         $$=makeleaf($1);
         $$->type = string("null");
         $$->expType = 4;
         $$->tempName = string($1);
+		sym_entry* temp = new sym_entry;
+		$$->place = qid($1, temp);
+		$$->nextlist.clear();
     }
     ;
 
@@ -553,6 +575,11 @@ VariableDeclarator
 		if (insertStructAttr($1->tempName, $1->type, $1->size, 1) != 1){
 			yyerror(("The Attribute " + string($1->tempName) + " is already declared in the same class").c_str());
 		} 
+		//3 AC
+		$$->type=$1->type;
+		int num = assign_exp($2, $$->type, $1->type, $3->type, $1->place, $3->place);
+		$$->place = $1->place;
+		backpatch($3->nextlist, num);
     }
     ;
 
@@ -572,7 +599,7 @@ Declarator
 		$$->size = getSize(type);
 
 		//3AC
-		$$->place = qid($$->tempName, NULL);
+		$$->place = qid(string($1), lookup(string($1)));
     }
     | Declarator '[' ']' {
         vector<data2> v;
@@ -1500,7 +1527,10 @@ Primary
     |ArrayCreationExpression{$$ = $1;}
     ;
 PrimaryNoNewArray
-    :Literal{$$=$1;}
+    :Literal{
+		$$=$1;
+		$$->isInit=1;
+		}
     |THIS {$$ = makeleaf($1);}
     |'(' Expression ')'{$$=$2;}
     |ClassInstanceCreationExpression{$$=$1;}
@@ -3102,7 +3132,7 @@ int main(int argc, char* argv[]){
     } */
 
     setGlobal();
-	/* if(dump_tac) print3AC(); */
+	print3AC();
 	endAST();
 	if(dump_sym_table) printSymbolTable(&globalst, "Global_Symbol_Table.csv");
     return 0;

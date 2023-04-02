@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.8.2.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,9 +31,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
 
 #ifndef YY_YY_PARSER_HPP_INCLUDED
 # define YY_YY_PARSER_HPP_INCLUDED
@@ -45,75 +44,70 @@
 extern int yydebug;
 #endif
 
-/* Token kinds.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    RIGHT_OP = 258,                /* RIGHT_OP  */
-    LEFT_OP = 259,                 /* LEFT_OP  */
-    EQ_OP = 260,                   /* EQ_OP  */
-    NE_OP = 261,                   /* NE_OP  */
-    AND_OP = 262,                  /* AND_OP  */
-    OR_OP = 263,                   /* OR_OP  */
-    LE_OP = 264,                   /* LE_OP  */
-    GE_OP = 265,                   /* GE_OP  */
-    ADD_ASSIGN = 266,              /* ADD_ASSIGN  */
-    SUB_ASSIGN = 267,              /* SUB_ASSIGN  */
-    MUL_ASSIGN = 268,              /* MUL_ASSIGN  */
-    DIV_ASSIGN = 269,              /* DIV_ASSIGN  */
-    MOD_ASSIGN = 270,              /* MOD_ASSIGN  */
-    LEFT_ASSIGN = 271,             /* LEFT_ASSIGN  */
-    RIGHT_ASSIGN = 272,            /* RIGHT_ASSIGN  */
-    AND_ASSIGN = 273,              /* AND_ASSIGN  */
-    XOR_ASSIGN = 274,              /* XOR_ASSIGN  */
-    OR_ASSIGN = 275,               /* OR_ASSIGN  */
-    UNSIGNED_RIGHT = 276,          /* UNSIGNED_RIGHT  */
-    UNSIGNED_RIGHT_ASSIGN = 277,   /* UNSIGNED_RIGHT_ASSIGN  */
-    integerLiteral = 278,          /* integerLiteral  */
-    stringLiteral = 279,           /* stringLiteral  */
-    nullLiteral = 280,             /* nullLiteral  */
-    characterLiteral = 281,        /* characterLiteral  */
-    textBlock = 282,               /* textBlock  */
-    booleanLiteral = 283,          /* booleanLiteral  */
-    FloatingPointLiteral = 284,    /* FloatingPointLiteral  */
-    Identifier = 285,              /* Identifier  */
-    CONTINUE = 286,                /* CONTINUE  */
-    FOR = 287,                     /* FOR  */
-    NEW = 288,                     /* NEW  */
-    IF = 289,                      /* IF  */
-    PACKAGE = 290,                 /* PACKAGE  */
-    BOOLEAN = 291,                 /* BOOLEAN  */
-    PRIVATE = 292,                 /* PRIVATE  */
-    THIS = 293,                    /* THIS  */
-    BREAK = 294,                   /* BREAK  */
-    DOUBLE = 295,                  /* DOUBLE  */
-    THROW = 296,                   /* THROW  */
-    BYTE = 297,                    /* BYTE  */
-    ELSE = 298,                    /* ELSE  */
-    PUBLIC = 299,                  /* PUBLIC  */
-    RETURN = 300,                  /* RETURN  */
-    INT = 301,                     /* INT  */
-    SHORT = 302,                   /* SHORT  */
-    CHAR = 303,                    /* CHAR  */
-    FINAL = 304,                   /* FINAL  */
-    STATIC = 305,                  /* STATIC  */
-    VOID = 306,                    /* VOID  */
-    CLASS = 307,                   /* CLASS  */
-    LONG = 308,                    /* LONG  */
-    FLOAT = 309,                   /* FLOAT  */
-    WHILE = 310,                   /* WHILE  */
-    _ = 311,                       /* _  */
-    YIELD = 312,                   /* YIELD  */
-    eof = 313,                     /* eof  */
-    INC_OP = 314,                  /* INC_OP  */
-    DEC_OP = 315                   /* DEC_OP  */
+    RIGHT_OP = 258,
+    LEFT_OP = 259,
+    EQ_OP = 260,
+    NE_OP = 261,
+    AND_OP = 262,
+    OR_OP = 263,
+    LE_OP = 264,
+    GE_OP = 265,
+    ADD_ASSIGN = 266,
+    SUB_ASSIGN = 267,
+    MUL_ASSIGN = 268,
+    DIV_ASSIGN = 269,
+    MOD_ASSIGN = 270,
+    LEFT_ASSIGN = 271,
+    RIGHT_ASSIGN = 272,
+    AND_ASSIGN = 273,
+    XOR_ASSIGN = 274,
+    OR_ASSIGN = 275,
+    UNSIGNED_RIGHT = 276,
+    UNSIGNED_RIGHT_ASSIGN = 277,
+    integerLiteral = 278,
+    stringLiteral = 279,
+    nullLiteral = 280,
+    characterLiteral = 281,
+    textBlock = 282,
+    booleanLiteral = 283,
+    FloatingPointLiteral = 284,
+    Identifier = 285,
+    CONTINUE = 286,
+    FOR = 287,
+    NEW = 288,
+    IF = 289,
+    PACKAGE = 290,
+    BOOLEAN = 291,
+    PRIVATE = 292,
+    THIS = 293,
+    BREAK = 294,
+    DOUBLE = 295,
+    THROW = 296,
+    BYTE = 297,
+    ELSE = 298,
+    PUBLIC = 299,
+    RETURN = 300,
+    INT = 301,
+    SHORT = 302,
+    CHAR = 303,
+    FINAL = 304,
+    STATIC = 305,
+    VOID = 306,
+    CLASS = 307,
+    LONG = 308,
+    FLOAT = 309,
+    WHILE = 310,
+    _ = 311,
+    YIELD = 312,
+    eof = 313,
+    INC_OP = 314,
+    DEC_OP = 315
   };
-  typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
@@ -127,7 +121,7 @@ union YYSTYPE
     constants* num;
     int ind;
 
-#line 131 "parser.hpp"
+#line 125 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -138,8 +132,6 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE yylval;
 
-
 int yyparse (void);
-
 
 #endif /* !YY_YY_PARSER_HPP_INCLUDED  */

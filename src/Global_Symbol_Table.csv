@@ -51,8 +51,7 @@ break,keyword,16,1,192
 byte,keyword,16,1,240
 char,keyword,16,1,384
 class,keyword,16,1,464
-class_test,class_test,12,0,0
-class_test2,class_test2,12,0,0
+class_test_8,class_test_8,4,0,0
 continue,keyword,16,1,16
 default,keyword,16,1,80
 double,keyword,16,1,208

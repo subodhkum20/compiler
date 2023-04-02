@@ -1,13 +1,13 @@
 Nonterminals useless in grammar
 
-    ArrayInitializer
-    FieldAccess
-    PackageDeclaration
-    YieldStatement
     comay
     VariableInitializerList
     EXPR_STMT_CODE
     $@3
+    ArrayInitializer
+    FieldAccess
+    PackageDeclaration
+    YieldStatement
 
 
 Terminals unused in grammar
@@ -20,13 +20,13 @@ Terminals unused in grammar
 
 Rules useless in grammar
 
-  255 comay: ε
+  255 comay: %empty
   256      | ','
 
   257 VariableInitializerList: VariableInitializer
   258                        | VariableInitializerList ',' VariableInitializer
 
-  259 $@3: ε
+  259 $@3: %empty
 
   260 EXPR_STMT_CODE: $@3 ExpressionStatement
 
@@ -75,7 +75,7 @@ Grammar
 
    26 OrdinaryCompilationUnit: TopLevelClassOrInterfaceDeclarations
 
-   27 TopLevelClassOrInterfaceDeclarations: ε
+   27 TopLevelClassOrInterfaceDeclarations: %empty
    28                                     | TopLevelClassOrInterfaceDeclarations TopLevelClassOrInterfaceDeclaration
 
    29 TopLevelClassOrInterfaceDeclaration: ClassDeclaration
@@ -94,7 +94,7 @@ Grammar
 
    39 ClassBody: '{' ClassBodyDeclarations '}'
 
-   40 ClassBodyDeclarations: ε
+   40 ClassBodyDeclarations: %empty
    41                      | ClassBodyDeclarations ClassBodyDeclaration
 
    42 ClassBodyDeclaration: FieldDeclaration
@@ -130,7 +130,7 @@ Grammar
 
    63 VariableInitializer: Expression
 
-   64 Dimsy: ε
+   64 Dimsy: %empty
    65      | Dims
 
    66 FormalParameterList: FormalParameter
@@ -150,15 +150,15 @@ Grammar
 
    75 ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' ';'
 
-   76 ArgumentListy: ε
+   76 ArgumentListy: %empty
    77              | ArgumentList
 
-   78 ClassBodyy: ε
+   78 ClassBodyy: %empty
    79           | ClassBody
 
    80 Block: '{' ChangeTable BlockStatements '}'
 
-   81 BlockStatements: ε
+   81 BlockStatements: %empty
    82                | BlockStatements NEXT_QUAD BlockStatement
 
    83 BlockStatement: Declaration_list
@@ -204,7 +204,7 @@ Grammar
   114                    | MethodInvocation
   115                    | ClassInstanceCreationExpression
 
-  116 $@1: ε
+  116 $@1: %empty
 
   117 IF_CODE: IF $@1 '(' Expression ')'
 
@@ -228,13 +228,13 @@ Grammar
 
   128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression ')'
 
-  129 ForInity: ε
+  129 ForInity: %empty
   130         | ForInit
 
-  131 Expressiony: ε
+  131 Expressiony: %empty
   132            | Expression
 
-  133 ForUpdatey: ε
+  133 ForUpdatey: %empty
   134           | ForUpdate
 
   135 ForInit: StatementExpressionList
@@ -256,11 +256,11 @@ Grammar
 
   146 ThrowStatement: THROW Expression ';'
 
-  147 $@2: ε
+  147 $@2: %empty
 
   148 EXPR_CODE: $@2 StatementExpression
 
-  149 N: ε
+  149 N: %empty
 
   150 Primary: PrimaryNoNewArray
   151        | ArrayCreationExpression
@@ -280,10 +280,10 @@ Grammar
 
   162 ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy
 
-  163 TypeArgumentsOrDiamondy: ε
+  163 TypeArgumentsOrDiamondy: %empty
   164                        | TypeArgumentsOrDiamond
 
-  165 ClassOrInterfaceTypeToInstant: ε
+  165 ClassOrInterfaceTypeToInstant: %empty
   166                              | '.' SimpleName ClassOrInterfaceTypeToInstant
 
   167 TypeArgumentsOrDiamond: '<' '>'
@@ -309,7 +309,7 @@ Grammar
   179 AssignmentExpression: Assignment
   180                     | ConditionalExpression
 
-  181 $@4: ε
+  181 $@4: %empty
 
   182 Assignment: LeftHandSide AssignmentOperator $@4 AssignmentExpression
 
@@ -334,7 +334,7 @@ Grammar
 
   199 GOTO_COND: ConditionalOrExpression '?'
 
-  200 WRITE_GOTO: ε
+  200 WRITE_GOTO: %empty
 
   201 ConditionalOrExpression: GOTO_OR NEXT_QUAD ConditionalAndExpression
   202                        | ConditionalAndExpression
@@ -407,13 +407,13 @@ Grammar
 
   250 G: Identifier
 
-  251 S: ε
+  251 S: %empty
 
-  252 NEXT_QUAD: ε
+  252 NEXT_QUAD: %empty
 
-  253 ChangeTable: ε
+  253 ChangeTable: %empty
 
-  254 A: ε
+  254 A: %empty
 
 
 Terminals, with rules where they appear
@@ -881,7 +881,7 @@ Nonterminals, with rules where they appear
 
 State 0
 
-    0 $accept: • CompilationUnit $end
+    0 $accept: . CompilationUnit $end
 
     $default  reduce using rule 27 (TopLevelClassOrInterfaceDeclarations)
 
@@ -892,22 +892,22 @@ State 0
 
 State 1
 
-    0 $accept: CompilationUnit • $end
+    0 $accept: CompilationUnit . $end
 
     $end  shift, and go to state 4
 
 
 State 2
 
-   25 CompilationUnit: OrdinaryCompilationUnit •
+   25 CompilationUnit: OrdinaryCompilationUnit .
 
     $default  reduce using rule 25 (CompilationUnit)
 
 
 State 3
 
-   26 OrdinaryCompilationUnit: TopLevelClassOrInterfaceDeclarations •
-   28 TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations • TopLevelClassOrInterfaceDeclaration
+   26 OrdinaryCompilationUnit: TopLevelClassOrInterfaceDeclarations .
+   28 TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations . TopLevelClassOrInterfaceDeclaration
 
     ';'      shift, and go to state 5
     PRIVATE  shift, and go to state 6
@@ -926,49 +926,49 @@ State 3
 
 State 4
 
-    0 $accept: CompilationUnit $end •
+    0 $accept: CompilationUnit $end .
 
     $default  accept
 
 
 State 5
 
-   30 TopLevelClassOrInterfaceDeclaration: ';' •
+   30 TopLevelClassOrInterfaceDeclaration: ';' .
 
     $default  reduce using rule 30 (TopLevelClassOrInterfaceDeclaration)
 
 
 State 6
 
-   36 Modifier: PRIVATE •
+   36 Modifier: PRIVATE .
 
     $default  reduce using rule 36 (Modifier)
 
 
 State 7
 
-   35 Modifier: PUBLIC •
+   35 Modifier: PUBLIC .
 
     $default  reduce using rule 35 (Modifier)
 
 
 State 8
 
-   38 Modifier: FINAL •
+   38 Modifier: FINAL .
 
     $default  reduce using rule 38 (Modifier)
 
 
 State 9
 
-   37 Modifier: STATIC •
+   37 Modifier: STATIC .
 
     $default  reduce using rule 37 (Modifier)
 
 
 State 10
 
-   32 ClassDeclaration: CLASS • G S ClassBody
+   32 ClassDeclaration: CLASS . G S ClassBody
 
     Identifier  shift, and go to state 15
 
@@ -977,29 +977,29 @@ State 10
 
 State 11
 
-   28 TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations TopLevelClassOrInterfaceDeclaration •
+   28 TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations TopLevelClassOrInterfaceDeclaration .
 
     $default  reduce using rule 28 (TopLevelClassOrInterfaceDeclarations)
 
 
 State 12
 
-   29 TopLevelClassOrInterfaceDeclaration: ClassDeclaration •
+   29 TopLevelClassOrInterfaceDeclaration: ClassDeclaration .
 
     $default  reduce using rule 29 (TopLevelClassOrInterfaceDeclaration)
 
 
 State 13
 
-   31 ClassDeclaration: Modifiers • CLASS G S ClassBody
+   31 ClassDeclaration: Modifiers . CLASS G S ClassBody
 
     CLASS  shift, and go to state 17
 
 
 State 14
 
-   33 Modifiers: Modifier •
-   34          | Modifier • Modifiers
+   33 Modifiers: Modifier .
+   34          | Modifier . Modifiers
 
     PRIVATE  shift, and go to state 6
     PUBLIC   shift, and go to state 7
@@ -1014,14 +1014,14 @@ State 14
 
 State 15
 
-  250 G: Identifier •
+  250 G: Identifier .
 
     $default  reduce using rule 250 (G)
 
 
 State 16
 
-   32 ClassDeclaration: CLASS G • S ClassBody
+   32 ClassDeclaration: CLASS G . S ClassBody
 
     $default  reduce using rule 251 (S)
 
@@ -1030,7 +1030,7 @@ State 16
 
 State 17
 
-   31 ClassDeclaration: Modifiers CLASS • G S ClassBody
+   31 ClassDeclaration: Modifiers CLASS . G S ClassBody
 
     Identifier  shift, and go to state 15
 
@@ -1039,14 +1039,14 @@ State 17
 
 State 18
 
-   34 Modifiers: Modifier Modifiers •
+   34 Modifiers: Modifier Modifiers .
 
     $default  reduce using rule 34 (Modifiers)
 
 
 State 19
 
-   32 ClassDeclaration: CLASS G S • ClassBody
+   32 ClassDeclaration: CLASS G S . ClassBody
 
     '{'  shift, and go to state 21
 
@@ -1055,7 +1055,7 @@ State 19
 
 State 20
 
-   31 ClassDeclaration: Modifiers CLASS G • S ClassBody
+   31 ClassDeclaration: Modifiers CLASS G . S ClassBody
 
     $default  reduce using rule 251 (S)
 
@@ -1064,7 +1064,7 @@ State 20
 
 State 21
 
-   39 ClassBody: '{' • ClassBodyDeclarations '}'
+   39 ClassBody: '{' . ClassBodyDeclarations '}'
 
     $default  reduce using rule 40 (ClassBodyDeclarations)
 
@@ -1073,14 +1073,14 @@ State 21
 
 State 22
 
-   32 ClassDeclaration: CLASS G S ClassBody •
+   32 ClassDeclaration: CLASS G S ClassBody .
 
     $default  reduce using rule 32 (ClassDeclaration)
 
 
 State 23
 
-   31 ClassDeclaration: Modifiers CLASS G S • ClassBody
+   31 ClassDeclaration: Modifiers CLASS G S . ClassBody
 
     '{'  shift, and go to state 21
 
@@ -1089,8 +1089,8 @@ State 23
 
 State 24
 
-   39 ClassBody: '{' ClassBodyDeclarations • '}'
-   41 ClassBodyDeclarations: ClassBodyDeclarations • ClassBodyDeclaration
+   39 ClassBody: '{' ClassBodyDeclarations . '}'
+   41 ClassBodyDeclarations: ClassBodyDeclarations . ClassBodyDeclaration
 
     '}'      shift, and go to state 26
     BOOLEAN  shift, and go to state 27
@@ -1124,64 +1124,64 @@ State 24
 
 State 25
 
-   31 ClassDeclaration: Modifiers CLASS G S ClassBody •
+   31 ClassDeclaration: Modifiers CLASS G S ClassBody .
 
     $default  reduce using rule 31 (ClassDeclaration)
 
 
 State 26
 
-   39 ClassBody: '{' ClassBodyDeclarations '}' •
+   39 ClassBody: '{' ClassBodyDeclarations '}' .
 
     $default  reduce using rule 39 (ClassBody)
 
 
 State 27
 
-    9 PrimitiveType: BOOLEAN •
+    9 PrimitiveType: BOOLEAN .
 
     $default  reduce using rule 9 (PrimitiveType)
 
 
 State 28
 
-   18 FloatingPointType: DOUBLE •
+   18 FloatingPointType: DOUBLE .
 
     $default  reduce using rule 18 (FloatingPointType)
 
 
 State 29
 
-   12 IntegralType: BYTE •
+   12 IntegralType: BYTE .
 
     $default  reduce using rule 12 (IntegralType)
 
 
 State 30
 
-   14 IntegralType: INT •
+   14 IntegralType: INT .
 
     $default  reduce using rule 14 (IntegralType)
 
 
 State 31
 
-   13 IntegralType: SHORT •
+   13 IntegralType: SHORT .
 
     $default  reduce using rule 13 (IntegralType)
 
 
 State 32
 
-   16 IntegralType: CHAR •
+   16 IntegralType: CHAR .
 
     $default  reduce using rule 16 (IntegralType)
 
 
 State 33
 
-   37 Modifier: STATIC •
-   71 StaticInitializer: STATIC • Block
+   37 Modifier: STATIC .
+   71 StaticInitializer: STATIC . Block
 
     '{'  shift, and go to state 49
 
@@ -1192,29 +1192,29 @@ State 33
 
 State 34
 
-   59 VOID2: VOID •
+   59 VOID2: VOID .
 
     $default  reduce using rule 59 (VOID2)
 
 
 State 35
 
-   15 IntegralType: LONG •
+   15 IntegralType: LONG .
 
     $default  reduce using rule 15 (IntegralType)
 
 
 State 36
 
-   17 FloatingPointType: FLOAT •
+   17 FloatingPointType: FLOAT .
 
     $default  reduce using rule 17 (FloatingPointType)
 
 
 State 37
 
-   47 FieldDeclaration: PrimitiveType • VariableDeclaratorList ';'
-   56 MethodHeader: PrimitiveType • MethodorConstrDeclarator
+   47 FieldDeclaration: PrimitiveType . VariableDeclaratorList ';'
+   56 MethodHeader: PrimitiveType . MethodorConstrDeclarator
 
     Identifier  shift, and go to state 51
 
@@ -1227,31 +1227,31 @@ State 37
 
 State 38
 
-    8 PrimitiveType: NumericType •
+    8 PrimitiveType: NumericType .
 
     $default  reduce using rule 8 (PrimitiveType)
 
 
 State 39
 
-   10 NumericType: IntegralType •
+   10 NumericType: IntegralType .
 
     $default  reduce using rule 10 (NumericType)
 
 
 State 40
 
-   11 NumericType: FloatingPointType •
+   11 NumericType: FloatingPointType .
 
     $default  reduce using rule 11 (NumericType)
 
 
 State 41
 
-   46 FieldDeclaration: Modifiers • PrimitiveType VariableDeclaratorList ';'
-   55 MethodHeader: Modifiers • PrimitiveType MethodorConstrDeclarator
-   57             | Modifiers • VOID2 MethodorConstrDeclarator
-   72 ConstructorDeclaration: Modifiers • MethodorConstrDeclarator ConstructorBody
+   46 FieldDeclaration: Modifiers . PrimitiveType VariableDeclaratorList ';'
+   55 MethodHeader: Modifiers . PrimitiveType MethodorConstrDeclarator
+   57             | Modifiers . VOID2 MethodorConstrDeclarator
+   72 ConstructorDeclaration: Modifiers . MethodorConstrDeclarator ConstructorBody
 
     Identifier  shift, and go to state 57
     BOOLEAN     shift, and go to state 27
@@ -1275,28 +1275,28 @@ State 41
 
 State 42
 
-   41 ClassBodyDeclarations: ClassBodyDeclarations ClassBodyDeclaration •
+   41 ClassBodyDeclarations: ClassBodyDeclarations ClassBodyDeclaration .
 
     $default  reduce using rule 41 (ClassBodyDeclarations)
 
 
 State 43
 
-   42 ClassBodyDeclaration: FieldDeclaration •
+   42 ClassBodyDeclaration: FieldDeclaration .
 
     $default  reduce using rule 42 (ClassBodyDeclaration)
 
 
 State 44
 
-   43 ClassBodyDeclaration: MethodDeclaration •
+   43 ClassBodyDeclaration: MethodDeclaration .
 
     $default  reduce using rule 43 (ClassBodyDeclaration)
 
 
 State 45
 
-   54 MethodDeclaration: MethodHeader • MethodBody
+   54 MethodDeclaration: MethodHeader . MethodBody
 
     '{'  shift, and go to state 49
     ';'  shift, and go to state 61
@@ -1307,7 +1307,7 @@ State 45
 
 State 46
 
-   58 MethodHeader: VOID2 • MethodorConstrDeclarator
+   58 MethodHeader: VOID2 . MethodorConstrDeclarator
 
     Identifier  shift, and go to state 57
 
@@ -1317,21 +1317,21 @@ State 46
 
 State 47
 
-   44 ClassBodyDeclaration: StaticInitializer •
+   44 ClassBodyDeclaration: StaticInitializer .
 
     $default  reduce using rule 44 (ClassBodyDeclaration)
 
 
 State 48
 
-   45 ClassBodyDeclaration: ConstructorDeclaration •
+   45 ClassBodyDeclaration: ConstructorDeclaration .
 
     $default  reduce using rule 45 (ClassBodyDeclaration)
 
 
 State 49
 
-   80 Block: '{' • ChangeTable BlockStatements '}'
+   80 Block: '{' . ChangeTable BlockStatements '}'
 
     $default  reduce using rule 253 (ChangeTable)
 
@@ -1340,15 +1340,15 @@ State 49
 
 State 50
 
-   71 StaticInitializer: STATIC Block •
+   71 StaticInitializer: STATIC Block .
 
     $default  reduce using rule 71 (StaticInitializer)
 
 
 State 51
 
-   52 Declarator: Identifier •
-   62 SimpleName2: Identifier •
+   52 Declarator: Identifier .
+   62 SimpleName2: Identifier .
 
     '('       reduce using rule 62 (SimpleName2)
     $default  reduce using rule 52 (Declarator)
@@ -1356,8 +1356,8 @@ State 51
 
 State 52
 
-   47 FieldDeclaration: PrimitiveType VariableDeclaratorList • ';'
-   49 VariableDeclaratorList: VariableDeclaratorList • ',' VariableDeclarator
+   47 FieldDeclaration: PrimitiveType VariableDeclaratorList . ';'
+   49 VariableDeclaratorList: VariableDeclaratorList . ',' VariableDeclarator
 
     ','  shift, and go to state 66
     ';'  shift, and go to state 67
@@ -1365,16 +1365,16 @@ State 52
 
 State 53
 
-   48 VariableDeclaratorList: VariableDeclarator •
+   48 VariableDeclaratorList: VariableDeclarator .
 
     $default  reduce using rule 48 (VariableDeclaratorList)
 
 
 State 54
 
-   50 VariableDeclarator: Declarator •
-   51                   | Declarator • '=' VariableInitializer
-   53 Declarator: Declarator • '[' ']'
+   50 VariableDeclarator: Declarator .
+   51                   | Declarator . '=' VariableInitializer
+   53 Declarator: Declarator . '[' ']'
 
     '['  shift, and go to state 68
     '='  shift, and go to state 69
@@ -1384,30 +1384,30 @@ State 54
 
 State 55
 
-   56 MethodHeader: PrimitiveType MethodorConstrDeclarator •
+   56 MethodHeader: PrimitiveType MethodorConstrDeclarator .
 
     $default  reduce using rule 56 (MethodHeader)
 
 
 State 56
 
-   60 MethodorConstrDeclarator: SimpleName2 • '(' A FormalParameterList ')' NEXT_QUAD
-   61                         | SimpleName2 • '(' A ')' Dimsy
+   60 MethodorConstrDeclarator: SimpleName2 . '(' A FormalParameterList ')' NEXT_QUAD
+   61                         | SimpleName2 . '(' A ')' Dimsy
 
     '('  shift, and go to state 70
 
 
 State 57
 
-   62 SimpleName2: Identifier •
+   62 SimpleName2: Identifier .
 
     $default  reduce using rule 62 (SimpleName2)
 
 
 State 58
 
-   46 FieldDeclaration: Modifiers PrimitiveType • VariableDeclaratorList ';'
-   55 MethodHeader: Modifiers PrimitiveType • MethodorConstrDeclarator
+   46 FieldDeclaration: Modifiers PrimitiveType . VariableDeclaratorList ';'
+   55 MethodHeader: Modifiers PrimitiveType . MethodorConstrDeclarator
 
     Identifier  shift, and go to state 51
 
@@ -1420,7 +1420,7 @@ State 58
 
 State 59
 
-   57 MethodHeader: Modifiers VOID2 • MethodorConstrDeclarator
+   57 MethodHeader: Modifiers VOID2 . MethodorConstrDeclarator
 
     Identifier  shift, and go to state 57
 
@@ -1430,7 +1430,7 @@ State 59
 
 State 60
 
-   72 ConstructorDeclaration: Modifiers MethodorConstrDeclarator • ConstructorBody
+   72 ConstructorDeclaration: Modifiers MethodorConstrDeclarator . ConstructorBody
 
     '{'  shift, and go to state 74
 
@@ -1439,35 +1439,35 @@ State 60
 
 State 61
 
-   70 MethodBody: ';' •
+   70 MethodBody: ';' .
 
     $default  reduce using rule 70 (MethodBody)
 
 
 State 62
 
-   54 MethodDeclaration: MethodHeader MethodBody •
+   54 MethodDeclaration: MethodHeader MethodBody .
 
     $default  reduce using rule 54 (MethodDeclaration)
 
 
 State 63
 
-   69 MethodBody: Block •
+   69 MethodBody: Block .
 
     $default  reduce using rule 69 (MethodBody)
 
 
 State 64
 
-   58 MethodHeader: VOID2 MethodorConstrDeclarator •
+   58 MethodHeader: VOID2 MethodorConstrDeclarator .
 
     $default  reduce using rule 58 (MethodHeader)
 
 
 State 65
 
-   80 Block: '{' ChangeTable • BlockStatements '}'
+   80 Block: '{' ChangeTable . BlockStatements '}'
 
     $default  reduce using rule 81 (BlockStatements)
 
@@ -1476,7 +1476,7 @@ State 65
 
 State 66
 
-   49 VariableDeclaratorList: VariableDeclaratorList ',' • VariableDeclarator
+   49 VariableDeclaratorList: VariableDeclaratorList ',' . VariableDeclarator
 
     Identifier  shift, and go to state 77
 
@@ -1486,21 +1486,21 @@ State 66
 
 State 67
 
-   47 FieldDeclaration: PrimitiveType VariableDeclaratorList ';' •
+   47 FieldDeclaration: PrimitiveType VariableDeclaratorList ';' .
 
     $default  reduce using rule 47 (FieldDeclaration)
 
 
 State 68
 
-   53 Declarator: Declarator '[' • ']'
+   53 Declarator: Declarator '[' . ']'
 
     ']'  shift, and go to state 79
 
 
 State 69
 
-   51 VariableDeclarator: Declarator '=' • VariableInitializer
+   51 VariableDeclarator: Declarator '=' . VariableInitializer
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1562,8 +1562,8 @@ State 69
 
 State 70
 
-   60 MethodorConstrDeclarator: SimpleName2 '(' • A FormalParameterList ')' NEXT_QUAD
-   61                         | SimpleName2 '(' • A ')' Dimsy
+   60 MethodorConstrDeclarator: SimpleName2 '(' . A FormalParameterList ')' NEXT_QUAD
+   61                         | SimpleName2 '(' . A ')' Dimsy
 
     $default  reduce using rule 254 (A)
 
@@ -1572,8 +1572,8 @@ State 70
 
 State 71
 
-   46 FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList • ';'
-   49 VariableDeclaratorList: VariableDeclaratorList • ',' VariableDeclarator
+   46 FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList . ';'
+   49 VariableDeclaratorList: VariableDeclaratorList . ',' VariableDeclarator
 
     ','  shift, and go to state 66
     ';'  shift, and go to state 136
@@ -1581,22 +1581,22 @@ State 71
 
 State 72
 
-   55 MethodHeader: Modifiers PrimitiveType MethodorConstrDeclarator •
+   55 MethodHeader: Modifiers PrimitiveType MethodorConstrDeclarator .
 
     $default  reduce using rule 55 (MethodHeader)
 
 
 State 73
 
-   57 MethodHeader: Modifiers VOID2 MethodorConstrDeclarator •
+   57 MethodHeader: Modifiers VOID2 MethodorConstrDeclarator .
 
     $default  reduce using rule 57 (MethodHeader)
 
 
 State 74
 
-   73 ConstructorBody: '{' • ExplicitConstructorInvocation BlockStatements '}'
-   74                | '{' • BlockStatements '}'
+   73 ConstructorBody: '{' . ExplicitConstructorInvocation BlockStatements '}'
+   74                | '{' . BlockStatements '}'
 
     THIS  shift, and go to state 137
 
@@ -1609,15 +1609,15 @@ State 74
 
 State 75
 
-   72 ConstructorDeclaration: Modifiers MethodorConstrDeclarator ConstructorBody •
+   72 ConstructorDeclaration: Modifiers MethodorConstrDeclarator ConstructorBody .
 
     $default  reduce using rule 72 (ConstructorDeclaration)
 
 
 State 76
 
-   80 Block: '{' ChangeTable BlockStatements • '}'
-   82 BlockStatements: BlockStatements • NEXT_QUAD BlockStatement
+   80 Block: '{' ChangeTable BlockStatements . '}'
+   82 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
     '}'  shift, and go to state 140
 
@@ -1628,29 +1628,29 @@ State 76
 
 State 77
 
-   52 Declarator: Identifier •
+   52 Declarator: Identifier .
 
     $default  reduce using rule 52 (Declarator)
 
 
 State 78
 
-   49 VariableDeclaratorList: VariableDeclaratorList ',' VariableDeclarator •
+   49 VariableDeclaratorList: VariableDeclaratorList ',' VariableDeclarator .
 
     $default  reduce using rule 49 (VariableDeclaratorList)
 
 
 State 79
 
-   53 Declarator: Declarator '[' ']' •
+   53 Declarator: Declarator '[' ']' .
 
     $default  reduce using rule 53 (Declarator)
 
 
 State 80
 
-  154 PrimaryNoNewArray: '(' • Expression ')'
-  249 CastExpression: '(' • PrimitiveType ')' UnaryExpression
+  154 PrimaryNoNewArray: '(' . Expression ')'
+  249 CastExpression: '(' . PrimitiveType ')' UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1723,7 +1723,7 @@ State 80
 
 State 81
 
-  234 UnaryExpression: '+' • UnaryExpression
+  234 UnaryExpression: '+' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1766,7 +1766,7 @@ State 81
 
 State 82
 
-  235 UnaryExpression: '-' • UnaryExpression
+  235 UnaryExpression: '-' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1809,7 +1809,7 @@ State 82
 
 State 83
 
-  240 UnaryExpressionNotPlusMinus: '~' • UnaryExpression
+  240 UnaryExpressionNotPlusMinus: '~' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1852,7 +1852,7 @@ State 83
 
 State 84
 
-  241 UnaryExpressionNotPlusMinus: '!' • UnaryExpression
+  241 UnaryExpressionNotPlusMinus: '!' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -1895,64 +1895,64 @@ State 84
 
 State 85
 
-    1 Literal: integerLiteral •
+    1 Literal: integerLiteral .
 
     $default  reduce using rule 1 (Literal)
 
 
 State 86
 
-    5 Literal: stringLiteral •
+    5 Literal: stringLiteral .
 
     $default  reduce using rule 5 (Literal)
 
 
 State 87
 
-    7 Literal: nullLiteral •
+    7 Literal: nullLiteral .
 
     $default  reduce using rule 7 (Literal)
 
 
 State 88
 
-    4 Literal: characterLiteral •
+    4 Literal: characterLiteral .
 
     $default  reduce using rule 4 (Literal)
 
 
 State 89
 
-    6 Literal: textBlock •
+    6 Literal: textBlock .
 
     $default  reduce using rule 6 (Literal)
 
 
 State 90
 
-    3 Literal: booleanLiteral •
+    3 Literal: booleanLiteral .
 
     $default  reduce using rule 3 (Literal)
 
 
 State 91
 
-    2 Literal: FloatingPointLiteral •
+    2 Literal: FloatingPointLiteral .
 
     $default  reduce using rule 2 (Literal)
 
 
 State 92
 
-   23 SimpleName: Identifier •
+   23 SimpleName: Identifier .
 
     $default  reduce using rule 23 (SimpleName)
 
 
 State 93
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW • ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy
-  174 ArrayCreationExpression: NEW • PrimitiveType DimExprs Dimsy
+  161 UnqualifiedClassInstanceCreationExpression: NEW . ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy
+  174 ArrayCreationExpression: NEW . PrimitiveType DimExprs Dimsy
 
     Identifier  shift, and go to state 92
     BOOLEAN     shift, and go to state 27
@@ -1974,14 +1974,14 @@ State 93
 
 State 94
 
-  153 PrimaryNoNewArray: THIS •
+  153 PrimaryNoNewArray: THIS .
 
     $default  reduce using rule 153 (PrimaryNoNewArray)
 
 
 State 95
 
-  237 PreIncrementExpression: INC_OP • UnaryExpression
+  237 PreIncrementExpression: INC_OP . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -2024,7 +2024,7 @@ State 95
 
 State 96
 
-  238 PreDecrementExpression: DEC_OP • UnaryExpression
+  238 PreDecrementExpression: DEC_OP . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -2067,19 +2067,19 @@ State 96
 
 State 97
 
-  152 PrimaryNoNewArray: Literal •
+  152 PrimaryNoNewArray: Literal .
 
     $default  reduce using rule 152 (PrimaryNoNewArray)
 
 
 State 98
 
-   24 QualifiedName: Name • '.' SimpleName
-  159 ClassInstanceCreationExpression: Name • '.' UnqualifiedClassInstanceCreationExpression
-  168 ArrayAccess: Name • '[' Expression ']'
-  170 MethodInvocation: Name • '(' ArgumentListy ')'
-  183 LeftHandSide: Name •
-  244 PostfixExpression: Name •
+   24 QualifiedName: Name . '.' SimpleName
+  159 ClassInstanceCreationExpression: Name . '.' UnqualifiedClassInstanceCreationExpression
+  168 ArrayAccess: Name . '[' Expression ']'
+  170 MethodInvocation: Name . '(' ArgumentListy ')'
+  183 LeftHandSide: Name .
+  244 PostfixExpression: Name .
 
     '('  shift, and go to state 155
     '['  shift, and go to state 156
@@ -2102,30 +2102,30 @@ State 98
 
 State 99
 
-   21 Name: SimpleName •
+   21 Name: SimpleName .
 
     $default  reduce using rule 21 (Name)
 
 
 State 100
 
-   22 Name: QualifiedName •
+   22 Name: QualifiedName .
 
     $default  reduce using rule 22 (Name)
 
 
 State 101
 
-   51 VariableDeclarator: Declarator '=' VariableInitializer •
+   51 VariableDeclarator: Declarator '=' VariableInitializer .
 
     $default  reduce using rule 51 (VariableDeclarator)
 
 
 State 102
 
-  160 ClassInstanceCreationExpression: Primary • '.' UnqualifiedClassInstanceCreationExpression
-  171 MethodInvocation: Primary • '.' SimpleName '(' ArgumentListy ')'
-  243 PostfixExpression: Primary •
+  160 ClassInstanceCreationExpression: Primary . '.' UnqualifiedClassInstanceCreationExpression
+  171 MethodInvocation: Primary . '.' SimpleName '(' ArgumentListy ')'
+  243 PostfixExpression: Primary .
 
     '.'  shift, and go to state 158
 
@@ -2134,30 +2134,30 @@ State 102
 
 State 103
 
-  150 Primary: PrimaryNoNewArray •
+  150 Primary: PrimaryNoNewArray .
 
     $default  reduce using rule 150 (Primary)
 
 
 State 104
 
-  155 PrimaryNoNewArray: ClassInstanceCreationExpression •
+  155 PrimaryNoNewArray: ClassInstanceCreationExpression .
 
     $default  reduce using rule 155 (PrimaryNoNewArray)
 
 
 State 105
 
-  158 ClassInstanceCreationExpression: UnqualifiedClassInstanceCreationExpression •
+  158 ClassInstanceCreationExpression: UnqualifiedClassInstanceCreationExpression .
 
     $default  reduce using rule 158 (ClassInstanceCreationExpression)
 
 
 State 106
 
-  156 PrimaryNoNewArray: ArrayAccess •
-  169 ArrayAccess: ArrayAccess • '[' Expression ']'
-  184 LeftHandSide: ArrayAccess •
+  156 PrimaryNoNewArray: ArrayAccess .
+  169 ArrayAccess: ArrayAccess . '[' Expression ']'
+  184 LeftHandSide: ArrayAccess .
 
     '['  shift, and go to state 159
 
@@ -2178,42 +2178,42 @@ State 106
 
 State 107
 
-  157 PrimaryNoNewArray: MethodInvocation •
+  157 PrimaryNoNewArray: MethodInvocation .
 
     $default  reduce using rule 157 (PrimaryNoNewArray)
 
 
 State 108
 
-  151 Primary: ArrayCreationExpression •
+  151 Primary: ArrayCreationExpression .
 
     $default  reduce using rule 151 (Primary)
 
 
 State 109
 
-   63 VariableInitializer: Expression •
+   63 VariableInitializer: Expression .
 
     $default  reduce using rule 63 (VariableInitializer)
 
 
 State 110
 
-  178 Expression: AssignmentExpression •
+  178 Expression: AssignmentExpression .
 
     $default  reduce using rule 178 (Expression)
 
 
 State 111
 
-  179 AssignmentExpression: Assignment •
+  179 AssignmentExpression: Assignment .
 
     $default  reduce using rule 179 (AssignmentExpression)
 
 
 State 112
 
-  182 Assignment: LeftHandSide • AssignmentOperator $@4 AssignmentExpression
+  182 Assignment: LeftHandSide . AssignmentOperator $@4 AssignmentExpression
 
     '='                    shift, and go to state 160
     ADD_ASSIGN             shift, and go to state 161
@@ -2233,14 +2233,14 @@ State 112
 
 State 113
 
-  180 AssignmentExpression: ConditionalExpression •
+  180 AssignmentExpression: ConditionalExpression .
 
     $default  reduce using rule 180 (AssignmentExpression)
 
 
 State 114
 
-  197 ConditionalExpression: GOTO_COND • NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
+  197 ConditionalExpression: GOTO_COND . NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -2249,9 +2249,9 @@ State 114
 
 State 115
 
-  198 ConditionalExpression: ConditionalOrExpression •
-  199 GOTO_COND: ConditionalOrExpression • '?'
-  203 GOTO_OR: ConditionalOrExpression • OR_OP
+  198 ConditionalExpression: ConditionalOrExpression .
+  199 GOTO_COND: ConditionalOrExpression . '?'
+  203 GOTO_OR: ConditionalOrExpression . OR_OP
 
     '?'    shift, and go to state 174
     OR_OP  shift, and go to state 175
@@ -2261,7 +2261,7 @@ State 115
 
 State 116
 
-  201 ConditionalOrExpression: GOTO_OR • NEXT_QUAD ConditionalAndExpression
+  201 ConditionalOrExpression: GOTO_OR . NEXT_QUAD ConditionalAndExpression
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -2270,8 +2270,8 @@ State 116
 
 State 117
 
-  202 ConditionalOrExpression: ConditionalAndExpression •
-  206 GOTO_AND: ConditionalAndExpression • AND_OP
+  202 ConditionalOrExpression: ConditionalAndExpression .
+  206 GOTO_AND: ConditionalAndExpression . AND_OP
 
     AND_OP  shift, and go to state 177
 
@@ -2280,7 +2280,7 @@ State 117
 
 State 118
 
-  204 ConditionalAndExpression: GOTO_AND • NEXT_QUAD InclusiveOrExpression
+  204 ConditionalAndExpression: GOTO_AND . NEXT_QUAD InclusiveOrExpression
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -2289,8 +2289,8 @@ State 118
 
 State 119
 
-  205 ConditionalAndExpression: InclusiveOrExpression •
-  207 InclusiveOrExpression: InclusiveOrExpression • '|' ExclusiveOrExpression
+  205 ConditionalAndExpression: InclusiveOrExpression .
+  207 InclusiveOrExpression: InclusiveOrExpression . '|' ExclusiveOrExpression
 
     '|'  shift, and go to state 179
 
@@ -2299,8 +2299,8 @@ State 119
 
 State 120
 
-  208 InclusiveOrExpression: ExclusiveOrExpression •
-  209 ExclusiveOrExpression: ExclusiveOrExpression • '^' AndExpression
+  208 InclusiveOrExpression: ExclusiveOrExpression .
+  209 ExclusiveOrExpression: ExclusiveOrExpression . '^' AndExpression
 
     '^'  shift, and go to state 180
 
@@ -2309,8 +2309,8 @@ State 120
 
 State 121
 
-  210 ExclusiveOrExpression: AndExpression •
-  211 AndExpression: AndExpression • '&' EqualityExpression
+  210 ExclusiveOrExpression: AndExpression .
+  211 AndExpression: AndExpression . '&' EqualityExpression
 
     '&'  shift, and go to state 181
 
@@ -2319,9 +2319,9 @@ State 121
 
 State 122
 
-  212 AndExpression: EqualityExpression •
-  213 EqualityExpression: EqualityExpression • EQ_OP RelationalExpression
-  214                   | EqualityExpression • NE_OP RelationalExpression
+  212 AndExpression: EqualityExpression .
+  213 EqualityExpression: EqualityExpression . EQ_OP RelationalExpression
+  214                   | EqualityExpression . NE_OP RelationalExpression
 
     EQ_OP  shift, and go to state 182
     NE_OP  shift, and go to state 183
@@ -2331,11 +2331,11 @@ State 122
 
 State 123
 
-  215 EqualityExpression: RelationalExpression •
-  216 RelationalExpression: RelationalExpression • '<' ShiftExpression
-  217                     | RelationalExpression • '>' ShiftExpression
-  218                     | RelationalExpression • GE_OP ShiftExpression
-  219                     | RelationalExpression • LE_OP ShiftExpression
+  215 EqualityExpression: RelationalExpression .
+  216 RelationalExpression: RelationalExpression . '<' ShiftExpression
+  217                     | RelationalExpression . '>' ShiftExpression
+  218                     | RelationalExpression . GE_OP ShiftExpression
+  219                     | RelationalExpression . LE_OP ShiftExpression
 
     '<'    shift, and go to state 184
     '>'    shift, and go to state 185
@@ -2347,10 +2347,10 @@ State 123
 
 State 124
 
-  220 RelationalExpression: ShiftExpression •
-  221 ShiftExpression: ShiftExpression • LEFT_OP AdditiveExpression
-  222                | ShiftExpression • RIGHT_OP AdditiveExpression
-  223                | ShiftExpression • UNSIGNED_RIGHT AdditiveExpression
+  220 RelationalExpression: ShiftExpression .
+  221 ShiftExpression: ShiftExpression . LEFT_OP AdditiveExpression
+  222                | ShiftExpression . RIGHT_OP AdditiveExpression
+  223                | ShiftExpression . UNSIGNED_RIGHT AdditiveExpression
 
     RIGHT_OP        shift, and go to state 188
     LEFT_OP         shift, and go to state 189
@@ -2361,9 +2361,9 @@ State 124
 
 State 125
 
-  224 ShiftExpression: AdditiveExpression •
-  225 AdditiveExpression: AdditiveExpression • '+' MultiplicativeExpression
-  226                   | AdditiveExpression • '-' MultiplicativeExpression
+  224 ShiftExpression: AdditiveExpression .
+  225 AdditiveExpression: AdditiveExpression . '+' MultiplicativeExpression
+  226                   | AdditiveExpression . '-' MultiplicativeExpression
 
     '+'  shift, and go to state 191
     '-'  shift, and go to state 192
@@ -2373,10 +2373,10 @@ State 125
 
 State 126
 
-  227 AdditiveExpression: MultiplicativeExpression •
-  228 MultiplicativeExpression: MultiplicativeExpression • '*' UnaryExpression
-  229                         | MultiplicativeExpression • '/' UnaryExpression
-  230                         | MultiplicativeExpression • '%' UnaryExpression
+  227 AdditiveExpression: MultiplicativeExpression .
+  228 MultiplicativeExpression: MultiplicativeExpression . '*' UnaryExpression
+  229                         | MultiplicativeExpression . '/' UnaryExpression
+  230                         | MultiplicativeExpression . '%' UnaryExpression
 
     '*'  shift, and go to state 193
     '/'  shift, and go to state 194
@@ -2387,37 +2387,37 @@ State 126
 
 State 127
 
-  231 MultiplicativeExpression: UnaryExpression •
+  231 MultiplicativeExpression: UnaryExpression .
 
     $default  reduce using rule 231 (MultiplicativeExpression)
 
 
 State 128
 
-  232 UnaryExpression: PreIncrementExpression •
+  232 UnaryExpression: PreIncrementExpression .
 
     $default  reduce using rule 232 (UnaryExpression)
 
 
 State 129
 
-  233 UnaryExpression: PreDecrementExpression •
+  233 UnaryExpression: PreDecrementExpression .
 
     $default  reduce using rule 233 (UnaryExpression)
 
 
 State 130
 
-  236 UnaryExpression: UnaryExpressionNotPlusMinus •
+  236 UnaryExpression: UnaryExpressionNotPlusMinus .
 
     $default  reduce using rule 236 (UnaryExpression)
 
 
 State 131
 
-  239 UnaryExpressionNotPlusMinus: PostfixExpression •
-  247 PostIncrementExpression: PostfixExpression • INC_OP
-  248 PostDecrementExpression: PostfixExpression • DEC_OP
+  239 UnaryExpressionNotPlusMinus: PostfixExpression .
+  247 PostIncrementExpression: PostfixExpression . INC_OP
+  248 PostDecrementExpression: PostfixExpression . DEC_OP
 
     INC_OP  shift, and go to state 196
     DEC_OP  shift, and go to state 197
@@ -2427,29 +2427,29 @@ State 131
 
 State 132
 
-  245 PostfixExpression: PostIncrementExpression •
+  245 PostfixExpression: PostIncrementExpression .
 
     $default  reduce using rule 245 (PostfixExpression)
 
 
 State 133
 
-  246 PostfixExpression: PostDecrementExpression •
+  246 PostfixExpression: PostDecrementExpression .
 
     $default  reduce using rule 246 (PostfixExpression)
 
 
 State 134
 
-  242 UnaryExpressionNotPlusMinus: CastExpression •
+  242 UnaryExpressionNotPlusMinus: CastExpression .
 
     $default  reduce using rule 242 (UnaryExpressionNotPlusMinus)
 
 
 State 135
 
-   60 MethodorConstrDeclarator: SimpleName2 '(' A • FormalParameterList ')' NEXT_QUAD
-   61                         | SimpleName2 '(' A • ')' Dimsy
+   60 MethodorConstrDeclarator: SimpleName2 '(' A . FormalParameterList ')' NEXT_QUAD
+   61                         | SimpleName2 '(' A . ')' Dimsy
 
     ')'      shift, and go to state 198
     BOOLEAN  shift, and go to state 27
@@ -2471,21 +2471,21 @@ State 135
 
 State 136
 
-   46 FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList ';' •
+   46 FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList ';' .
 
     $default  reduce using rule 46 (FieldDeclaration)
 
 
 State 137
 
-   75 ExplicitConstructorInvocation: THIS • '(' ArgumentListy ')' ';'
+   75 ExplicitConstructorInvocation: THIS . '(' ArgumentListy ')' ';'
 
     '('  shift, and go to state 202
 
 
 State 138
 
-   73 ConstructorBody: '{' ExplicitConstructorInvocation • BlockStatements '}'
+   73 ConstructorBody: '{' ExplicitConstructorInvocation . BlockStatements '}'
 
     $default  reduce using rule 81 (BlockStatements)
 
@@ -2494,8 +2494,8 @@ State 138
 
 State 139
 
-   74 ConstructorBody: '{' BlockStatements • '}'
-   82 BlockStatements: BlockStatements • NEXT_QUAD BlockStatement
+   74 ConstructorBody: '{' BlockStatements . '}'
+   82 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
     '}'  shift, and go to state 204
 
@@ -2506,14 +2506,14 @@ State 139
 
 State 140
 
-   80 Block: '{' ChangeTable BlockStatements '}' •
+   80 Block: '{' ChangeTable BlockStatements '}' .
 
     $default  reduce using rule 80 (Block)
 
 
 State 141
 
-   82 BlockStatements: BlockStatements NEXT_QUAD • BlockStatement
+   82 BlockStatements: BlockStatements NEXT_QUAD . BlockStatement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -2600,25 +2600,25 @@ State 141
 
 State 142
 
-  249 CastExpression: '(' PrimitiveType • ')' UnaryExpression
+  249 CastExpression: '(' PrimitiveType . ')' UnaryExpression
 
     ')'  shift, and go to state 245
 
 
 State 143
 
-  154 PrimaryNoNewArray: '(' Expression • ')'
+  154 PrimaryNoNewArray: '(' Expression . ')'
 
     ')'  shift, and go to state 246
 
 
 State 144
 
-   24 QualifiedName: Name • '.' SimpleName
-  159 ClassInstanceCreationExpression: Name • '.' UnqualifiedClassInstanceCreationExpression
-  168 ArrayAccess: Name • '[' Expression ']'
-  170 MethodInvocation: Name • '(' ArgumentListy ')'
-  244 PostfixExpression: Name •
+   24 QualifiedName: Name . '.' SimpleName
+  159 ClassInstanceCreationExpression: Name . '.' UnqualifiedClassInstanceCreationExpression
+  168 ArrayAccess: Name . '[' Expression ']'
+  170 MethodInvocation: Name . '(' ArgumentListy ')'
+  244 PostfixExpression: Name .
 
     '('  shift, and go to state 155
     '['  shift, and go to state 156
@@ -2629,8 +2629,8 @@ State 144
 
 State 145
 
-  156 PrimaryNoNewArray: ArrayAccess •
-  169 ArrayAccess: ArrayAccess • '[' Expression ']'
+  156 PrimaryNoNewArray: ArrayAccess .
+  169 ArrayAccess: ArrayAccess . '[' Expression ']'
 
     '['  shift, and go to state 159
 
@@ -2639,35 +2639,35 @@ State 145
 
 State 146
 
-  234 UnaryExpression: '+' UnaryExpression •
+  234 UnaryExpression: '+' UnaryExpression .
 
     $default  reduce using rule 234 (UnaryExpression)
 
 
 State 147
 
-  235 UnaryExpression: '-' UnaryExpression •
+  235 UnaryExpression: '-' UnaryExpression .
 
     $default  reduce using rule 235 (UnaryExpression)
 
 
 State 148
 
-  240 UnaryExpressionNotPlusMinus: '~' UnaryExpression •
+  240 UnaryExpressionNotPlusMinus: '~' UnaryExpression .
 
     $default  reduce using rule 240 (UnaryExpressionNotPlusMinus)
 
 
 State 149
 
-  241 UnaryExpressionNotPlusMinus: '!' UnaryExpression •
+  241 UnaryExpressionNotPlusMinus: '!' UnaryExpression .
 
     $default  reduce using rule 241 (UnaryExpressionNotPlusMinus)
 
 
 State 150
 
-  174 ArrayCreationExpression: NEW PrimitiveType • DimExprs Dimsy
+  174 ArrayCreationExpression: NEW PrimitiveType . DimExprs Dimsy
 
     '['  shift, and go to state 247
 
@@ -2677,7 +2677,7 @@ State 150
 
 State 151
 
-  162 ClassOrInterfaceTypeToInstantiate: SimpleName • ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy
+  162 ClassOrInterfaceTypeToInstantiate: SimpleName . ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy
 
     '.'  shift, and go to state 250
 
@@ -2688,28 +2688,28 @@ State 151
 
 State 152
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate • '(' ArgumentListy ')' ClassBodyy
+  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate . '(' ArgumentListy ')' ClassBodyy
 
     '('  shift, and go to state 252
 
 
 State 153
 
-  237 PreIncrementExpression: INC_OP UnaryExpression •
+  237 PreIncrementExpression: INC_OP UnaryExpression .
 
     $default  reduce using rule 237 (PreIncrementExpression)
 
 
 State 154
 
-  238 PreDecrementExpression: DEC_OP UnaryExpression •
+  238 PreDecrementExpression: DEC_OP UnaryExpression .
 
     $default  reduce using rule 238 (PreDecrementExpression)
 
 
 State 155
 
-  170 MethodInvocation: Name '(' • ArgumentListy ')'
+  170 MethodInvocation: Name '(' . ArgumentListy ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -2774,7 +2774,7 @@ State 155
 
 State 156
 
-  168 ArrayAccess: Name '[' • Expression ']'
+  168 ArrayAccess: Name '[' . Expression ']'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -2835,8 +2835,8 @@ State 156
 
 State 157
 
-   24 QualifiedName: Name '.' • SimpleName
-  159 ClassInstanceCreationExpression: Name '.' • UnqualifiedClassInstanceCreationExpression
+   24 QualifiedName: Name '.' . SimpleName
+  159 ClassInstanceCreationExpression: Name '.' . UnqualifiedClassInstanceCreationExpression
 
     Identifier  shift, and go to state 92
     NEW         shift, and go to state 257
@@ -2847,8 +2847,8 @@ State 157
 
 State 158
 
-  160 ClassInstanceCreationExpression: Primary '.' • UnqualifiedClassInstanceCreationExpression
-  171 MethodInvocation: Primary '.' • SimpleName '(' ArgumentListy ')'
+  160 ClassInstanceCreationExpression: Primary '.' . UnqualifiedClassInstanceCreationExpression
+  171 MethodInvocation: Primary '.' . SimpleName '(' ArgumentListy ')'
 
     Identifier  shift, and go to state 92
     NEW         shift, and go to state 257
@@ -2859,7 +2859,7 @@ State 158
 
 State 159
 
-  169 ArrayAccess: ArrayAccess '[' • Expression ']'
+  169 ArrayAccess: ArrayAccess '[' . Expression ']'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -2920,91 +2920,91 @@ State 159
 
 State 160
 
-  185 AssignmentOperator: '=' •
+  185 AssignmentOperator: '=' .
 
     $default  reduce using rule 185 (AssignmentOperator)
 
 
 State 161
 
-  189 AssignmentOperator: ADD_ASSIGN •
+  189 AssignmentOperator: ADD_ASSIGN .
 
     $default  reduce using rule 189 (AssignmentOperator)
 
 
 State 162
 
-  190 AssignmentOperator: SUB_ASSIGN •
+  190 AssignmentOperator: SUB_ASSIGN .
 
     $default  reduce using rule 190 (AssignmentOperator)
 
 
 State 163
 
-  187 AssignmentOperator: MUL_ASSIGN •
+  187 AssignmentOperator: MUL_ASSIGN .
 
     $default  reduce using rule 187 (AssignmentOperator)
 
 
 State 164
 
-  186 AssignmentOperator: DIV_ASSIGN •
+  186 AssignmentOperator: DIV_ASSIGN .
 
     $default  reduce using rule 186 (AssignmentOperator)
 
 
 State 165
 
-  188 AssignmentOperator: MOD_ASSIGN •
+  188 AssignmentOperator: MOD_ASSIGN .
 
     $default  reduce using rule 188 (AssignmentOperator)
 
 
 State 166
 
-  191 AssignmentOperator: LEFT_ASSIGN •
+  191 AssignmentOperator: LEFT_ASSIGN .
 
     $default  reduce using rule 191 (AssignmentOperator)
 
 
 State 167
 
-  192 AssignmentOperator: RIGHT_ASSIGN •
+  192 AssignmentOperator: RIGHT_ASSIGN .
 
     $default  reduce using rule 192 (AssignmentOperator)
 
 
 State 168
 
-  194 AssignmentOperator: AND_ASSIGN •
+  194 AssignmentOperator: AND_ASSIGN .
 
     $default  reduce using rule 194 (AssignmentOperator)
 
 
 State 169
 
-  195 AssignmentOperator: XOR_ASSIGN •
+  195 AssignmentOperator: XOR_ASSIGN .
 
     $default  reduce using rule 195 (AssignmentOperator)
 
 
 State 170
 
-  196 AssignmentOperator: OR_ASSIGN •
+  196 AssignmentOperator: OR_ASSIGN .
 
     $default  reduce using rule 196 (AssignmentOperator)
 
 
 State 171
 
-  193 AssignmentOperator: UNSIGNED_RIGHT_ASSIGN •
+  193 AssignmentOperator: UNSIGNED_RIGHT_ASSIGN .
 
     $default  reduce using rule 193 (AssignmentOperator)
 
 
 State 172
 
-  182 Assignment: LeftHandSide AssignmentOperator • $@4 AssignmentExpression
+  182 Assignment: LeftHandSide AssignmentOperator . $@4 AssignmentExpression
 
     $default  reduce using rule 181 ($@4)
 
@@ -3013,7 +3013,7 @@ State 172
 
 State 173
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD • Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD . Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3074,21 +3074,21 @@ State 173
 
 State 174
 
-  199 GOTO_COND: ConditionalOrExpression '?' •
+  199 GOTO_COND: ConditionalOrExpression '?' .
 
     $default  reduce using rule 199 (GOTO_COND)
 
 
 State 175
 
-  203 GOTO_OR: ConditionalOrExpression OR_OP •
+  203 GOTO_OR: ConditionalOrExpression OR_OP .
 
     $default  reduce using rule 203 (GOTO_OR)
 
 
 State 176
 
-  201 ConditionalOrExpression: GOTO_OR NEXT_QUAD • ConditionalAndExpression
+  201 ConditionalOrExpression: GOTO_OR NEXT_QUAD . ConditionalAndExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3141,14 +3141,14 @@ State 176
 
 State 177
 
-  206 GOTO_AND: ConditionalAndExpression AND_OP •
+  206 GOTO_AND: ConditionalAndExpression AND_OP .
 
     $default  reduce using rule 206 (GOTO_AND)
 
 
 State 178
 
-  204 ConditionalAndExpression: GOTO_AND NEXT_QUAD • InclusiveOrExpression
+  204 ConditionalAndExpression: GOTO_AND NEXT_QUAD . InclusiveOrExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3199,7 +3199,7 @@ State 178
 
 State 179
 
-  207 InclusiveOrExpression: InclusiveOrExpression '|' • ExclusiveOrExpression
+  207 InclusiveOrExpression: InclusiveOrExpression '|' . ExclusiveOrExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3249,7 +3249,7 @@ State 179
 
 State 180
 
-  209 ExclusiveOrExpression: ExclusiveOrExpression '^' • AndExpression
+  209 ExclusiveOrExpression: ExclusiveOrExpression '^' . AndExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3298,7 +3298,7 @@ State 180
 
 State 181
 
-  211 AndExpression: AndExpression '&' • EqualityExpression
+  211 AndExpression: AndExpression '&' . EqualityExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3346,7 +3346,7 @@ State 181
 
 State 182
 
-  213 EqualityExpression: EqualityExpression EQ_OP • RelationalExpression
+  213 EqualityExpression: EqualityExpression EQ_OP . RelationalExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3393,7 +3393,7 @@ State 182
 
 State 183
 
-  214 EqualityExpression: EqualityExpression NE_OP • RelationalExpression
+  214 EqualityExpression: EqualityExpression NE_OP . RelationalExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3440,7 +3440,7 @@ State 183
 
 State 184
 
-  216 RelationalExpression: RelationalExpression '<' • ShiftExpression
+  216 RelationalExpression: RelationalExpression '<' . ShiftExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3486,7 +3486,7 @@ State 184
 
 State 185
 
-  217 RelationalExpression: RelationalExpression '>' • ShiftExpression
+  217 RelationalExpression: RelationalExpression '>' . ShiftExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3532,7 +3532,7 @@ State 185
 
 State 186
 
-  219 RelationalExpression: RelationalExpression LE_OP • ShiftExpression
+  219 RelationalExpression: RelationalExpression LE_OP . ShiftExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3578,7 +3578,7 @@ State 186
 
 State 187
 
-  218 RelationalExpression: RelationalExpression GE_OP • ShiftExpression
+  218 RelationalExpression: RelationalExpression GE_OP . ShiftExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3624,7 +3624,7 @@ State 187
 
 State 188
 
-  222 ShiftExpression: ShiftExpression RIGHT_OP • AdditiveExpression
+  222 ShiftExpression: ShiftExpression RIGHT_OP . AdditiveExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3669,7 +3669,7 @@ State 188
 
 State 189
 
-  221 ShiftExpression: ShiftExpression LEFT_OP • AdditiveExpression
+  221 ShiftExpression: ShiftExpression LEFT_OP . AdditiveExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3714,7 +3714,7 @@ State 189
 
 State 190
 
-  223 ShiftExpression: ShiftExpression UNSIGNED_RIGHT • AdditiveExpression
+  223 ShiftExpression: ShiftExpression UNSIGNED_RIGHT . AdditiveExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3759,7 +3759,7 @@ State 190
 
 State 191
 
-  225 AdditiveExpression: AdditiveExpression '+' • MultiplicativeExpression
+  225 AdditiveExpression: AdditiveExpression '+' . MultiplicativeExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3803,7 +3803,7 @@ State 191
 
 State 192
 
-  226 AdditiveExpression: AdditiveExpression '-' • MultiplicativeExpression
+  226 AdditiveExpression: AdditiveExpression '-' . MultiplicativeExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3847,7 +3847,7 @@ State 192
 
 State 193
 
-  228 MultiplicativeExpression: MultiplicativeExpression '*' • UnaryExpression
+  228 MultiplicativeExpression: MultiplicativeExpression '*' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3890,7 +3890,7 @@ State 193
 
 State 194
 
-  229 MultiplicativeExpression: MultiplicativeExpression '/' • UnaryExpression
+  229 MultiplicativeExpression: MultiplicativeExpression '/' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3933,7 +3933,7 @@ State 194
 
 State 195
 
-  230 MultiplicativeExpression: MultiplicativeExpression '%' • UnaryExpression
+  230 MultiplicativeExpression: MultiplicativeExpression '%' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -3976,21 +3976,21 @@ State 195
 
 State 196
 
-  247 PostIncrementExpression: PostfixExpression INC_OP •
+  247 PostIncrementExpression: PostfixExpression INC_OP .
 
     $default  reduce using rule 247 (PostIncrementExpression)
 
 
 State 197
 
-  248 PostDecrementExpression: PostfixExpression DEC_OP •
+  248 PostDecrementExpression: PostfixExpression DEC_OP .
 
     $default  reduce using rule 248 (PostDecrementExpression)
 
 
 State 198
 
-   61 MethodorConstrDeclarator: SimpleName2 '(' A ')' • Dimsy
+   61 MethodorConstrDeclarator: SimpleName2 '(' A ')' . Dimsy
 
     '['  shift, and go to state 284
 
@@ -4002,7 +4002,7 @@ State 198
 
 State 199
 
-   68 FormalParameter: PrimitiveType • SimpleName2 Dimsy
+   68 FormalParameter: PrimitiveType . SimpleName2 Dimsy
 
     Identifier  shift, and go to state 57
 
@@ -4011,8 +4011,8 @@ State 199
 
 State 200
 
-   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList • ')' NEXT_QUAD
-   67 FormalParameterList: FormalParameterList • ',' NEXT_QUAD FormalParameter
+   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList . ')' NEXT_QUAD
+   67 FormalParameterList: FormalParameterList . ',' NEXT_QUAD FormalParameter
 
     ')'  shift, and go to state 288
     ','  shift, and go to state 289
@@ -4020,14 +4020,14 @@ State 200
 
 State 201
 
-   66 FormalParameterList: FormalParameter •
+   66 FormalParameterList: FormalParameter .
 
     $default  reduce using rule 66 (FormalParameterList)
 
 
 State 202
 
-   75 ExplicitConstructorInvocation: THIS '(' • ArgumentListy ')' ';'
+   75 ExplicitConstructorInvocation: THIS '(' . ArgumentListy ')' ';'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4092,8 +4092,8 @@ State 202
 
 State 203
 
-   73 ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements • '}'
-   82 BlockStatements: BlockStatements • NEXT_QUAD BlockStatement
+   73 ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements . '}'
+   82 BlockStatements: BlockStatements . NEXT_QUAD BlockStatement
 
     '}'  shift, and go to state 291
 
@@ -4104,14 +4104,14 @@ State 203
 
 State 204
 
-   74 ConstructorBody: '{' BlockStatements '}' •
+   74 ConstructorBody: '{' BlockStatements '}' .
 
     $default  reduce using rule 74 (ConstructorBody)
 
 
 State 205
 
-  154 PrimaryNoNewArray: '(' • Expression ')'
+  154 PrimaryNoNewArray: '(' . Expression ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4172,15 +4172,15 @@ State 205
 
 State 206
 
-  100 StatementWithoutTrailingSubstatement: ';' •
+  100 StatementWithoutTrailingSubstatement: ';' .
 
     $default  reduce using rule 100 (StatementWithoutTrailingSubstatement)
 
 
 State 207
 
-  142 ContinueStatement: CONTINUE • SimpleName ';'
-  143                  | CONTINUE • ';'
+  142 ContinueStatement: CONTINUE . SimpleName ';'
+  143                  | CONTINUE . ';'
 
     ';'         shift, and go to state 292
     Identifier  shift, and go to state 92
@@ -4190,15 +4190,15 @@ State 207
 
 State 208
 
-  127 BasicForHeader: FOR • '(' ForInity ';' Expressiony ';' ForUpdatey ')'
-  128 EnhancedForHeader: FOR • '(' LocalVariableDeclaration ':' Expression ')'
+  127 BasicForHeader: FOR . '(' ForInity ';' Expressiony ';' ForUpdatey ')'
+  128 EnhancedForHeader: FOR . '(' LocalVariableDeclaration ':' Expression ')'
 
     '('  shift, and go to state 294
 
 
 State 209
 
-  117 IF_CODE: IF • $@1 '(' Expression ')'
+  117 IF_CODE: IF . $@1 '(' Expression ')'
 
     $default  reduce using rule 116 ($@1)
 
@@ -4207,8 +4207,8 @@ State 209
 
 State 210
 
-  140 BreakStatement: BREAK • SimpleName ';'
-  141               | BREAK • ';'
+  140 BreakStatement: BREAK . SimpleName ';'
+  141               | BREAK . ';'
 
     ';'         shift, and go to state 296
     Identifier  shift, and go to state 92
@@ -4218,7 +4218,7 @@ State 210
 
 State 211
 
-  146 ThrowStatement: THROW • Expression ';'
+  146 ThrowStatement: THROW . Expression ';'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4279,8 +4279,8 @@ State 211
 
 State 212
 
-  144 ReturnStatement: RETURN • Expression ';'
-  145                | RETURN • ';'
+  144 ReturnStatement: RETURN . Expression ';'
+  145                | RETURN . ';'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4342,14 +4342,14 @@ State 212
 
 State 213
 
-  121 WhileStatement: WHILE • '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
+  121 WhileStatement: WHILE . '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
 
     '('  shift, and go to state 301
 
 
 State 214
 
-   87 LocalVariableDeclaration: PrimitiveType • VariableDeclaratorList
+   87 LocalVariableDeclaration: PrimitiveType . VariableDeclaratorList
 
     Identifier  shift, and go to state 77
 
@@ -4360,8 +4360,8 @@ State 214
 
 State 215
 
-   21 Name: SimpleName •
-  106 LabeledStatement: SimpleName • ':' NEXT_QUAD Statement
+   21 Name: SimpleName .
+  106 LabeledStatement: SimpleName . ':' NEXT_QUAD Statement
 
     ':'  shift, and go to state 303
 
@@ -4370,78 +4370,78 @@ State 215
 
 State 216
 
-   86 Declaration_list: ClassDeclaration •
+   86 Declaration_list: ClassDeclaration .
 
     $default  reduce using rule 86 (Declaration_list)
 
 
 State 217
 
-   99 StatementWithoutTrailingSubstatement: Block •
+   99 StatementWithoutTrailingSubstatement: Block .
 
     $default  reduce using rule 99 (StatementWithoutTrailingSubstatement)
 
 
 State 218
 
-   82 BlockStatements: BlockStatements NEXT_QUAD BlockStatement •
+   82 BlockStatements: BlockStatements NEXT_QUAD BlockStatement .
 
     $default  reduce using rule 82 (BlockStatements)
 
 
 State 219
 
-   83 BlockStatement: Declaration_list •
+   83 BlockStatement: Declaration_list .
 
     $default  reduce using rule 83 (BlockStatement)
 
 
 State 220
 
-   85 Declaration_list: LocalVariableDeclaration • ';'
+   85 Declaration_list: LocalVariableDeclaration . ';'
 
     ';'  shift, and go to state 304
 
 
 State 221
 
-   84 BlockStatement: Statement •
+   84 BlockStatement: Statement .
 
     $default  reduce using rule 84 (BlockStatement)
 
 
 State 222
 
-   88 Statement: StatementWithoutTrailingSubstatement •
+   88 Statement: StatementWithoutTrailingSubstatement .
 
     $default  reduce using rule 88 (Statement)
 
 
 State 223
 
-   89 Statement: LabeledStatement •
+   89 Statement: LabeledStatement .
 
     $default  reduce using rule 89 (Statement)
 
 
 State 224
 
-  101 StatementWithoutTrailingSubstatement: ExpressionStatement •
+  101 StatementWithoutTrailingSubstatement: ExpressionStatement .
 
     $default  reduce using rule 101 (StatementWithoutTrailingSubstatement)
 
 
 State 225
 
-  108 ExpressionStatement: StatementExpression • ';'
+  108 ExpressionStatement: StatementExpression . ';'
 
     ';'  shift, and go to state 305
 
 
 State 226
 
-  118 IfThenStatement: IF_CODE • NEXT_QUAD Statement
-  119 IfThenElseStatement: IF_CODE • NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
+  118 IfThenStatement: IF_CODE . NEXT_QUAD Statement
+  119 IfThenElseStatement: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -4450,35 +4450,35 @@ State 226
 
 State 227
 
-   90 Statement: IfThenStatement •
+   90 Statement: IfThenStatement .
 
     $default  reduce using rule 90 (Statement)
 
 
 State 228
 
-   91 Statement: IfThenElseStatement •
+   91 Statement: IfThenElseStatement .
 
     $default  reduce using rule 91 (Statement)
 
 
 State 229
 
-   92 Statement: WhileStatement •
+   92 Statement: WhileStatement .
 
     $default  reduce using rule 92 (Statement)
 
 
 State 230
 
-   93 Statement: ForStatement •
+   93 Statement: ForStatement .
 
     $default  reduce using rule 93 (Statement)
 
 
 State 231
 
-  123 ForStatement: BasicForHeader • Statement
+  123 ForStatement: BasicForHeader . Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -4542,7 +4542,7 @@ State 231
 
 State 232
 
-  124 ForStatement: EnhancedForHeader • Statement
+  124 ForStatement: EnhancedForHeader . Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -4606,36 +4606,36 @@ State 232
 
 State 233
 
-  102 StatementWithoutTrailingSubstatement: BreakStatement •
+  102 StatementWithoutTrailingSubstatement: BreakStatement .
 
     $default  reduce using rule 102 (StatementWithoutTrailingSubstatement)
 
 
 State 234
 
-  103 StatementWithoutTrailingSubstatement: ContinueStatement •
+  103 StatementWithoutTrailingSubstatement: ContinueStatement .
 
     $default  reduce using rule 103 (StatementWithoutTrailingSubstatement)
 
 
 State 235
 
-  104 StatementWithoutTrailingSubstatement: ReturnStatement •
+  104 StatementWithoutTrailingSubstatement: ReturnStatement .
 
     $default  reduce using rule 104 (StatementWithoutTrailingSubstatement)
 
 
 State 236
 
-  105 StatementWithoutTrailingSubstatement: ThrowStatement •
+  105 StatementWithoutTrailingSubstatement: ThrowStatement .
 
     $default  reduce using rule 105 (StatementWithoutTrailingSubstatement)
 
 
 State 237
 
-  115 StatementExpression: ClassInstanceCreationExpression •
-  155 PrimaryNoNewArray: ClassInstanceCreationExpression •
+  115 StatementExpression: ClassInstanceCreationExpression .
+  155 PrimaryNoNewArray: ClassInstanceCreationExpression .
 
     '.'       reduce using rule 155 (PrimaryNoNewArray)
     INC_OP    reduce using rule 155 (PrimaryNoNewArray)
@@ -4645,8 +4645,8 @@ State 237
 
 State 238
 
-  114 StatementExpression: MethodInvocation •
-  157 PrimaryNoNewArray: MethodInvocation •
+  114 StatementExpression: MethodInvocation .
+  157 PrimaryNoNewArray: MethodInvocation .
 
     '.'       reduce using rule 157 (PrimaryNoNewArray)
     INC_OP    reduce using rule 157 (PrimaryNoNewArray)
@@ -4656,29 +4656,29 @@ State 238
 
 State 239
 
-  109 StatementExpression: Assignment •
+  109 StatementExpression: Assignment .
 
     $default  reduce using rule 109 (StatementExpression)
 
 
 State 240
 
-  110 StatementExpression: PreIncrementExpression •
+  110 StatementExpression: PreIncrementExpression .
 
     $default  reduce using rule 110 (StatementExpression)
 
 
 State 241
 
-  111 StatementExpression: PreDecrementExpression •
+  111 StatementExpression: PreDecrementExpression .
 
     $default  reduce using rule 111 (StatementExpression)
 
 
 State 242
 
-  247 PostIncrementExpression: PostfixExpression • INC_OP
-  248 PostDecrementExpression: PostfixExpression • DEC_OP
+  247 PostIncrementExpression: PostfixExpression . INC_OP
+  248 PostDecrementExpression: PostfixExpression . DEC_OP
 
     INC_OP  shift, and go to state 196
     DEC_OP  shift, and go to state 197
@@ -4686,8 +4686,8 @@ State 242
 
 State 243
 
-  112 StatementExpression: PostIncrementExpression •
-  245 PostfixExpression: PostIncrementExpression •
+  112 StatementExpression: PostIncrementExpression .
+  245 PostfixExpression: PostIncrementExpression .
 
     INC_OP    reduce using rule 245 (PostfixExpression)
     DEC_OP    reduce using rule 245 (PostfixExpression)
@@ -4696,8 +4696,8 @@ State 243
 
 State 244
 
-  113 StatementExpression: PostDecrementExpression •
-  246 PostfixExpression: PostDecrementExpression •
+  113 StatementExpression: PostDecrementExpression .
+  246 PostfixExpression: PostDecrementExpression .
 
     INC_OP    reduce using rule 246 (PostfixExpression)
     DEC_OP    reduce using rule 246 (PostfixExpression)
@@ -4706,7 +4706,7 @@ State 244
 
 State 245
 
-  249 CastExpression: '(' PrimitiveType ')' • UnaryExpression
+  249 CastExpression: '(' PrimitiveType ')' . UnaryExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4749,14 +4749,14 @@ State 245
 
 State 246
 
-  154 PrimaryNoNewArray: '(' Expression ')' •
+  154 PrimaryNoNewArray: '(' Expression ')' .
 
     $default  reduce using rule 154 (PrimaryNoNewArray)
 
 
 State 247
 
-  177 DimExpr: '[' • Expression ']'
+  177 DimExpr: '[' . Expression ']'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4817,8 +4817,8 @@ State 247
 
 State 248
 
-  174 ArrayCreationExpression: NEW PrimitiveType DimExprs • Dimsy
-  176 DimExprs: DimExprs • DimExpr
+  174 ArrayCreationExpression: NEW PrimitiveType DimExprs . Dimsy
+  176 DimExprs: DimExprs . DimExpr
 
     '['  shift, and go to state 311
 
@@ -4831,14 +4831,14 @@ State 248
 
 State 249
 
-  175 DimExprs: DimExpr •
+  175 DimExprs: DimExpr .
 
     $default  reduce using rule 175 (DimExprs)
 
 
 State 250
 
-  166 ClassOrInterfaceTypeToInstant: '.' • SimpleName ClassOrInterfaceTypeToInstant
+  166 ClassOrInterfaceTypeToInstant: '.' . SimpleName ClassOrInterfaceTypeToInstant
 
     Identifier  shift, and go to state 92
 
@@ -4847,7 +4847,7 @@ State 250
 
 State 251
 
-  162 ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant • TypeArgumentsOrDiamondy
+  162 ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant . TypeArgumentsOrDiamondy
 
     '<'  shift, and go to state 315
 
@@ -4859,7 +4859,7 @@ State 251
 
 State 252
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' • ArgumentListy ')' ClassBodyy
+  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' . ArgumentListy ')' ClassBodyy
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -4924,15 +4924,15 @@ State 252
 
 State 253
 
-  170 MethodInvocation: Name '(' ArgumentListy • ')'
+  170 MethodInvocation: Name '(' ArgumentListy . ')'
 
     ')'  shift, and go to state 319
 
 
 State 254
 
-   77 ArgumentListy: ArgumentList •
-  173 ArgumentList: ArgumentList • ',' Expression
+   77 ArgumentListy: ArgumentList .
+  173 ArgumentList: ArgumentList . ',' Expression
 
     ','  shift, and go to state 320
 
@@ -4941,21 +4941,21 @@ State 254
 
 State 255
 
-  172 ArgumentList: Expression •
+  172 ArgumentList: Expression .
 
     $default  reduce using rule 172 (ArgumentList)
 
 
 State 256
 
-  168 ArrayAccess: Name '[' Expression • ']'
+  168 ArrayAccess: Name '[' Expression . ']'
 
     ']'  shift, and go to state 321
 
 
 State 257
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW • ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy
+  161 UnqualifiedClassInstanceCreationExpression: NEW . ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy
 
     Identifier  shift, and go to state 92
 
@@ -4965,42 +4965,42 @@ State 257
 
 State 258
 
-   24 QualifiedName: Name '.' SimpleName •
+   24 QualifiedName: Name '.' SimpleName .
 
     $default  reduce using rule 24 (QualifiedName)
 
 
 State 259
 
-  159 ClassInstanceCreationExpression: Name '.' UnqualifiedClassInstanceCreationExpression •
+  159 ClassInstanceCreationExpression: Name '.' UnqualifiedClassInstanceCreationExpression .
 
     $default  reduce using rule 159 (ClassInstanceCreationExpression)
 
 
 State 260
 
-  171 MethodInvocation: Primary '.' SimpleName • '(' ArgumentListy ')'
+  171 MethodInvocation: Primary '.' SimpleName . '(' ArgumentListy ')'
 
     '('  shift, and go to state 322
 
 
 State 261
 
-  160 ClassInstanceCreationExpression: Primary '.' UnqualifiedClassInstanceCreationExpression •
+  160 ClassInstanceCreationExpression: Primary '.' UnqualifiedClassInstanceCreationExpression .
 
     $default  reduce using rule 160 (ClassInstanceCreationExpression)
 
 
 State 262
 
-  169 ArrayAccess: ArrayAccess '[' Expression • ']'
+  169 ArrayAccess: ArrayAccess '[' Expression . ']'
 
     ']'  shift, and go to state 323
 
 
 State 263
 
-  182 Assignment: LeftHandSide AssignmentOperator $@4 • AssignmentExpression
+  182 Assignment: LeftHandSide AssignmentOperator $@4 . AssignmentExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -5060,7 +5060,7 @@ State 263
 
 State 264
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression • WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression . WRITE_GOTO ':' NEXT_QUAD ConditionalExpression
 
     $default  reduce using rule 200 (WRITE_GOTO)
 
@@ -5069,8 +5069,8 @@ State 264
 
 State 265
 
-  201 ConditionalOrExpression: GOTO_OR NEXT_QUAD ConditionalAndExpression •
-  206 GOTO_AND: ConditionalAndExpression • AND_OP
+  201 ConditionalOrExpression: GOTO_OR NEXT_QUAD ConditionalAndExpression .
+  206 GOTO_AND: ConditionalAndExpression . AND_OP
 
     AND_OP  shift, and go to state 177
 
@@ -5079,8 +5079,8 @@ State 265
 
 State 266
 
-  204 ConditionalAndExpression: GOTO_AND NEXT_QUAD InclusiveOrExpression •
-  207 InclusiveOrExpression: InclusiveOrExpression • '|' ExclusiveOrExpression
+  204 ConditionalAndExpression: GOTO_AND NEXT_QUAD InclusiveOrExpression .
+  207 InclusiveOrExpression: InclusiveOrExpression . '|' ExclusiveOrExpression
 
     '|'  shift, and go to state 179
 
@@ -5089,8 +5089,8 @@ State 266
 
 State 267
 
-  207 InclusiveOrExpression: InclusiveOrExpression '|' ExclusiveOrExpression •
-  209 ExclusiveOrExpression: ExclusiveOrExpression • '^' AndExpression
+  207 InclusiveOrExpression: InclusiveOrExpression '|' ExclusiveOrExpression .
+  209 ExclusiveOrExpression: ExclusiveOrExpression . '^' AndExpression
 
     '^'  shift, and go to state 180
 
@@ -5099,8 +5099,8 @@ State 267
 
 State 268
 
-  209 ExclusiveOrExpression: ExclusiveOrExpression '^' AndExpression •
-  211 AndExpression: AndExpression • '&' EqualityExpression
+  209 ExclusiveOrExpression: ExclusiveOrExpression '^' AndExpression .
+  211 AndExpression: AndExpression . '&' EqualityExpression
 
     '&'  shift, and go to state 181
 
@@ -5109,9 +5109,9 @@ State 268
 
 State 269
 
-  211 AndExpression: AndExpression '&' EqualityExpression •
-  213 EqualityExpression: EqualityExpression • EQ_OP RelationalExpression
-  214                   | EqualityExpression • NE_OP RelationalExpression
+  211 AndExpression: AndExpression '&' EqualityExpression .
+  213 EqualityExpression: EqualityExpression . EQ_OP RelationalExpression
+  214                   | EqualityExpression . NE_OP RelationalExpression
 
     EQ_OP  shift, and go to state 182
     NE_OP  shift, and go to state 183
@@ -5121,11 +5121,11 @@ State 269
 
 State 270
 
-  213 EqualityExpression: EqualityExpression EQ_OP RelationalExpression •
-  216 RelationalExpression: RelationalExpression • '<' ShiftExpression
-  217                     | RelationalExpression • '>' ShiftExpression
-  218                     | RelationalExpression • GE_OP ShiftExpression
-  219                     | RelationalExpression • LE_OP ShiftExpression
+  213 EqualityExpression: EqualityExpression EQ_OP RelationalExpression .
+  216 RelationalExpression: RelationalExpression . '<' ShiftExpression
+  217                     | RelationalExpression . '>' ShiftExpression
+  218                     | RelationalExpression . GE_OP ShiftExpression
+  219                     | RelationalExpression . LE_OP ShiftExpression
 
     '<'    shift, and go to state 184
     '>'    shift, and go to state 185
@@ -5137,11 +5137,11 @@ State 270
 
 State 271
 
-  214 EqualityExpression: EqualityExpression NE_OP RelationalExpression •
-  216 RelationalExpression: RelationalExpression • '<' ShiftExpression
-  217                     | RelationalExpression • '>' ShiftExpression
-  218                     | RelationalExpression • GE_OP ShiftExpression
-  219                     | RelationalExpression • LE_OP ShiftExpression
+  214 EqualityExpression: EqualityExpression NE_OP RelationalExpression .
+  216 RelationalExpression: RelationalExpression . '<' ShiftExpression
+  217                     | RelationalExpression . '>' ShiftExpression
+  218                     | RelationalExpression . GE_OP ShiftExpression
+  219                     | RelationalExpression . LE_OP ShiftExpression
 
     '<'    shift, and go to state 184
     '>'    shift, and go to state 185
@@ -5153,10 +5153,10 @@ State 271
 
 State 272
 
-  216 RelationalExpression: RelationalExpression '<' ShiftExpression •
-  221 ShiftExpression: ShiftExpression • LEFT_OP AdditiveExpression
-  222                | ShiftExpression • RIGHT_OP AdditiveExpression
-  223                | ShiftExpression • UNSIGNED_RIGHT AdditiveExpression
+  216 RelationalExpression: RelationalExpression '<' ShiftExpression .
+  221 ShiftExpression: ShiftExpression . LEFT_OP AdditiveExpression
+  222                | ShiftExpression . RIGHT_OP AdditiveExpression
+  223                | ShiftExpression . UNSIGNED_RIGHT AdditiveExpression
 
     RIGHT_OP        shift, and go to state 188
     LEFT_OP         shift, and go to state 189
@@ -5167,10 +5167,10 @@ State 272
 
 State 273
 
-  217 RelationalExpression: RelationalExpression '>' ShiftExpression •
-  221 ShiftExpression: ShiftExpression • LEFT_OP AdditiveExpression
-  222                | ShiftExpression • RIGHT_OP AdditiveExpression
-  223                | ShiftExpression • UNSIGNED_RIGHT AdditiveExpression
+  217 RelationalExpression: RelationalExpression '>' ShiftExpression .
+  221 ShiftExpression: ShiftExpression . LEFT_OP AdditiveExpression
+  222                | ShiftExpression . RIGHT_OP AdditiveExpression
+  223                | ShiftExpression . UNSIGNED_RIGHT AdditiveExpression
 
     RIGHT_OP        shift, and go to state 188
     LEFT_OP         shift, and go to state 189
@@ -5181,10 +5181,10 @@ State 273
 
 State 274
 
-  219 RelationalExpression: RelationalExpression LE_OP ShiftExpression •
-  221 ShiftExpression: ShiftExpression • LEFT_OP AdditiveExpression
-  222                | ShiftExpression • RIGHT_OP AdditiveExpression
-  223                | ShiftExpression • UNSIGNED_RIGHT AdditiveExpression
+  219 RelationalExpression: RelationalExpression LE_OP ShiftExpression .
+  221 ShiftExpression: ShiftExpression . LEFT_OP AdditiveExpression
+  222                | ShiftExpression . RIGHT_OP AdditiveExpression
+  223                | ShiftExpression . UNSIGNED_RIGHT AdditiveExpression
 
     RIGHT_OP        shift, and go to state 188
     LEFT_OP         shift, and go to state 189
@@ -5195,10 +5195,10 @@ State 274
 
 State 275
 
-  218 RelationalExpression: RelationalExpression GE_OP ShiftExpression •
-  221 ShiftExpression: ShiftExpression • LEFT_OP AdditiveExpression
-  222                | ShiftExpression • RIGHT_OP AdditiveExpression
-  223                | ShiftExpression • UNSIGNED_RIGHT AdditiveExpression
+  218 RelationalExpression: RelationalExpression GE_OP ShiftExpression .
+  221 ShiftExpression: ShiftExpression . LEFT_OP AdditiveExpression
+  222                | ShiftExpression . RIGHT_OP AdditiveExpression
+  223                | ShiftExpression . UNSIGNED_RIGHT AdditiveExpression
 
     RIGHT_OP        shift, and go to state 188
     LEFT_OP         shift, and go to state 189
@@ -5209,9 +5209,9 @@ State 275
 
 State 276
 
-  222 ShiftExpression: ShiftExpression RIGHT_OP AdditiveExpression •
-  225 AdditiveExpression: AdditiveExpression • '+' MultiplicativeExpression
-  226                   | AdditiveExpression • '-' MultiplicativeExpression
+  222 ShiftExpression: ShiftExpression RIGHT_OP AdditiveExpression .
+  225 AdditiveExpression: AdditiveExpression . '+' MultiplicativeExpression
+  226                   | AdditiveExpression . '-' MultiplicativeExpression
 
     '+'  shift, and go to state 191
     '-'  shift, and go to state 192
@@ -5221,9 +5221,9 @@ State 276
 
 State 277
 
-  221 ShiftExpression: ShiftExpression LEFT_OP AdditiveExpression •
-  225 AdditiveExpression: AdditiveExpression • '+' MultiplicativeExpression
-  226                   | AdditiveExpression • '-' MultiplicativeExpression
+  221 ShiftExpression: ShiftExpression LEFT_OP AdditiveExpression .
+  225 AdditiveExpression: AdditiveExpression . '+' MultiplicativeExpression
+  226                   | AdditiveExpression . '-' MultiplicativeExpression
 
     '+'  shift, and go to state 191
     '-'  shift, and go to state 192
@@ -5233,9 +5233,9 @@ State 277
 
 State 278
 
-  223 ShiftExpression: ShiftExpression UNSIGNED_RIGHT AdditiveExpression •
-  225 AdditiveExpression: AdditiveExpression • '+' MultiplicativeExpression
-  226                   | AdditiveExpression • '-' MultiplicativeExpression
+  223 ShiftExpression: ShiftExpression UNSIGNED_RIGHT AdditiveExpression .
+  225 AdditiveExpression: AdditiveExpression . '+' MultiplicativeExpression
+  226                   | AdditiveExpression . '-' MultiplicativeExpression
 
     '+'  shift, and go to state 191
     '-'  shift, and go to state 192
@@ -5245,10 +5245,10 @@ State 278
 
 State 279
 
-  225 AdditiveExpression: AdditiveExpression '+' MultiplicativeExpression •
-  228 MultiplicativeExpression: MultiplicativeExpression • '*' UnaryExpression
-  229                         | MultiplicativeExpression • '/' UnaryExpression
-  230                         | MultiplicativeExpression • '%' UnaryExpression
+  225 AdditiveExpression: AdditiveExpression '+' MultiplicativeExpression .
+  228 MultiplicativeExpression: MultiplicativeExpression . '*' UnaryExpression
+  229                         | MultiplicativeExpression . '/' UnaryExpression
+  230                         | MultiplicativeExpression . '%' UnaryExpression
 
     '*'  shift, and go to state 193
     '/'  shift, and go to state 194
@@ -5259,10 +5259,10 @@ State 279
 
 State 280
 
-  226 AdditiveExpression: AdditiveExpression '-' MultiplicativeExpression •
-  228 MultiplicativeExpression: MultiplicativeExpression • '*' UnaryExpression
-  229                         | MultiplicativeExpression • '/' UnaryExpression
-  230                         | MultiplicativeExpression • '%' UnaryExpression
+  226 AdditiveExpression: AdditiveExpression '-' MultiplicativeExpression .
+  228 MultiplicativeExpression: MultiplicativeExpression . '*' UnaryExpression
+  229                         | MultiplicativeExpression . '/' UnaryExpression
+  230                         | MultiplicativeExpression . '%' UnaryExpression
 
     '*'  shift, and go to state 193
     '/'  shift, and go to state 194
@@ -5273,50 +5273,50 @@ State 280
 
 State 281
 
-  228 MultiplicativeExpression: MultiplicativeExpression '*' UnaryExpression •
+  228 MultiplicativeExpression: MultiplicativeExpression '*' UnaryExpression .
 
     $default  reduce using rule 228 (MultiplicativeExpression)
 
 
 State 282
 
-  229 MultiplicativeExpression: MultiplicativeExpression '/' UnaryExpression •
+  229 MultiplicativeExpression: MultiplicativeExpression '/' UnaryExpression .
 
     $default  reduce using rule 229 (MultiplicativeExpression)
 
 
 State 283
 
-  230 MultiplicativeExpression: MultiplicativeExpression '%' UnaryExpression •
+  230 MultiplicativeExpression: MultiplicativeExpression '%' UnaryExpression .
 
     $default  reduce using rule 230 (MultiplicativeExpression)
 
 
 State 284
 
-   19 Dims: '[' • ']'
-   20     | '[' • ']' Dims
+   19 Dims: '[' . ']'
+   20     | '[' . ']' Dims
 
     ']'  shift, and go to state 326
 
 
 State 285
 
-   65 Dimsy: Dims •
+   65 Dimsy: Dims .
 
     $default  reduce using rule 65 (Dimsy)
 
 
 State 286
 
-   61 MethodorConstrDeclarator: SimpleName2 '(' A ')' Dimsy •
+   61 MethodorConstrDeclarator: SimpleName2 '(' A ')' Dimsy .
 
     $default  reduce using rule 61 (MethodorConstrDeclarator)
 
 
 State 287
 
-   68 FormalParameter: PrimitiveType SimpleName2 • Dimsy
+   68 FormalParameter: PrimitiveType SimpleName2 . Dimsy
 
     '['  shift, and go to state 284
 
@@ -5328,7 +5328,7 @@ State 287
 
 State 288
 
-   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' • NEXT_QUAD
+   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' . NEXT_QUAD
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -5337,7 +5337,7 @@ State 288
 
 State 289
 
-   67 FormalParameterList: FormalParameterList ',' • NEXT_QUAD FormalParameter
+   67 FormalParameterList: FormalParameterList ',' . NEXT_QUAD FormalParameter
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -5346,36 +5346,36 @@ State 289
 
 State 290
 
-   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy • ')' ';'
+   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy . ')' ';'
 
     ')'  shift, and go to state 330
 
 
 State 291
 
-   73 ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements '}' •
+   73 ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements '}' .
 
     $default  reduce using rule 73 (ConstructorBody)
 
 
 State 292
 
-  143 ContinueStatement: CONTINUE ';' •
+  143 ContinueStatement: CONTINUE ';' .
 
     $default  reduce using rule 143 (ContinueStatement)
 
 
 State 293
 
-  142 ContinueStatement: CONTINUE SimpleName • ';'
+  142 ContinueStatement: CONTINUE SimpleName . ';'
 
     ';'  shift, and go to state 331
 
 
 State 294
 
-  127 BasicForHeader: FOR '(' • ForInity ';' Expressiony ';' ForUpdatey ')'
-  128 EnhancedForHeader: FOR '(' • LocalVariableDeclaration ':' Expression ')'
+  127 BasicForHeader: FOR '(' . ForInity ';' Expressiony ';' ForUpdatey ')'
+  128 EnhancedForHeader: FOR '(' . LocalVariableDeclaration ':' Expression ')'
 
     '('                   shift, and go to state 205
     integerLiteral        shift, and go to state 85
@@ -5432,49 +5432,49 @@ State 294
 
 State 295
 
-  117 IF_CODE: IF $@1 • '(' Expression ')'
+  117 IF_CODE: IF $@1 . '(' Expression ')'
 
     '('  shift, and go to state 337
 
 
 State 296
 
-  141 BreakStatement: BREAK ';' •
+  141 BreakStatement: BREAK ';' .
 
     $default  reduce using rule 141 (BreakStatement)
 
 
 State 297
 
-  140 BreakStatement: BREAK SimpleName • ';'
+  140 BreakStatement: BREAK SimpleName . ';'
 
     ';'  shift, and go to state 338
 
 
 State 298
 
-  146 ThrowStatement: THROW Expression • ';'
+  146 ThrowStatement: THROW Expression . ';'
 
     ';'  shift, and go to state 339
 
 
 State 299
 
-  145 ReturnStatement: RETURN ';' •
+  145 ReturnStatement: RETURN ';' .
 
     $default  reduce using rule 145 (ReturnStatement)
 
 
 State 300
 
-  144 ReturnStatement: RETURN Expression • ';'
+  144 ReturnStatement: RETURN Expression . ';'
 
     ';'  shift, and go to state 340
 
 
 State 301
 
-  121 WhileStatement: WHILE '(' • NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
+  121 WhileStatement: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -5483,8 +5483,8 @@ State 301
 
 State 302
 
-   49 VariableDeclaratorList: VariableDeclaratorList • ',' VariableDeclarator
-   87 LocalVariableDeclaration: PrimitiveType VariableDeclaratorList •
+   49 VariableDeclaratorList: VariableDeclaratorList . ',' VariableDeclarator
+   87 LocalVariableDeclaration: PrimitiveType VariableDeclaratorList .
 
     ','  shift, and go to state 66
 
@@ -5493,7 +5493,7 @@ State 302
 
 State 303
 
-  106 LabeledStatement: SimpleName ':' • NEXT_QUAD Statement
+  106 LabeledStatement: SimpleName ':' . NEXT_QUAD Statement
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -5502,22 +5502,22 @@ State 303
 
 State 304
 
-   85 Declaration_list: LocalVariableDeclaration ';' •
+   85 Declaration_list: LocalVariableDeclaration ';' .
 
     $default  reduce using rule 85 (Declaration_list)
 
 
 State 305
 
-  108 ExpressionStatement: StatementExpression ';' •
+  108 ExpressionStatement: StatementExpression ';' .
 
     $default  reduce using rule 108 (ExpressionStatement)
 
 
 State 306
 
-  118 IfThenStatement: IF_CODE NEXT_QUAD • Statement
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD • StatementNoShortIf N ELSE NEXT_QUAD Statement
+  118 IfThenStatement: IF_CODE NEXT_QUAD . Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD . StatementNoShortIf N ELSE NEXT_QUAD Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -5586,37 +5586,37 @@ State 306
 
 State 307
 
-  123 ForStatement: BasicForHeader Statement •
+  123 ForStatement: BasicForHeader Statement .
 
     $default  reduce using rule 123 (ForStatement)
 
 
 State 308
 
-  124 ForStatement: EnhancedForHeader Statement •
+  124 ForStatement: EnhancedForHeader Statement .
 
     $default  reduce using rule 124 (ForStatement)
 
 
 State 309
 
-  249 CastExpression: '(' PrimitiveType ')' UnaryExpression •
+  249 CastExpression: '(' PrimitiveType ')' UnaryExpression .
 
     $default  reduce using rule 249 (CastExpression)
 
 
 State 310
 
-  177 DimExpr: '[' Expression • ']'
+  177 DimExpr: '[' Expression . ']'
 
     ']'  shift, and go to state 355
 
 
 State 311
 
-   19 Dims: '[' • ']'
-   20     | '[' • ']' Dims
-  177 DimExpr: '[' • Expression ']'
+   19 Dims: '[' . ']'
+   20     | '[' . ']' Dims
+  177 DimExpr: '[' . Expression ']'
 
     '('                   shift, and go to state 80
     ']'                   shift, and go to state 326
@@ -5678,21 +5678,21 @@ State 311
 
 State 312
 
-  174 ArrayCreationExpression: NEW PrimitiveType DimExprs Dimsy •
+  174 ArrayCreationExpression: NEW PrimitiveType DimExprs Dimsy .
 
     $default  reduce using rule 174 (ArrayCreationExpression)
 
 
 State 313
 
-  176 DimExprs: DimExprs DimExpr •
+  176 DimExprs: DimExprs DimExpr .
 
     $default  reduce using rule 176 (DimExprs)
 
 
 State 314
 
-  166 ClassOrInterfaceTypeToInstant: '.' SimpleName • ClassOrInterfaceTypeToInstant
+  166 ClassOrInterfaceTypeToInstant: '.' SimpleName . ClassOrInterfaceTypeToInstant
 
     '.'  shift, and go to state 250
 
@@ -5703,42 +5703,42 @@ State 314
 
 State 315
 
-  167 TypeArgumentsOrDiamond: '<' • '>'
+  167 TypeArgumentsOrDiamond: '<' . '>'
 
     '>'  shift, and go to state 357
 
 
 State 316
 
-  162 ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy •
+  162 ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy .
 
     $default  reduce using rule 162 (ClassOrInterfaceTypeToInstantiate)
 
 
 State 317
 
-  164 TypeArgumentsOrDiamondy: TypeArgumentsOrDiamond •
+  164 TypeArgumentsOrDiamondy: TypeArgumentsOrDiamond .
 
     $default  reduce using rule 164 (TypeArgumentsOrDiamondy)
 
 
 State 318
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy • ')' ClassBodyy
+  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy . ')' ClassBodyy
 
     ')'  shift, and go to state 358
 
 
 State 319
 
-  170 MethodInvocation: Name '(' ArgumentListy ')' •
+  170 MethodInvocation: Name '(' ArgumentListy ')' .
 
     $default  reduce using rule 170 (MethodInvocation)
 
 
 State 320
 
-  173 ArgumentList: ArgumentList ',' • Expression
+  173 ArgumentList: ArgumentList ',' . Expression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -5799,14 +5799,14 @@ State 320
 
 State 321
 
-  168 ArrayAccess: Name '[' Expression ']' •
+  168 ArrayAccess: Name '[' Expression ']' .
 
     $default  reduce using rule 168 (ArrayAccess)
 
 
 State 322
 
-  171 MethodInvocation: Primary '.' SimpleName '(' • ArgumentListy ')'
+  171 MethodInvocation: Primary '.' SimpleName '(' . ArgumentListy ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -5871,29 +5871,29 @@ State 322
 
 State 323
 
-  169 ArrayAccess: ArrayAccess '[' Expression ']' •
+  169 ArrayAccess: ArrayAccess '[' Expression ']' .
 
     $default  reduce using rule 169 (ArrayAccess)
 
 
 State 324
 
-  182 Assignment: LeftHandSide AssignmentOperator $@4 AssignmentExpression •
+  182 Assignment: LeftHandSide AssignmentOperator $@4 AssignmentExpression .
 
     $default  reduce using rule 182 (Assignment)
 
 
 State 325
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO • ':' NEXT_QUAD ConditionalExpression
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO . ':' NEXT_QUAD ConditionalExpression
 
     ':'  shift, and go to state 361
 
 
 State 326
 
-   19 Dims: '[' ']' •
-   20     | '[' ']' • Dims
+   19 Dims: '[' ']' .
+   20     | '[' ']' . Dims
 
     '['  shift, and go to state 284
 
@@ -5904,21 +5904,21 @@ State 326
 
 State 327
 
-   68 FormalParameter: PrimitiveType SimpleName2 Dimsy •
+   68 FormalParameter: PrimitiveType SimpleName2 Dimsy .
 
     $default  reduce using rule 68 (FormalParameter)
 
 
 State 328
 
-   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' NEXT_QUAD •
+   60 MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' NEXT_QUAD .
 
     $default  reduce using rule 60 (MethodorConstrDeclarator)
 
 
 State 329
 
-   67 FormalParameterList: FormalParameterList ',' NEXT_QUAD • FormalParameter
+   67 FormalParameterList: FormalParameterList ',' NEXT_QUAD . FormalParameter
 
     BOOLEAN  shift, and go to state 27
     DOUBLE   shift, and go to state 28
@@ -5938,22 +5938,22 @@ State 329
 
 State 330
 
-   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' • ';'
+   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' . ';'
 
     ';'  shift, and go to state 364
 
 
 State 331
 
-  142 ContinueStatement: CONTINUE SimpleName ';' •
+  142 ContinueStatement: CONTINUE SimpleName ';' .
 
     $default  reduce using rule 142 (ContinueStatement)
 
 
 State 332
 
-  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration • ':' Expression ')'
-  136 ForInit: LocalVariableDeclaration •
+  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration . ':' Expression ')'
+  136 ForInit: LocalVariableDeclaration .
 
     ':'  shift, and go to state 365
 
@@ -5962,8 +5962,8 @@ State 332
 
 State 333
 
-  138 StatementExpressionList: StatementExpression •
-  139                        | StatementExpression • ',' StatementExpressionList
+  138 StatementExpressionList: StatementExpression .
+  139                        | StatementExpression . ',' StatementExpressionList
 
     ','  shift, and go to state 366
 
@@ -5972,28 +5972,28 @@ State 333
 
 State 334
 
-  127 BasicForHeader: FOR '(' ForInity • ';' Expressiony ';' ForUpdatey ')'
+  127 BasicForHeader: FOR '(' ForInity . ';' Expressiony ';' ForUpdatey ')'
 
     ';'  shift, and go to state 367
 
 
 State 335
 
-  130 ForInity: ForInit •
+  130 ForInity: ForInit .
 
     $default  reduce using rule 130 (ForInity)
 
 
 State 336
 
-  135 ForInit: StatementExpressionList •
+  135 ForInit: StatementExpressionList .
 
     $default  reduce using rule 135 (ForInit)
 
 
 State 337
 
-  117 IF_CODE: IF $@1 '(' • Expression ')'
+  117 IF_CODE: IF $@1 '(' . Expression ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -6054,28 +6054,28 @@ State 337
 
 State 338
 
-  140 BreakStatement: BREAK SimpleName ';' •
+  140 BreakStatement: BREAK SimpleName ';' .
 
     $default  reduce using rule 140 (BreakStatement)
 
 
 State 339
 
-  146 ThrowStatement: THROW Expression ';' •
+  146 ThrowStatement: THROW Expression ';' .
 
     $default  reduce using rule 146 (ThrowStatement)
 
 
 State 340
 
-  144 ReturnStatement: RETURN Expression ';' •
+  144 ReturnStatement: RETURN Expression ';' .
 
     $default  reduce using rule 144 (ReturnStatement)
 
 
 State 341
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD • EXPR_CODE ')' NEXT_QUAD Statement
+  121 WhileStatement: WHILE '(' NEXT_QUAD . EXPR_CODE ')' NEXT_QUAD Statement
 
     $default  reduce using rule 147 ($@2)
 
@@ -6085,7 +6085,7 @@ State 341
 
 State 342
 
-  106 LabeledStatement: SimpleName ':' NEXT_QUAD • Statement
+  106 LabeledStatement: SimpleName ':' NEXT_QUAD . Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -6149,17 +6149,17 @@ State 342
 
 State 343
 
-  121 WhileStatement: WHILE • '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
-  122 WhileStatementNoShortIf: WHILE • '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
+  121 WhileStatement: WHILE . '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
+  122 WhileStatementNoShortIf: WHILE . '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
 
     '('  shift, and go to state 372
 
 
 State 344
 
-   21 Name: SimpleName •
-  106 LabeledStatement: SimpleName • ':' NEXT_QUAD Statement
-  107 LabeledStatementNoShortIf: SimpleName • ':' NEXT_QUAD StatementNoShortIf
+   21 Name: SimpleName .
+  106 LabeledStatement: SimpleName . ':' NEXT_QUAD Statement
+  107 LabeledStatementNoShortIf: SimpleName . ':' NEXT_QUAD StatementNoShortIf
 
     ':'  shift, and go to state 373
 
@@ -6168,14 +6168,14 @@ State 344
 
 State 345
 
-  118 IfThenStatement: IF_CODE NEXT_QUAD Statement •
+  118 IfThenStatement: IF_CODE NEXT_QUAD Statement .
 
     $default  reduce using rule 118 (IfThenStatement)
 
 
 State 346
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf • N ELSE NEXT_QUAD Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf . N ELSE NEXT_QUAD Statement
 
     $default  reduce using rule 149 (N)
 
@@ -6184,8 +6184,8 @@ State 346
 
 State 347
 
-   88 Statement: StatementWithoutTrailingSubstatement •
-   94 StatementNoShortIf: StatementWithoutTrailingSubstatement •
+   88 Statement: StatementWithoutTrailingSubstatement .
+   94 StatementNoShortIf: StatementWithoutTrailingSubstatement .
 
     ELSE      reduce using rule 94 (StatementNoShortIf)
     $default  reduce using rule 88 (Statement)
@@ -6193,16 +6193,16 @@ State 347
 
 State 348
 
-   95 StatementNoShortIf: LabeledStatementNoShortIf •
+   95 StatementNoShortIf: LabeledStatementNoShortIf .
 
     $default  reduce using rule 95 (StatementNoShortIf)
 
 
 State 349
 
-  118 IfThenStatement: IF_CODE • NEXT_QUAD Statement
-  119 IfThenElseStatement: IF_CODE • NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE • NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
+  118 IfThenStatement: IF_CODE . NEXT_QUAD Statement
+  119 IfThenElseStatement: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE . NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -6211,29 +6211,29 @@ State 349
 
 State 350
 
-   96 StatementNoShortIf: IfThenElseStatementNoShortIf •
+   96 StatementNoShortIf: IfThenElseStatementNoShortIf .
 
     $default  reduce using rule 96 (StatementNoShortIf)
 
 
 State 351
 
-   97 StatementNoShortIf: WhileStatementNoShortIf •
+   97 StatementNoShortIf: WhileStatementNoShortIf .
 
     $default  reduce using rule 97 (StatementNoShortIf)
 
 
 State 352
 
-   98 StatementNoShortIf: ForStatementNoShortIf •
+   98 StatementNoShortIf: ForStatementNoShortIf .
 
     $default  reduce using rule 98 (StatementNoShortIf)
 
 
 State 353
 
-  123 ForStatement: BasicForHeader • Statement
-  125 ForStatementNoShortIf: BasicForHeader • StatementNoShortIf
+  123 ForStatement: BasicForHeader . Statement
+  125 ForStatementNoShortIf: BasicForHeader . StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -6302,8 +6302,8 @@ State 353
 
 State 354
 
-  124 ForStatement: EnhancedForHeader • Statement
-  126 ForStatementNoShortIf: EnhancedForHeader • StatementNoShortIf
+  124 ForStatement: EnhancedForHeader . Statement
+  126 ForStatementNoShortIf: EnhancedForHeader . StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -6372,28 +6372,28 @@ State 354
 
 State 355
 
-  177 DimExpr: '[' Expression ']' •
+  177 DimExpr: '[' Expression ']' .
 
     $default  reduce using rule 177 (DimExpr)
 
 
 State 356
 
-  166 ClassOrInterfaceTypeToInstant: '.' SimpleName ClassOrInterfaceTypeToInstant •
+  166 ClassOrInterfaceTypeToInstant: '.' SimpleName ClassOrInterfaceTypeToInstant .
 
     $default  reduce using rule 166 (ClassOrInterfaceTypeToInstant)
 
 
 State 357
 
-  167 TypeArgumentsOrDiamond: '<' '>' •
+  167 TypeArgumentsOrDiamond: '<' '>' .
 
     $default  reduce using rule 167 (TypeArgumentsOrDiamond)
 
 
 State 358
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' • ClassBodyy
+  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' . ClassBodyy
 
     '{'  shift, and go to state 21
 
@@ -6405,21 +6405,21 @@ State 358
 
 State 359
 
-  173 ArgumentList: ArgumentList ',' Expression •
+  173 ArgumentList: ArgumentList ',' Expression .
 
     $default  reduce using rule 173 (ArgumentList)
 
 
 State 360
 
-  171 MethodInvocation: Primary '.' SimpleName '(' ArgumentListy • ')'
+  171 MethodInvocation: Primary '.' SimpleName '(' ArgumentListy . ')'
 
     ')'  shift, and go to state 380
 
 
 State 361
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' • NEXT_QUAD ConditionalExpression
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' . NEXT_QUAD ConditionalExpression
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -6428,28 +6428,28 @@ State 361
 
 State 362
 
-   20 Dims: '[' ']' Dims •
+   20 Dims: '[' ']' Dims .
 
     $default  reduce using rule 20 (Dims)
 
 
 State 363
 
-   67 FormalParameterList: FormalParameterList ',' NEXT_QUAD FormalParameter •
+   67 FormalParameterList: FormalParameterList ',' NEXT_QUAD FormalParameter .
 
     $default  reduce using rule 67 (FormalParameterList)
 
 
 State 364
 
-   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' ';' •
+   75 ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' ';' .
 
     $default  reduce using rule 75 (ExplicitConstructorInvocation)
 
 
 State 365
 
-  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' • Expression ')'
+  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' . Expression ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -6510,7 +6510,7 @@ State 365
 
 State 366
 
-  139 StatementExpressionList: StatementExpression ',' • StatementExpressionList
+  139 StatementExpressionList: StatementExpression ',' . StatementExpressionList
 
     '('                   shift, and go to state 205
     integerLiteral        shift, and go to state 85
@@ -6550,7 +6550,7 @@ State 366
 
 State 367
 
-  127 BasicForHeader: FOR '(' ForInity ';' • Expressiony ';' ForUpdatey ')'
+  127 BasicForHeader: FOR '(' ForInity ';' . Expressiony ';' ForUpdatey ')'
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -6614,21 +6614,21 @@ State 367
 
 State 368
 
-  117 IF_CODE: IF $@1 '(' Expression • ')'
+  117 IF_CODE: IF $@1 '(' Expression . ')'
 
     ')'  shift, and go to state 386
 
 
 State 369
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE • ')' NEXT_QUAD Statement
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE . ')' NEXT_QUAD Statement
 
     ')'  shift, and go to state 387
 
 
 State 370
 
-  148 EXPR_CODE: $@2 • StatementExpression
+  148 EXPR_CODE: $@2 . StatementExpression
 
     '('                   shift, and go to state 205
     integerLiteral        shift, and go to state 85
@@ -6667,15 +6667,15 @@ State 370
 
 State 371
 
-  106 LabeledStatement: SimpleName ':' NEXT_QUAD Statement •
+  106 LabeledStatement: SimpleName ':' NEXT_QUAD Statement .
 
     $default  reduce using rule 106 (LabeledStatement)
 
 
 State 372
 
-  121 WhileStatement: WHILE '(' • NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
-  122 WhileStatementNoShortIf: WHILE '(' • NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
+  121 WhileStatement: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement
+  122 WhileStatementNoShortIf: WHILE '(' . NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -6684,8 +6684,8 @@ State 372
 
 State 373
 
-  106 LabeledStatement: SimpleName ':' • NEXT_QUAD Statement
-  107 LabeledStatementNoShortIf: SimpleName ':' • NEXT_QUAD StatementNoShortIf
+  106 LabeledStatement: SimpleName ':' . NEXT_QUAD Statement
+  107 LabeledStatementNoShortIf: SimpleName ':' . NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -6694,16 +6694,16 @@ State 373
 
 State 374
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N • ELSE NEXT_QUAD Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N . ELSE NEXT_QUAD Statement
 
     ELSE  shift, and go to state 391
 
 
 State 375
 
-  118 IfThenStatement: IF_CODE NEXT_QUAD • Statement
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD • StatementNoShortIf N ELSE NEXT_QUAD Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD • StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
+  118 IfThenStatement: IF_CODE NEXT_QUAD . Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD . StatementNoShortIf N ELSE NEXT_QUAD Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD . StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -6772,42 +6772,42 @@ State 375
 
 State 376
 
-  125 ForStatementNoShortIf: BasicForHeader StatementNoShortIf •
+  125 ForStatementNoShortIf: BasicForHeader StatementNoShortIf .
 
     $default  reduce using rule 125 (ForStatementNoShortIf)
 
 
 State 377
 
-  126 ForStatementNoShortIf: EnhancedForHeader StatementNoShortIf •
+  126 ForStatementNoShortIf: EnhancedForHeader StatementNoShortIf .
 
     $default  reduce using rule 126 (ForStatementNoShortIf)
 
 
 State 378
 
-   79 ClassBodyy: ClassBody •
+   79 ClassBodyy: ClassBody .
 
     $default  reduce using rule 79 (ClassBodyy)
 
 
 State 379
 
-  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy •
+  161 UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy .
 
     $default  reduce using rule 161 (UnqualifiedClassInstanceCreationExpression)
 
 
 State 380
 
-  171 MethodInvocation: Primary '.' SimpleName '(' ArgumentListy ')' •
+  171 MethodInvocation: Primary '.' SimpleName '(' ArgumentListy ')' .
 
     $default  reduce using rule 171 (MethodInvocation)
 
 
 State 381
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD • ConditionalExpression
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD . ConditionalExpression
 
     '('                   shift, and go to state 80
     '+'                   shift, and go to state 81
@@ -6864,42 +6864,42 @@ State 381
 
 State 382
 
-  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression • ')'
+  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression . ')'
 
     ')'  shift, and go to state 394
 
 
 State 383
 
-  139 StatementExpressionList: StatementExpression ',' StatementExpressionList •
+  139 StatementExpressionList: StatementExpression ',' StatementExpressionList .
 
     $default  reduce using rule 139 (StatementExpressionList)
 
 
 State 384
 
-  127 BasicForHeader: FOR '(' ForInity ';' Expressiony • ';' ForUpdatey ')'
+  127 BasicForHeader: FOR '(' ForInity ';' Expressiony . ';' ForUpdatey ')'
 
     ';'  shift, and go to state 395
 
 
 State 385
 
-  132 Expressiony: Expression •
+  132 Expressiony: Expression .
 
     $default  reduce using rule 132 (Expressiony)
 
 
 State 386
 
-  117 IF_CODE: IF $@1 '(' Expression ')' •
+  117 IF_CODE: IF $@1 '(' Expression ')' .
 
     $default  reduce using rule 117 (IF_CODE)
 
 
 State 387
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' • NEXT_QUAD Statement
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD Statement
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -6908,15 +6908,15 @@ State 387
 
 State 388
 
-  148 EXPR_CODE: $@2 StatementExpression •
+  148 EXPR_CODE: $@2 StatementExpression .
 
     $default  reduce using rule 148 (EXPR_CODE)
 
 
 State 389
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD • EXPR_CODE ')' NEXT_QUAD Statement
-  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD • EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
+  121 WhileStatement: WHILE '(' NEXT_QUAD . EXPR_CODE ')' NEXT_QUAD Statement
+  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD . EXPR_CODE ')' NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 147 ($@2)
 
@@ -6926,8 +6926,8 @@ State 389
 
 State 390
 
-  106 LabeledStatement: SimpleName ':' NEXT_QUAD • Statement
-  107 LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD • StatementNoShortIf
+  106 LabeledStatement: SimpleName ':' NEXT_QUAD . Statement
+  107 LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD . StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -6996,7 +6996,7 @@ State 390
 
 State 391
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE • NEXT_QUAD Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD Statement
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -7005,8 +7005,8 @@ State 391
 
 State 392
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf • N ELSE NEXT_QUAD Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf • N ELSE NEXT_QUAD StatementNoShortIf
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf . N ELSE NEXT_QUAD Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf . N ELSE NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 149 (N)
 
@@ -7015,21 +7015,21 @@ State 392
 
 State 393
 
-  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression •
+  197 ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression .
 
     $default  reduce using rule 197 (ConditionalExpression)
 
 
 State 394
 
-  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression ')' •
+  128 EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression ')' .
 
     $default  reduce using rule 128 (EnhancedForHeader)
 
 
 State 395
 
-  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' • ForUpdatey ')'
+  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' . ForUpdatey ')'
 
     '('                   shift, and go to state 205
     integerLiteral        shift, and go to state 85
@@ -7073,7 +7073,7 @@ State 395
 
 State 396
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD • Statement
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD . Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -7137,22 +7137,22 @@ State 396
 
 State 397
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE • ')' NEXT_QUAD Statement
-  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE • ')' NEXT_QUAD StatementNoShortIf
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE . ')' NEXT_QUAD Statement
+  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE . ')' NEXT_QUAD StatementNoShortIf
 
     ')'  shift, and go to state 405
 
 
 State 398
 
-  107 LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD StatementNoShortIf •
+  107 LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD StatementNoShortIf .
 
     $default  reduce using rule 107 (LabeledStatementNoShortIf)
 
 
 State 399
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD • Statement
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD . Statement
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -7216,44 +7216,44 @@ State 399
 
 State 400
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N • ELSE NEXT_QUAD Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N • ELSE NEXT_QUAD StatementNoShortIf
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N . ELSE NEXT_QUAD Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N . ELSE NEXT_QUAD StatementNoShortIf
 
     ELSE  shift, and go to state 407
 
 
 State 401
 
-  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey • ')'
+  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey . ')'
 
     ')'  shift, and go to state 408
 
 
 State 402
 
-  134 ForUpdatey: ForUpdate •
+  134 ForUpdatey: ForUpdate .
 
     $default  reduce using rule 134 (ForUpdatey)
 
 
 State 403
 
-  137 ForUpdate: StatementExpressionList •
+  137 ForUpdate: StatementExpressionList .
 
     $default  reduce using rule 137 (ForUpdate)
 
 
 State 404
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement •
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement .
 
     $default  reduce using rule 121 (WhileStatement)
 
 
 State 405
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' • NEXT_QUAD Statement
-  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' • NEXT_QUAD StatementNoShortIf
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD Statement
+  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' . NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -7262,15 +7262,15 @@ State 405
 
 State 406
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement •
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement .
 
     $default  reduce using rule 119 (IfThenElseStatement)
 
 
 State 407
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE • NEXT_QUAD Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE • NEXT_QUAD StatementNoShortIf
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE . NEXT_QUAD StatementNoShortIf
 
     $default  reduce using rule 252 (NEXT_QUAD)
 
@@ -7279,15 +7279,15 @@ State 407
 
 State 408
 
-  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey ')' •
+  127 BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey ')' .
 
     $default  reduce using rule 127 (BasicForHeader)
 
 
 State 409
 
-  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD • Statement
-  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD • StatementNoShortIf
+  121 WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD . Statement
+  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD . StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -7356,8 +7356,8 @@ State 409
 
 State 410
 
-  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD • Statement
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD • StatementNoShortIf
+  119 IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD . Statement
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD . StatementNoShortIf
 
     '('                   shift, and go to state 205
     '{'                   shift, and go to state 49
@@ -7426,13 +7426,13 @@ State 410
 
 State 411
 
-  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf •
+  122 WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf .
 
     $default  reduce using rule 122 (WhileStatementNoShortIf)
 
 
 State 412
 
-  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf •
+  120 IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf .
 
     $default  reduce using rule 120 (IfThenElseStatementNoShortIf)

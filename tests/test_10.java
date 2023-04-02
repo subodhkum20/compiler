@@ -1,7 +1,6 @@
 //  sample program provided by sir
 
-package tests;
-
 public class test_10 {
-    int d = 3;
+    float d = 3;
+    int x = d==3?d+4:d*2;
 }

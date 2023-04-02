@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.8.2.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -34,10 +34,6 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
-
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -45,11 +41,14 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Identify Bison output, and Bison version.  */
-#define YYBISON 30802
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
 
-/* Bison version string.  */
-#define YYBISON_VERSION "3.8.2"
+/* Identify Bison output.  */
+#define YYBISON 1
+
+/* Bison version.  */
+#define YYBISON_VERSION "3.5.1"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -118,7 +117,7 @@
     #define YYERROR_VERBOSE
 
 
-#line 122 "parser.cpp"
+#line 121 "parser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -141,223 +140,117 @@
 #  endif
 # endif
 
-#include "parser.hpp"
-/* Symbol kind.  */
-enum yysymbol_kind_t
-{
-  YYSYMBOL_YYEMPTY = -2,
-  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
-  YYSYMBOL_YYerror = 1,                    /* error  */
-  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_3_ = 3,                         /* '('  */
-  YYSYMBOL_4_ = 4,                         /* ')'  */
-  YYSYMBOL_5_ = 5,                         /* '{'  */
-  YYSYMBOL_6_ = 6,                         /* '}'  */
-  YYSYMBOL_7_ = 7,                         /* '['  */
-  YYSYMBOL_8_ = 8,                         /* ']'  */
-  YYSYMBOL_9_ = 9,                         /* '.'  */
-  YYSYMBOL_10_ = 10,                       /* '+'  */
-  YYSYMBOL_11_ = 11,                       /* '-'  */
-  YYSYMBOL_12_ = 12,                       /* '*'  */
-  YYSYMBOL_13_ = 13,                       /* '/'  */
-  YYSYMBOL_14_ = 14,                       /* '%'  */
-  YYSYMBOL_15_ = 15,                       /* '&'  */
-  YYSYMBOL_16_ = 16,                       /* '|'  */
-  YYSYMBOL_17_ = 17,                       /* '^'  */
-  YYSYMBOL_18_ = 18,                       /* ','  */
-  YYSYMBOL_19_ = 19,                       /* ';'  */
-  YYSYMBOL_20_ = 20,                       /* '<'  */
-  YYSYMBOL_21_ = 21,                       /* '>'  */
-  YYSYMBOL_22_ = 22,                       /* '~'  */
-  YYSYMBOL_23_ = 23,                       /* '!'  */
-  YYSYMBOL_24_ = 24,                       /* '?'  */
-  YYSYMBOL_25_ = 25,                       /* ':'  */
-  YYSYMBOL_26_ = 26,                       /* '='  */
-  YYSYMBOL_RIGHT_OP = 27,                  /* RIGHT_OP  */
-  YYSYMBOL_LEFT_OP = 28,                   /* LEFT_OP  */
-  YYSYMBOL_EQ_OP = 29,                     /* EQ_OP  */
-  YYSYMBOL_NE_OP = 30,                     /* NE_OP  */
-  YYSYMBOL_AND_OP = 31,                    /* AND_OP  */
-  YYSYMBOL_OR_OP = 32,                     /* OR_OP  */
-  YYSYMBOL_LE_OP = 33,                     /* LE_OP  */
-  YYSYMBOL_GE_OP = 34,                     /* GE_OP  */
-  YYSYMBOL_ADD_ASSIGN = 35,                /* ADD_ASSIGN  */
-  YYSYMBOL_SUB_ASSIGN = 36,                /* SUB_ASSIGN  */
-  YYSYMBOL_MUL_ASSIGN = 37,                /* MUL_ASSIGN  */
-  YYSYMBOL_DIV_ASSIGN = 38,                /* DIV_ASSIGN  */
-  YYSYMBOL_MOD_ASSIGN = 39,                /* MOD_ASSIGN  */
-  YYSYMBOL_LEFT_ASSIGN = 40,               /* LEFT_ASSIGN  */
-  YYSYMBOL_RIGHT_ASSIGN = 41,              /* RIGHT_ASSIGN  */
-  YYSYMBOL_AND_ASSIGN = 42,                /* AND_ASSIGN  */
-  YYSYMBOL_XOR_ASSIGN = 43,                /* XOR_ASSIGN  */
-  YYSYMBOL_OR_ASSIGN = 44,                 /* OR_ASSIGN  */
-  YYSYMBOL_UNSIGNED_RIGHT = 45,            /* UNSIGNED_RIGHT  */
-  YYSYMBOL_UNSIGNED_RIGHT_ASSIGN = 46,     /* UNSIGNED_RIGHT_ASSIGN  */
-  YYSYMBOL_integerLiteral = 47,            /* integerLiteral  */
-  YYSYMBOL_stringLiteral = 48,             /* stringLiteral  */
-  YYSYMBOL_nullLiteral = 49,               /* nullLiteral  */
-  YYSYMBOL_characterLiteral = 50,          /* characterLiteral  */
-  YYSYMBOL_textBlock = 51,                 /* textBlock  */
-  YYSYMBOL_booleanLiteral = 52,            /* booleanLiteral  */
-  YYSYMBOL_FloatingPointLiteral = 53,      /* FloatingPointLiteral  */
-  YYSYMBOL_Identifier = 54,                /* Identifier  */
-  YYSYMBOL_CONTINUE = 55,                  /* CONTINUE  */
-  YYSYMBOL_FOR = 56,                       /* FOR  */
-  YYSYMBOL_NEW = 57,                       /* NEW  */
-  YYSYMBOL_IF = 58,                        /* IF  */
-  YYSYMBOL_PACKAGE = 59,                   /* PACKAGE  */
-  YYSYMBOL_BOOLEAN = 60,                   /* BOOLEAN  */
-  YYSYMBOL_PRIVATE = 61,                   /* PRIVATE  */
-  YYSYMBOL_THIS = 62,                      /* THIS  */
-  YYSYMBOL_BREAK = 63,                     /* BREAK  */
-  YYSYMBOL_DOUBLE = 64,                    /* DOUBLE  */
-  YYSYMBOL_THROW = 65,                     /* THROW  */
-  YYSYMBOL_BYTE = 66,                      /* BYTE  */
-  YYSYMBOL_ELSE = 67,                      /* ELSE  */
-  YYSYMBOL_PUBLIC = 68,                    /* PUBLIC  */
-  YYSYMBOL_RETURN = 69,                    /* RETURN  */
-  YYSYMBOL_INT = 70,                       /* INT  */
-  YYSYMBOL_SHORT = 71,                     /* SHORT  */
-  YYSYMBOL_CHAR = 72,                      /* CHAR  */
-  YYSYMBOL_FINAL = 73,                     /* FINAL  */
-  YYSYMBOL_STATIC = 74,                    /* STATIC  */
-  YYSYMBOL_VOID = 75,                      /* VOID  */
-  YYSYMBOL_CLASS = 76,                     /* CLASS  */
-  YYSYMBOL_LONG = 77,                      /* LONG  */
-  YYSYMBOL_FLOAT = 78,                     /* FLOAT  */
-  YYSYMBOL_WHILE = 79,                     /* WHILE  */
-  YYSYMBOL__ = 80,                         /* _  */
-  YYSYMBOL_YIELD = 81,                     /* YIELD  */
-  YYSYMBOL_eof = 82,                       /* eof  */
-  YYSYMBOL_INC_OP = 83,                    /* INC_OP  */
-  YYSYMBOL_DEC_OP = 84,                    /* DEC_OP  */
-  YYSYMBOL_YYACCEPT = 85,                  /* $accept  */
-  YYSYMBOL_Literal = 86,                   /* Literal  */
-  YYSYMBOL_PrimitiveType = 87,             /* PrimitiveType  */
-  YYSYMBOL_NumericType = 88,               /* NumericType  */
-  YYSYMBOL_IntegralType = 89,              /* IntegralType  */
-  YYSYMBOL_FloatingPointType = 90,         /* FloatingPointType  */
-  YYSYMBOL_Dims = 91,                      /* Dims  */
-  YYSYMBOL_Name = 92,                      /* Name  */
-  YYSYMBOL_SimpleName = 93,                /* SimpleName  */
-  YYSYMBOL_QualifiedName = 94,             /* QualifiedName  */
-  YYSYMBOL_CompilationUnit = 95,           /* CompilationUnit  */
-  YYSYMBOL_OrdinaryCompilationUnit = 96,   /* OrdinaryCompilationUnit  */
-  YYSYMBOL_TopLevelClassOrInterfaceDeclarations = 97, /* TopLevelClassOrInterfaceDeclarations  */
-  YYSYMBOL_TopLevelClassOrInterfaceDeclaration = 98, /* TopLevelClassOrInterfaceDeclaration  */
-  YYSYMBOL_ClassDeclaration = 99,          /* ClassDeclaration  */
-  YYSYMBOL_Modifiers = 100,                /* Modifiers  */
-  YYSYMBOL_Modifier = 101,                 /* Modifier  */
-  YYSYMBOL_ClassBody = 102,                /* ClassBody  */
-  YYSYMBOL_ClassBodyDeclarations = 103,    /* ClassBodyDeclarations  */
-  YYSYMBOL_ClassBodyDeclaration = 104,     /* ClassBodyDeclaration  */
-  YYSYMBOL_FieldDeclaration = 105,         /* FieldDeclaration  */
-  YYSYMBOL_VariableDeclaratorList = 106,   /* VariableDeclaratorList  */
-  YYSYMBOL_VariableDeclarator = 107,       /* VariableDeclarator  */
-  YYSYMBOL_Declarator = 108,               /* Declarator  */
-  YYSYMBOL_MethodDeclaration = 109,        /* MethodDeclaration  */
-  YYSYMBOL_MethodHeader = 110,             /* MethodHeader  */
-  YYSYMBOL_VOID2 = 111,                    /* VOID2  */
-  YYSYMBOL_MethodorConstrDeclarator = 112, /* MethodorConstrDeclarator  */
-  YYSYMBOL_SimpleName2 = 113,              /* SimpleName2  */
-  YYSYMBOL_VariableInitializer = 114,      /* VariableInitializer  */
-  YYSYMBOL_Dimsy = 115,                    /* Dimsy  */
-  YYSYMBOL_FormalParameterList = 116,      /* FormalParameterList  */
-  YYSYMBOL_FormalParameter = 117,          /* FormalParameter  */
-  YYSYMBOL_MethodBody = 118,               /* MethodBody  */
-  YYSYMBOL_StaticInitializer = 119,        /* StaticInitializer  */
-  YYSYMBOL_ConstructorDeclaration = 120,   /* ConstructorDeclaration  */
-  YYSYMBOL_ConstructorBody = 121,          /* ConstructorBody  */
-  YYSYMBOL_ExplicitConstructorInvocation = 122, /* ExplicitConstructorInvocation  */
-  YYSYMBOL_ArgumentListy = 123,            /* ArgumentListy  */
-  YYSYMBOL_ClassBodyy = 124,               /* ClassBodyy  */
-  YYSYMBOL_Block = 125,                    /* Block  */
-  YYSYMBOL_BlockStatements = 126,          /* BlockStatements  */
-  YYSYMBOL_BlockStatement = 127,           /* BlockStatement  */
-  YYSYMBOL_Declaration_list = 128,         /* Declaration_list  */
-  YYSYMBOL_LocalVariableDeclaration = 129, /* LocalVariableDeclaration  */
-  YYSYMBOL_Statement = 130,                /* Statement  */
-  YYSYMBOL_StatementNoShortIf = 131,       /* StatementNoShortIf  */
-  YYSYMBOL_StatementWithoutTrailingSubstatement = 132, /* StatementWithoutTrailingSubstatement  */
-  YYSYMBOL_LabeledStatement = 133,         /* LabeledStatement  */
-  YYSYMBOL_LabeledStatementNoShortIf = 134, /* LabeledStatementNoShortIf  */
-  YYSYMBOL_ExpressionStatement = 135,      /* ExpressionStatement  */
-  YYSYMBOL_StatementExpression = 136,      /* StatementExpression  */
-  YYSYMBOL_IF_CODE = 137,                  /* IF_CODE  */
-  YYSYMBOL_138_1 = 138,                    /* $@1  */
-  YYSYMBOL_IfThenStatement = 139,          /* IfThenStatement  */
-  YYSYMBOL_IfThenElseStatement = 140,      /* IfThenElseStatement  */
-  YYSYMBOL_IfThenElseStatementNoShortIf = 141, /* IfThenElseStatementNoShortIf  */
-  YYSYMBOL_WhileStatement = 142,           /* WhileStatement  */
-  YYSYMBOL_WhileStatementNoShortIf = 143,  /* WhileStatementNoShortIf  */
-  YYSYMBOL_ForStatement = 144,             /* ForStatement  */
-  YYSYMBOL_ForStatementNoShortIf = 145,    /* ForStatementNoShortIf  */
-  YYSYMBOL_BasicForHeader = 146,           /* BasicForHeader  */
-  YYSYMBOL_EnhancedForHeader = 147,        /* EnhancedForHeader  */
-  YYSYMBOL_ForInity = 148,                 /* ForInity  */
-  YYSYMBOL_Expressiony = 149,              /* Expressiony  */
-  YYSYMBOL_ForUpdatey = 150,               /* ForUpdatey  */
-  YYSYMBOL_ForInit = 151,                  /* ForInit  */
-  YYSYMBOL_ForUpdate = 152,                /* ForUpdate  */
-  YYSYMBOL_StatementExpressionList = 153,  /* StatementExpressionList  */
-  YYSYMBOL_BreakStatement = 154,           /* BreakStatement  */
-  YYSYMBOL_ContinueStatement = 155,        /* ContinueStatement  */
-  YYSYMBOL_ReturnStatement = 156,          /* ReturnStatement  */
-  YYSYMBOL_ThrowStatement = 157,           /* ThrowStatement  */
-  YYSYMBOL_EXPR_CODE = 158,                /* EXPR_CODE  */
-  YYSYMBOL_159_2 = 159,                    /* $@2  */
-  YYSYMBOL_N = 160,                        /* N  */
-  YYSYMBOL_Primary = 161,                  /* Primary  */
-  YYSYMBOL_PrimaryNoNewArray = 162,        /* PrimaryNoNewArray  */
-  YYSYMBOL_ClassInstanceCreationExpression = 163, /* ClassInstanceCreationExpression  */
-  YYSYMBOL_UnqualifiedClassInstanceCreationExpression = 164, /* UnqualifiedClassInstanceCreationExpression  */
-  YYSYMBOL_ClassOrInterfaceTypeToInstantiate = 165, /* ClassOrInterfaceTypeToInstantiate  */
-  YYSYMBOL_TypeArgumentsOrDiamondy = 166,  /* TypeArgumentsOrDiamondy  */
-  YYSYMBOL_ClassOrInterfaceTypeToInstant = 167, /* ClassOrInterfaceTypeToInstant  */
-  YYSYMBOL_TypeArgumentsOrDiamond = 168,   /* TypeArgumentsOrDiamond  */
-  YYSYMBOL_ArrayAccess = 169,              /* ArrayAccess  */
-  YYSYMBOL_MethodInvocation = 170,         /* MethodInvocation  */
-  YYSYMBOL_ArgumentList = 171,             /* ArgumentList  */
-  YYSYMBOL_ArrayCreationExpression = 172,  /* ArrayCreationExpression  */
-  YYSYMBOL_DimExprs = 173,                 /* DimExprs  */
-  YYSYMBOL_DimExpr = 174,                  /* DimExpr  */
-  YYSYMBOL_Expression = 175,               /* Expression  */
-  YYSYMBOL_AssignmentExpression = 176,     /* AssignmentExpression  */
-  YYSYMBOL_Assignment = 177,               /* Assignment  */
-  YYSYMBOL_178_4 = 178,                    /* $@4  */
-  YYSYMBOL_LeftHandSide = 179,             /* LeftHandSide  */
-  YYSYMBOL_AssignmentOperator = 180,       /* AssignmentOperator  */
-  YYSYMBOL_ConditionalExpression = 181,    /* ConditionalExpression  */
-  YYSYMBOL_GOTO_COND = 182,                /* GOTO_COND  */
-  YYSYMBOL_WRITE_GOTO = 183,               /* WRITE_GOTO  */
-  YYSYMBOL_ConditionalOrExpression = 184,  /* ConditionalOrExpression  */
-  YYSYMBOL_GOTO_OR = 185,                  /* GOTO_OR  */
-  YYSYMBOL_ConditionalAndExpression = 186, /* ConditionalAndExpression  */
-  YYSYMBOL_GOTO_AND = 187,                 /* GOTO_AND  */
-  YYSYMBOL_InclusiveOrExpression = 188,    /* InclusiveOrExpression  */
-  YYSYMBOL_ExclusiveOrExpression = 189,    /* ExclusiveOrExpression  */
-  YYSYMBOL_AndExpression = 190,            /* AndExpression  */
-  YYSYMBOL_EqualityExpression = 191,       /* EqualityExpression  */
-  YYSYMBOL_RelationalExpression = 192,     /* RelationalExpression  */
-  YYSYMBOL_ShiftExpression = 193,          /* ShiftExpression  */
-  YYSYMBOL_AdditiveExpression = 194,       /* AdditiveExpression  */
-  YYSYMBOL_MultiplicativeExpression = 195, /* MultiplicativeExpression  */
-  YYSYMBOL_UnaryExpression = 196,          /* UnaryExpression  */
-  YYSYMBOL_PreIncrementExpression = 197,   /* PreIncrementExpression  */
-  YYSYMBOL_PreDecrementExpression = 198,   /* PreDecrementExpression  */
-  YYSYMBOL_UnaryExpressionNotPlusMinus = 199, /* UnaryExpressionNotPlusMinus  */
-  YYSYMBOL_PostfixExpression = 200,        /* PostfixExpression  */
-  YYSYMBOL_PostIncrementExpression = 201,  /* PostIncrementExpression  */
-  YYSYMBOL_PostDecrementExpression = 202,  /* PostDecrementExpression  */
-  YYSYMBOL_CastExpression = 203,           /* CastExpression  */
-  YYSYMBOL_G = 204,                        /* G  */
-  YYSYMBOL_S = 205,                        /* S  */
-  YYSYMBOL_NEXT_QUAD = 206,                /* NEXT_QUAD  */
-  YYSYMBOL_ChangeTable = 207,              /* ChangeTable  */
-  YYSYMBOL_A = 208                         /* A  */
-};
-typedef enum yysymbol_kind_t yysymbol_kind_t;
+/* Enabling verbose error messages.  */
+#ifdef YYERROR_VERBOSE
+# undef YYERROR_VERBOSE
+# define YYERROR_VERBOSE 1
+#else
+# define YYERROR_VERBOSE 0
+#endif
 
+/* Use api.header.include to #include this header
+   instead of duplicating it here.  */
+#ifndef YY_YY_PARSER_HPP_INCLUDED
+# define YY_YY_PARSER_HPP_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    RIGHT_OP = 258,
+    LEFT_OP = 259,
+    EQ_OP = 260,
+    NE_OP = 261,
+    AND_OP = 262,
+    OR_OP = 263,
+    LE_OP = 264,
+    GE_OP = 265,
+    ADD_ASSIGN = 266,
+    SUB_ASSIGN = 267,
+    MUL_ASSIGN = 268,
+    DIV_ASSIGN = 269,
+    MOD_ASSIGN = 270,
+    LEFT_ASSIGN = 271,
+    RIGHT_ASSIGN = 272,
+    AND_ASSIGN = 273,
+    XOR_ASSIGN = 274,
+    OR_ASSIGN = 275,
+    UNSIGNED_RIGHT = 276,
+    UNSIGNED_RIGHT_ASSIGN = 277,
+    integerLiteral = 278,
+    stringLiteral = 279,
+    nullLiteral = 280,
+    characterLiteral = 281,
+    textBlock = 282,
+    booleanLiteral = 283,
+    FloatingPointLiteral = 284,
+    Identifier = 285,
+    CONTINUE = 286,
+    FOR = 287,
+    NEW = 288,
+    IF = 289,
+    PACKAGE = 290,
+    BOOLEAN = 291,
+    PRIVATE = 292,
+    THIS = 293,
+    BREAK = 294,
+    DOUBLE = 295,
+    THROW = 296,
+    BYTE = 297,
+    ELSE = 298,
+    PUBLIC = 299,
+    RETURN = 300,
+    INT = 301,
+    SHORT = 302,
+    CHAR = 303,
+    FINAL = 304,
+    STATIC = 305,
+    VOID = 306,
+    CLASS = 307,
+    LONG = 308,
+    FLOAT = 309,
+    WHILE = 310,
+    _ = 311,
+    YIELD = 312,
+    eof = 313,
+    INC_OP = 314,
+    DEC_OP = 315
+  };
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+union YYSTYPE
+{
+#line 52 "parser.y++"
+ 
+    char* str;
+    treeNode* ptr;
+    constants* num;
+    int ind;
+
+#line 241 "parser.cpp"
+
+};
+typedef union YYSTYPE YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+
+extern YYSTYPE yylval;
+
+int yyparse (void);
+
+#endif /* !YY_YY_PARSER_HPP_INCLUDED  */
 
 
 
@@ -396,18 +289,6 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
-#endif
-
-/* Work around bug in HP-UX 11.23, which defines these macros
-   incorrectly for preprocessor constants.  This workaround can likely
-   be removed in 2023, as HPE has promised support for HP-UX 11.23
-   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
-   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
-#ifdef __hpux
-# undef UINT_LEAST8_MAX
-# undef UINT_LEAST16_MAX
-# define UINT_LEAST8_MAX 255
-# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -469,7 +350,6 @@ typedef int yytype_uint16;
 
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
-
 /* Stored state numbers (used for stacks). */
 typedef yytype_int16 yy_state_t;
 
@@ -487,7 +367,6 @@ typedef int yy_state_fast_t;
 #  define YY_(Msgid) Msgid
 # endif
 #endif
-
 
 #ifndef YY_ATTRIBUTE_PURE
 # if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
@@ -507,23 +386,17 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YY_USE(E) ((void) (E))
+# define YYUSE(E) ((void) (E))
 #else
-# define YY_USE(E) /* empty */
+# define YYUSE(E) /* empty */
 #endif
 
+#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
-# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
-#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
-    _Pragma ("GCC diagnostic push")                                     \
-    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
-# else
-#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
-# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -552,7 +425,7 @@ typedef int yy_state_fast_t;
 
 #define YY_ASSERT(E) ((void) (0 && (E)))
 
-#if !defined yyoverflow
+#if ! defined yyoverflow || YYERROR_VERBOSE
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -617,7 +490,8 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* !defined yyoverflow */
+#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
+
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
@@ -693,16 +567,14 @@ union yyalloc
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  413
 
-/* YYMAXUTOK -- Last valid token kind.  */
+#define YYUNDEFTOK  2
 #define YYMAXUTOK   315
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, with out-of-bounds checking.  */
-#define YYTRANSLATE(YYX)                                \
-  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
-   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
-   : YYSYMBOL_YYUNDEF)
+#define YYTRANSLATE(YYX)                                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
@@ -743,57 +615,50 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    78,    78,    85,    92,   101,   108,   115,   121,   131,
-     135,   146,   149,   155,   164,   172,   180,   188,   199,   207,
-     218,   229,   250,   251,   254,   303,   344,   352,   358,   359,
-     369,   370,   378,   397,   421,   422,   439,   443,   447,   451,
-     458,   470,   471,   483,   484,   485,   486,   490,   504,   520,
-     523,   533,   542,   560,   577,   600,   610,   623,   634,   646,
-     660,   671,   724,   764,   783,   787,   788,   792,   795,   811,
-     837,   838,   853,   864,   880,   888,   898,   912,   913,   923,
-     924,   944,   960,   961,   981,   982,   986,   987,   991,  1006,
-    1007,  1008,  1009,  1010,  1011,  1015,  1016,  1017,  1018,  1019,
-    1023,  1024,  1025,  1026,  1027,  1028,  1029,  1033,  1062,  1090,
-    1096,  1097,  1098,  1099,  1100,  1101,  1102,  1106,  1106,  1121,
-    1142,  1166,  1190,  1212,  1234,  1248,  1265,  1280,  1297,  1316,
-    1336,  1337,  1341,  1342,  1346,  1347,  1351,  1352,  1356,  1360,
-    1363,  1374,  1385,  1395,  1407,  1421,  1433,  1442,  1456,  1456,
-    1488,  1499,  1500,  1503,  1504,  1505,  1506,  1507,  1508,  1513,
-    1514,  1521,  1531,  1544,  1554,  1555,  1559,  1560,  1570,  1579,
-    1596,  1616,  1624,  1637,  1652,  1666,  1677,  1678,  1688,  1698,
-    1703,  1704,  1708,  1708,  1743,  1744,  1748,  1750,  1753,  1756,
-    1759,  1762,  1765,  1768,  1771,  1774,  1777,  1780,  1786,  1835,
-    1839,  1854,  1862,  1899,  1903,  1916,  1951,  1955,  1969,  2004,
-    2007,  2048,  2052,  2093,  2097,  2136,  2177,  2181,  2227,  2271,
-    2305,  2338,  2343,  2381,  2420,  2430,  2434,  2493,  2552,  2557,
-    2624,  2689,  2728,  2733,  2734,  2735,  2768,  2800,  2804,  2840,
-    2874,  2876,  2909,  2940,  2944,  2945,  2946,  2947,  2951,  2988,
-    3026,  3038,  3047,  3056,  3062,  3073
+       0,    78,    78,    88,    99,   111,   121,   131,   140,   153,
+     157,   168,   171,   177,   186,   194,   202,   210,   221,   229,
+     240,   251,   272,   273,   276,   325,   366,   374,   380,   381,
+     391,   392,   400,   419,   443,   444,   461,   465,   469,   473,
+     480,   492,   493,   505,   506,   507,   508,   512,   526,   542,
+     545,   555,   564,   587,   604,   627,   637,   650,   661,   673,
+     687,   698,   751,   791,   810,   814,   815,   819,   822,   838,
+     864,   865,   880,   891,   907,   915,   925,   939,   940,   950,
+     951,   971,   987,   988,  1008,  1009,  1013,  1014,  1018,  1033,
+    1034,  1035,  1036,  1037,  1038,  1042,  1043,  1044,  1045,  1046,
+    1050,  1051,  1052,  1053,  1054,  1055,  1056,  1060,  1089,  1117,
+    1123,  1124,  1125,  1126,  1127,  1128,  1129,  1133,  1133,  1148,
+    1169,  1193,  1217,  1239,  1261,  1275,  1292,  1307,  1324,  1343,
+    1363,  1364,  1368,  1369,  1373,  1374,  1378,  1379,  1383,  1387,
+    1390,  1401,  1412,  1422,  1434,  1448,  1460,  1469,  1483,  1483,
+    1515,  1526,  1527,  1530,  1534,  1535,  1536,  1537,  1538,  1543,
+    1544,  1551,  1561,  1574,  1584,  1585,  1589,  1590,  1600,  1609,
+    1626,  1646,  1654,  1667,  1682,  1696,  1707,  1708,  1718,  1728,
+    1733,  1734,  1738,  1738,  1773,  1774,  1778,  1780,  1783,  1786,
+    1789,  1792,  1795,  1798,  1801,  1804,  1807,  1810,  1816,  1865,
+    1869,  1884,  1892,  1929,  1933,  1946,  1981,  1985,  1999,  2034,
+    2037,  2078,  2082,  2123,  2127,  2166,  2207,  2211,  2257,  2301,
+    2335,  2368,  2373,  2411,  2450,  2460,  2464,  2523,  2582,  2587,
+    2654,  2719,  2758,  2763,  2764,  2765,  2798,  2830,  2834,  2870,
+    2904,  2906,  2939,  2970,  2974,  2975,  2976,  2977,  2981,  3018,
+    3056,  3068,  3077,  3086,  3092,  3103
 };
 #endif
 
-/** Accessing symbol of state STATE.  */
-#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
-
-#if YYDEBUG || 0
-/* The user-facing name of the symbol whose (internal) number is
-   YYSYMBOL.  No bounds checking.  */
-static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
-
+#if YYDEBUG || YYERROR_VERBOSE || 0
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "'('", "')'", "'{'",
-  "'}'", "'['", "']'", "'.'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'",
-  "'|'", "'^'", "','", "';'", "'<'", "'>'", "'~'", "'!'", "'?'", "':'",
-  "'='", "RIGHT_OP", "LEFT_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP",
-  "LE_OP", "GE_OP", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN",
-  "MOD_ASSIGN", "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN",
-  "OR_ASSIGN", "UNSIGNED_RIGHT", "UNSIGNED_RIGHT_ASSIGN", "integerLiteral",
+  "$end", "error", "$undefined", "'('", "')'", "'{'", "'}'", "'['", "']'",
+  "'.'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", "','",
+  "';'", "'<'", "'>'", "'~'", "'!'", "'?'", "':'", "'='", "RIGHT_OP",
+  "LEFT_OP", "EQ_OP", "NE_OP", "AND_OP", "OR_OP", "LE_OP", "GE_OP",
+  "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", "MOD_ASSIGN",
+  "LEFT_ASSIGN", "RIGHT_ASSIGN", "AND_ASSIGN", "XOR_ASSIGN", "OR_ASSIGN",
+  "UNSIGNED_RIGHT", "UNSIGNED_RIGHT_ASSIGN", "integerLiteral",
   "stringLiteral", "nullLiteral", "characterLiteral", "textBlock",
   "booleanLiteral", "FloatingPointLiteral", "Identifier", "CONTINUE",
   "FOR", "NEW", "IF", "PACKAGE", "BOOLEAN", "PRIVATE", "THIS", "BREAK",
@@ -839,13 +704,24 @@ static const char *const yytname[] =
   "PostIncrementExpression", "PostDecrementExpression", "CastExpression",
   "G", "S", "NEXT_QUAD", "ChangeTable", "A", YY_NULLPTR
 };
-
-static const char *
-yysymbol_name (yysymbol_kind_t yysymbol)
-{
-  return yytname[yysymbol];
-}
 #endif
+
+# ifdef YYPRINT
+/* YYTOKNUM[NUM] -- (External) token number corresponding to the
+   (internal) symbol number NUM (which must be that of a token).  */
+static const yytype_int16 yytoknum[] =
+{
+       0,   256,   257,    40,    41,   123,   125,    91,    93,    46,
+      43,    45,    42,    47,    37,    38,   124,    94,    44,    59,
+      60,    62,   126,    33,    63,    58,    61,   258,   259,   260,
+     261,   262,   263,   264,   265,   266,   267,   268,   269,   270,
+     271,   272,   273,   274,   275,   276,   277,   278,   279,   280,
+     281,   282,   283,   284,   285,   286,   287,   288,   289,   290,
+     291,   292,   293,   294,   295,   296,   297,   298,   299,   300,
+     301,   302,   303,   304,   305,   306,   307,   308,   309,   310,
+     311,   312,   313,   314,   315
+};
+# endif
 
 #define YYPACT_NINF (-357)
 
@@ -857,8 +733,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 #define yytable_value_is_error(Yyn) \
   0
 
-/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-   STATE-NUM.  */
+  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+     STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
     -357,    14,  -357,   126,  -357,  -357,  -357,  -357,  -357,  -357,
@@ -905,9 +781,9 @@ static const yytype_int16 yypact[] =
      778,  -357,  -357
 };
 
-/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-   Performed when YYTABLE does not specify something else to do.  Zero
-   means the default is an error.  */
+  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+     Performed when YYTABLE does not specify something else to do.  Zero
+     means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
       28,     0,    26,    27,     1,    31,    37,    36,    39,    38,
@@ -954,7 +830,7 @@ static const yytype_uint8 yydefact[] =
        0,   123,   121
 };
 
-/* YYPGOTO[NTERM-NUM].  */
+  /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
     -357,  -357,    -3,  -357,  -357,  -357,    24,   -59,   -92,  -357,
@@ -972,10 +848,10 @@ static const yytype_int16 yypgoto[] =
      360,   -71,  -357,  -357
 };
 
-/* YYDEFGOTO[NTERM-NUM].  */
+  /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
-       0,    97,   199,    38,    39,    40,   285,    98,    99,   100,
+      -1,    97,   199,    38,    39,    40,   285,    98,    99,   100,
        1,     2,     3,    11,    12,    13,    14,    22,    24,    42,
       43,    52,    53,    54,    44,    45,    46,    55,    56,   101,
      286,   200,   201,    62,    47,    48,    75,   138,   253,   379,
@@ -990,9 +866,9 @@ static const yytype_int16 yydefgoto[] =
       19,   141,    65,   135
 };
 
-/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-   positive, shift that token.  If negative, reduce the rule whose
-   number is the opposite.  If YYTABLE_NINF, syntax error.  */
+  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+     positive, shift that token.  If negative, reduce the rule whose
+     number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
       25,   151,   222,    71,   139,  -156,   333,   109,    15,   226,
@@ -1213,8 +1089,8 @@ static const yytype_int16 yycheck[] =
       43,    44,    -1,    46
 };
 
-/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
-   state STATE-NUM.  */
+  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
+     symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
        0,    95,    96,    97,     0,    19,    61,    68,    73,    74,
@@ -1261,7 +1137,7 @@ static const yytype_uint8 yystos[] =
      206,   131,   131
 };
 
-/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
+  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
        0,    85,    86,    86,    86,    86,    86,    86,    86,    87,
@@ -1292,7 +1168,7 @@ static const yytype_uint8 yyr1[] =
      203,   204,   205,   206,   207,   208
 };
 
-/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
+  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
@@ -1324,15 +1200,14 @@ static const yytype_int8 yyr2[] =
 };
 
 
-enum { YYENOMEM = -2 };
-
 #define yyerrok         (yyerrstatus = 0)
 #define yyclearin       (yychar = YYEMPTY)
+#define YYEMPTY         (-2)
+#define YYEOF           0
 
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
-#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -1354,9 +1229,10 @@ enum { YYENOMEM = -2 };
       }                                                           \
   while (0)
 
-/* Backward compatibility with an undocumented macro.
-   Use YYerror or YYUNDEF. */
-#define YYERRCODE YYUNDEF
+/* Error token number */
+#define YYTERROR        1
+#define YYERRCODE       256
+
 
 
 /* Enable debugging if requested.  */
@@ -1373,16 +1249,19 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
+/* This macro is provided for backward compatibility. */
+#ifndef YY_LOCATION_PRINT
+# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+#endif
 
 
-
-# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Kind, Value); \
+                  Type, Value); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -1393,15 +1272,18 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
   FILE *yyoutput = yyo;
-  YY_USE (yyoutput);
+  YYUSE (yyoutput);
   if (!yyvaluep)
     return;
+# ifdef YYPRINT
+  if (yytype < YYNTOKENS)
+    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
+# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YY_USE (yykind);
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1411,13 +1293,12 @@ yy_symbol_value_print (FILE *yyo,
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep)
+yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep)
 {
   YYFPRINTF (yyo, "%s %s (",
-             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
+             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
 
-  yy_symbol_value_print (yyo, yykind, yyvaluep);
+  yy_symbol_value_print (yyo, yytype, yyvaluep);
   YYFPRINTF (yyo, ")");
 }
 
@@ -1450,8 +1331,7 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
-                 int yyrule)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, int yyrule)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1463,8 +1343,9 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp,
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
-                       &yyvsp[(yyi + 1) - (yynrhs)]);
+                       yystos[+yyssp[yyi + 1 - yynrhs]],
+                       &yyvsp[(yyi + 1) - (yynrhs)]
+                                              );
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -1479,8 +1360,8 @@ do {                                    \
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args) ((void) 0)
-# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
+# define YYDPRINTF(Args)
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
@@ -1503,38 +1384,265 @@ int yydebug;
 #endif
 
 
+#if YYERROR_VERBOSE
 
+# ifndef yystrlen
+#  if defined __GLIBC__ && defined _STRING_H
+#   define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
+#  else
+/* Return the length of YYSTR.  */
+static YYPTRDIFF_T
+yystrlen (const char *yystr)
+{
+  YYPTRDIFF_T yylen;
+  for (yylen = 0; yystr[yylen]; yylen++)
+    continue;
+  return yylen;
+}
+#  endif
+# endif
 
+# ifndef yystpcpy
+#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
+#   define yystpcpy stpcpy
+#  else
+/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
+   YYDEST.  */
+static char *
+yystpcpy (char *yydest, const char *yysrc)
+{
+  char *yyd = yydest;
+  const char *yys = yysrc;
 
+  while ((*yyd++ = *yys++) != '\0')
+    continue;
+
+  return yyd - 1;
+}
+#  endif
+# endif
+
+# ifndef yytnamerr
+/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
+   quotes and backslashes, so that it's suitable for yyerror.  The
+   heuristic is that double-quoting is unnecessary unless the string
+   contains an apostrophe, a comma, or backslash (other than
+   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
+   null, do not copy; instead, return the length of what the result
+   would have been.  */
+static YYPTRDIFF_T
+yytnamerr (char *yyres, const char *yystr)
+{
+  if (*yystr == '"')
+    {
+      YYPTRDIFF_T yyn = 0;
+      char const *yyp = yystr;
+
+      for (;;)
+        switch (*++yyp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
+
+          case '\\':
+            if (*++yyp != '\\')
+              goto do_not_strip_quotes;
+            else
+              goto append;
+
+          append:
+          default:
+            if (yyres)
+              yyres[yyn] = *yyp;
+            yyn++;
+            break;
+
+          case '"':
+            if (yyres)
+              yyres[yyn] = '\0';
+            return yyn;
+          }
+    do_not_strip_quotes: ;
+    }
+
+  if (yyres)
+    return yystpcpy (yyres, yystr) - yyres;
+  else
+    return yystrlen (yystr);
+}
+# endif
+
+/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
+   about the unexpected token YYTOKEN for the state stack whose top is
+   YYSSP.
+
+   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
+   not large enough to hold the message.  In that case, also set
+   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
+   required number of bytes is too large to store.  */
+static int
+yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
+                yy_state_t *yyssp, int yytoken)
+{
+  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+  /* Internationalized format string. */
+  const char *yyformat = YY_NULLPTR;
+  /* Arguments of yyformat: reported tokens (one for the "unexpected",
+     one per "expected"). */
+  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
+  /* Actual size of YYARG. */
+  int yycount = 0;
+  /* Cumulated lengths of YYARG.  */
+  YYPTRDIFF_T yysize = 0;
+
+  /* There are many possibilities here to consider:
+     - If this state is a consistent state with a default action, then
+       the only way this function was invoked is if the default action
+       is an error action.  In that case, don't check for expected
+       tokens because there are none.
+     - The only way there can be no lookahead present (in yychar) is if
+       this state is a consistent state with a default action.  Thus,
+       detecting the absence of a lookahead is sufficient to determine
+       that there is no unexpected or expected token to report.  In that
+       case, just report a simple "syntax error".
+     - Don't assume there isn't a lookahead just because this state is a
+       consistent state with a default action.  There might have been a
+       previous inconsistent state, consistent state with a non-default
+       action, or user semantic action that manipulated yychar.
+     - Of course, the expected token list depends on states to have
+       correct lookahead information, and it depends on the parser not
+       to perform extra reductions after fetching a lookahead from the
+       scanner and before detecting a syntax error.  Thus, state merging
+       (from LALR or IELR) and default reductions corrupt the expected
+       token list.  However, the list is correct for canonical LR with
+       one exception: it will still contain any token that will not be
+       accepted due to an error action in a later state.
+  */
+  if (yytoken != YYEMPTY)
+    {
+      int yyn = yypact[+*yyssp];
+      YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
+      yysize = yysize0;
+      yyarg[yycount++] = yytname[yytoken];
+      if (!yypact_value_is_default (yyn))
+        {
+          /* Start YYX at -YYN if negative to avoid negative indexes in
+             YYCHECK.  In other words, skip the first -YYN actions for
+             this state because they are default actions.  */
+          int yyxbegin = yyn < 0 ? -yyn : 0;
+          /* Stay within bounds of both yycheck and yytname.  */
+          int yychecklim = YYLAST - yyn + 1;
+          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+          int yyx;
+
+          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
+                && !yytable_value_is_error (yytable[yyx + yyn]))
+              {
+                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+                  {
+                    yycount = 1;
+                    yysize = yysize0;
+                    break;
+                  }
+                yyarg[yycount++] = yytname[yyx];
+                {
+                  YYPTRDIFF_T yysize1
+                    = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
+                  if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
+                    yysize = yysize1;
+                  else
+                    return 2;
+                }
+              }
+        }
+    }
+
+  switch (yycount)
+    {
+# define YYCASE_(N, S)                      \
+      case N:                               \
+        yyformat = S;                       \
+      break
+    default: /* Avoid compiler warnings. */
+      YYCASE_(0, YY_("syntax error"));
+      YYCASE_(1, YY_("syntax error, unexpected %s"));
+      YYCASE_(2, YY_("syntax error, unexpected %s, expecting %s"));
+      YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
+      YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
+      YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
+# undef YYCASE_
+    }
+
+  {
+    /* Don't count the "%s"s in the final size, but reserve room for
+       the terminator.  */
+    YYPTRDIFF_T yysize1 = yysize + (yystrlen (yyformat) - 2 * yycount) + 1;
+    if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
+      yysize = yysize1;
+    else
+      return 2;
+  }
+
+  if (*yymsg_alloc < yysize)
+    {
+      *yymsg_alloc = 2 * yysize;
+      if (! (yysize <= *yymsg_alloc
+             && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
+        *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
+      return 1;
+    }
+
+  /* Avoid sprintf, as that infringes on the user's name space.
+     Don't have undefined behavior even if the translation
+     produced a string with the wrong number of "%s"s.  */
+  {
+    char *yyp = *yymsg;
+    int yyi = 0;
+    while ((*yyp = *yyformat) != '\0')
+      if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
+        {
+          yyp += yytnamerr (yyp, yyarg[yyi++]);
+          yyformat += 2;
+        }
+      else
+        {
+          ++yyp;
+          ++yyformat;
+        }
+  }
+  return 0;
+}
+#endif /* YYERROR_VERBOSE */
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep)
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
 {
-  YY_USE (yyvaluep);
+  YYUSE (yyvaluep);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YY_USE (yykind);
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
-/* Lookahead token kind.  */
+
+
+/* The lookahead symbol.  */
 int yychar;
 
 /* The semantic value of the lookahead symbol.  */
 YYSTYPE yylval;
 /* Number of syntax errors so far.  */
 int yynerrs;
-
-
 
 
 /*----------.
@@ -1544,36 +1652,43 @@ int yynerrs;
 int
 yyparse (void)
 {
-    yy_state_fast_t yystate = 0;
+    yy_state_fast_t yystate;
     /* Number of tokens to shift before error messages enabled.  */
-    int yyerrstatus = 0;
+    int yyerrstatus;
 
-    /* Refer to the stacks through separate pointers, to allow yyoverflow
+    /* The stacks and their tools:
+       'yyss': related to states.
+       'yyvs': related to semantic values.
+
+       Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
 
-    /* Their size.  */
-    YYPTRDIFF_T yystacksize = YYINITDEPTH;
-
-    /* The state stack: array, bottom, top.  */
+    /* The state stack.  */
     yy_state_t yyssa[YYINITDEPTH];
-    yy_state_t *yyss = yyssa;
-    yy_state_t *yyssp = yyss;
+    yy_state_t *yyss;
+    yy_state_t *yyssp;
 
-    /* The semantic value stack: array, bottom, top.  */
+    /* The semantic value stack.  */
     YYSTYPE yyvsa[YYINITDEPTH];
-    YYSTYPE *yyvs = yyvsa;
-    YYSTYPE *yyvsp = yyvs;
+    YYSTYPE *yyvs;
+    YYSTYPE *yyvsp;
+
+    YYPTRDIFF_T yystacksize;
 
   int yyn;
-  /* The return value of yyparse.  */
   int yyresult;
-  /* Lookahead symbol kind.  */
-  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
+  /* Lookahead token as an internal (translated) token number.  */
+  int yytoken = 0;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
 
-
+#if YYERROR_VERBOSE
+  /* Buffer for error messages, and its allocated size.  */
+  char yymsgbuf[128];
+  char *yymsg = yymsgbuf;
+  YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
+#endif
 
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 
@@ -1581,10 +1696,16 @@ yyparse (void)
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
+  yyssp = yyss = yyssa;
+  yyvsp = yyvs = yyvsa;
+  yystacksize = YYINITDEPTH;
+
   YYDPRINTF ((stderr, "Starting parse\n"));
 
+  yystate = 0;
+  yyerrstatus = 0;
+  yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
-
   goto yysetstate;
 
 
@@ -1606,11 +1727,10 @@ yysetstate:
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
   YY_IGNORE_USELESS_CAST_END
-  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    YYNOMEM;
+    goto yyexhaustedlab;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1638,7 +1758,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        YYNOMEM;
+        goto yyexhaustedlab;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1649,10 +1769,10 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          YYNOMEM;
+          goto yyexhaustedlab;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
-#  undef YYSTACK_RELOCATE
+# undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
       }
@@ -1670,7 +1790,6 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
-
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1692,28 +1811,17 @@ yybackup:
 
   /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
+  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token\n"));
+      YYDPRINTF ((stderr, "Reading a token: "));
       yychar = yylex ();
     }
 
   if (yychar <= YYEOF)
     {
-      yychar = YYEOF;
-      yytoken = YYSYMBOL_YYEOF;
+      yychar = yytoken = YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
-    }
-  else if (yychar == YYerror)
-    {
-      /* The scanner already issued an error message, process directly
-         to error recovery.  But do not keep the error token as
-         lookahead, it is too special and may lead us to an endless
-         loop in error recovery. */
-      yychar = YYUNDEF;
-      yytoken = YYSYMBOL_YYerror;
-      goto yyerrlab1;
     }
   else
     {
@@ -1783,7 +1891,7 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* Literal: integerLiteral  */
+  case 2:
 #line 78 "parser.y++"
                      {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
@@ -1791,24 +1899,31 @@ yyreduce:
         (yyval.ptr)->intVal = stoi(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1796 "parser.cpp"
+#line 1907 "parser.cpp"
     break;
 
-  case 3: /* Literal: FloatingPointLiteral  */
-#line 85 "parser.y++"
+  case 3:
+#line 88 "parser.y++"
                            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("float");
         (yyval.ptr)->realVal = stod(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
+
     }
-#line 1808 "parser.cpp"
+#line 1923 "parser.cpp"
     break;
 
-  case 4: /* Literal: booleanLiteral  */
-#line 92 "parser.y++"
+  case 4:
+#line 99 "parser.y++"
                      {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("boolean");
@@ -1817,67 +1932,82 @@ yyreduce:
         (yyval.ptr)->strVal = string((yyvsp[0].str));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1822 "parser.cpp"
+#line 1940 "parser.cpp"
     break;
 
-  case 5: /* Literal: characterLiteral  */
-#line 101 "parser.y++"
+  case 5:
+#line 111 "parser.y++"
                        {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("char");
         (yyval.ptr)->intVal = char_int(string((yyvsp[0].str)));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1834 "parser.cpp"
+#line 1955 "parser.cpp"
     break;
 
-  case 6: /* Literal: stringLiteral  */
-#line 108 "parser.y++"
+  case 6:
+#line 121 "parser.y++"
                     {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("string");
         (yyval.ptr)->strVal = string((yyvsp[0].str));
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1846 "parser.cpp"
+#line 1970 "parser.cpp"
     break;
 
-  case 7: /* Literal: textBlock  */
-#line 115 "parser.y++"
+  case 7:
+#line 131 "parser.y++"
                 {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("textblock");
         (yyval.ptr)->tbval = (yyvsp[0].str);
         (yyval.ptr)->expType = 4;
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1857 "parser.cpp"
+#line 1984 "parser.cpp"
     break;
 
-  case 8: /* Literal: nullLiteral  */
-#line 121 "parser.y++"
+  case 8:
+#line 140 "parser.y++"
                   {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = string("null");
         (yyval.ptr)->expType = 4;
         (yyval.ptr)->tempName = string((yyvsp[0].str));
+		sym_entry* temp = new sym_entry;
+		(yyval.ptr)->place = qid((yyvsp[0].str), temp);
+		(yyval.ptr)->nextlist.clear();
     }
-#line 1868 "parser.cpp"
+#line 1998 "parser.cpp"
     break;
 
-  case 9: /* PrimitiveType: NumericType  */
-#line 131 "parser.y++"
+  case 9:
+#line 153 "parser.y++"
                   {
         type = (yyvsp[0].ptr)->type;
         (yyval.ptr) = (yyvsp[0].ptr);
 	}
-#line 1877 "parser.cpp"
+#line 2007 "parser.cpp"
     break;
 
-  case 10: /* PrimitiveType: BOOLEAN  */
-#line 135 "parser.y++"
+  case 10:
+#line 157 "parser.y++"
               {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1885,27 +2015,27 @@ yyreduce:
         type = (yyvsp[0].str);
         (yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1889 "parser.cpp"
+#line 2019 "parser.cpp"
     break;
 
-  case 11: /* NumericType: IntegralType  */
-#line 146 "parser.y++"
+  case 11:
+#line 168 "parser.y++"
                    {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 1897 "parser.cpp"
+#line 2027 "parser.cpp"
     break;
 
-  case 12: /* NumericType: FloatingPointType  */
-#line 149 "parser.y++"
+  case 12:
+#line 171 "parser.y++"
                         {
         (yyval.ptr) = (yyvsp[0].ptr) ;
     }
-#line 1905 "parser.cpp"
+#line 2035 "parser.cpp"
     break;
 
-  case 13: /* IntegralType: BYTE  */
-#line 155 "parser.y++"
+  case 13:
+#line 177 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1915,11 +2045,11 @@ yyreduce:
 		(yyval.ptr)->type = (yyvsp[0].str);
 
     }
-#line 1919 "parser.cpp"
+#line 2049 "parser.cpp"
     break;
 
-  case 14: /* IntegralType: SHORT  */
-#line 164 "parser.y++"
+  case 14:
+#line 186 "parser.y++"
             {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1928,11 +2058,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1932 "parser.cpp"
+#line 2062 "parser.cpp"
     break;
 
-  case 15: /* IntegralType: INT  */
-#line 172 "parser.y++"
+  case 15:
+#line 194 "parser.y++"
           {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1941,11 +2071,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1945 "parser.cpp"
+#line 2075 "parser.cpp"
     break;
 
-  case 16: /* IntegralType: LONG  */
-#line 180 "parser.y++"
+  case 16:
+#line 202 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1954,11 +2084,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1958 "parser.cpp"
+#line 2088 "parser.cpp"
     break;
 
-  case 17: /* IntegralType: CHAR  */
-#line 188 "parser.y++"
+  case 17:
+#line 210 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1967,11 +2097,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1971 "parser.cpp"
+#line 2101 "parser.cpp"
     break;
 
-  case 18: /* FloatingPointType: FLOAT  */
-#line 199 "parser.y++"
+  case 18:
+#line 221 "parser.y++"
             {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1980,11 +2110,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1984 "parser.cpp"
+#line 2114 "parser.cpp"
     break;
 
-  case 19: /* FloatingPointType: DOUBLE  */
-#line 207 "parser.y++"
+  case 19:
+#line 229 "parser.y++"
              {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -1993,11 +2123,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 1997 "parser.cpp"
+#line 2127 "parser.cpp"
     break;
 
-  case 20: /* Dims: '[' ']'  */
-#line 218 "parser.y++"
+  case 20:
+#line 240 "parser.y++"
            {
         vector<data2>v;
         insertAttr(v, NULL, "[", 0);
@@ -2009,11 +2139,11 @@ yyreduce:
         (yyval.ptr)->type = "*";
 
     }
-#line 2013 "parser.cpp"
+#line 2143 "parser.cpp"
     break;
 
-  case 21: /* Dims: '[' ']' Dims  */
-#line 229 "parser.y++"
+  case 21:
+#line 251 "parser.y++"
                  {
         vector<data2>v;
         insertAttr(v, NULL, "[", 0);
@@ -2030,23 +2160,23 @@ yyreduce:
             (yyval.ptr)->is_error = 1;
         }
     }
-#line 2034 "parser.cpp"
+#line 2164 "parser.cpp"
     break;
 
-  case 22: /* Name: SimpleName  */
-#line 250 "parser.y++"
+  case 22:
+#line 272 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2040 "parser.cpp"
+#line 2170 "parser.cpp"
     break;
 
-  case 23: /* Name: QualifiedName  */
-#line 251 "parser.y++"
+  case 23:
+#line 273 "parser.y++"
                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2046 "parser.cpp"
+#line 2176 "parser.cpp"
     break;
 
-  case 24: /* SimpleName: Identifier  */
-#line 254 "parser.y++"
+  case 24:
+#line 276 "parser.y++"
                {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
 
@@ -2094,11 +2224,11 @@ yyreduce:
 			}
 		}
     }
-#line 2098 "parser.cpp"
+#line 2228 "parser.cpp"
     break;
 
-  case 25: /* QualifiedName: Name '.' SimpleName  */
-#line 303 "parser.y++"
+  case 25:
+#line 325 "parser.y++"
                         {
         vector<data2>v;
         insertAttr(v, (yyvsp[-2].ptr), "", 1);
@@ -2136,35 +2266,35 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 2140 "parser.cpp"
+#line 2270 "parser.cpp"
     break;
 
-  case 26: /* CompilationUnit: OrdinaryCompilationUnit  */
-#line 344 "parser.y++"
+  case 26:
+#line 366 "parser.y++"
                               {
         vector<data2> v;
         insertAttr(v, (yyvsp[0].ptr), "", 1);
         (yyval.ptr) = makenode("CompilationUnit",v);
     }
-#line 2150 "parser.cpp"
+#line 2280 "parser.cpp"
     break;
 
-  case 27: /* OrdinaryCompilationUnit: TopLevelClassOrInterfaceDeclarations  */
-#line 352 "parser.y++"
+  case 27:
+#line 374 "parser.y++"
                                            {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2158 "parser.cpp"
+#line 2288 "parser.cpp"
     break;
 
-  case 28: /* TopLevelClassOrInterfaceDeclarations: %empty  */
-#line 358 "parser.y++"
+  case 28:
+#line 380 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2164 "parser.cpp"
+#line 2294 "parser.cpp"
     break;
 
-  case 29: /* TopLevelClassOrInterfaceDeclarations: TopLevelClassOrInterfaceDeclarations TopLevelClassOrInterfaceDeclaration  */
-#line 359 "parser.y++"
+  case 29:
+#line 381 "parser.y++"
                                                                                {
         vector<data2> v;
 		insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2172,25 +2302,25 @@ yyreduce:
 		(yyval.ptr) = makenode("Top_level_class_or_interface_declarations",v);
 		cout << "leaving top level\n";
     }
-#line 2176 "parser.cpp"
+#line 2306 "parser.cpp"
     break;
 
-  case 30: /* TopLevelClassOrInterfaceDeclaration: ClassDeclaration  */
-#line 369 "parser.y++"
+  case 30:
+#line 391 "parser.y++"
                        { (yyval.ptr) = (yyvsp[0].ptr);}
-#line 2182 "parser.cpp"
+#line 2312 "parser.cpp"
     break;
 
-  case 31: /* TopLevelClassOrInterfaceDeclaration: ';'  */
-#line 370 "parser.y++"
+  case 31:
+#line 392 "parser.y++"
          {
         (yyval.ptr) = makeleaf(";");
     }
-#line 2190 "parser.cpp"
+#line 2320 "parser.cpp"
     break;
 
-  case 32: /* ClassDeclaration: Modifiers CLASS G S ClassBody  */
-#line 378 "parser.y++"
+  case 32:
+#line 400 "parser.y++"
                                     {
 		vector<data2>v;
         if((yyvsp[-4].ptr) != NULL) insertAttr(v,(yyvsp[-4].ptr),"",1);
@@ -2210,11 +2340,11 @@ yyreduce:
 		}
 		type = "";
     }
-#line 2214 "parser.cpp"
+#line 2344 "parser.cpp"
     break;
 
-  case 33: /* ClassDeclaration: CLASS G S ClassBody  */
-#line 397 "parser.y++"
+  case 33:
+#line 419 "parser.y++"
                           {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2236,17 +2366,17 @@ yyreduce:
 		}
 		type = "";
     }
-#line 2240 "parser.cpp"
+#line 2370 "parser.cpp"
     break;
 
-  case 34: /* Modifiers: Modifier  */
-#line 421 "parser.y++"
+  case 34:
+#line 443 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2246 "parser.cpp"
+#line 2376 "parser.cpp"
     break;
 
-  case 35: /* Modifiers: Modifier Modifiers  */
-#line 422 "parser.y++"
+  case 35:
+#line 444 "parser.y++"
                          {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2261,47 +2391,47 @@ yyreduce:
             (yyval.ptr)->type = string((yyvsp[-1].ptr)->type + "_" + (yyvsp[0].ptr)->type);
         }
     }
-#line 2265 "parser.cpp"
+#line 2395 "parser.cpp"
     break;
 
-  case 36: /* Modifier: PUBLIC  */
-#line 439 "parser.y++"
+  case 36:
+#line 461 "parser.y++"
            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "public";
     }
-#line 2274 "parser.cpp"
+#line 2404 "parser.cpp"
     break;
 
-  case 37: /* Modifier: PRIVATE  */
-#line 443 "parser.y++"
+  case 37:
+#line 465 "parser.y++"
             {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "private";
     }
-#line 2283 "parser.cpp"
+#line 2413 "parser.cpp"
     break;
 
-  case 38: /* Modifier: STATIC  */
-#line 447 "parser.y++"
+  case 38:
+#line 469 "parser.y++"
            {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "static";
     }
-#line 2292 "parser.cpp"
+#line 2422 "parser.cpp"
     break;
 
-  case 39: /* Modifier: FINAL  */
-#line 451 "parser.y++"
+  case 39:
+#line 473 "parser.y++"
           {
         (yyval.ptr)=makeleaf((yyvsp[0].str));
         (yyval.ptr)->type = "final";
     }
-#line 2301 "parser.cpp"
+#line 2431 "parser.cpp"
     break;
 
-  case 40: /* ClassBody: '{' ClassBodyDeclarations '}'  */
-#line 458 "parser.y++"
+  case 40:
+#line 480 "parser.y++"
                                     {
 		vector<data2> v;
 		cout<<"entered Class body"<<endl;
@@ -2311,17 +2441,17 @@ yyreduce:
         (yyval.ptr) = makenode("classBody",v);
 		cout << "leaving class body\n";
     }
-#line 2315 "parser.cpp"
+#line 2445 "parser.cpp"
     break;
 
-  case 41: /* ClassBodyDeclarations: %empty  */
-#line 470 "parser.y++"
+  case 41:
+#line 492 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2321 "parser.cpp"
+#line 2451 "parser.cpp"
     break;
 
-  case 42: /* ClassBodyDeclarations: ClassBodyDeclarations ClassBodyDeclaration  */
-#line 471 "parser.y++"
+  case 42:
+#line 493 "parser.y++"
                                                 {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2331,35 +2461,35 @@ yyreduce:
         // Semantics
 		cout << "in classbodydeclarations\n";
     }
-#line 2335 "parser.cpp"
+#line 2465 "parser.cpp"
     break;
 
-  case 43: /* ClassBodyDeclaration: FieldDeclaration  */
-#line 483 "parser.y++"
+  case 43:
+#line 505 "parser.y++"
                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2341 "parser.cpp"
+#line 2471 "parser.cpp"
     break;
 
-  case 44: /* ClassBodyDeclaration: MethodDeclaration  */
-#line 484 "parser.y++"
+  case 44:
+#line 506 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2347 "parser.cpp"
+#line 2477 "parser.cpp"
     break;
 
-  case 45: /* ClassBodyDeclaration: StaticInitializer  */
-#line 485 "parser.y++"
+  case 45:
+#line 507 "parser.y++"
                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2353 "parser.cpp"
+#line 2483 "parser.cpp"
     break;
 
-  case 46: /* ClassBodyDeclaration: ConstructorDeclaration  */
-#line 486 "parser.y++"
+  case 46:
+#line 508 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2359 "parser.cpp"
+#line 2489 "parser.cpp"
     break;
 
-  case 47: /* FieldDeclaration: Modifiers PrimitiveType VariableDeclaratorList ';'  */
-#line 490 "parser.y++"
+  case 47:
+#line 512 "parser.y++"
                                                          {
         vector<data2> v;
         insertAttr(v,(yyvsp[-3].ptr),"",1);
@@ -2374,11 +2504,11 @@ yyreduce:
 		type_delim = 0;
 
     }
-#line 2378 "parser.cpp"
+#line 2508 "parser.cpp"
     break;
 
-  case 48: /* FieldDeclaration: PrimitiveType VariableDeclaratorList ';'  */
-#line 504 "parser.y++"
+  case 48:
+#line 526 "parser.y++"
                                                {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2391,19 +2521,19 @@ yyreduce:
 		className = classTemp;
 		type_delim = 0;
     }
-#line 2395 "parser.cpp"
+#line 2525 "parser.cpp"
     break;
 
-  case 49: /* VariableDeclaratorList: VariableDeclarator  */
-#line 520 "parser.y++"
+  case 49:
+#line 542 "parser.y++"
                          {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2403 "parser.cpp"
+#line 2533 "parser.cpp"
     break;
 
-  case 50: /* VariableDeclaratorList: VariableDeclaratorList ',' VariableDeclarator  */
-#line 523 "parser.y++"
+  case 50:
+#line 545 "parser.y++"
                                                     {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2411,11 +2541,11 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr),"",1);
         (yyval.ptr) = makenode("Variable_Declarator_List",v);
     }
-#line 2415 "parser.cpp"
+#line 2545 "parser.cpp"
     break;
 
-  case 51: /* VariableDeclarator: Declarator  */
-#line 533 "parser.y++"
+  case 51:
+#line 555 "parser.y++"
                  {
         (yyval.ptr) = (yyvsp[0].ptr);
 
@@ -2425,11 +2555,11 @@ yyreduce:
 		} 
 		cout << "in Variable declarator\n";
     }
-#line 2429 "parser.cpp"
+#line 2559 "parser.cpp"
     break;
 
-  case 52: /* VariableDeclarator: Declarator '=' VariableInitializer  */
-#line 542 "parser.y++"
+  case 52:
+#line 564 "parser.y++"
                                          {
 
         vector<data2>v;
@@ -2444,12 +2574,17 @@ yyreduce:
 		if (insertStructAttr((yyvsp[-2].ptr)->tempName, (yyvsp[-2].ptr)->type, (yyvsp[-2].ptr)->size, 1) != 1){
 			yyerror(("The Attribute " + string((yyvsp[-2].ptr)->tempName) + " is already declared in the same class").c_str());
 		} 
+		//3 AC
+		(yyval.ptr)->type=(yyvsp[-2].ptr)->type;
+		int num = assign_exp((yyvsp[-1].str), (yyval.ptr)->type, (yyvsp[-2].ptr)->type, (yyvsp[0].ptr)->type, (yyvsp[-2].ptr)->place, (yyvsp[0].ptr)->place);
+		(yyval.ptr)->place = (yyvsp[-2].ptr)->place;
+		backpatch((yyvsp[0].ptr)->nextlist, num);
     }
-#line 2449 "parser.cpp"
+#line 2584 "parser.cpp"
     break;
 
-  case 53: /* Declarator: Identifier  */
-#line 560 "parser.y++"
+  case 53:
+#line 587 "parser.y++"
                  {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2465,13 +2600,13 @@ yyreduce:
 		(yyval.ptr)->size = getSize(type);
 
 		//3AC
-		(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
+		(yyval.ptr)->place = qid(string((yyvsp[0].str)), lookup(string((yyvsp[0].str))));
     }
-#line 2471 "parser.cpp"
+#line 2606 "parser.cpp"
     break;
 
-  case 54: /* Declarator: Declarator '[' ']'  */
-#line 577 "parser.y++"
+  case 54:
+#line 604 "parser.y++"
                          {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-2].ptr), "", 1);
@@ -2492,11 +2627,11 @@ yyreduce:
 		}
 		else yyerror(( (yyvsp[-2].ptr)->tempName + " declared as function returning an array").c_str());
     }
-#line 2496 "parser.cpp"
+#line 2631 "parser.cpp"
     break;
 
-  case 55: /* MethodDeclaration: MethodHeader MethodBody  */
-#line 600 "parser.y++"
+  case 55:
+#line 627 "parser.y++"
                              {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2505,11 +2640,11 @@ yyreduce:
 
         // Semantics
     }
-#line 2509 "parser.cpp"
+#line 2644 "parser.cpp"
     break;
 
-  case 56: /* MethodHeader: Modifiers PrimitiveType MethodorConstrDeclarator  */
-#line 610 "parser.y++"
+  case 56:
+#line 637 "parser.y++"
                                                      {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2523,11 +2658,11 @@ yyreduce:
 		type_delim = 0;
 
     }
-#line 2527 "parser.cpp"
+#line 2662 "parser.cpp"
     break;
 
-  case 57: /* MethodHeader: PrimitiveType MethodorConstrDeclarator  */
-#line 623 "parser.y++"
+  case 57:
+#line 650 "parser.y++"
                                            {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2539,11 +2674,11 @@ yyreduce:
 		className = classTemp;
 		type_delim = 0;
     }
-#line 2543 "parser.cpp"
+#line 2678 "parser.cpp"
     break;
 
-  case 58: /* MethodHeader: Modifiers VOID2 MethodorConstrDeclarator  */
-#line 634 "parser.y++"
+  case 58:
+#line 661 "parser.y++"
                                              {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2556,11 +2691,11 @@ yyreduce:
 		className = classTemp;
 		type_delim = 0;
     }
-#line 2560 "parser.cpp"
+#line 2695 "parser.cpp"
     break;
 
-  case 59: /* MethodHeader: VOID2 MethodorConstrDeclarator  */
-#line 646 "parser.y++"
+  case 59:
+#line 673 "parser.y++"
                                    {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr),"",1);
@@ -2572,11 +2707,11 @@ yyreduce:
 		className = classTemp;
 		type_delim = 0;
     }
-#line 2576 "parser.cpp"
+#line 2711 "parser.cpp"
     break;
 
-  case 60: /* VOID2: VOID  */
-#line 660 "parser.y++"
+  case 60:
+#line 687 "parser.y++"
            {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2585,11 +2720,11 @@ yyreduce:
 		else if(!type_delim) type += " " + string((yyvsp[0].str));
 		(yyval.ptr)->type = (yyvsp[0].str);
     }
-#line 2589 "parser.cpp"
+#line 2724 "parser.cpp"
     break;
 
-  case 61: /* MethodorConstrDeclarator: SimpleName2 '(' A FormalParameterList ')' NEXT_QUAD  */
-#line 671 "parser.y++"
+  case 61:
+#line 698 "parser.y++"
                                                           {
         vector<data2> v;
         insertAttr(v,(yyvsp[-5].ptr),"",1);
@@ -2643,11 +2778,11 @@ yyreduce:
 				}
 			}
 	}
-#line 2647 "parser.cpp"
+#line 2782 "parser.cpp"
     break;
 
-  case 62: /* MethodorConstrDeclarator: SimpleName2 '(' A ')' Dimsy  */
-#line 724 "parser.y++"
+  case 62:
+#line 751 "parser.y++"
                                       {
 		vector<data2> v;
 		insertAttr(v, (yyvsp[-4].ptr), "", 1);
@@ -2685,11 +2820,11 @@ yyreduce:
 				}
 			}
 	}
-#line 2689 "parser.cpp"
+#line 2824 "parser.cpp"
     break;
 
-  case 63: /* SimpleName2: Identifier  */
-#line 764 "parser.y++"
+  case 63:
+#line 791 "parser.y++"
                  {
         (yyval.ptr) = makeleaf((yyvsp[0].str));
 
@@ -2706,37 +2841,37 @@ yyreduce:
 		//3AC
 		(yyval.ptr)->place = qid((yyval.ptr)->tempName, NULL);
     }
-#line 2710 "parser.cpp"
+#line 2845 "parser.cpp"
     break;
 
-  case 64: /* VariableInitializer: Expression  */
-#line 783 "parser.y++"
+  case 64:
+#line 810 "parser.y++"
                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2716 "parser.cpp"
+#line 2851 "parser.cpp"
     break;
 
-  case 65: /* Dimsy: %empty  */
-#line 787 "parser.y++"
+  case 65:
+#line 814 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2722 "parser.cpp"
+#line 2857 "parser.cpp"
     break;
 
-  case 66: /* Dimsy: Dims  */
-#line 788 "parser.y++"
+  case 66:
+#line 815 "parser.y++"
            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2728 "parser.cpp"
+#line 2863 "parser.cpp"
     break;
 
-  case 67: /* FormalParameterList: FormalParameter  */
-#line 792 "parser.y++"
+  case 67:
+#line 819 "parser.y++"
                       {
         (yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 2736 "parser.cpp"
+#line 2871 "parser.cpp"
     break;
 
-  case 68: /* FormalParameterList: FormalParameterList ',' NEXT_QUAD FormalParameter  */
-#line 795 "parser.y++"
+  case 68:
+#line 822 "parser.y++"
                                                         {
         vector<data2> v;
         insertAttr(v,(yyvsp[-3].ptr),"",1);
@@ -2749,11 +2884,11 @@ yyreduce:
 		backpatch((yyvsp[-3].ptr)->nextlist, (yyvsp[-1].ind));
 		(yyval.ptr)->nextlist = (yyvsp[0].ptr)->nextlist;
     }
-#line 2753 "parser.cpp"
+#line 2888 "parser.cpp"
     break;
 
-  case 69: /* FormalParameter: PrimitiveType SimpleName2 Dimsy  */
-#line 811 "parser.y++"
+  case 69:
+#line 838 "parser.y++"
                                       {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2776,17 +2911,17 @@ yyreduce:
 			yyerror("Argument type is not variable or array");
 		}
     }
-#line 2780 "parser.cpp"
+#line 2915 "parser.cpp"
     break;
 
-  case 70: /* MethodBody: Block  */
-#line 837 "parser.y++"
+  case 70:
+#line 864 "parser.y++"
             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2786 "parser.cpp"
+#line 2921 "parser.cpp"
     break;
 
-  case 71: /* MethodBody: ';'  */
-#line 838 "parser.y++"
+  case 71:
+#line 865 "parser.y++"
           {
 		(yyval.ptr)=makeleaf(";");
 		// if(func_flag>=2){
@@ -2799,11 +2934,11 @@ yyreduce:
 		// 	func_flag--;
 		// }
 	}
-#line 2803 "parser.cpp"
+#line 2938 "parser.cpp"
     break;
 
-  case 72: /* StaticInitializer: STATIC Block  */
-#line 853 "parser.y++"
+  case 72:
+#line 880 "parser.y++"
                    {
         vector<data2> v;
         insertAttr(v,makeleaf((yyvsp[-1].str)),"",1);
@@ -2812,11 +2947,11 @@ yyreduce:
 
         (yyval.ptr)->is_error = (yyvsp[0].ptr)->is_error;
     }
-#line 2816 "parser.cpp"
+#line 2951 "parser.cpp"
     break;
 
-  case 73: /* ConstructorDeclaration: Modifiers MethodorConstrDeclarator ConstructorBody  */
-#line 864 "parser.y++"
+  case 73:
+#line 891 "parser.y++"
                                                          {
         vector<data2> v;
         insertAttr(v,(yyvsp[-2].ptr),"",1);
@@ -2830,11 +2965,11 @@ yyreduce:
 		type_delim = 0;
 		(yyval.ptr)->is_error = (yyvsp[-2].ptr)->is_error || (yyvsp[-1].ptr)->is_error || (yyvsp[0].ptr)->is_error;
     }
-#line 2834 "parser.cpp"
+#line 2969 "parser.cpp"
     break;
 
-  case 74: /* ConstructorBody: '{' ExplicitConstructorInvocation BlockStatements '}'  */
-#line 880 "parser.y++"
+  case 74:
+#line 907 "parser.y++"
                                                             {
         vector<data2> v;
         insertAttr(v,NULL,"{",0);
@@ -2843,11 +2978,11 @@ yyreduce:
         insertAttr(v,NULL,"}",0);
         (yyval.ptr) = makenode("Constructor_body",v);
     }
-#line 2847 "parser.cpp"
+#line 2982 "parser.cpp"
     break;
 
-  case 75: /* ConstructorBody: '{' BlockStatements '}'  */
-#line 888 "parser.y++"
+  case 75:
+#line 915 "parser.y++"
                               {
         vector<data2> v;
         insertAttr(v,NULL,"{",0);
@@ -2855,11 +2990,11 @@ yyreduce:
         insertAttr(v,NULL,"}",0);
         (yyval.ptr) = makenode("Constructor_body",v);
     }
-#line 2859 "parser.cpp"
+#line 2994 "parser.cpp"
     break;
 
-  case 76: /* ExplicitConstructorInvocation: THIS '(' ArgumentListy ')' ';'  */
-#line 898 "parser.y++"
+  case 76:
+#line 925 "parser.y++"
                                      {
         vector<data2> v;
         insertAttr(v,makeleaf((yyvsp[-4].str)),"",1);
@@ -2871,35 +3006,35 @@ yyreduce:
 
 
     }
-#line 2875 "parser.cpp"
+#line 3010 "parser.cpp"
     break;
 
-  case 77: /* ArgumentListy: %empty  */
-#line 912 "parser.y++"
+  case 77:
+#line 939 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2881 "parser.cpp"
+#line 3016 "parser.cpp"
     break;
 
-  case 78: /* ArgumentListy: ArgumentList  */
-#line 913 "parser.y++"
+  case 78:
+#line 940 "parser.y++"
                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2887 "parser.cpp"
+#line 3022 "parser.cpp"
     break;
 
-  case 79: /* ClassBodyy: %empty  */
-#line 923 "parser.y++"
+  case 79:
+#line 950 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2893 "parser.cpp"
+#line 3028 "parser.cpp"
     break;
 
-  case 80: /* ClassBodyy: ClassBody  */
-#line 924 "parser.y++"
+  case 80:
+#line 951 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2899 "parser.cpp"
+#line 3034 "parser.cpp"
     break;
 
-  case 81: /* Block: '{' ChangeTable BlockStatements '}'  */
-#line 944 "parser.y++"
+  case 81:
+#line 971 "parser.y++"
                                         {
         (yyval.ptr) =(yyvsp[-1].ptr);
         cout << "in Block\n";
@@ -2913,17 +3048,17 @@ yyreduce:
 		// 	func_flag--;
 		// }
     }
-#line 2917 "parser.cpp"
+#line 3052 "parser.cpp"
     break;
 
-  case 82: /* BlockStatements: %empty  */
-#line 960 "parser.y++"
+  case 82:
+#line 987 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 2923 "parser.cpp"
+#line 3058 "parser.cpp"
     break;
 
-  case 83: /* BlockStatements: BlockStatements NEXT_QUAD BlockStatement  */
-#line 961 "parser.y++"
+  case 83:
+#line 988 "parser.y++"
                                                {
 		cout << "in Block statements\n";
         vector<data2>v;
@@ -2941,35 +3076,35 @@ yyreduce:
         // $$->breaklist = $1->breaklist;
 		cout << "in Block statements2\n";
     }
-#line 2945 "parser.cpp"
+#line 3080 "parser.cpp"
     break;
 
-  case 84: /* BlockStatement: Declaration_list  */
-#line 981 "parser.y++"
+  case 84:
+#line 1008 "parser.y++"
                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2951 "parser.cpp"
+#line 3086 "parser.cpp"
     break;
 
-  case 85: /* BlockStatement: Statement  */
-#line 982 "parser.y++"
+  case 85:
+#line 1009 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2957 "parser.cpp"
+#line 3092 "parser.cpp"
     break;
 
-  case 86: /* Declaration_list: LocalVariableDeclaration ';'  */
-#line 986 "parser.y++"
+  case 86:
+#line 1013 "parser.y++"
                                    {(yyval.ptr)=(yyvsp[-1].ptr);}
-#line 2963 "parser.cpp"
+#line 3098 "parser.cpp"
     break;
 
-  case 87: /* Declaration_list: ClassDeclaration  */
-#line 987 "parser.y++"
+  case 87:
+#line 1014 "parser.y++"
                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2969 "parser.cpp"
+#line 3104 "parser.cpp"
     break;
 
-  case 88: /* LocalVariableDeclaration: PrimitiveType VariableDeclaratorList  */
-#line 991 "parser.y++"
+  case 88:
+#line 1018 "parser.y++"
                                          {
         vector<data2>v;
         insertAttr(v, (yyvsp[-1].ptr), "", 1);
@@ -2981,119 +3116,119 @@ yyreduce:
 		type = (yyvsp[-1].ptr)->type ;
 		type_delim = 0;
     }
-#line 2985 "parser.cpp"
+#line 3120 "parser.cpp"
     break;
 
-  case 89: /* Statement: StatementWithoutTrailingSubstatement  */
-#line 1006 "parser.y++"
-                                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2991 "parser.cpp"
-    break;
-
-  case 90: /* Statement: LabeledStatement  */
-#line 1007 "parser.y++"
-                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 2997 "parser.cpp"
-    break;
-
-  case 91: /* Statement: IfThenStatement  */
-#line 1008 "parser.y++"
-                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3003 "parser.cpp"
-    break;
-
-  case 92: /* Statement: IfThenElseStatement  */
-#line 1009 "parser.y++"
-                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3009 "parser.cpp"
-    break;
-
-  case 93: /* Statement: WhileStatement  */
-#line 1010 "parser.y++"
-                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3015 "parser.cpp"
-    break;
-
-  case 94: /* Statement: ForStatement  */
-#line 1011 "parser.y++"
-                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3021 "parser.cpp"
-    break;
-
-  case 95: /* StatementNoShortIf: StatementWithoutTrailingSubstatement  */
-#line 1015 "parser.y++"
-                                         {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3027 "parser.cpp"
-    break;
-
-  case 96: /* StatementNoShortIf: LabeledStatementNoShortIf  */
-#line 1016 "parser.y++"
-                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3033 "parser.cpp"
-    break;
-
-  case 97: /* StatementNoShortIf: IfThenElseStatementNoShortIf  */
-#line 1017 "parser.y++"
-                                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3039 "parser.cpp"
-    break;
-
-  case 98: /* StatementNoShortIf: WhileStatementNoShortIf  */
-#line 1018 "parser.y++"
-                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3045 "parser.cpp"
-    break;
-
-  case 99: /* StatementNoShortIf: ForStatementNoShortIf  */
-#line 1019 "parser.y++"
-                          {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3051 "parser.cpp"
-    break;
-
-  case 100: /* StatementWithoutTrailingSubstatement: Block  */
-#line 1023 "parser.y++"
-          {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3057 "parser.cpp"
-    break;
-
-  case 101: /* StatementWithoutTrailingSubstatement: ';'  */
-#line 1024 "parser.y++"
-        {(yyval.ptr)=makeleaf(";");}
-#line 3063 "parser.cpp"
-    break;
-
-  case 102: /* StatementWithoutTrailingSubstatement: ExpressionStatement  */
-#line 1025 "parser.y++"
-                        {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3069 "parser.cpp"
-    break;
-
-  case 103: /* StatementWithoutTrailingSubstatement: BreakStatement  */
-#line 1026 "parser.y++"
-                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3075 "parser.cpp"
-    break;
-
-  case 104: /* StatementWithoutTrailingSubstatement: ContinueStatement  */
-#line 1027 "parser.y++"
-                      {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3081 "parser.cpp"
-    break;
-
-  case 105: /* StatementWithoutTrailingSubstatement: ReturnStatement  */
-#line 1028 "parser.y++"
-                    {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3087 "parser.cpp"
-    break;
-
-  case 106: /* StatementWithoutTrailingSubstatement: ThrowStatement  */
-#line 1029 "parser.y++"
-                   {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3093 "parser.cpp"
-    break;
-
-  case 107: /* LabeledStatement: SimpleName ':' NEXT_QUAD Statement  */
+  case 89:
 #line 1033 "parser.y++"
+                                         {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3126 "parser.cpp"
+    break;
+
+  case 90:
+#line 1034 "parser.y++"
+                     {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3132 "parser.cpp"
+    break;
+
+  case 91:
+#line 1035 "parser.y++"
+                    {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3138 "parser.cpp"
+    break;
+
+  case 92:
+#line 1036 "parser.y++"
+                        {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3144 "parser.cpp"
+    break;
+
+  case 93:
+#line 1037 "parser.y++"
+                   {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3150 "parser.cpp"
+    break;
+
+  case 94:
+#line 1038 "parser.y++"
+                 {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3156 "parser.cpp"
+    break;
+
+  case 95:
+#line 1042 "parser.y++"
+                                         {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3162 "parser.cpp"
+    break;
+
+  case 96:
+#line 1043 "parser.y++"
+                              {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3168 "parser.cpp"
+    break;
+
+  case 97:
+#line 1044 "parser.y++"
+                                 {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3174 "parser.cpp"
+    break;
+
+  case 98:
+#line 1045 "parser.y++"
+                            {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3180 "parser.cpp"
+    break;
+
+  case 99:
+#line 1046 "parser.y++"
+                          {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3186 "parser.cpp"
+    break;
+
+  case 100:
+#line 1050 "parser.y++"
+          {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3192 "parser.cpp"
+    break;
+
+  case 101:
+#line 1051 "parser.y++"
+        {(yyval.ptr)=makeleaf(";");}
+#line 3198 "parser.cpp"
+    break;
+
+  case 102:
+#line 1052 "parser.y++"
+                        {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3204 "parser.cpp"
+    break;
+
+  case 103:
+#line 1053 "parser.y++"
+                   {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3210 "parser.cpp"
+    break;
+
+  case 104:
+#line 1054 "parser.y++"
+                      {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3216 "parser.cpp"
+    break;
+
+  case 105:
+#line 1055 "parser.y++"
+                    {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3222 "parser.cpp"
+    break;
+
+  case 106:
+#line 1056 "parser.y++"
+                   {(yyval.ptr)=(yyvsp[0].ptr);}
+#line 3228 "parser.cpp"
+    break;
+
+  case 107:
+#line 1060 "parser.y++"
                                         {
         vector<data2>v;
         insertAttr(v, (yyvsp[-3].ptr), "", 1);
@@ -3120,11 +3255,11 @@ yyreduce:
 		(yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
 
     }
-#line 3124 "parser.cpp"
+#line 3259 "parser.cpp"
     break;
 
-  case 108: /* LabeledStatementNoShortIf: SimpleName ':' NEXT_QUAD StatementNoShortIf  */
-#line 1062 "parser.y++"
+  case 108:
+#line 1089 "parser.y++"
                                                 {
         vector<data2>v;
         insertAttr(v, (yyvsp[-3].ptr), "", 1);
@@ -3150,67 +3285,67 @@ yyreduce:
 		(yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
 
     }
-#line 3154 "parser.cpp"
+#line 3289 "parser.cpp"
     break;
 
-  case 109: /* ExpressionStatement: StatementExpression ';'  */
-#line 1090 "parser.y++"
+  case 109:
+#line 1117 "parser.y++"
                             {
 		(yyval.ptr) = (yyvsp[-1].ptr);
     }
-#line 3162 "parser.cpp"
+#line 3297 "parser.cpp"
     break;
 
-  case 110: /* StatementExpression: Assignment  */
-#line 1096 "parser.y++"
+  case 110:
+#line 1123 "parser.y++"
                {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3168 "parser.cpp"
+#line 3303 "parser.cpp"
     break;
 
-  case 111: /* StatementExpression: PreIncrementExpression  */
-#line 1097 "parser.y++"
+  case 111:
+#line 1124 "parser.y++"
                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3174 "parser.cpp"
+#line 3309 "parser.cpp"
     break;
 
-  case 112: /* StatementExpression: PreDecrementExpression  */
-#line 1098 "parser.y++"
+  case 112:
+#line 1125 "parser.y++"
                            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3180 "parser.cpp"
+#line 3315 "parser.cpp"
     break;
 
-  case 113: /* StatementExpression: PostIncrementExpression  */
-#line 1099 "parser.y++"
+  case 113:
+#line 1126 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3186 "parser.cpp"
+#line 3321 "parser.cpp"
     break;
 
-  case 114: /* StatementExpression: PostDecrementExpression  */
-#line 1100 "parser.y++"
+  case 114:
+#line 1127 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3192 "parser.cpp"
+#line 3327 "parser.cpp"
     break;
 
-  case 115: /* StatementExpression: MethodInvocation  */
-#line 1101 "parser.y++"
+  case 115:
+#line 1128 "parser.y++"
                      {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3198 "parser.cpp"
+#line 3333 "parser.cpp"
     break;
 
-  case 116: /* StatementExpression: ClassInstanceCreationExpression  */
-#line 1102 "parser.y++"
+  case 116:
+#line 1129 "parser.y++"
                                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3204 "parser.cpp"
+#line 3339 "parser.cpp"
     break;
 
-  case 117: /* $@1: %empty  */
-#line 1106 "parser.y++"
+  case 117:
+#line 1133 "parser.y++"
          {if_found = 1;}
-#line 3210 "parser.cpp"
+#line 3345 "parser.cpp"
     break;
 
-  case 118: /* IF_CODE: IF $@1 '(' Expression ')'  */
-#line 1106 "parser.y++"
+  case 118:
+#line 1133 "parser.y++"
                                             {
         if((yyvsp[-1].ptr)->truelist.empty() && (yyvsp[-1].ptr)->falselist.empty()) {
             int a = code.size();
@@ -3224,11 +3359,11 @@ yyreduce:
         (yyval.ptr) = (yyvsp[-1].ptr);
 		if_found = 0;
     }
-#line 3228 "parser.cpp"
+#line 3363 "parser.cpp"
     break;
 
-  case 119: /* IfThenStatement: IF_CODE NEXT_QUAD Statement  */
-#line 1121 "parser.y++"
+  case 119:
+#line 1148 "parser.y++"
                                 {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-2].ptr), "", 1);
@@ -3247,11 +3382,11 @@ yyreduce:
         (yyval.ptr)->continuelist = (yyvsp[0].ptr)->continuelist;
         (yyval.ptr)->breaklist = (yyvsp[0].ptr)->breaklist;
     }
-#line 3251 "parser.cpp"
+#line 3386 "parser.cpp"
     break;
 
-  case 120: /* IfThenElseStatement: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD Statement  */
-#line 1142 "parser.y++"
+  case 120:
+#line 1169 "parser.y++"
                                                                     {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-6].ptr), "", 1);
@@ -3273,11 +3408,11 @@ yyreduce:
 		(yyvsp[-4].ptr)->continuelist.insert((yyvsp[-4].ptr)->continuelist.end(), (yyvsp[0].ptr)->continuelist.begin(), (yyvsp[0].ptr)->continuelist.end());
 		(yyval.ptr)->continuelist = (yyvsp[-4].ptr)->continuelist;
     }
-#line 3277 "parser.cpp"
+#line 3412 "parser.cpp"
     break;
 
-  case 121: /* IfThenElseStatementNoShortIf: IF_CODE NEXT_QUAD StatementNoShortIf N ELSE NEXT_QUAD StatementNoShortIf  */
-#line 1166 "parser.y++"
+  case 121:
+#line 1193 "parser.y++"
                                                                               {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-6].ptr), "", 1);
@@ -3299,11 +3434,11 @@ yyreduce:
 		(yyvsp[-4].ptr)->continuelist.insert((yyvsp[-4].ptr)->continuelist.end(), (yyvsp[0].ptr)->continuelist.begin(), (yyvsp[0].ptr)->continuelist.end());
 		(yyval.ptr)->continuelist = (yyvsp[-4].ptr)->continuelist;
     }
-#line 3303 "parser.cpp"
+#line 3438 "parser.cpp"
     break;
 
-  case 122: /* WhileStatement: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD Statement  */
-#line 1190 "parser.y++"
+  case 122:
+#line 1217 "parser.y++"
                                                            {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-3].ptr), "", 1);
@@ -3323,11 +3458,11 @@ yyreduce:
         (yyval.ptr)->nextlist.insert((yyval.ptr)->nextlist.end(), (yyvsp[0].ptr)->breaklist.begin(), (yyvsp[0].ptr)->breaklist.end());
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), (yyvsp[-4].ind));
     }
-#line 3327 "parser.cpp"
+#line 3462 "parser.cpp"
     break;
 
-  case 123: /* WhileStatementNoShortIf: WHILE '(' NEXT_QUAD EXPR_CODE ')' NEXT_QUAD StatementNoShortIf  */
-#line 1212 "parser.y++"
+  case 123:
+#line 1239 "parser.y++"
                                                                      {
         vector<data2> v;
 		insertAttr(v, (yyvsp[-3].ptr), "", 1);
@@ -3347,11 +3482,11 @@ yyreduce:
         (yyval.ptr)->nextlist.insert((yyval.ptr)->nextlist.end(), (yyvsp[0].ptr)->breaklist.begin(), (yyvsp[0].ptr)->breaklist.end());
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), (yyvsp[-4].ind));
     }
-#line 3351 "parser.cpp"
+#line 3486 "parser.cpp"
     break;
 
-  case 124: /* ForStatement: BasicForHeader Statement  */
-#line 1234 "parser.y++"
+  case 124:
+#line 1261 "parser.y++"
                               {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -3366,11 +3501,11 @@ yyreduce:
 
         //3ac
     }
-#line 3370 "parser.cpp"
+#line 3505 "parser.cpp"
     break;
 
-  case 125: /* ForStatement: EnhancedForHeader Statement  */
-#line 1248 "parser.y++"
+  case 125:
+#line 1275 "parser.y++"
                                  {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -3385,11 +3520,11 @@ yyreduce:
 
         //3ac
     }
-#line 3389 "parser.cpp"
+#line 3524 "parser.cpp"
     break;
 
-  case 126: /* ForStatementNoShortIf: BasicForHeader StatementNoShortIf  */
-#line 1265 "parser.y++"
+  case 126:
+#line 1292 "parser.y++"
                                        {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -3405,11 +3540,11 @@ yyreduce:
         //3ac
 
     }
-#line 3409 "parser.cpp"
+#line 3544 "parser.cpp"
     break;
 
-  case 127: /* ForStatementNoShortIf: EnhancedForHeader StatementNoShortIf  */
-#line 1280 "parser.y++"
+  case 127:
+#line 1307 "parser.y++"
                                           {
         vector<data2> v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -3424,11 +3559,11 @@ yyreduce:
 
         //3ac
     }
-#line 3428 "parser.cpp"
+#line 3563 "parser.cpp"
     break;
 
-  case 128: /* BasicForHeader: FOR '(' ForInity ';' Expressiony ';' ForUpdatey ')'  */
-#line 1297 "parser.y++"
+  case 128:
+#line 1324 "parser.y++"
                                                           {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-7].str)), "", 1);
@@ -3446,11 +3581,11 @@ yyreduce:
         //3ac
 
     }
-#line 3450 "parser.cpp"
+#line 3585 "parser.cpp"
     break;
 
-  case 129: /* EnhancedForHeader: FOR '(' LocalVariableDeclaration ':' Expression ')'  */
-#line 1316 "parser.y++"
+  case 129:
+#line 1343 "parser.y++"
                                                           {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-5].str)), "", 1);
@@ -3469,73 +3604,73 @@ yyreduce:
 
         //3ac
     }
-#line 3473 "parser.cpp"
+#line 3608 "parser.cpp"
     break;
 
-  case 130: /* ForInity: %empty  */
-#line 1336 "parser.y++"
+  case 130:
+#line 1363 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3479 "parser.cpp"
+#line 3614 "parser.cpp"
     break;
 
-  case 131: /* ForInity: ForInit  */
-#line 1337 "parser.y++"
+  case 131:
+#line 1364 "parser.y++"
               {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3485 "parser.cpp"
+#line 3620 "parser.cpp"
     break;
 
-  case 132: /* Expressiony: %empty  */
-#line 1341 "parser.y++"
+  case 132:
+#line 1368 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3491 "parser.cpp"
+#line 3626 "parser.cpp"
     break;
 
-  case 133: /* Expressiony: Expression  */
-#line 1342 "parser.y++"
+  case 133:
+#line 1369 "parser.y++"
                  {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3497 "parser.cpp"
+#line 3632 "parser.cpp"
     break;
 
-  case 134: /* ForUpdatey: %empty  */
-#line 1346 "parser.y++"
+  case 134:
+#line 1373 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3503 "parser.cpp"
+#line 3638 "parser.cpp"
     break;
 
-  case 135: /* ForUpdatey: ForUpdate  */
-#line 1347 "parser.y++"
+  case 135:
+#line 1374 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3509 "parser.cpp"
+#line 3644 "parser.cpp"
     break;
 
-  case 136: /* ForInit: StatementExpressionList  */
-#line 1351 "parser.y++"
+  case 136:
+#line 1378 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3515 "parser.cpp"
+#line 3650 "parser.cpp"
     break;
 
-  case 137: /* ForInit: LocalVariableDeclaration  */
-#line 1352 "parser.y++"
+  case 137:
+#line 1379 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3521 "parser.cpp"
+#line 3656 "parser.cpp"
     break;
 
-  case 138: /* ForUpdate: StatementExpressionList  */
-#line 1356 "parser.y++"
+  case 138:
+#line 1383 "parser.y++"
                             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3527 "parser.cpp"
+#line 3662 "parser.cpp"
     break;
 
-  case 139: /* StatementExpressionList: StatementExpression  */
-#line 1360 "parser.y++"
+  case 139:
+#line 1387 "parser.y++"
                         {
 		(yyval.ptr) = (yyvsp[0].ptr);
     }
-#line 3535 "parser.cpp"
+#line 3670 "parser.cpp"
     break;
 
-  case 140: /* StatementExpressionList: StatementExpression ',' StatementExpressionList  */
-#line 1363 "parser.y++"
+  case 140:
+#line 1390 "parser.y++"
                                                     {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -3543,11 +3678,11 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr),"",1);
 		(yyval.ptr) = makenode("StatementExpressionList2", v);
     }
-#line 3547 "parser.cpp"
+#line 3682 "parser.cpp"
     break;
 
-  case 141: /* BreakStatement: BREAK SimpleName ';'  */
-#line 1374 "parser.y++"
+  case 141:
+#line 1401 "parser.y++"
                          {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
@@ -3559,11 +3694,11 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->breaklist.push_back(a);
     }
-#line 3563 "parser.cpp"
+#line 3698 "parser.cpp"
     break;
 
-  case 142: /* BreakStatement: BREAK ';'  */
-#line 1385 "parser.y++"
+  case 142:
+#line 1412 "parser.y++"
               {
         (yyval.ptr) = makeleaf((yyvsp[-1].str));
         
@@ -3571,11 +3706,11 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->breaklist.push_back(a);
     }
-#line 3575 "parser.cpp"
+#line 3710 "parser.cpp"
     break;
 
-  case 143: /* ContinueStatement: CONTINUE SimpleName ';'  */
-#line 1395 "parser.y++"
+  case 143:
+#line 1422 "parser.y++"
                             {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
@@ -3588,11 +3723,11 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->continuelist.push_back(a);
     }
-#line 3592 "parser.cpp"
+#line 3727 "parser.cpp"
     break;
 
-  case 144: /* ContinueStatement: CONTINUE ';'  */
-#line 1407 "parser.y++"
+  case 144:
+#line 1434 "parser.y++"
                  {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
@@ -3604,11 +3739,11 @@ yyreduce:
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->continuelist.push_back(a);
     }
-#line 3608 "parser.cpp"
+#line 3743 "parser.cpp"
     break;
 
-  case 145: /* ReturnStatement: RETURN Expression ';'  */
-#line 1421 "parser.y++"
+  case 145:
+#line 1448 "parser.y++"
                           {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
@@ -3621,22 +3756,22 @@ yyreduce:
 		backpatch((yyvsp[-1].ptr)->nextlist,code.size());
         emit(qid("RETURN", NULL), (yyvsp[-1].ptr)->place, qid("", NULL), qid("", NULL), -1);
     }
-#line 3625 "parser.cpp"
+#line 3760 "parser.cpp"
     break;
 
-  case 146: /* ReturnStatement: RETURN ';'  */
-#line 1433 "parser.y++"
+  case 146:
+#line 1460 "parser.y++"
                  {
         (yyval.ptr) = makeleaf((yyvsp[-1].str));
 
         // Semantics
         emit(qid("RETURN", NULL), qid("", NULL), qid("", NULL), qid("", NULL), -1);
     }
-#line 3636 "parser.cpp"
+#line 3771 "parser.cpp"
     break;
 
-  case 147: /* ThrowStatement: THROW Expression ';'  */
-#line 1442 "parser.y++"
+  case 147:
+#line 1469 "parser.y++"
                          {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-2].str)), "", 1);
@@ -3647,17 +3782,17 @@ yyreduce:
         // Semantics
         yyerror("Not implemented yet\n");        
     }
-#line 3651 "parser.cpp"
+#line 3786 "parser.cpp"
     break;
 
-  case 148: /* $@2: %empty  */
-#line 1456 "parser.y++"
+  case 148:
+#line 1483 "parser.y++"
       {if_found = 1;}
-#line 3657 "parser.cpp"
+#line 3792 "parser.cpp"
     break;
 
-  case 149: /* EXPR_CODE: $@2 StatementExpression  */
-#line 1456 "parser.y++"
+  case 149:
+#line 1483 "parser.y++"
                                           {
         if((yyvsp[0].ptr)->truelist.empty() && (yyvsp[0].ptr)->falselist.empty()) {
             int a = code.size();
@@ -3671,76 +3806,79 @@ yyreduce:
         (yyval.ptr) = (yyvsp[0].ptr);
 		if_found = 0;
     }
-#line 3675 "parser.cpp"
+#line 3810 "parser.cpp"
     break;
 
-  case 150: /* N: %empty  */
-#line 1488 "parser.y++"
+  case 150:
+#line 1515 "parser.y++"
              {
         int a = code.size();
 		(yyval.ptr) = new treeNode;
         emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
         (yyval.ptr)->nextlist.push_back(a);
     }
-#line 3686 "parser.cpp"
+#line 3821 "parser.cpp"
     break;
 
-  case 151: /* Primary: PrimaryNoNewArray  */
-#line 1499 "parser.y++"
+  case 151:
+#line 1526 "parser.y++"
                       {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3692 "parser.cpp"
+#line 3827 "parser.cpp"
     break;
 
-  case 152: /* Primary: ArrayCreationExpression  */
-#line 1500 "parser.y++"
+  case 152:
+#line 1527 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3698 "parser.cpp"
+#line 3833 "parser.cpp"
     break;
 
-  case 153: /* PrimaryNoNewArray: Literal  */
-#line 1503 "parser.y++"
-            {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3704 "parser.cpp"
+  case 153:
+#line 1530 "parser.y++"
+            {
+		(yyval.ptr)=(yyvsp[0].ptr);
+		(yyval.ptr)->isInit=1;
+		}
+#line 3842 "parser.cpp"
     break;
 
-  case 154: /* PrimaryNoNewArray: THIS  */
-#line 1504 "parser.y++"
+  case 154:
+#line 1534 "parser.y++"
           {(yyval.ptr) = makeleaf((yyvsp[0].str));}
-#line 3710 "parser.cpp"
+#line 3848 "parser.cpp"
     break;
 
-  case 155: /* PrimaryNoNewArray: '(' Expression ')'  */
-#line 1505 "parser.y++"
+  case 155:
+#line 1535 "parser.y++"
                        {(yyval.ptr)=(yyvsp[-1].ptr);}
-#line 3716 "parser.cpp"
+#line 3854 "parser.cpp"
     break;
 
-  case 156: /* PrimaryNoNewArray: ClassInstanceCreationExpression  */
-#line 1506 "parser.y++"
+  case 156:
+#line 1536 "parser.y++"
                                     {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3722 "parser.cpp"
+#line 3860 "parser.cpp"
     break;
 
-  case 157: /* PrimaryNoNewArray: ArrayAccess  */
-#line 1507 "parser.y++"
+  case 157:
+#line 1537 "parser.y++"
                  {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3728 "parser.cpp"
+#line 3866 "parser.cpp"
     break;
 
-  case 158: /* PrimaryNoNewArray: MethodInvocation  */
-#line 1508 "parser.y++"
+  case 158:
+#line 1538 "parser.y++"
                       {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3734 "parser.cpp"
+#line 3872 "parser.cpp"
     break;
 
-  case 159: /* ClassInstanceCreationExpression: UnqualifiedClassInstanceCreationExpression  */
-#line 1513 "parser.y++"
+  case 159:
+#line 1543 "parser.y++"
                                                 {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3740 "parser.cpp"
+#line 3878 "parser.cpp"
     break;
 
-  case 160: /* ClassInstanceCreationExpression: Name '.' UnqualifiedClassInstanceCreationExpression  */
-#line 1514 "parser.y++"
+  case 160:
+#line 1544 "parser.y++"
                                                         {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -3748,11 +3886,11 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassInstanceCreationExpression", v);
     }
-#line 3752 "parser.cpp"
+#line 3890 "parser.cpp"
     break;
 
-  case 161: /* ClassInstanceCreationExpression: Primary '.' UnqualifiedClassInstanceCreationExpression  */
-#line 1521 "parser.y++"
+  case 161:
+#line 1551 "parser.y++"
                                                            {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -3760,11 +3898,11 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassInstanceCreationExpression", v);
     }
-#line 3764 "parser.cpp"
+#line 3902 "parser.cpp"
     break;
 
-  case 162: /* UnqualifiedClassInstanceCreationExpression: NEW ClassOrInterfaceTypeToInstantiate '(' ArgumentListy ')' ClassBodyy  */
-#line 1531 "parser.y++"
+  case 162:
+#line 1561 "parser.y++"
                                                                             {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-5].str)), "", 1);
@@ -3775,11 +3913,11 @@ yyreduce:
         insertAttr(v, (yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("UnqualifiedClassInstanceCreationExpression", v);
     }
-#line 3779 "parser.cpp"
+#line 3917 "parser.cpp"
     break;
 
-  case 163: /* ClassOrInterfaceTypeToInstantiate: SimpleName ClassOrInterfaceTypeToInstant TypeArgumentsOrDiamondy  */
-#line 1544 "parser.y++"
+  case 163:
+#line 1574 "parser.y++"
                                                                        {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -3787,29 +3925,29 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassOrInterfaceTypeToInstantiate", v);
     }
-#line 3791 "parser.cpp"
+#line 3929 "parser.cpp"
     break;
 
-  case 164: /* TypeArgumentsOrDiamondy: %empty  */
-#line 1554 "parser.y++"
+  case 164:
+#line 1584 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3797 "parser.cpp"
+#line 3935 "parser.cpp"
     break;
 
-  case 165: /* TypeArgumentsOrDiamondy: TypeArgumentsOrDiamond  */
-#line 1555 "parser.y++"
+  case 165:
+#line 1585 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3803 "parser.cpp"
+#line 3941 "parser.cpp"
     break;
 
-  case 166: /* ClassOrInterfaceTypeToInstant: %empty  */
-#line 1559 "parser.y++"
+  case 166:
+#line 1589 "parser.y++"
              {(yyval.ptr)=NULL;}
-#line 3809 "parser.cpp"
+#line 3947 "parser.cpp"
     break;
 
-  case 167: /* ClassOrInterfaceTypeToInstant: '.' SimpleName ClassOrInterfaceTypeToInstant  */
-#line 1560 "parser.y++"
+  case 167:
+#line 1590 "parser.y++"
                                                     {
         vector<data2>v;
         insertAttr(v,NULL,".",0);
@@ -3817,22 +3955,22 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ClassOrInterfaceTypeToInstant", v);
     }
-#line 3821 "parser.cpp"
+#line 3959 "parser.cpp"
     break;
 
-  case 168: /* TypeArgumentsOrDiamond: '<' '>'  */
-#line 1570 "parser.y++"
+  case 168:
+#line 1600 "parser.y++"
            {
         vector<data2>v;
         insertAttr(v, NULL, "<", 0);
         insertAttr(v, NULL, ">", 0);
 		(yyval.ptr) = makenode("TypeArgumentsOrDiamond", v);
     }
-#line 3832 "parser.cpp"
+#line 3970 "parser.cpp"
     break;
 
-  case 169: /* ArrayAccess: Name '[' Expression ']'  */
-#line 1579 "parser.y++"
+  case 169:
+#line 1609 "parser.y++"
                              {
         vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
@@ -3850,11 +3988,11 @@ yyreduce:
 		}
 		yyerror("Accessing field of a non-array construct");
     }
-#line 3854 "parser.cpp"
+#line 3992 "parser.cpp"
     break;
 
-  case 170: /* ArrayAccess: ArrayAccess '[' Expression ']'  */
-#line 1596 "parser.y++"
+  case 170:
+#line 1626 "parser.y++"
                                    {
         vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
@@ -3871,11 +4009,11 @@ yyreduce:
 		}
 		yyerror("Accessing field of a non-array construct");
     }
-#line 3875 "parser.cpp"
+#line 4013 "parser.cpp"
     break;
 
-  case 171: /* MethodInvocation: Name '(' ArgumentListy ')'  */
-#line 1616 "parser.y++"
+  case 171:
+#line 1646 "parser.y++"
                                 {
         vector<data2>v;
         insertAttr(v, (yyvsp[-3].ptr), "", 1);
@@ -3884,11 +4022,11 @@ yyreduce:
         insertAttr(v, NULL, ")", 0);
 		(yyval.ptr) = makenode("MethodInvocation", v);
     }
-#line 3888 "parser.cpp"
+#line 4026 "parser.cpp"
     break;
 
-  case 172: /* MethodInvocation: Primary '.' SimpleName '(' ArgumentListy ')'  */
-#line 1624 "parser.y++"
+  case 172:
+#line 1654 "parser.y++"
                                                   {
         vector<data2>v;
         insertAttr(v, (yyvsp[-5].ptr), "", 1);
@@ -3899,11 +4037,11 @@ yyreduce:
         insertAttr(v, NULL, ")", 0);
 		(yyval.ptr) = makenode("MethodInvocation", v);
     }
-#line 3903 "parser.cpp"
+#line 4041 "parser.cpp"
     break;
 
-  case 173: /* ArgumentList: Expression  */
-#line 1637 "parser.y++"
+  case 173:
+#line 1667 "parser.y++"
                  {
         (yyval.ptr)=(yyvsp[0].ptr);
 
@@ -3919,11 +4057,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 3923 "parser.cpp"
+#line 4061 "parser.cpp"
     break;
 
-  case 174: /* ArgumentList: ArgumentList ',' Expression  */
-#line 1652 "parser.y++"
+  case 174:
+#line 1682 "parser.y++"
                                  {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -3936,11 +4074,11 @@ yyreduce:
 		currArgs.back().push_back((yyvsp[0].ptr)->type);
 		(yyval.ptr)->type = "void";
     }
-#line 3940 "parser.cpp"
+#line 4078 "parser.cpp"
     break;
 
-  case 175: /* ArrayCreationExpression: NEW PrimitiveType DimExprs Dimsy  */
-#line 1666 "parser.y++"
+  case 175:
+#line 1696 "parser.y++"
                                       {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-3].str)), "", 1);
@@ -3949,28 +4087,28 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("ArrayCreationExpression", v);
     }
-#line 3953 "parser.cpp"
+#line 4091 "parser.cpp"
     break;
 
-  case 176: /* DimExprs: DimExpr  */
-#line 1677 "parser.y++"
+  case 176:
+#line 1707 "parser.y++"
             {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 3959 "parser.cpp"
+#line 4097 "parser.cpp"
     break;
 
-  case 177: /* DimExprs: DimExprs DimExpr  */
-#line 1678 "parser.y++"
+  case 177:
+#line 1708 "parser.y++"
                      {
         vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("DimExprs", v);
     }
-#line 3970 "parser.cpp"
+#line 4108 "parser.cpp"
     break;
 
-  case 178: /* DimExpr: '[' Expression ']'  */
-#line 1688 "parser.y++"
+  case 178:
+#line 1718 "parser.y++"
                         {
         vector<data2>v;
         insertAttr(v, NULL, "[", 0);
@@ -3978,35 +4116,35 @@ yyreduce:
         insertAttr(v, NULL, "]", 0);
 		(yyval.ptr) = makenode("DimExpr", v);
     }
-#line 3982 "parser.cpp"
+#line 4120 "parser.cpp"
     break;
 
-  case 179: /* Expression: AssignmentExpression  */
-#line 1698 "parser.y++"
+  case 179:
+#line 1728 "parser.y++"
                           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3988 "parser.cpp"
+#line 4126 "parser.cpp"
     break;
 
-  case 180: /* AssignmentExpression: Assignment  */
-#line 1703 "parser.y++"
+  case 180:
+#line 1733 "parser.y++"
                 {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 3994 "parser.cpp"
+#line 4132 "parser.cpp"
     break;
 
-  case 181: /* AssignmentExpression: ConditionalExpression  */
-#line 1704 "parser.y++"
+  case 181:
+#line 1734 "parser.y++"
                            {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4000 "parser.cpp"
+#line 4138 "parser.cpp"
     break;
 
-  case 182: /* $@4: %empty  */
-#line 1708 "parser.y++"
+  case 182:
+#line 1738 "parser.y++"
                                      {if_found = 0;}
-#line 4006 "parser.cpp"
+#line 4144 "parser.cpp"
     break;
 
-  case 183: /* Assignment: LeftHandSide AssignmentOperator $@4 AssignmentExpression  */
-#line 1708 "parser.y++"
+  case 183:
+#line 1738 "parser.y++"
                                                                           {
         vector<data2>v;
         insertAttr(v,(yyvsp[-3].ptr), "", 1);
@@ -4039,118 +4177,118 @@ yyreduce:
 			}
 		}
     }
-#line 4043 "parser.cpp"
+#line 4181 "parser.cpp"
     break;
 
-  case 184: /* LeftHandSide: Name  */
-#line 1743 "parser.y++"
+  case 184:
+#line 1773 "parser.y++"
           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4049 "parser.cpp"
+#line 4187 "parser.cpp"
     break;
 
-  case 185: /* LeftHandSide: ArrayAccess  */
-#line 1744 "parser.y++"
+  case 185:
+#line 1774 "parser.y++"
                 {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4055 "parser.cpp"
+#line 4193 "parser.cpp"
     break;
 
-  case 186: /* AssignmentOperator: '='  */
-#line 1748 "parser.y++"
+  case 186:
+#line 1778 "parser.y++"
         {(yyval.ptr) = makeleaf("=");
     (yyval.ptr)->tempName = "=";}
-#line 4062 "parser.cpp"
+#line 4200 "parser.cpp"
     break;
 
-  case 187: /* AssignmentOperator: DIV_ASSIGN  */
-#line 1750 "parser.y++"
+  case 187:
+#line 1780 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4070 "parser.cpp"
+#line 4208 "parser.cpp"
     break;
 
-  case 188: /* AssignmentOperator: MUL_ASSIGN  */
-#line 1753 "parser.y++"
+  case 188:
+#line 1783 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4078 "parser.cpp"
+#line 4216 "parser.cpp"
     break;
 
-  case 189: /* AssignmentOperator: MOD_ASSIGN  */
-#line 1756 "parser.y++"
+  case 189:
+#line 1786 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4086 "parser.cpp"
+#line 4224 "parser.cpp"
     break;
 
-  case 190: /* AssignmentOperator: ADD_ASSIGN  */
-#line 1759 "parser.y++"
+  case 190:
+#line 1789 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4094 "parser.cpp"
+#line 4232 "parser.cpp"
     break;
 
-  case 191: /* AssignmentOperator: SUB_ASSIGN  */
-#line 1762 "parser.y++"
+  case 191:
+#line 1792 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4102 "parser.cpp"
+#line 4240 "parser.cpp"
     break;
 
-  case 192: /* AssignmentOperator: LEFT_ASSIGN  */
-#line 1765 "parser.y++"
+  case 192:
+#line 1795 "parser.y++"
                 {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4110 "parser.cpp"
+#line 4248 "parser.cpp"
     break;
 
-  case 193: /* AssignmentOperator: RIGHT_ASSIGN  */
-#line 1768 "parser.y++"
+  case 193:
+#line 1798 "parser.y++"
                  {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4118 "parser.cpp"
+#line 4256 "parser.cpp"
     break;
 
-  case 194: /* AssignmentOperator: UNSIGNED_RIGHT_ASSIGN  */
-#line 1771 "parser.y++"
+  case 194:
+#line 1801 "parser.y++"
                           {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4126 "parser.cpp"
+#line 4264 "parser.cpp"
     break;
 
-  case 195: /* AssignmentOperator: AND_ASSIGN  */
-#line 1774 "parser.y++"
+  case 195:
+#line 1804 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4134 "parser.cpp"
+#line 4272 "parser.cpp"
     break;
 
-  case 196: /* AssignmentOperator: XOR_ASSIGN  */
-#line 1777 "parser.y++"
+  case 196:
+#line 1807 "parser.y++"
                {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4142 "parser.cpp"
+#line 4280 "parser.cpp"
     break;
 
-  case 197: /* AssignmentOperator: OR_ASSIGN  */
-#line 1780 "parser.y++"
+  case 197:
+#line 1810 "parser.y++"
               {(yyval.ptr) = makeleaf((yyvsp[0].str));
     (yyval.ptr)->tempName = string((yyvsp[0].str));
     }
-#line 4150 "parser.cpp"
+#line 4288 "parser.cpp"
     break;
 
-  case 198: /* ConditionalExpression: GOTO_COND NEXT_QUAD Expression WRITE_GOTO ':' NEXT_QUAD ConditionalExpression  */
-#line 1786 "parser.y++"
+  case 198:
+#line 1816 "parser.y++"
                                                                                     {
         vector<data2>v;
         insertAttr(v,(yyvsp[-6].ptr), "", 1);
@@ -4200,17 +4338,17 @@ yyreduce:
 		(yyval.ptr)->nextlist.push_back((yyvsp[-3].ind));
 		(yyval.ptr)->place = temp1;
     }
-#line 4204 "parser.cpp"
+#line 4342 "parser.cpp"
     break;
 
-  case 199: /* ConditionalExpression: ConditionalOrExpression  */
-#line 1835 "parser.y++"
+  case 199:
+#line 1865 "parser.y++"
                              {(yyval.ptr)=(yyvsp[0].ptr);}
-#line 4210 "parser.cpp"
+#line 4348 "parser.cpp"
     break;
 
-  case 200: /* GOTO_COND: ConditionalOrExpression '?'  */
-#line 1839 "parser.y++"
+  case 200:
+#line 1869 "parser.y++"
                                       {
 		previous_if_found = if_found;
 		if_found = 0;
@@ -4223,21 +4361,21 @@ yyreduce:
 			(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 		}
 	}
-#line 4227 "parser.cpp"
+#line 4365 "parser.cpp"
     break;
 
-  case 201: /* WRITE_GOTO: %empty  */
-#line 1854 "parser.y++"
+  case 201:
+#line 1884 "parser.y++"
                  {
 		emit(qid("=", NULL), qid("", NULL), qid("", NULL), qid("", NULL), -1);
 		emit(qid("GOTO", NULL), qid("", NULL), qid("", NULL), qid("", NULL), 0);
 		(yyval.ind) = code.size()-1;
 	}
-#line 4237 "parser.cpp"
+#line 4375 "parser.cpp"
     break;
 
-  case 202: /* ConditionalOrExpression: GOTO_OR NEXT_QUAD ConditionalAndExpression  */
-#line 1862 "parser.y++"
+  case 202:
+#line 1892 "parser.y++"
                                                         {
 		vector<data2> attr;
 		insertAttr(attr, (yyvsp[-2].ptr), "", 1);
@@ -4275,17 +4413,17 @@ yyreduce:
 			(yyval.ptr)->falselist = (yyvsp[0].ptr)->falselist;
 
 	}
-#line 4279 "parser.cpp"
+#line 4417 "parser.cpp"
     break;
 
-  case 203: /* ConditionalOrExpression: ConditionalAndExpression  */
-#line 1899 "parser.y++"
+  case 203:
+#line 1929 "parser.y++"
                               { (yyval.ptr) = (yyvsp[0].ptr) ; }
-#line 4285 "parser.cpp"
+#line 4423 "parser.cpp"
     break;
 
-  case 204: /* GOTO_OR: ConditionalOrExpression OR_OP  */
-#line 1903 "parser.y++"
+  case 204:
+#line 1933 "parser.y++"
                                         {
 		(yyval.ptr) = (yyvsp[-1].ptr);
 		if((yyvsp[-1].ptr)->truelist.empty() && if_found){
@@ -4296,11 +4434,11 @@ yyreduce:
 				(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 			}
 	}
-#line 4300 "parser.cpp"
+#line 4438 "parser.cpp"
     break;
 
-  case 205: /* ConditionalAndExpression: GOTO_AND NEXT_QUAD InclusiveOrExpression  */
-#line 1916 "parser.y++"
+  case 205:
+#line 1946 "parser.y++"
                                               {
 		vector<data2> attr;
 		insertAttr(attr, (yyvsp[-2].ptr), "", 1);
@@ -4336,17 +4474,17 @@ yyreduce:
 			(yyval.ptr)->falselist = (yyvsp[-2].ptr)->falselist;
 			(yyval.ptr)->falselist.insert((yyval.ptr)->falselist.end(), (yyvsp[0].ptr)->falselist.begin(), (yyvsp[0].ptr)->falselist.end());
 	}
-#line 4340 "parser.cpp"
+#line 4478 "parser.cpp"
     break;
 
-  case 206: /* ConditionalAndExpression: InclusiveOrExpression  */
-#line 1951 "parser.y++"
+  case 206:
+#line 1981 "parser.y++"
                            { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 4346 "parser.cpp"
+#line 4484 "parser.cpp"
     break;
 
-  case 207: /* GOTO_AND: ConditionalAndExpression AND_OP  */
-#line 1955 "parser.y++"
+  case 207:
+#line 1985 "parser.y++"
                                           {
 		(yyval.ptr) = (yyvsp[-1].ptr);
 		
@@ -4358,11 +4496,11 @@ yyreduce:
 				(yyvsp[-1].ptr)->falselist.push_back(code.size()-1);
 			}
 	}
-#line 4362 "parser.cpp"
+#line 4500 "parser.cpp"
     break;
 
-  case 208: /* InclusiveOrExpression: InclusiveOrExpression '|' ExclusiveOrExpression  */
-#line 1969 "parser.y++"
+  case 208:
+#line 1999 "parser.y++"
                                                      {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4398,17 +4536,17 @@ yyreduce:
 			yyerror(("Invalid operands of types \'" + string((yyvsp[-2].ptr)->type) + "\' and \'" + string((yyvsp[0].ptr)->type) + "\' to boolean").c_str());
 		}
     }
-#line 4402 "parser.cpp"
+#line 4540 "parser.cpp"
     break;
 
-  case 209: /* InclusiveOrExpression: ExclusiveOrExpression  */
-#line 2004 "parser.y++"
+  case 209:
+#line 2034 "parser.y++"
                            {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4408 "parser.cpp"
+#line 4546 "parser.cpp"
     break;
 
-  case 210: /* ExclusiveOrExpression: ExclusiveOrExpression '^' AndExpression  */
-#line 2007 "parser.y++"
+  case 210:
+#line 2037 "parser.y++"
                                              {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4450,17 +4588,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4454 "parser.cpp"
+#line 4592 "parser.cpp"
     break;
 
-  case 211: /* ExclusiveOrExpression: AndExpression  */
-#line 2048 "parser.y++"
+  case 211:
+#line 2078 "parser.y++"
                    {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4460 "parser.cpp"
+#line 4598 "parser.cpp"
     break;
 
-  case 212: /* AndExpression: AndExpression '&' EqualityExpression  */
-#line 2052 "parser.y++"
+  case 212:
+#line 2082 "parser.y++"
                                           {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4502,17 +4640,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4506 "parser.cpp"
+#line 4644 "parser.cpp"
     break;
 
-  case 213: /* AndExpression: EqualityExpression  */
-#line 2093 "parser.y++"
+  case 213:
+#line 2123 "parser.y++"
                         {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4512 "parser.cpp"
+#line 4650 "parser.cpp"
     break;
 
-  case 214: /* EqualityExpression: EqualityExpression EQ_OP RelationalExpression  */
-#line 2097 "parser.y++"
+  case 214:
+#line 2127 "parser.y++"
                                                    {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4552,11 +4690,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4556 "parser.cpp"
+#line 4694 "parser.cpp"
     break;
 
-  case 215: /* EqualityExpression: EqualityExpression NE_OP RelationalExpression  */
-#line 2136 "parser.y++"
+  case 215:
+#line 2166 "parser.y++"
                                                    {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4598,17 +4736,17 @@ yyreduce:
 
         
     }
-#line 4602 "parser.cpp"
+#line 4740 "parser.cpp"
     break;
 
-  case 216: /* EqualityExpression: RelationalExpression  */
-#line 2177 "parser.y++"
+  case 216:
+#line 2207 "parser.y++"
                           {(yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 4608 "parser.cpp"
+#line 4746 "parser.cpp"
     break;
 
-  case 217: /* RelationalExpression: RelationalExpression '<' ShiftExpression  */
-#line 2181 "parser.y++"
+  case 217:
+#line 2211 "parser.y++"
                                                {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4655,11 +4793,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4659 "parser.cpp"
+#line 4797 "parser.cpp"
     break;
 
-  case 218: /* RelationalExpression: RelationalExpression '>' ShiftExpression  */
-#line 2227 "parser.y++"
+  case 218:
+#line 2257 "parser.y++"
                                                {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4704,11 +4842,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4708 "parser.cpp"
+#line 4846 "parser.cpp"
     break;
 
-  case 219: /* RelationalExpression: RelationalExpression GE_OP ShiftExpression  */
-#line 2271 "parser.y++"
+  case 219:
+#line 2301 "parser.y++"
                                                  {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4743,11 +4881,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4747 "parser.cpp"
+#line 4885 "parser.cpp"
     break;
 
-  case 220: /* RelationalExpression: RelationalExpression LE_OP ShiftExpression  */
-#line 2305 "parser.y++"
+  case 220:
+#line 2335 "parser.y++"
                                                  {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4781,17 +4919,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4785 "parser.cpp"
+#line 4923 "parser.cpp"
     break;
 
-  case 221: /* RelationalExpression: ShiftExpression  */
-#line 2338 "parser.y++"
+  case 221:
+#line 2368 "parser.y++"
                      {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 4791 "parser.cpp"
+#line 4929 "parser.cpp"
     break;
 
-  case 222: /* ShiftExpression: ShiftExpression LEFT_OP AdditiveExpression  */
-#line 2343 "parser.y++"
+  case 222:
+#line 2373 "parser.y++"
                                                 {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4830,11 +4968,11 @@ yyreduce:
 		}
 
     }
-#line 4834 "parser.cpp"
+#line 4972 "parser.cpp"
     break;
 
-  case 223: /* ShiftExpression: ShiftExpression RIGHT_OP AdditiveExpression  */
-#line 2381 "parser.y++"
+  case 223:
+#line 2411 "parser.y++"
                                                  {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4874,11 +5012,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4878 "parser.cpp"
+#line 5016 "parser.cpp"
     break;
 
-  case 224: /* ShiftExpression: ShiftExpression UNSIGNED_RIGHT AdditiveExpression  */
-#line 2420 "parser.y++"
+  case 224:
+#line 2450 "parser.y++"
                                                        {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4889,17 +5027,17 @@ yyreduce:
         yyerror("Not implemented yet!\n");
 
     }
-#line 4893 "parser.cpp"
+#line 5031 "parser.cpp"
     break;
 
-  case 225: /* ShiftExpression: AdditiveExpression  */
-#line 2430 "parser.y++"
+  case 225:
+#line 2460 "parser.y++"
                         {(yyval.ptr)= (yyvsp[0].ptr);}
-#line 4899 "parser.cpp"
+#line 5037 "parser.cpp"
     break;
 
-  case 226: /* AdditiveExpression: AdditiveExpression '+' MultiplicativeExpression  */
-#line 2434 "parser.y++"
+  case 226:
+#line 2464 "parser.y++"
                                                       {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -4959,11 +5097,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 4963 "parser.cpp"
+#line 5101 "parser.cpp"
     break;
 
-  case 227: /* AdditiveExpression: AdditiveExpression '-' MultiplicativeExpression  */
-#line 2493 "parser.y++"
+  case 227:
+#line 2523 "parser.y++"
                                                       {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -5023,17 +5161,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
 	}
-#line 5027 "parser.cpp"
+#line 5165 "parser.cpp"
     break;
 
-  case 228: /* AdditiveExpression: MultiplicativeExpression  */
-#line 2552 "parser.y++"
+  case 228:
+#line 2582 "parser.y++"
                               {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5033 "parser.cpp"
+#line 5171 "parser.cpp"
     break;
 
-  case 229: /* MultiplicativeExpression: MultiplicativeExpression '*' UnaryExpression  */
-#line 2557 "parser.y++"
+  case 229:
+#line 2587 "parser.y++"
                                                   {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -5101,11 +5239,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5105 "parser.cpp"
+#line 5243 "parser.cpp"
     break;
 
-  case 230: /* MultiplicativeExpression: MultiplicativeExpression '/' UnaryExpression  */
-#line 2624 "parser.y++"
+  case 230:
+#line 2654 "parser.y++"
                                                   {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -5171,11 +5309,11 @@ yyreduce:
 		}
 
     }
-#line 5175 "parser.cpp"
+#line 5313 "parser.cpp"
     break;
 
-  case 231: /* MultiplicativeExpression: MultiplicativeExpression '%' UnaryExpression  */
-#line 2689 "parser.y++"
+  case 231:
+#line 2719 "parser.y++"
                                                   {
         vector<data2>v;
         insertAttr(v,(yyvsp[-2].ptr), "", 1);
@@ -5215,29 +5353,29 @@ yyreduce:
 
 
     }
-#line 5219 "parser.cpp"
+#line 5357 "parser.cpp"
     break;
 
-  case 232: /* MultiplicativeExpression: UnaryExpression  */
-#line 2728 "parser.y++"
+  case 232:
+#line 2758 "parser.y++"
                      {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5225 "parser.cpp"
+#line 5363 "parser.cpp"
     break;
 
-  case 233: /* UnaryExpression: PreIncrementExpression  */
-#line 2733 "parser.y++"
+  case 233:
+#line 2763 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5231 "parser.cpp"
+#line 5369 "parser.cpp"
     break;
 
-  case 234: /* UnaryExpression: PreDecrementExpression  */
-#line 2734 "parser.y++"
+  case 234:
+#line 2764 "parser.y++"
                             {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5237 "parser.cpp"
+#line 5375 "parser.cpp"
     break;
 
-  case 235: /* UnaryExpression: '+' UnaryExpression  */
-#line 2735 "parser.y++"
+  case 235:
+#line 2765 "parser.y++"
                          {
         // $1=makeleaf("+");
         vector<data2>v;
@@ -5271,11 +5409,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5275 "parser.cpp"
+#line 5413 "parser.cpp"
     break;
 
-  case 236: /* UnaryExpression: '-' UnaryExpression  */
-#line 2768 "parser.y++"
+  case 236:
+#line 2798 "parser.y++"
                          {
         vector<data2>v;
         insertAttr(v, NULL, "-", 0);
@@ -5308,17 +5446,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5312 "parser.cpp"
+#line 5450 "parser.cpp"
     break;
 
-  case 237: /* UnaryExpression: UnaryExpressionNotPlusMinus  */
-#line 2800 "parser.y++"
+  case 237:
+#line 2830 "parser.y++"
                                  {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5318 "parser.cpp"
+#line 5456 "parser.cpp"
     break;
 
-  case 238: /* PreIncrementExpression: INC_OP UnaryExpression  */
-#line 2804 "parser.y++"
+  case 238:
+#line 2834 "parser.y++"
                             {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
@@ -5352,11 +5490,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5356 "parser.cpp"
+#line 5494 "parser.cpp"
     break;
 
-  case 239: /* PreDecrementExpression: DEC_OP UnaryExpression  */
-#line 2840 "parser.y++"
+  case 239:
+#line 2870 "parser.y++"
                             {
         vector<data2>v;
         insertAttr(v, makeleaf((yyvsp[-1].str)), "", 1);
@@ -5388,17 +5526,17 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5392 "parser.cpp"
+#line 5530 "parser.cpp"
     break;
 
-  case 240: /* UnaryExpressionNotPlusMinus: PostfixExpression  */
-#line 2874 "parser.y++"
+  case 240:
+#line 2904 "parser.y++"
                        {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5398 "parser.cpp"
+#line 5536 "parser.cpp"
     break;
 
-  case 241: /* UnaryExpressionNotPlusMinus: '~' UnaryExpression  */
-#line 2876 "parser.y++"
+  case 241:
+#line 2906 "parser.y++"
                          {
         vector<data2>v;
         insertAttr(v, NULL, "~", 0);
@@ -5432,11 +5570,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5436 "parser.cpp"
+#line 5574 "parser.cpp"
     break;
 
-  case 242: /* UnaryExpressionNotPlusMinus: '!' UnaryExpression  */
-#line 2909 "parser.y++"
+  case 242:
+#line 2939 "parser.y++"
                          {
         vector<data2>v;
         insertAttr(v, NULL, "!", 0);
@@ -5468,41 +5606,41 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5472 "parser.cpp"
+#line 5610 "parser.cpp"
     break;
 
-  case 243: /* UnaryExpressionNotPlusMinus: CastExpression  */
-#line 2940 "parser.y++"
+  case 243:
+#line 2970 "parser.y++"
                     {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5478 "parser.cpp"
+#line 5616 "parser.cpp"
     break;
 
-  case 244: /* PostfixExpression: Primary  */
-#line 2944 "parser.y++"
+  case 244:
+#line 2974 "parser.y++"
              {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5484 "parser.cpp"
+#line 5622 "parser.cpp"
     break;
 
-  case 245: /* PostfixExpression: Name  */
-#line 2945 "parser.y++"
+  case 245:
+#line 2975 "parser.y++"
           {(yyval.ptr) = (yyvsp[0].ptr);}
-#line 5490 "parser.cpp"
+#line 5628 "parser.cpp"
     break;
 
-  case 246: /* PostfixExpression: PostIncrementExpression  */
-#line 2946 "parser.y++"
+  case 246:
+#line 2976 "parser.y++"
                              { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 5496 "parser.cpp"
+#line 5634 "parser.cpp"
     break;
 
-  case 247: /* PostfixExpression: PostDecrementExpression  */
-#line 2947 "parser.y++"
+  case 247:
+#line 2977 "parser.y++"
                              { (yyval.ptr) = (yyvsp[0].ptr) ;}
-#line 5502 "parser.cpp"
+#line 5640 "parser.cpp"
     break;
 
-  case 248: /* PostIncrementExpression: PostfixExpression INC_OP  */
-#line 2951 "parser.y++"
+  case 248:
+#line 2981 "parser.y++"
                               {
         vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -5537,11 +5675,11 @@ yyreduce:
 			(yyval.ptr)->is_error = 1;
 		}
     }
-#line 5541 "parser.cpp"
+#line 5679 "parser.cpp"
     break;
 
-  case 249: /* PostDecrementExpression: PostfixExpression DEC_OP  */
-#line 2988 "parser.y++"
+  case 249:
+#line 3018 "parser.y++"
                               {
         vector<data2>v;
         insertAttr(v,(yyvsp[-1].ptr), "", 1);
@@ -5577,11 +5715,11 @@ yyreduce:
 		}
 
     }
-#line 5581 "parser.cpp"
+#line 5719 "parser.cpp"
     break;
 
-  case 250: /* CastExpression: '(' PrimitiveType ')' UnaryExpression  */
-#line 3026 "parser.y++"
+  case 250:
+#line 3056 "parser.y++"
                                              { // 1
         vector<data2>v;
         insertAttr(v, NULL, "(", 0);
@@ -5590,41 +5728,41 @@ yyreduce:
         insertAttr(v,(yyvsp[0].ptr), "", 1);
 		(yyval.ptr) = makenode("CastExpression", v);
     }
-#line 5594 "parser.cpp"
+#line 5732 "parser.cpp"
     break;
 
-  case 251: /* G: Identifier  */
-#line 3038 "parser.y++"
+  case 251:
+#line 3068 "parser.y++"
                         {
 		(yyval.ptr) = makeleaf((yyvsp[0].str));
 		(yyval.ptr)->tempName = string((yyvsp[0].str));
 		className = (yyvsp[0].str);
 		classTemp = className ; 
 	}
-#line 5605 "parser.cpp"
+#line 5743 "parser.cpp"
     break;
 
-  case 252: /* S: %empty  */
-#line 3047 "parser.y++"
+  case 252:
+#line 3077 "parser.y++"
              {
 		createStructTable();
 		if(type != "") {
 			yyerror(("cannot combine with previous " + type + " declaration specifier").c_str());
 		}
 	}
-#line 5616 "parser.cpp"
+#line 5754 "parser.cpp"
     break;
 
-  case 253: /* NEXT_QUAD: %empty  */
-#line 3056 "parser.y++"
+  case 253:
+#line 3086 "parser.y++"
                  {
 		(yyval.ind) = code.size();
 	}
-#line 5624 "parser.cpp"
+#line 5762 "parser.cpp"
     break;
 
-  case 254: /* ChangeTable: %empty  */
-#line 3062 "parser.y++"
+  case 254:
+#line 3092 "parser.y++"
                  {
 		(yyval.ptr)=NULL;
 		string str = "Block" +to_string(block_count);
@@ -5633,11 +5771,11 @@ yyreduce:
 		// func_flag++;
 		makeSymbolTable(str, "",0);
 	}
-#line 5637 "parser.cpp"
+#line 5775 "parser.cpp"
     break;
 
-  case 255: /* A: %empty  */
-#line 3073 "parser.y++"
+  case 255:
+#line 3103 "parser.y++"
                         {
 		(yyval.ptr)=NULL;
 		type ="";
@@ -5647,11 +5785,11 @@ yyreduce:
 		gotolablelist.clear();
 		gotolabel.clear();
 	}
-#line 5651 "parser.cpp"
+#line 5789 "parser.cpp"
     break;
 
 
-#line 5655 "parser.cpp"
+#line 5793 "parser.cpp"
 
       default: break;
     }
@@ -5666,10 +5804,11 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
-  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
+  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
+  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
 
@@ -5693,13 +5832,49 @@ yyreduce:
 yyerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
-  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
+  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
+
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
+#if ! YYERROR_VERBOSE
       yyerror (YY_("syntax error"));
+#else
+# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
+                                        yyssp, yytoken)
+      {
+        char const *yymsgp = YY_("syntax error");
+        int yysyntax_error_status;
+        yysyntax_error_status = YYSYNTAX_ERROR;
+        if (yysyntax_error_status == 0)
+          yymsgp = yymsg;
+        else if (yysyntax_error_status == 1)
+          {
+            if (yymsg != yymsgbuf)
+              YYSTACK_FREE (yymsg);
+            yymsg = YY_CAST (char *, YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
+            if (!yymsg)
+              {
+                yymsg = yymsgbuf;
+                yymsg_alloc = sizeof yymsgbuf;
+                yysyntax_error_status = 2;
+              }
+            else
+              {
+                yysyntax_error_status = YYSYNTAX_ERROR;
+                yymsgp = yymsg;
+              }
+          }
+        yyerror (yymsgp);
+        if (yysyntax_error_status == 2)
+          goto yyexhaustedlab;
+      }
+# undef YYSYNTAX_ERROR
+#endif
     }
+
+
 
   if (yyerrstatus == 3)
     {
@@ -5733,7 +5908,6 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
-  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -5750,14 +5924,13 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
-  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))
         {
-          yyn += YYSYMBOL_YYerror;
-          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
+          yyn += YYTERROR;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
             {
               yyn = yytable[yyn];
               if (0 < yyn)
@@ -5771,7 +5944,7 @@ yyerrlab1:
 
 
       yydestruct ("Error: popping",
-                  YY_ACCESSING_SYMBOL (yystate), yyvsp);
+                  yystos[yystate], yyvsp);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -5783,7 +5956,7 @@ yyerrlab1:
 
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -5794,7 +5967,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturnlab;
+  goto yyreturn;
 
 
 /*-----------------------------------.
@@ -5802,22 +5975,24 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturnlab;
+  goto yyreturn;
 
 
-/*-----------------------------------------------------------.
-| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
-`-----------------------------------------------------------*/
+#if !defined yyoverflow || YYERROR_VERBOSE
+/*-------------------------------------------------.
+| yyexhaustedlab -- memory exhaustion comes here.  |
+`-------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturnlab;
+  /* Fall through.  */
+#endif
 
 
-/*----------------------------------------------------------.
-| yyreturnlab -- parsing is finished, clean up and return.  |
-`----------------------------------------------------------*/
-yyreturnlab:
+/*-----------------------------------------------------.
+| yyreturn -- parsing is finished, return the result.  |
+`-----------------------------------------------------*/
+yyreturn:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -5833,18 +6008,20 @@ yyreturnlab:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp);
+                  yystos[+*yyssp], yyvsp);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-
+#if YYERROR_VERBOSE
+  if (yymsg != yymsgbuf)
+    YYSTACK_FREE (yymsg);
+#endif
   return yyresult;
 }
-
-#line 3084 "parser.y++"
+#line 3114 "parser.y++"
 
     
 int main(int argc, char* argv[]){
@@ -5866,7 +6043,7 @@ int main(int argc, char* argv[]){
     } */
 
     setGlobal();
-	/* if(dump_tac) print3AC(); */
+	print3AC();
 	endAST();
 	if(dump_sym_table) printSymbolTable(&globalst, "Global_Symbol_Table.csv");
     return 0;
