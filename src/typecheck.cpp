@@ -151,11 +151,13 @@ int isInt(string type1){
    if(type1=="long") return 1;
    if(type1=="short") return 1;
    if(type1=="byte") return 1;
+   if(isInt(type1.substr(type1.size()-3,type1.size())))return 1;
    return 0;
 }
 
 // done
 bool isFloat (string type){
    if(type=="float" || type=="double") return 1;
+   if(type.size()>=5 && isFloat(type.substr(type.size()-5,type.size())))return 1;
    return 0;
 }

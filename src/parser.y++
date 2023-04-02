@@ -570,6 +570,7 @@ VariableDeclarator
 
         // Semantics
         if(assignExp($1->type,$3->type,"=") == ""){
+			cout<<$3->type<<endl;
             yyerror("Incorrect type assignment");
         }
 		if (insertStructAttr($1->tempName, $1->type, $1->size, 1) != 1){
@@ -1643,13 +1644,59 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :Name '(' ArgumentListy ')' {
+    :Name '(' { currArgs.push_back(vector<string>()); } ArgumentListy ')' {
         vector<data2>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, NULL, "(", 0);
-        insertAttr(v,$3, "", 1);
+        insertAttr(v,$4, "", 1);
         insertAttr(v, NULL, ")", 0);
 		$$ = makenode("MethodInvocation", v);
+		//semantics
+		string temp = postfixExpression($1->type,3);
+		if(temp.empty()){
+			temp = getFuncType($1->tempName);
+		}
+		if(!temp.empty()){	
+			$$->type = temp;
+			if($1->expType ==3){
+				vector<string> funcArgs = getFuncArgs($1->tempName);
+				vector<string> tempArgs =currArgs.back();
+				for(int i=0;i<funcArgs.size();i++){
+					if(funcArgs[i]=="...")break;
+					if(tempArgs.size()==i){
+						yyerror(("Too few Arguments to Function " + $1->tempName).c_str());
+						break;
+					}
+					string msg = assignExp(funcArgs[i],tempArgs[i],"=");
+					if(msg =="warning"){
+						cout<<"Incompatible conversion of " +  tempArgs[i] + " to parameter of type " + funcArgs[i]<<endl;
+					}
+					else if(msg.empty()){
+						yyerror(("Incompatible Argument to the function " + $1->tempName).c_str());
+						$$->is_error = 1;
+						break;
+					}
+					if(i==funcArgs.size()-1 && i<tempArgs.size()-1){
+						yyerror(("Too many Arguments to Function " + $1->tempName).c_str());
+						$$->is_error = 1;
+						break;
+					}
+				}	
+				//--3AC
+				qid q = newtemp($$->type);
+				$$->place = q;
+				$$->nextlist.clear();
+				emit(qid("CALL", NULL), qid($1->tempName,NULL), qid(to_string(currArgs.back().size()), NULL), q, -1);
+				currArgs.pop_back();
+				if(func_usage_map.find($1->tempName) != func_usage_map.end()){
+					func_usage_map[$1->tempName] = 1;
+				}
+			}
+		}
+		else{
+			yyerror("Invalid function call");
+			$$->is_error=1;
+		}
     }
     |Primary '.' SimpleName '(' ArgumentListy ')' {
         vector<data2>v;

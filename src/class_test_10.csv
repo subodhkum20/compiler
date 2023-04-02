@@ -1,8 +1,0 @@
-Name, Type, Size, isInitialized, Offset
-#V0,int,4,0,1656
-#V1,int,4,0,1660
-#V2,int,4,0,1664
-#V3,int,4,0,1668
-#V4,float,4,0,1676
-d,int,4,1,0
-x,float,4,1,4

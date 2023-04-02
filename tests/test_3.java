@@ -8,6 +8,5 @@ public class test_3
     public static void main(int args) 
     {
         int result = sum(10);
-        System.out.println(result);
     }
 }
