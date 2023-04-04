@@ -14,6 +14,7 @@
     int yylex (void); 
 
     FILE* dotfile;
+	ofstream code_file;
     stack<int> block_stack;
 
     int func_flag = 0;
@@ -25,6 +26,7 @@
     int previous_if_found = 0;
     int stop_compiler = 0;		// shows error while parsing
     int type_delim = 0;	
+	int debug_mode = 1;		
 
     string funcName = "";
     string className = "";
@@ -66,7 +68,7 @@
 
 %type<ptr> S G A ChangeTable 
 %type<ind> WRITE_GOTO
-%type<ptr> AdditiveExpression Name AndExpression ArgumentList ArrayAccess ArrayCreationExpression ArrayInitializer Assignment AssignmentExpression AssignmentOperator Block BlockStatement BlockStatements BreakStatement CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassInstanceCreationExpression ClassOrInterfaceTypeToInstantiate CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstructorBody ConstructorDeclaration ContinueStatement DimExpr DimExprs Dims EqualityExpression ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionStatement FieldAccess FieldDeclaration FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate  IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement InclusiveOrExpression IntegralType LabeledStatement LabeledStatementNoShortIf  Literal LocalVariableDeclaration MethodBody MethodDeclaration MethodHeader MethodInvocation MultiplicativeExpression NumericType OrdinaryCompilationUnit PackageDeclaration PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType RelationalExpression ReturnStatement ShiftExpression Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticInitializer ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations  TypeArgumentsOrDiamond UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression VariableDeclaratorList VariableInitializer VariableInitializerList WhileStatement WhileStatementNoShortIf YieldStatement ClassBodyDeclarations Dimsy ArgumentListy comay ClassBodyy BasicForHeader EnhancedForHeader ForInity Expressiony ForUpdatey TypeArgumentsOrDiamondy ClassOrInterfaceTypeToInstant  Modifiers Modifier SimpleName QualifiedName LeftHandSide VOID2 MethodorConstrDeclarator VariableDeclarator Declarator SimpleName2 Declaration_list IF_CODE EXPR_CODE EXPR_STMT_CODE GOTO_COND GOTO_OR GOTO_AND N
+%type<ptr> AdditiveExpression Name AndExpression ArgumentList ArrayAccess ArrayCreationExpression Assignment AssignmentExpression AssignmentOperator Block BlockStatement BlockStatements BreakStatement CastExpression ClassBody ClassBodyDeclaration ClassDeclaration ClassInstanceCreationExpression ClassOrInterfaceTypeToInstantiate CompilationUnit ConditionalAndExpression ConditionalExpression ConditionalOrExpression ConstructorBody ConstructorDeclaration ContinueStatement DimExpr DimExprs Dims EqualityExpression ExclusiveOrExpression ExplicitConstructorInvocation Expression ExpressionStatement  FieldDeclaration FloatingPointType ForInit FormalParameter FormalParameterList ForStatement ForStatementNoShortIf ForUpdate  IfThenElseStatement IfThenElseStatementNoShortIf IfThenStatement InclusiveOrExpression IntegralType LabeledStatement LabeledStatementNoShortIf  Literal LocalVariableDeclaration MethodBody MethodDeclaration MethodHeader MethodInvocation MultiplicativeExpression NumericType OrdinaryCompilationUnit PostDecrementExpression PostfixExpression PostIncrementExpression PreDecrementExpression PreIncrementExpression Primary PrimaryNoNewArray PrimitiveType RelationalExpression ReturnStatement ShiftExpression Statement StatementExpression StatementExpressionList StatementNoShortIf StatementWithoutTrailingSubstatement StaticInitializer ThrowStatement TopLevelClassOrInterfaceDeclaration TopLevelClassOrInterfaceDeclarations  TypeArgumentsOrDiamond UnaryExpression UnaryExpressionNotPlusMinus UnqualifiedClassInstanceCreationExpression VariableDeclaratorList VariableInitializer WhileStatement WhileStatementNoShortIf ClassBodyDeclarations Dimsy ArgumentListy ClassBodyy BasicForHeader EnhancedForHeader ForInity Expressiony ForUpdatey TypeArgumentsOrDiamondy ClassOrInterfaceTypeToInstant  Modifiers Modifier SimpleName QualifiedName LeftHandSide VOID2 MethodorConstrDeclarator VariableDeclarator Declarator SimpleName2 Declaration_list IF_CODE EXPR_CODE GOTO_COND GOTO_OR GOTO_AND N
 
 %start CompilationUnit
 
@@ -632,6 +634,14 @@ MethodDeclaration
         $$ = makenode("Method_declaration",v);
 
         // Semantics
+		for(auto i: gotolablelist){
+			if(gotolabel.find(i.first) == gotolabel.end()){
+				yyerror(("label \'" + string(i.first) + "\' used but not defined").c_str());
+			}
+			else backpatch(i.second, gotolabel[i.first]);
+		}
+		emit(qid(" end :", NULL), qid("",NULL), qid("", NULL), qid("", NULL), -1);
+		backpatch_rem();
     }
     ;
 MethodHeader
@@ -643,10 +653,12 @@ MethodHeader
         $$ = makenode("Method_Header",v);
 
         // Semantics
-		type = "";
-		className = classTemp;
+		type = $2->type ;
 		type_delim = 0;
 
+		//3AC
+		emit(qid("push",NULL),qid("",NULL),qid("",NULL),qid("bp",NULL),-1);
+		emit(qid("=",NULL),qid("sp",NULL),qid("",NULL),qid("bp",NULL),-1);
     }
     |PrimitiveType MethodorConstrDeclarator{
         vector<data2> v;
@@ -655,9 +667,13 @@ MethodHeader
         $$ = makenode("Method_Header",v);
 
         // Semantics
-		type = "";
-		className = classTemp;
+		type = $1->type;
+		// funcName = funcTemp;
 		type_delim = 0;
+
+		//3AC
+		emit(qid("push",NULL),qid("",NULL),qid("",NULL),qid("bp",NULL),-1);
+		emit(qid("=",NULL),qid("sp",NULL),qid("",NULL),qid("bp",NULL),-1);
     }
     |Modifiers VOID2 MethodorConstrDeclarator{
         vector<data2> v;
@@ -667,9 +683,13 @@ MethodHeader
         $$ = makenode("Method_Header",v);
 
         // Semantics
-		type = "";
-		className = classTemp;
+		type = "void";
+		// className = classTemp;
 		type_delim = 0;
+
+		//3AC
+		emit(qid("push",NULL),qid("",NULL),qid("",NULL),qid("bp",NULL),-1);
+		emit(qid("=",NULL),qid("sp",NULL),qid("",NULL),qid("bp",NULL),-1);
     }
     |VOID2 MethodorConstrDeclarator{
         vector<data2> v;
@@ -678,9 +698,13 @@ MethodHeader
         $$ = makenode("Method_Header",v);
 
         // Semantics
-		type = "";
-		className = classTemp;
+		type = "void";
+		// className = classTemp;
 		type_delim = 0;
+
+		//3AC
+		emit(qid("push",NULL),qid("",NULL),qid("",NULL),qid("bp",NULL),-1);
+		emit(qid("=",NULL),qid("sp",NULL),qid("",NULL),qid("bp",NULL),-1);
     }
     ;
 
@@ -708,7 +732,7 @@ MethodorConstrDeclarator
 			if($1->expType == 1) {
 				$$->tempName = $1->tempName;
 				$$->expType = 3;
-				$$->type = "FUNC_" + string($1->type);
+				$$->type = string($1->type);
 				$$->size = getSize($$->type);
 
 				vector<string> temp = getFuncArgs($1->tempName);
@@ -940,12 +964,6 @@ ArgumentListy
     : %empty {$$=NULL;}
     | ArgumentList {$$=$1;}
     ;
-
-
-comay
-    : %empty {$$=NULL;}
-    | ',' {$$=makeleaf(",");};
-    ;
     
 ClassBodyy
     : %empty {$$=NULL;}
@@ -954,16 +972,6 @@ ClassBodyy
 
 //10. Arrays
 
-VariableInitializerList
-    :VariableInitializer{$$=$1;}
-    |VariableInitializerList ',' VariableInitializer  {
-        vector<data2>v;
-        insertAttr(v, $1, "", 1);
-        insertAttr(v, NULL, ",", 0);
-        insertAttr(v, $3, "", 1);
-		$$ = makenode("VariableInitializerList", v);
-    }
-    ;
 
 
 //14. Productions from (blocks, statements and patterns)
@@ -982,10 +990,23 @@ Block
 		// 	func_flag--;
 		// }
     }
+    |'{' ChangeTable '}'{
+        $$ =NULL;
+        cout << "in Block\n";
+        // if(func_flag>=2){
+			int bc = block_stack.top();
+			block_stack.pop();
+			string str = "Block" + to_string(bc);
+			string name = funcName+str+".csv";
+			printSymbolTable(curr_table, name);
+			updSymbolTable(str,0);
+		// 	func_flag--;
+		// }
+    }
     ;
 
 BlockStatements
-    : %empty {$$=NULL;}
+    : BlockStatement {$$=$1;}
     | BlockStatements NEXT_QUAD BlockStatement {
 		cout << "in Block statements\n";
         vector<data2>v;
@@ -993,14 +1014,14 @@ BlockStatements
         insertAttr(v, $3, "", 1);
 		$$ = makenode("BlockStatements", v);
 
-        // backpatch($1->nextlist, $2);
-        // $$->nextlist = $3->nextlist;
-		// $1->caselist.insert($1->caselist.end(), $3->caselist.begin(), $3->caselist.end());
-        // $$->caselist = $1->caselist;
-		// $1->continuelist.insert($1->continuelist.end(), $3->continuelist.begin(), $3->continuelist.end());
-		// $1->breaklist.insert($1->breaklist.end(), $3->breaklist.begin(), $3->breaklist.end());
-        // $$->continuelist = $1->continuelist;
-        // $$->breaklist = $1->breaklist;
+        backpatch($1->nextlist, $2);
+        $$->nextlist = $3->nextlist;
+		$1->caselist.insert($1->caselist.end(), $3->caselist.begin(), $3->caselist.end());
+        $$->caselist = $1->caselist;
+		$1->continuelist.insert($1->continuelist.end(), $3->continuelist.begin(), $3->continuelist.end());
+		$1->breaklist.insert($1->breaklist.end(), $3->breaklist.begin(), $3->breaklist.end());
+        $$->continuelist = $1->continuelist;
+        $$->breaklist = $1->breaklist;
 		cout << "in Block statements2\n";
     }
     ;
@@ -1026,6 +1047,8 @@ LocalVariableDeclaration
 		cout << "in local variable declaration\n";
 		type = $1->type ;
 		type_delim = 0;
+
+		//3ac
     }
     ;
 
@@ -1456,12 +1479,14 @@ ReturnStatement
         // Semantics
 
 		backpatch($2->nextlist,code.size());
+        emit(qid("POP", NULL), qid("BP",NULL), qid("", NULL), qid("", NULL), -1);
         emit(qid("RETURN", NULL), $2->place, qid("", NULL), qid("", NULL), -1);
     }
     | RETURN ';' {
         $$ = makeleaf($1);
 
         // Semantics
+		emit(qid("POP", NULL), qid("BP",NULL), qid("", NULL), qid("", NULL), -1);
         emit(qid("RETURN", NULL), qid("", NULL), qid("", NULL), qid("", NULL), -1);
     }
 ;
@@ -1494,22 +1519,6 @@ EXPR_CODE
         $$ = $2;
 		if_found = 0;
     }
-    ;
-
-EXPR_STMT_CODE
-    : {if_found = 1;} ExpressionStatement { 
-		if($2->truelist.empty() && $2->falselist.empty()) {
-            int a = code.size();
-			backpatch($2->nextlist, a);
-            emit(qid("GOTO", NULL),qid("IF", lookup("if")), $2->place, qid("", NULL ),0);
-            int b = code.size();
-            emit(qid("GOTO", NULL),qid("", NULL), qid("", NULL), qid("", NULL ),0);
-            $2->truelist.push_back(a);
-            $2->falselist.push_back(b);
-        }
-        $$ = $2;
-		if_found = 0;
-	}
     ;
 
 N
@@ -1644,7 +1653,12 @@ ArrayAccess
     ;
 
 MethodInvocation
-    :Name '(' { currArgs.push_back(vector<string>()); } ArgumentListy ')' {
+    :Name '(' { sym_entry* n = lookup($1->tempName);
+				if(n){
+					int size=n->size;
+					emit(qid("-int",NULL),qid("SP",NULL),qid(to_string(size),NULL),qid("SP",NULL),-1);
+				}
+				currArgs.push_back(vector<string>()); } ArgumentListy ')' {
         vector<data2>v;
         insertAttr(v, $1, "", 1);
         insertAttr(v, NULL, "(", 0);
@@ -1665,7 +1679,7 @@ MethodInvocation
 					if(funcArgs[i]=="...")break;
 					if(tempArgs.size()==i){
 						yyerror(("Too few Arguments to Function " + $1->tempName).c_str());
-						break;
+						return 0;
 					}
 					string msg = assignExp(funcArgs[i],tempArgs[i],"=");
 					if(msg =="warning"){
@@ -1674,12 +1688,12 @@ MethodInvocation
 					else if(msg.empty()){
 						yyerror(("Incompatible Argument to the function " + $1->tempName).c_str());
 						$$->is_error = 1;
-						break;
+						return 0;
 					}
 					if(i==funcArgs.size()-1 && i<tempArgs.size()-1){
 						yyerror(("Too many Arguments to Function " + $1->tempName).c_str());
 						$$->is_error = 1;
-						break;
+						return 0;
 					}
 				}	
 				//--3AC
@@ -1721,6 +1735,10 @@ ArgumentList
 			$$->type = "void";
 
 			//--3AC
+			$$->nextlist.clear();
+			int _idx = -1;
+			if($$->type == "char*" && $$->place.second == NULL) _idx = -4;
+			emit(qid("param", NULL), $$->place, qid("", NULL), qid("", NULL), _idx);
 		}
 		else{
 			$$->is_error = 1;
@@ -1737,6 +1755,13 @@ ArgumentList
 		if($1->isInit && $3->isInit) $$->isInit=1;
 		currArgs.back().push_back($3->type);
 		$$->type = "void";
+
+		//3AC
+			$$->nextlist.clear();
+			int _idx = -1;
+			backpatch($3->nextlist, code.size());
+			if($3->type == "char*" && $3->place.second == NULL) _idx = -4;
+			emit(qid("param", NULL), $3->place, qid("", NULL), qid("", NULL), _idx);
     }
 
 ArrayCreationExpression
@@ -3138,11 +3163,12 @@ NEXT_QUAD
 ChangeTable
 	: %empty {
 		$$=NULL;
-		string str = "Block" +to_string(block_count);
+		// string str = "Block" +to_string(block_count);
+		string str = funcName;
 		block_stack.push(block_count);
 		block_count++;
 		// func_flag++;
-		makeSymbolTable(str, "",0);
+		makeSymbolTable(str, type,0);
 	}
 	;
 
@@ -3163,10 +3189,13 @@ A
 int main(int argc, char* argv[]){
 
     dotfile=fopen(argv[1],"w");
+    code_file.open("final.txt");
+
     if(dotfile == NULL){
 		cout<<"cannot open the dot file AST.dot"<<"\nCompilation terminated\n";
 		return -1;
 	}
+	
 
     symTable_init();
 	beginAST();

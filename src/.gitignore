@@ -6,3 +6,4 @@ parser.output
 *.out
 *.png
 lex.yy.c
+*.txt
