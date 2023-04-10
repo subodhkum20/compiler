@@ -29,5 +29,4 @@ The compiler dumps a 3AC file (similar to the one generated in milestone 2) but 
 3. param - Used to add parameters just before function calls
 4. CALL - Used to call a function already defined
 
-When calling a function we store the base pointer of the caller, function arguments of the callee onto the stack. 
-
+When calling a function we store the base pointer of the caller, function arguments of the callee onto the stack.

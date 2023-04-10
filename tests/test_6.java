@@ -1,16 +1,15 @@
- // test for airthmetic operation.
-
-
-package tests;
-
-public class test_6 {
-    public static void main(String args[])
+class gfg {
+    // Gcd of u and v using recursive method
+    static int GCD(int u, int v)
     {
-        int a = 8;
-        int b = 4;
-        System.out.println(a+b);
-        System.out.println(a-b);
-        System.out.println(a*b);
-        System.out.println(a/b);
+        int x = u==0?v:GCD(v % u, u);
+        return x;
+    }
+ 
+    // The Driver method
+    public static int main()
+    {
+        int u = 25, v = 15;
+        return GCD(u, v);
     }
 }

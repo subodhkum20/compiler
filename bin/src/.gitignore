@@ -1,9 +1,0 @@
-*.csv
-parser.cpp
-parser.hpp
-parser.output
-*.dot
-*.out
-*.png
-lex.yy.c
-*.txt

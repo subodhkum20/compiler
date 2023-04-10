@@ -1,10 +1,10 @@
-public class test_1 {
-    int y ;
-    int add(int a, int b){
-        return a+b ;
+public class test_1
+{
+    public static int sum(int k, int d) {
+      return k+d;
     }
-    int z = add(2,3) ;
-    public static void main(String args[]){
-
+    public static int main() 
+    {
+      return sum(10, 5);
     }
 }

@@ -12,7 +12,7 @@ map<typ_table*, typ_table*> typ_parent_table;
 typ_table* curr_typ;
 
 int max_size = 0;                     //?
-int param_offset = 0;
+int param_offset = -4;
 int class_count = 1;                
 int avl=0;                            //?
 extern int isArray;
@@ -52,7 +52,10 @@ void makeSymbolTable(string name, string f_type, int offset_flag){
 		sym_table* new_table = new sym_table;
 		typ_table* new_typ = new typ_table;
 
-		if(f_type != "") insertSymbol(*curr_table, name , "FUNC_" + f_type , 0 , 1, new_table);
+		if(f_type != "") {
+			insertSymbol(*curr_table, name , "FUNC_" + f_type , 0 , 1, new_table);
+			
+		}
 		else{
 			insertSymbol(*curr_table, name , "Block",0,1, new_table);
 			blockCnt++;
@@ -60,6 +63,9 @@ void makeSymbolTable(string name, string f_type, int offset_flag){
 
 		Goffset.push(0);
 		if(offset_flag)blockSz.push(0);
+		if(f_type!=""){
+			blockSz.top()+=4;
+		}
 		parent_table.insert(make_pair(new_table, curr_table));
 		typ_parent_table.insert(make_pair(new_typ, curr_typ));
 
@@ -321,6 +327,7 @@ void insertSymbol(sym_table& table, string id, string type, int size, bool is_in
 void paramInsert(sym_table& table, string id, string type, int size, bool is_init, sym_table* ptr){
 	table.insert(make_pair(id, createEntry(type, size, is_init, param_offset-size, ptr)));
 	if(type[type.length()-1] == '*' && !array_dims.empty()){
+		size = 4;
 		vector<int> temp;
 		int curr = 1;
 		for(int i = array_dims.size()-1; i>=1; i--){
@@ -337,7 +344,7 @@ void paramInsert(sym_table& table, string id, string type, int size, bool is_ini
 
 // reset parameter offset global variable before insertion - done
 void clear_paramoffset(){
-	param_offset = 0;
+	param_offset = -4;
 }
 
 // returns the list of function arguments if the function exists - done
