@@ -37,7 +37,7 @@ qid newtemp(string type){
     // creating temp variables
     string temp_var = "#V"+to_string(counter);
     counter++;
-    insertSymbol(*curr_table, temp_var, type, getSize(type), 1, NULL);
+    insertSymbol(*curr_table, temp_var, type, getSize(type), 0, NULL);
     return qid(temp_var, lookup(temp_var));
 }
 
@@ -108,6 +108,14 @@ void print3AC(){
     ofstream tac_file;
     tac_file.open("intermediate_3ac.csv");
     for(int i=0;i<code.size(); i++){
-        tac_file<<code[i].op.first<<","<<code[i].arg1.first<<","<<code[i].arg2.first<<","<<code[i].res.first<<","<<code[i].idx<<","<<i<<endl;
+        if(code[i].op.first.substr(0,5)=="FUNC_"){
+            tac_file<<code[i].op.first.substr(5,code[i].op.first.size())<<endl;
+            continue;
+        }
+        if(code[i].op.first.substr(0,4)=="#end"){
+            tac_file<<code[i].op.first.substr(1,code[i].op.first.size())<<endl;
+            continue;
+        }
+        tac_file<<"   "<<code[i].op.first<<","<<code[i].arg1.first<<","<<code[i].arg2.first<<","<<code[i].res.first<<","<<code[i].idx<<","<<i<<endl;
     }
 }
