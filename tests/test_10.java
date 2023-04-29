@@ -1,13 +1,17 @@
+//checking some more operators and else if
+
 
 public class test_10 {
- 
-        int decr(int x){
-            int a;
-            int b,c;
-            decr(x-1);
+        public static int main(){
+        int a=0,b=1,c=1;
+        while (a < 5)
+        {
+                if(a%2==1)b>>=1;
+                else if(a==4)c=b;
+                else c--;
+                a++;
         }
-
-        int main(int k){
-                decr(k);
-        }
+        return 0;
 }
+}
+    

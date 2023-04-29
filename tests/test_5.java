@@ -2,15 +2,15 @@
 
 public class test_5
 {
-    int add(int k, int d) {
+    static int add(int k, int d) {
       return k+d;
     }
 
-    int dif(int k, int d) {
+    static int dif(int k, int d) {
       return k-d;
     }
 
-    int main() 
+    public static int main() 
     {
         int x1=5, y1=6;
         int x2=8, y2=9;

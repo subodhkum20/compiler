@@ -1,4 +1,6 @@
-// test case for passing variables as parameters
+ 
+
+// test case for passing variables as parameters in function
 
 public class test_2
 {

@@ -2,8 +2,8 @@ class gfg {
     // Gcd of u and v using recursive method
     static int GCD(int u, int v)
     {
-        int x = u==0?v:GCD(v % u, u);
-        return x;
+        if(u==0)return v;
+        else return GCD(v%u,u);
     }
  
     // The Driver method

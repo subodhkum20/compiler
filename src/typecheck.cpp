@@ -147,7 +147,7 @@ string assignExp(string a, string b, string op){
 // done
 int isInt(string type1){
    if(type1=="int") return 1;
-   if(type1=="bool")return 1;
+   if(type1=="boolean")return 1;
    if(type1=="long") return 1;
    if(type1=="short") return 1;
    if(type1=="byte") return 1;

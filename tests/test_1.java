@@ -1,10 +1,11 @@
-public class test_1
-{
-    public static int sum(int k, int d) {
-      return k+d;
-    }
-    public static int main() 
-    {
-      return sum(10, 5);
+//testcase for checking basic while loop
+
+public class test_1 {
+    public int main(){
+        int d=5,c=10;
+        while(d!=c){
+            ++d;
+        }
+        return 0;
     }
 }

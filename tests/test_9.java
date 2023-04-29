@@ -1,11 +1,15 @@
 
 public class test_9 {
  
-        int call(int x){
-                call(x-1);
-        }
+        public static int main(){
 
-        int main(int k){
-                call(k);
+                int Number=475,Reminder=0,Sum=0;
+                while(Number > 0)
+                {
+                        Reminder = Number - 10;
+                        Sum = Sum+ Reminder;
+                        Number = Number + 10;
+                }
+                return Sum;
         }
 }

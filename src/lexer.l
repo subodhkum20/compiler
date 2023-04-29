@@ -11,6 +11,7 @@
         #include "parser.hpp"
         void count(void);
         int line = 1;
+        extern string funcName;
         void yyerror(char const*);        
 
         unordered_map<string,yytokentype>m(
@@ -53,7 +54,7 @@ oneLineComment  [/]{2}[^\r\n]+
 multiLineComment    "/*"([^*]|\*+[^*/])*\*+"/"
 comments    {oneLineComment}|{multiLineComment}
 keyword abstract|continue|for|new|switch|assert|default|if|package|boolean|do|goto|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|while|_|exports|opens|requires|uses|module|permits|sealed|var|non-sealed|provides|to|with|open|record|transitive|yield
-Identifier       [a-zA-Z$_][a-zA-Z0-9$_]*
+Identifier       [a-zA-Z$_][a-zA-Z0-9$_]*|System.out.println
 hexAndUnderscore    [0-9a-fA-F_]+
 hexDigits   {hex}|{hex}{hexAndUnderscore}?{hex}
 hexNumeral  0[xX]{hexDigits}
@@ -85,7 +86,7 @@ textBlock   [\"]{3}[ \t\f]*{textBlockCharacter}*{end}
 {LineTerminators}       {count();}
 {whitespace}            {}
 {comments}              {count();}
-{keyword}               {yylval.str = strdup(yytext); count(); return m[string(yytext)];}
+{keyword}               {yylval.str = strdup(yytext); count(); if(string(yytext) == "while" || string(yytext) == "for" || string(yytext) == "if") funcName = string(yytext) ;return m[string(yytext)];}
 {integerLiteral}        {yylval.str = strdup(yytext); count(); return integerLiteral;}
 {stringLiteral}         {yylval.str = strdup(yytext); count(); return stringLiteral;}
 {boolean}               {yylval.str = strdup(yytext); count(); return booleanLiteral;}

@@ -112,10 +112,6 @@ void print3AC(){
             tac_file<<code[i].op.first.substr(5,code[i].op.first.size())<<endl;
             continue;
         }
-        if(code[i].op.first.substr(0,4)=="#end"){
-            tac_file<<code[i].op.first.substr(1,code[i].op.first.size())<<endl;
-            continue;
-        }
         tac_file<<"   "<<code[i].op.first<<","<<code[i].arg1.first<<","<<code[i].arg2.first<<","<<code[i].res.first<<","<<code[i].idx<<","<<i<<endl;
     }
 }

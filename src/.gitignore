@@ -7,3 +7,5 @@ parser.output
 *.png
 lex.yy.c
 *.txt
+codegen.cpp
+codegen.h

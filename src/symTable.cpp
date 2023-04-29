@@ -1,6 +1,8 @@
 #include "symTable.h"
 
+map<string,sym_entry*> selectorTable;
 sym_table globalst;
+extern string className;
 map<sym_table*, sym_table*> parent_table;
 map<string, pair< string,vector<string> > > func_arg;    // this information about functions is not stored in sym table
 int class_offset;
@@ -19,8 +21,14 @@ extern int isArray;
 extern vector<int> array_dims;
 extern map<string, int> func_usage_map;
 extern int dump_sym_table;
+extern int func_flag;
 map<string, pair<string, int>> globaldecl;           //?
-int blockCnt = 1;               //?
+
+void pushPrint(){
+	sym_table* temp= new sym_table();
+	// insertSymbol(*temp,);
+	insertSymbol(globalst,"System.out.println","FUNC_FUNC",0,true,temp);
+}
 
 // initialize base symbol table - done
 void symTable_init(){
@@ -30,7 +38,7 @@ void symTable_init(){
 	parent_table.insert(make_pair(&globalst, nullptr));
 	curr_table = &globalst;
 	curr_typ = &typ_gst;
-	initgst();
+	pushPrint();
 }
 
 // conclassor for symbol table entry - done
@@ -53,18 +61,17 @@ void makeSymbolTable(string name, string f_type, int offset_flag){
 		typ_table* new_typ = new typ_table;
 
 		if(f_type != "") {
-			insertSymbol(*curr_table, name , "FUNC_" + f_type , 0 , 1, new_table);
-			
+			insertSymbol(*curr_table,className + "." + name, "FUNC_" + f_type , 0 , 1, new_table);
 		}
 		else{
 			insertSymbol(*curr_table, name , "Block",0,1, new_table);
-			blockCnt++;
 		}
 
 		Goffset.push(0);
-		if(offset_flag)blockSz.push(0);
+		// if(offset_flag)blockSz.push(0);
+		blockSz.push(0);
 		if(f_type!=""){
-			blockSz.top()+=4;
+			blockSz.top()+=4; // for base pointers
 		}
 		parent_table.insert(make_pair(new_table, curr_table));
 		typ_parent_table.insert(make_pair(new_typ, curr_typ));
@@ -77,7 +84,7 @@ void makeSymbolTable(string name, string f_type, int offset_flag){
 		// given actual name to entry already existing in the parent table by dummy name
 		// actually not creating any new table
 		(*parent_table[curr_table]).erase("dummyF_name");
-		(*parent_table[curr_table]).insert(make_pair(name, createEntry("FUNC_"+f_type,0,1,Loffset.top(), curr_table)));
+		(*parent_table[curr_table]).insert(make_pair(className + "." + name, createEntry("FUNC_"+f_type,0,1,Loffset.top(), curr_table)));
 		Loffset.pop();
 	}
 }
@@ -86,29 +93,29 @@ void makeSymbolTable(string name, string f_type, int offset_flag){
 void removeFuncProto(){
 	avl = 0;
 	clear_paramoffset();
-	updSymbolTable("dummyF_name",1);
+	updSymbolTable("dummyF_name");
 	parent_table.erase((*curr_table)["dummyF_name"]->entry);
 	(*curr_table).erase("dummyF_name");
 	Loffset.pop();
 }
 
 // set parent as current (end of scope) and update current symbol table (adding sizes and all) - done
-void updSymbolTable(string id, int offset_flag){
+void updSymbolTable(string id){
+	// cout << "in updsymtable\n";
 	int temp = Goffset.top();
-	// Goffset.pop();
-	// Goffset.top()+=temp;
-	cout << "updSymbolTable\n";
+	Goffset.pop();
+	// cout << "in updsymtable2\n";
+	Goffset.top()+=temp;
+	// cout << "updSymbolTable\n";
 	curr_table = parent_table[curr_table];
 	curr_typ = typ_parent_table[curr_typ];
-	cout << "updSymbolTable2\n";
+	// cout << "updSymbolTable2\n";
 	sym_entry* entry = lookup(id);
 	if(entry) entry->size = blockSz.top();
-	cout << "updSymbolTable3\n";
-	// if(offset_flag){
-	// 	temp = blockSz.top();
-	// 	blockSz.pop();
-	// 	blockSz.top()+=temp;
-	// }
+	// cout << "updSymbolTable3\n";
+	temp = blockSz.top();
+	blockSz.pop();
+	blockSz.top()+=temp;
 }
 
 // look up the hirerachy up till the global sym table from the curr sym table that corresponds to the id - done
@@ -130,32 +137,13 @@ string funcProtoLookup(string id){
 
 // find total size of local variables a function - done
 int func_local_size(string name){
-	return globalst[name]->size;
+	return lookup(name)->size;
 }
 
 // look up for a symbol in current symbol table only (only the current scope) - done
 sym_entry* currLookup(string id){
 	if((*curr_table).find(id)==(*curr_table).end()) return nullptr;
 	return (*curr_table)[id];
-}
-
-// insert keywords into global symbol table - done
-void initgst(){
-	vector<string> key_words = {"abstract","continue","for","new","assert","default","if","package","synchronized","boolean","private","this","break","double","throw","byte","else","public","enum","instanceof","return","transient","int","short","char","final","interface","static","void","class","long","strictfp","volatile","float","native","super","while","exports","opens","requires","uses","module","permits","sealed","var","non-sealed","provides","to","with","open","record","transitive","yield"}; 
-	vector<string> op = {">>>",">>>=","::","...",">>=","<<=","+=","-=","*=","/=","%=","&=","^=","|=",">>","<<","++","--","->","&&","||","<=",">=","==","!=",";","@","{","}",",",":","=","(",")","[","]",".","&","!","~","-","+","*","/","%","<",">","^","|","?"};
-
-	for(auto h:key_words){
-		insertSymbol(*curr_table, h, "keyword", 16, 1, nullptr);
-	}
-	for(auto h:op){
-		insertSymbol(*curr_table, h, "operator", 16, 1, nullptr);
-	}
-	
-	// important io functions
-	insertSymbol(*curr_table,"System.out.println" , "FUNC_void", 4, 0, nullptr);
-	vector<string> vec;
-	func_arg.insert(make_pair("System.out.println" , make_pair("FUNC_void",vec)));
-	func_usage_map.insert({"System.out.println" , 0});
 }
 
 // find the type of a symbol if the entry for it exists - done
@@ -174,6 +162,8 @@ void createStructTable(){
 	typ_parent_table.insert(make_pair(new_typ,curr_typ));
 	curr_table = new_table;
 	class_offset = 0;
+	Goffset.push(0);
+	blockSz.push(0);
 }
 
 // insert class/ union members (attributes) in symbol table - done
@@ -182,7 +172,7 @@ int insertStructAttr(string attr, string type, int size, bool init){
 	if((*curr_table).find(attr)==(*curr_table).end()){
 		blockSz.top()+=size;
 		Goffset.top()+=size;
-		max_size = max(max_size, size);
+		// max_size = max(max_size, size);
 		(*curr_table).insert(make_pair(attr, createEntry(type,size,init, class_offset, nullptr)));
 		if(type[type.length()-1] == '*' && !array_dims.empty()){
 			vector<int> temp;
@@ -210,7 +200,8 @@ int printStructTable(string class_name){
 	if(globalst.find(class_name)==globalst.end()){
 		globalst.insert(make_pair(class_name,createEntry(class_name,0, 0, 0, curr_table)));
 		printSymbolTable(curr_table, class_name + ".csv");  // prints symbol table
-		updSymbolTable(class_name,1);
+		updSymbolTable(class_name);
+		// cout << "after upd table\n";
 		class_count++;
 		return 1;
 	}
@@ -398,7 +389,7 @@ void setGlobal(){
 
 // write the specified symbol table into a csv file - done
 void printSymbolTable(sym_table* table, string file_name){
-	cout << file_name << endl;
+	// cout << file_name << endl;
 	if(!dump_sym_table) return;
 	FILE* file = fopen(file_name.c_str(), "w");
   	fprintf( file,"Name, Type, Size, isInitialized, Offset\n");
@@ -407,6 +398,7 @@ void printSymbolTable(sym_table* table, string file_name){
 		fprintf(file, "%d,%d,%d\n", (it.second)->size, (it.second)->init, (it.second)->offset);
   	}
   	fclose(file);
+	// cout << "leaving printsymtable\n";
 }
 
 // return the total size of the user defined datatype - done
@@ -427,7 +419,7 @@ int getSize(string id){
   	if(id == "char") return 2;           
   	if(id == "short") return 2;
   	if(id == "int") return 4;
-  	if(id == "bool") return 1;
+  	if(id == "boolean") return 1;
   	if(id == "long") return 8;
   	if(id == "float") return 4;
   	if(id == "double") return 8;

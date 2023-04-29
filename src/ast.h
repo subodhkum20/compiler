@@ -19,12 +19,12 @@ typedef struct{
 
 	string tempName;
 	qid place;
-	vector<int> truelist;
-	vector<int> falselist;
-	vector<int> breaklist;
-	vector<int> continuelist;
-	vector<int> nextlist;
-	vector<int> caselist;
+	vector<int> truelist = {};
+	vector<int> falselist = {};
+	vector<int> breaklist = {};
+	vector<int> continuelist = {};
+	vector<int> nextlist = {};
+	vector<int> caselist = {};
 }treeNode;
 
 typedef struct{

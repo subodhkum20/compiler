@@ -1,14 +1,14 @@
-// testcase for while loop
+// testcase for 2 layer calls
 
 class gfg {
     // Gcd of u and v using recursive method
-    int GCD(int u, int v)
+    static int GCD(int u, int v)
     {
-        int x = u==0?v:GCD(v % u, u);
-        return x;
+        if(u==0) return v;
+        else return GCD(v % u, u);
     }
     
-    int LCM(int u, int v){
+    static int LCM(int u, int v){
         int x=u*v;
         return x/GCD(u,v);
     }
